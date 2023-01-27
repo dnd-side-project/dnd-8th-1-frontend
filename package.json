@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "husky install",
     "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook -s public",
-    "prepare": "husky install"
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
