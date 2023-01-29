@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "husky install",
     "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook -s public",
-    "prepare": "husky install"
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
@@ -45,13 +45,14 @@
     "@storybook/manager-webpack5": "^6.5.15",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
+    "@typescript-eslint/parser": "^5.49.0",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.3.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-storybook": "^0.6.10",
-    "husky": ">=7",
-    "lint-staged": ">=10",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.3",
     "sb": "^6.5.15",
@@ -62,5 +63,6 @@
       "prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "packageManager": "yarn@3.3.1"
 }
