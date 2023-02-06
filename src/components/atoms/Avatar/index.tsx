@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { CSSProperties } from 'react'
+import { PLACEHOLDER_IMG } from '@constants'
 
 interface AvatarProps {
   profileImage: string
@@ -29,9 +30,6 @@ const Avatar = ({
       : shape === 'round'
       ? 'rounded'
       : 'roundend-none'
-
-  const PLACEHOLDER_IMG =
-    'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
 
   return (
     <div
