@@ -14,6 +14,6 @@ const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />
 export const Default = Template.bind({})
 Default.args = {
   content: '라벨 입니다.',
-  className: '',
+  styleClass: '',
   htmlFor: 'label',
 }

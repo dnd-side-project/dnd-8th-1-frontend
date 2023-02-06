@@ -1,13 +1,13 @@
 import { LabelHTMLAttributes } from 'react'
 
-interface Props extends LabelHTMLAttributes<HTMLLabelElement> {
-  className: string
+interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  styleClass: string
   content: string
 }
 
-const Label = ({ className, content, ...rest }: Props) => {
+const Label = ({ styleClass, content, ...rest }: LabelProps) => {
   return (
-    <label className={`${className}`} {...rest}>
+    <label className={styleClass} {...rest}>
       {content}
     </label>
   )
