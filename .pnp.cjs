@@ -74,6 +74,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sb", "npm:6.5.15"],\
             ["tailwindcss", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:3.2.4"],\
             ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"],\
+            ["util", "npm:0.12.5"],\
             ["yup", "npm:0.32.11"]\
           ],\
           "linkType": "SOFT"\
@@ -14256,6 +14257,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sb", "npm:6.5.15"],\
             ["tailwindcss", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:3.2.4"],\
             ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"],\
+            ["util", "npm:0.12.5"],\
             ["yup", "npm:0.32.11"]\
           ],\
           "linkType": "SOFT"\
