@@ -15,11 +15,6 @@ export default {
       defaultValue: 70,
       control: { type: 'range', min: 40, max: 200 },
     },
-    mode: {
-      defaultValue: 'cover',
-      control: 'inline-radio',
-      options: ['cover', 'contain', 'fill'],
-    },
   },
   parameters: {
     componentSubtitle: '아바타 컴포넌트 (유저의 프로필 사진 표시)',
@@ -29,4 +24,3 @@ export default {
 const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />
 
 export const Default = Template.bind({})
-Default.args = {}
