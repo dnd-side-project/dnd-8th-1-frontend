@@ -28,7 +28,8 @@ const Avatar = ({
     shape === 'circle'
       ? 'rounded-full'
       : shape === 'round'
-      ? 'rounded'
+      ? // TODO: 디자인 명세가 나오면 변경
+        'rounded'
       : 'roundend-none'
 
   return (
