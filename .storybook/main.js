@@ -25,13 +25,14 @@ module.exports = {
       '@components': path.resolve(__dirname, '../src/components'),
       '@constants': path.resolve(__dirname, '../src/constants'),
       '@hooks': path.resolve(__dirname, '../src/hooks'),
-      '@hooks': path.resolve(__dirname, '../src/mocks'),
+      '@mocks': path.resolve(__dirname, '../src/mocks'),
       '@pages': path.resolve(__dirname, '../src/pages'),
       '@styles': path.resolve(__dirname, '../src/styles'),
-      '@styles': path.resolve(__dirname, '../src/public'),
+      '@public': path.resolve(__dirname, '../public'),
       '@types': path.resolve(__dirname, '../src/types'),
-      '@types': path.resolve(__dirname, '../src/utils'),
+      '@utils': path.resolve(__dirname, '../src/utils'),
     }
+
     return config
   },
 }
