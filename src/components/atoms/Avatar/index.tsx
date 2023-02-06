@@ -1,6 +1,5 @@
-import Image from 'next/image'
+import StyledImage from '../StyledImage'
 import { CSSProperties } from 'react'
-import { PLACEHOLDER_IMG } from '@constants'
 
 interface AvatarProps {
   profileImage: string
@@ -33,18 +32,15 @@ const Avatar = ({
       : 'roundend-none'
 
   return (
-    <div
-      className={`avatar-wrapper ${wrapperStyle}`}
-      style={{ ...style, ...avatarStyle }}
-    >
-      <Image
-        src={profileImage}
-        alt={'user-avatar'}
-        fill
-        placeholder="blur"
-        blurDataURL={PLACEHOLDER_IMG}
-      />
-    </div>
+    <StyledImage
+      src={profileImage}
+      className={`${wrapperStyle}`}
+      alt={'user-avatar'}
+      placeholder="blur"
+      style={{ ...avatarStyle, ...style }}
+      width={size}
+      height={size}
+    />
   )
 }
 
