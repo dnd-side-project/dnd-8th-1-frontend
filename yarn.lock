@@ -2529,7 +2529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/styled-system@npm:2.5.2":
+"@chakra-ui/styled-system@npm:2.5.2, @chakra-ui/styled-system@npm:^2.5.1":
   version: 2.5.2
   resolution: "@chakra-ui/styled-system@npm:2.5.2"
   dependencies:
@@ -2657,7 +2657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/theme@npm:2.2.5":
+"@chakra-ui/theme@npm:2.2.5, @chakra-ui/theme@npm:^2.2.4":
   version: 2.2.5
   resolution: "@chakra-ui/theme@npm:2.2.5"
   dependencies:
@@ -8750,6 +8750,8 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.12
     "@chakra-ui/react": ^2.4.9
+    "@chakra-ui/styled-system": ^2.5.1
+    "@chakra-ui/theme": ^2.2.4
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     "@hookform/resolvers": ^2.9.10
