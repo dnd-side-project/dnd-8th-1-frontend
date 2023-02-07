@@ -34,7 +34,7 @@ const Avatar = ({
   return (
     <StyledImage
       src={profileImage}
-      className={`${wrapperStyle}`}
+      styleClass={`${wrapperStyle}`}
       alt={'user-avatar'}
       placeholder="blur"
       style={{ ...avatarStyle, ...style }}
