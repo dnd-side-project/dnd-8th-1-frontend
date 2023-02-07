@@ -16,7 +16,7 @@ export default {
     (Story) => (
       <div className="relative mx-auto flex h-full max-w-[375px] flex-col justify-center bg-slate-100">
         <Story />
-        {[...Array(20).fill(0)].map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <div key={i} className="h-10 w-10">
             {i}
           </div>
