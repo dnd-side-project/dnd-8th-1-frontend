@@ -6,7 +6,7 @@ interface StyledImageProps {
   width: number
   height: number
   alt: string
-  className?: string // tailwind 커스텀을 위한 클래스네임
+  styleClass?: string
   style?: object
   placeholder?: 'blur' | 'empty' | undefined
 }
@@ -16,12 +16,12 @@ const StyledImage = ({
   width,
   height,
   alt,
-  className,
+  styleClass,
   style,
-  placeholder = 'blur',
+  placeholder,
 }: StyledImageProps) => {
   return (
-    <div className={`${className}`} style={{ ...style, width, height }}>
+    <div className={styleClass} style={{ ...style, width, height }}>
       <Image
         src={src}
         alt={alt}
