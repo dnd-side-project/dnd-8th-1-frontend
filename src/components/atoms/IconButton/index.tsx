@@ -1,9 +1,7 @@
 import { Icon } from '@components'
-import { iconName } from '@types'
+import { IconProps } from '@types'
 
-interface IconButtonProps {
-  icon: iconName
-  iconSize: number
+interface IconButtonProps extends IconProps {
   areaLabel: string // 해당 버튼에 대한 섦병
   buttonWrapperStyle?: string
   handleOnClick?: () => void
@@ -11,7 +9,8 @@ interface IconButtonProps {
 
 const IconButton = ({
   icon,
-  iconSize,
+  size,
+  color,
   areaLabel,
   buttonWrapperStyle,
   handleOnClick,
@@ -22,7 +21,7 @@ const IconButton = ({
       aria-label={areaLabel}
       onClick={handleOnClick}
     >
-      <Icon icon={icon} size={iconSize} />
+      <Icon icon={icon} size={size} color={color} />
     </button>
   )
 }

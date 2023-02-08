@@ -10,9 +10,12 @@ export default {
       control: 'inline-radio',
       options: ['vercel'],
     },
-    iconSize: {
-      defaultValue: 14,
-      control: { type: 'range', min: 8, max: 64 },
+    size: {
+      defaultValue: 16,
+      control: { type: 'range', min: 8, max: 240 },
+    },
+    color: {
+      control: { type: 'color' },
     },
   },
   parameters: {
