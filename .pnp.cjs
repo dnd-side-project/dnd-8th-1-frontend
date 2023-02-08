@@ -30,6 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@babel/core", "npm:7.20.12"],\
             ["@chakra-ui/react", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:2.4.9"],\
+            ["@chakra-ui/storybook-addon", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:4.0.17"],\
             ["@chakra-ui/styled-system", "npm:2.5.2"],\
             ["@chakra-ui/theme", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:2.2.5"],\
             ["@emotion/react", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:11.10.5"],\
@@ -5826,6 +5827,48 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@chakra-ui/system",\
             "@types/chakra-ui__system",\
             "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@chakra-ui/storybook-addon", [\
+        ["npm:4.0.17", {\
+          "packageLocation": "./.yarn/cache/@chakra-ui-storybook-addon-npm-4.0.17-581773acb7-20e425b341.zip/node_modules/@chakra-ui/storybook-addon/",\
+          "packageDependencies": [\
+            ["@chakra-ui/storybook-addon", "npm:4.0.17"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:4.0.17", {\
+          "packageLocation": "./.yarn/__virtual__/@chakra-ui-storybook-addon-virtual-d19ee259bd/0/cache/@chakra-ui-storybook-addon-npm-4.0.17-581773acb7-20e425b341.zip/node_modules/@chakra-ui/storybook-addon/",\
+          "packageDependencies": [\
+            ["@chakra-ui/storybook-addon", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:4.0.17"],\
+            ["@chakra-ui/react", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:2.4.9"],\
+            ["@storybook/addons", null],\
+            ["@storybook/api", null],\
+            ["@storybook/components", null],\
+            ["@types/chakra-ui__react", null],\
+            ["@types/react", "npm:18.0.26"],\
+            ["@types/react-dom", "npm:18.0.10"],\
+            ["@types/storybook__addons", null],\
+            ["@types/storybook__api", null],\
+            ["@types/storybook__components", null],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@chakra-ui/react",\
+            "@storybook/addons",\
+            "@storybook/api",\
+            "@storybook/components",\
+            "@types/chakra-ui__react",\
+            "@types/react-dom",\
+            "@types/react",\
+            "@types/storybook__addons",\
+            "@types/storybook__api",\
+            "@types/storybook__components",\
+            "react-dom",\
             "react"\
           ],\
           "linkType": "HARD"\
@@ -14215,6 +14258,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dnd-project-danverce", "workspace:."],\
             ["@babel/core", "npm:7.20.12"],\
             ["@chakra-ui/react", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:2.4.9"],\
+            ["@chakra-ui/storybook-addon", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:4.0.17"],\
             ["@chakra-ui/styled-system", "npm:2.5.2"],\
             ["@chakra-ui/theme", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:2.2.5"],\
             ["@emotion/react", "virtual:ce7c01823097313eb943df0eab1202a627393ca38a86ea363d45c9c9340bbab8b81e2503e33dcf83023d90af3f751661d08dd01b7dc83c1300fd6b766292264b#npm:11.10.5"],\
