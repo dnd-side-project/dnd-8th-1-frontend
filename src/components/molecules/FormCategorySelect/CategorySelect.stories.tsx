@@ -1,6 +1,5 @@
 import FormCategorySelect from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Box } from '@chakra-ui/react'
 
 export default {
   component: FormCategorySelect,
@@ -14,18 +13,55 @@ const callback = (index: number) => {
   console.log('상위 컴포넌트에서 콜백 넘겨주기, 선택된 인덱스 : ', index)
 }
 
-const Template: ComponentStory<typeof FormCategorySelect> = (args) => {
-  return <FormCategorySelect {...args} />
+const PostFormTemplate: ComponentStory<typeof FormCategorySelect> = (args) => {
+  const tabWrapperStyle = 'w-[340px] rounded-[8px]'
+  const tabItemStyle = 'bg-[#2D2D2D] text-[#747474]'
+  const activeStyle = {
+    backgroundColor: '#6DFFA8',
+    color: '#2D2D2D',
+  }
+
+  const postFormArgs = {
+    handleChange: callback,
+    tabWrapperStyle,
+    tabItemStyle,
+    activeStyle,
+  }
+
+  return <FormCategorySelect {...args} {...postFormArgs} />
 }
 
-export const Activity = Template.bind({})
+const ProfileFormTemplate: ComponentStory<typeof FormCategorySelect> = (
+  args,
+) => {
+  const tabWrapperStyle = 'w-[130px]'
+  const tabItemStyle = 'text-[#939393] text-[14px]'
+  const activeStyle = {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 14,
+  }
+
+  const postFormArgs = {
+    handleChange: callback,
+    tabWrapperStyle,
+    tabItemStyle,
+    activeStyle,
+  }
+  return <FormCategorySelect {...args} {...postFormArgs} />
+}
+
+export const Activity = PostFormTemplate.bind({})
 Activity.args = {
   categories: ['콜라보', '쉐어'],
-  handleChange: callback,
 }
 
-export const Role = Template.bind({})
+export const Role = PostFormTemplate.bind({})
 Role.args = {
   categories: ['댄서', '댄스팀'],
-  handleChange: callback,
+}
+
+export const ProfileRole = ProfileFormTemplate.bind({})
+ProfileRole.args = {
+  categories: ['댄서', '댄스팀'],
 }
