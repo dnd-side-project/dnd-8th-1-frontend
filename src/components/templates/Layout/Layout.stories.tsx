@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react'
 
 export default {
   component: Layout,
-  title: 'Template/Layout',
+  title: 'Templates/Layout',
   parameters: {
     componentSubtitle: '레이아웃 컴포넌트',
   },
