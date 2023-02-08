@@ -1,8 +1,12 @@
 import '../src/styles/globals.css'
 import '../src/styles/Home.module.css'
 import * as nextImage from 'next/image'
+import { theme } from '../src/styles/theme/chakraTheme'
 
 export const parameters = {
+  chakra: {
+    theme,
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
