@@ -1,4 +1,5 @@
-import { iconName, IconSet } from './Iconset'
+import { iconName } from '@types'
+import { IconSet } from './Iconset'
 
 interface IconProps {
   icon: iconName // 아이콘 종류
