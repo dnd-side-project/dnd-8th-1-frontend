@@ -1,10 +1,5 @@
-import { iconName, IconSet } from './Iconset'
-
-interface IconProps {
-  icon: iconName // 아이콘 종류
-  size: number
-  color?: string
-}
+import { IconProps } from '@types'
+import { IconSet } from './Iconset'
 
 const Icon = ({ icon, size = 16, color }: IconProps) => {
   return (
