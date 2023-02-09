@@ -1,5 +1,7 @@
 import FormCategorySelect from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { useState } from 'react'
+import { Box, Center, Text, Highlight } from '@chakra-ui/react'
 
 export default {
   component: FormCategorySelect,
@@ -9,8 +11,8 @@ export default {
   },
 } as ComponentMeta<typeof FormCategorySelect>
 
-const callback = (index: number) => {
-  console.log('상위 컴포넌트에서 콜백 넘겨주기, 선택된 인덱스 : ', index)
+const callback = (category: string) => {
+  console.log('상위 컴포넌트에서 콜백 넘겨주기, 선택된 인덱스 : ', category)
 }
 
 const PostFormTemplate: ComponentStory<typeof FormCategorySelect> = (args) => {
@@ -65,3 +67,35 @@ export const ProfileRole = ProfileFormTemplate.bind({})
 ProfileRole.args = {
   categories: ['댄서', '댄스팀'],
 }
+
+const PageTemplate: ComponentStory<typeof FormCategorySelect> = (args) => {
+  const [selectedCategory, setSelectedCategory] = useState('댄서') // 기본값
+  const categories = ['댄서', '댄스팀']
+
+  const tabWrapperStyle = 'w-[130px]'
+  const tabItemStyle = 'text-[#939393] text-[14px]'
+  const activeStyle = {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 14,
+  }
+
+  const postFormArgs = {
+    categories,
+    handleOnChange: setSelectedCategory,
+    tabWrapperStyle,
+    tabItemStyle,
+    activeStyle,
+  }
+  return (
+    <Center flexDirection={'column'}>
+      <FormCategorySelect {...args} {...postFormArgs} />
+
+      <Box>
+        <Text>현재 선택된 카테고리는 {selectedCategory} 입니다.</Text>
+      </Box>
+    </Center>
+  )
+}
+
+export const PageExample = PageTemplate.bind({})
