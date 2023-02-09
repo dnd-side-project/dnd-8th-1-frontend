@@ -1,10 +1,10 @@
 import { Tabs, TabList, Tab, Flex } from '@chakra-ui/react'
-import { CSSProperties, useState } from 'react'
+import { CSSProperties } from 'react'
 
 interface FormCategorySelectProps {
   active?: string
   categories: string[]
-  handleOnChange?: (index: number) => void // 인덱스가 변할 때, 상위 컴포넌트에 바뀐 인덱스 정보를 넘겨줌
+  handleOnChange?: (selected: string) => void // 인덱스가 변할 때, 상위 컴포넌트에 바뀐 인덱스 정보를 넘겨줌
   tabWrapperStyle?: string
   tabItemStyle?: string
   activeStyle?: CSSProperties
@@ -18,11 +18,7 @@ const FormCategorySelect = ({
   tabItemStyle,
   activeStyle,
 }: FormCategorySelectProps) => {
-  const [activeCategory, setActiveCategory] = useState(
-    active ? active : categories[0],
-  )
-
-  const currentIndex = categories.indexOf(activeCategory)
+  const currentIndex = active ? categories.indexOf(active) : 0
 
   return (
     <Flex overflow="hidden" className={tabWrapperStyle}>
@@ -30,7 +26,7 @@ const FormCategorySelect = ({
         defaultIndex={currentIndex}
         variant="unstyled"
         onChange={(index) => {
-          handleOnChange && handleOnChange(index)
+          handleOnChange && handleOnChange(categories[index])
         }}
         flexGrow={1}
       >
