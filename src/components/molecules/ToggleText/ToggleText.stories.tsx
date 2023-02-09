@@ -9,18 +9,17 @@ export default {
     componentSubtitle: 'ToggleText 컴포넌트',
   },
   argTypes: {
-    context: {
+    content: {
       defaultValue: '계정 삭제에 동의합니다.',
     },
     textStyle: {
-      defaultValue: {
-        marginLeft: '4px',
-      },
+      defaultValue: 'ml-[4px]',
     },
     containerStyle: {
-      defaultValue: {
-        width: '375px',
-      },
+      defaultValue: 'w-[375px]',
+    },
+    checkboxStyle: {
+      defaultValue: '',
     },
   },
   decorators: [StoryBookHOC()],

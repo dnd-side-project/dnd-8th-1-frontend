@@ -1,24 +1,25 @@
 import { Box, Text } from '@chakra-ui/react'
-import { Checkbox } from '@components/atoms'
-import { CSSProperties } from 'react'
+import { Checkbox } from '@components'
 import { useFormContext } from 'react-hook-form'
 
 interface ToggleTextProps {
-  context?: string
-  textStyle?: CSSProperties
-  containerStyle?: CSSProperties
+  content?: string
+  textStyle?: string
+  containerStyle?: string
+  checkboxStyle?: string
 }
 
 const ToggleText = ({
-  context,
+  content,
   textStyle,
   containerStyle,
+  checkboxStyle,
 }: ToggleTextProps) => {
   const { register } = useFormContext()
   return (
-    <Box display="flex" alignItems="center" style={{ ...containerStyle }}>
-      <Checkbox {...register('toggleText')} />
-      <Text style={{ ...textStyle }}>{context}</Text>
+    <Box display="flex" alignItems="center" className={containerStyle}>
+      <Checkbox className={checkboxStyle} {...register('toggleText')} />
+      <Text className={textStyle}>{content}</Text>
     </Box>
   )
 }
