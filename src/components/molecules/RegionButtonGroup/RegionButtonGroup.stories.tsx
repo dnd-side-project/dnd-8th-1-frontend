@@ -1,6 +1,7 @@
 import RegionButtonGroup from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { CONSTANT_REGION } from '@constants'
+import { REGION } from '@constants'
+import { useState } from 'react'
 
 export default {
   component: RegionButtonGroup,
@@ -9,15 +10,35 @@ export default {
     componentSubtitle: 'RegionButtonGroup 컴포넌트',
   },
   argTypes: {
-    clickRegion: {
+    selectedRegion: {
       defaultValue: '서울',
       control: 'inline-radio',
-      options: CONSTANT_REGION,
+      options: REGION,
+    },
+    containerStyle: {
+      defaultValue: '',
+    },
+    textStyle: {
+      defaultValue: '',
+    },
+    gridItemStyle: {
+      defaultValue: '',
+    },
+    buttonStyle: {
+      defaultValue: '',
     },
   },
 } as ComponentMeta<typeof RegionButtonGroup>
 
-const Template: ComponentStory<typeof RegionButtonGroup> = (args) => (
-  <RegionButtonGroup {...args} />
-)
+const Template: ComponentStory<typeof RegionButtonGroup> = (args) => {
+  const [selectedRegion, setSelectedRegion] = useState<string>('서울')
+  const handleSelectRegion = (region: string) => {
+    setSelectedRegion(region)
+  }
+  const props = {
+    selectedRegion,
+    handleOnClick: handleSelectRegion,
+  }
+  return <RegionButtonGroup {...args} {...props} />
+}
 export const Default = Template.bind({})

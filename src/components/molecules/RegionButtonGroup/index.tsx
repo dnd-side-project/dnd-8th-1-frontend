@@ -1,47 +1,50 @@
-import { Grid, GridItem, Text } from '@chakra-ui/react'
-import { CONSTANT_REGION } from '@constants'
-import { CSSProperties } from 'react'
+import { Button, Center, Grid, Text } from '@chakra-ui/react'
+import { REGION } from '@constants'
 
 interface RegionButtonGroupProps {
-  containerStyle?: CSSProperties
-  textStyle?: CSSProperties
-  gridItemStyle?: CSSProperties
-  clickRegion?: string
-  handlerFn?: (region: string) => void
+  containerStyle?: string
+  textStyle?: string
+  gridItemStyle?: string
+  buttonStyle?: string
+  selectedRegion?: string
+  handleOnClick?: (region: string) => void
 }
 
 const RegionButtonGroup = ({
-  clickRegion,
-  handlerFn,
+  selectedRegion,
+  handleOnClick,
   containerStyle,
   gridItemStyle,
+  buttonStyle,
   textStyle,
 }: RegionButtonGroupProps) => {
   return (
-    <Grid templateColumns="repeat(4, 1fr)" style={{ ...containerStyle }}>
-      {CONSTANT_REGION.map((region) => {
+    <Grid templateColumns="repeat(4, 1fr)" className={containerStyle}>
+      {REGION.map((region) => {
         return (
-          <GridItem
+          <Center
             width="100%"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
             key={region}
-            style={{
-              cursor: 'pointer',
-              backgroundColor: clickRegion === region ? 'gray' : 'white',
-              ...gridItemStyle,
-            }}
-            onClick={handlerFn && (() => handlerFn(region))}
+            className={gridItemStyle}
+            onClick={handleOnClick && (() => handleOnClick(region))}
           >
-            <Text
-              style={{
-                ...textStyle,
-              }}
+            <Button
+              width="100%"
+              variant="unstyled"
+              borderRadius="5px"
+              transition="all 0.01s ease-in-out"
+              bgColor={selectedRegion === region ? '#191919' : 'white'}
+              className={buttonStyle}
             >
-              {region}
-            </Text>
-          </GridItem>
+              <Text
+                className={`font-normal ${
+                  selectedRegion === region ? 'text-green-200' : 'text-black'
+                } ${textStyle}`}
+              >
+                {region}
+              </Text>
+            </Button>
+          </Center>
         )
       })}
     </Grid>
