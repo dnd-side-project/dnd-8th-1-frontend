@@ -24,14 +24,10 @@ export default {
 } as ComponentMeta<typeof IconButton>
 
 const Template: ComponentStory<typeof IconButton> = (args) => {
-  const buttonWrapperStyle = 'w-auto inline-block p-0' // tailwind에서 fit-content 설정
+  const styleClass = 'w-auto inline-block p-0' // tailwind에서 fit-content 설정
   const handleClick = () => console.log('click!')
   return (
-    <IconButton
-      {...args}
-      buttonWrapperStyle={buttonWrapperStyle}
-      handleOnClick={handleClick}
-    />
+    <IconButton {...args} styleClass={styleClass} handleOnClick={handleClick} />
   )
 }
 

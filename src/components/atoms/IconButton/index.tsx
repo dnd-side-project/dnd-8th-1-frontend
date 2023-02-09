@@ -3,7 +3,7 @@ import { IconProps } from '@types'
 
 interface IconButtonProps extends IconProps {
   areaLabel: string // 웹 접근성을 위한 버튼에 대한 설명
-  buttonWrapperStyle?: string
+  styleClass?: string
   handleOnClick?: () => void
 }
 
@@ -12,12 +12,12 @@ const IconButton = ({
   size,
   color,
   areaLabel,
-  buttonWrapperStyle,
+  styleClass,
   handleOnClick,
 }: IconButtonProps) => {
   return (
     <button
-      className={buttonWrapperStyle}
+      className={styleClass}
       aria-label={areaLabel}
       onClick={handleOnClick}
     >
