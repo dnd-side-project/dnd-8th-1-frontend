@@ -9,14 +9,19 @@ export default {
   },
   argTypes: {
     containerStyle: {
-      defaultValue: {
-        border: '1px solid black',
-        width: '162px',
-        padding: '0',
-      },
+      defaultValue: '',
     },
     tagStyle: {
-      defaultValue: {},
+      defaultValue: '',
+    },
+    textStyle: {
+      defaultValue: '',
+    },
+    /**
+     * TODO : iconType 추가 시 정의 할 것
+     */
+    iconType: {
+      defaultValue: 'vercel',
     },
   },
 } as ComponentMeta<typeof Tags>
@@ -25,5 +30,5 @@ const Template: ComponentStory<typeof Tags> = (args) => <Tags {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
-  tag: ['부산', '락킹'],
+  tags: ['부산', '락킹'],
 }

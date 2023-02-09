@@ -1,20 +1,20 @@
 import { Box, Center, Tag, Text } from '@chakra-ui/react'
 import { GenreTypes, RegionTypes } from '@types'
 import { Icon } from '@components'
-import React from 'react'
 
 type TagTypes = GenreTypes | RegionTypes
 
 interface TagsProps {
   iconType?: string
-  tag: TagTypes[]
-  containerStyleClass?: string
-  tagStyleClass?: string
+  tags: TagTypes[]
+  containerStyle?: string
+  tagStyle?: string
+  textStyle?: string
 }
 
-function isRegion(tag: TagTypes) {
+const isRegion = (tag: TagTypes) => {
   /**
-   * 다른 이슈에서 전역 상수로 선언해놓은게 있어서 임시로 선언했습니다!
+   * TODO : 다른 이슈에서 전역 상수로 선언해놓은게 있어서 임시로 선언했습니다!
    * 만약 그 이슈가 머지가 되면 수정될 예정 입니다.
    */
   const REGION = [
@@ -32,47 +32,48 @@ function isRegion(tag: TagTypes) {
     '대구',
     '제주',
     '전남',
-    '경남/울산',
+    '경남',
     '부산',
+    '울산',
   ]
   return REGION.includes(tag)
 }
 
 const Tags = ({
   /**
-   * iconType은 Icon 컴포넌트에 지금 Icon이 없어 어떤 값을 넣을 수가 없기에 임시로 두었습니다.
+   * TODO : iconType은 Icon 컴포넌트에 지금 Icon이 없어 어떤 값을 넣을 수가 없기에 임시로 두었습니다.
    * 또한 지금 Icon에 대한 타입이 없어 string으로 지정되었는데 추후 타입도 수정 될 예정입니다.
    */
   iconType,
-  tag,
-  containerStyleClass,
-  tagStyleClass,
+  tags,
+  containerStyle,
+  tagStyle,
+  textStyle,
 }: TagsProps) => {
+  const isTag = (tag: TagTypes) => {
+    return tags[tags.length - 1] === tag
+  }
   return (
-    <Box className={containerStyleClass}>
-      {tag.map((tagTitle) => (
+    <Box className={containerStyle}>
+      {tags.map((tag) => (
         <>
-          {isRegion(tagTitle) ? (
+          {isRegion(tag) ? (
             <Tag
-              key={tagTitle}
-              className={`${
-                tag[tag.length - 1] === tagTitle ? 'mr-[0px]' : 'mr-[4px]'
-              } ${tagStyleClass}`}
+              key={tag}
+              className={`${isTag(tag) ? 'mr-[0px]' : 'mr-[4px]'} ${tagStyle}`}
             >
-              <Center width={'100%'}>
+              <Center className="w-full">
                 <Icon icon="vercel" size={16} />
-                <Text marginLeft={1}>{tagTitle}</Text>
+                <Text className={`ml-2 ${textStyle}`}>{tag}</Text>
               </Center>
             </Tag>
           ) : (
             <Tag
-              key={tagTitle}
-              className={`${
-                tag[tag.length - 1] === tagTitle ? 'mr-[0px]' : 'mr-[4px]'
-              } ${tagStyleClass}`}
+              key={tag}
+              className={`${isTag(tag) ? 'mr-[0px]' : 'mr-[4px]'} ${tagStyle}`}
             >
-              <Center width={'100%'}>
-                <Text>{tagTitle}</Text>
+              <Center className="w-full">
+                <Text className={textStyle}>{tag}</Text>
               </Center>
             </Tag>
           )}
