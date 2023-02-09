@@ -1,39 +1,46 @@
-import { Box, Divider, Text } from '@chakra-ui/react'
-import { CSSProperties } from 'react'
+import { Box, Button, Divider } from '@chakra-ui/react'
 
 interface StatusPopupContentProps {
-  containerStyle?: CSSProperties
-  modifyTextStyle?: CSSProperties
-  deleteTextStyle?: CSSProperties
-  dividerStyle?: CSSProperties
-  modifyFn: () => void
-  deleteFn: () => void
+  containerStyle?: string
+  deleteButtonStyle?: string
+  modifyButtonStyle?: string
+  dividerStyle?: string
+  handleOnModify: () => void
+  handleOnDelete: () => void
 }
 
 const StatusPopupContent = ({
   containerStyle,
-  modifyTextStyle,
-  deleteTextStyle,
+  deleteButtonStyle,
+  modifyButtonStyle,
   dividerStyle,
-  modifyFn,
-  deleteFn,
+  handleOnModify,
+  handleOnDelete,
 }: StatusPopupContentProps) => {
   return (
     <Box
-      display={'flex'}
-      flexDirection={'column'}
-      alignItems={'center'}
-      style={{
-        ...containerStyle,
-      }}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      className={containerStyle}
     >
-      <Text style={{ ...modifyTextStyle }} onClick={modifyFn}>
+      <Button
+        fontWeight="normal"
+        variant="unstyled"
+        className={deleteButtonStyle}
+        onClick={handleOnModify}
+      >
         수정하기
-      </Text>
-      <Divider style={{ ...dividerStyle }} marginY={'12px'} />
-      <Text style={{ ...deleteTextStyle }} onClick={deleteFn}>
+      </Button>
+      <Divider marginY="12px" className={dividerStyle} />
+      <Button
+        fontWeight="normal"
+        variant="unstyled"
+        className={modifyButtonStyle}
+        onClick={handleOnDelete}
+      >
         삭제하기
-      </Text>
+      </Button>
     </Box>
   )
 }

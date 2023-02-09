@@ -1,5 +1,6 @@
 import StatusPopupContent from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
 export default {
   component: StatusPopupContent,
@@ -9,15 +10,19 @@ export default {
   },
   argTypes: {
     containerStyle: {
-      defaultValue: {
-        width: '130px',
-      },
+      defaultValue: 'w-[130px]',
     },
   },
 } as ComponentMeta<typeof StatusPopupContent>
 
-const Template: ComponentStory<typeof StatusPopupContent> = (args) => (
-  <StatusPopupContent {...args} />
-)
+const Template: ComponentStory<typeof StatusPopupContent> = (args) => {
+  const handleOnModify = action('수정하기')
+  const handleOnDelete = action('삭제하기')
+  const props = {
+    handleOnModify,
+    handleOnDelete,
+  }
+  return <StatusPopupContent {...args} {...props} />
+}
 
 export const Default = Template.bind({})
