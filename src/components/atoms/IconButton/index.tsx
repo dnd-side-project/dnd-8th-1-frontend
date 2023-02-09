@@ -2,7 +2,7 @@ import { Icon } from '@components'
 import { IconProps } from '@types'
 
 interface IconButtonProps extends IconProps {
-  areaLabel: string // 해당 버튼에 대한 섦병
+  areaLabel: string // 웹 접근성을 위한 버튼에 대한 설명
   buttonWrapperStyle?: string
   handleOnClick?: () => void
 }
