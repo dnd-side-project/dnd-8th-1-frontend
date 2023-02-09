@@ -1,6 +1,6 @@
 import GenrePopupContent from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { DANCE_GENRE } from '@constants'
+import { GENRE } from '@constants'
 import { useState } from 'react'
 
 export default {
@@ -13,7 +13,19 @@ export default {
     selectedGenre: {
       defaultValue: 'vercel',
       control: 'inline-radio',
-      options: DANCE_GENRE,
+      options: GENRE,
+    },
+    containerStyle: {
+      defaultValue: '',
+    },
+    textStyle: {
+      defaultValue: '',
+    },
+    gridItemStyle: {
+      defaultValue: '',
+    },
+    buttonStyle: {
+      defaultValue: '',
     },
   },
 } as ComponentMeta<typeof GenrePopupContent>

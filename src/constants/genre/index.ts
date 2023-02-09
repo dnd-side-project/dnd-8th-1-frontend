@@ -1,4 +1,4 @@
-const DANCE_GENRE = [
+const GENRE = [
   '커버댄스',
   '힙합',
   '스트릿',
@@ -11,4 +11,4 @@ const DANCE_GENRE = [
   '기타',
 ] as const
 
-export { DANCE_GENRE }
+export { GENRE }
