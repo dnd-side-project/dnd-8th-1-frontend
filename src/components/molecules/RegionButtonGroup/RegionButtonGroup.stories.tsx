@@ -1,6 +1,6 @@
 import RegionButtonGroup from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { REGION } from '@constants'
+import { REGIONS } from '@constants'
 import { useState } from 'react'
 
 export default {
@@ -13,7 +13,7 @@ export default {
     selectedRegion: {
       defaultValue: '서울',
       control: 'inline-radio',
-      options: REGION,
+      options: REGIONS,
     },
     containerStyle: {
       defaultValue: '',

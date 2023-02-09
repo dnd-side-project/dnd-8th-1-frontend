@@ -1,5 +1,5 @@
 import { Button, Center, Grid, Text } from '@chakra-ui/react'
-import { REGION } from '@constants'
+import { REGIONS } from '@constants'
 
 interface RegionButtonGroupProps {
   containerStyle?: string
@@ -20,7 +20,7 @@ const RegionButtonGroup = ({
 }: RegionButtonGroupProps) => {
   return (
     <Grid templateColumns="repeat(4, 1fr)" className={containerStyle}>
-      {REGION.map((region) => {
+      {REGIONS.map((region) => {
         return (
           <Center
             width="100%"
