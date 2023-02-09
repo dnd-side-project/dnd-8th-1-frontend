@@ -1,10 +1,4 @@
-// 동작 확인을 위한 예제 아이콘, 추후 아이콘 디자인 시스템이 나오면 추가 예정
-export type iconName = 'vercel'
-
-type icon = {
-  path: string
-  viewBox: string
-}
+import { iconName, icon } from '@types'
 
 const IconSet: Record<iconName, icon> = {
   vercel: {

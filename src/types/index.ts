@@ -1,3 +1,4 @@
-export type { GenreTypes } from './genre'
-export type { RegionTypes } from './region'
-export type { MeetTypes } from './meet'
+export type * from './genre'
+export type * from './region'
+export type * from './meet'
+export * from './icon'
