@@ -1,4 +1,4 @@
-const CONSTANT_REGION = [
+const REGION = [
   '서울',
   '경기',
   '인천',
@@ -13,8 +13,9 @@ const CONSTANT_REGION = [
   '대구',
   '제주',
   '전남',
-  '경남/울산',
+  '경남',
   '부산',
+  '울산',
 ] as const
 
-export { CONSTANT_REGION }
+export { REGION }
