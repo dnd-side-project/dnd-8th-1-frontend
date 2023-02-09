@@ -22,7 +22,7 @@ const PostFormTemplate: ComponentStory<typeof FormCategorySelect> = (args) => {
   }
 
   const postFormArgs = {
-    handleChange: callback,
+    handleOnChange: callback,
     tabWrapperStyle,
     tabItemStyle,
     activeStyle,
@@ -43,7 +43,7 @@ const ProfileFormTemplate: ComponentStory<typeof FormCategorySelect> = (
   }
 
   const postFormArgs = {
-    handleChange: callback,
+    handleOnChange: callback,
     tabWrapperStyle,
     tabItemStyle,
     activeStyle,

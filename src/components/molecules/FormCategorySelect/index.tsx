@@ -4,7 +4,7 @@ import { CSSProperties, useState } from 'react'
 interface FormCategorySelectProps {
   active?: string
   categories: string[]
-  handleChange?: (index: number) => void // 인덱스가 변할 때, 상위 컴포넌트에 바뀐 인덱스 정보를 넘겨줌
+  handleOnChange?: (index: number) => void // 인덱스가 변할 때, 상위 컴포넌트에 바뀐 인덱스 정보를 넘겨줌
   tabWrapperStyle?: string
   tabItemStyle?: string
   activeStyle?: CSSProperties
@@ -13,7 +13,7 @@ interface FormCategorySelectProps {
 const FormCategorySelect = ({
   active,
   categories,
-  handleChange,
+  handleOnChange,
   tabWrapperStyle,
   tabItemStyle,
   activeStyle,
@@ -30,7 +30,7 @@ const FormCategorySelect = ({
         defaultIndex={currentIndex}
         variant="unstyled"
         onChange={(index) => {
-          handleChange && handleChange(index)
+          handleOnChange && handleOnChange(index)
         }}
         flexGrow={1}
       >
