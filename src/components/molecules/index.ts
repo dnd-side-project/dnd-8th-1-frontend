@@ -1,4 +1,5 @@
 export { default as Molecule } from './Molecule'
+export { default as GenrePopupContent } from './GenrePopupContent'
 export { default as RegionButtonGroup } from './RegionButtonGroup'
 export { default as StatusPopupContent } from './StatusPopupContent'
 export { default as ToggleText } from './ToggleText'
