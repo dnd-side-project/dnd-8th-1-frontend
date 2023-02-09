@@ -1,23 +1,32 @@
 import GenrePopupContent from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { CONSTANT_DANCE_GENRE } from '@constants'
+import { DANCE_GENRE } from '@constants'
+import { useState } from 'react'
 
 export default {
   component: GenrePopupContent,
   title: 'Molecules/GenrePopupContent',
   parameters: {
-    componentSubtitle: 'GenrePopupContent',
+    componentSubtitle: 'GenrePopupContent 컴포넌트',
   },
   argTypes: {
-    clickGenre: {
+    selectedGenre: {
       defaultValue: 'vercel',
       control: 'inline-radio',
-      options: CONSTANT_DANCE_GENRE,
+      options: DANCE_GENRE,
     },
   },
 } as ComponentMeta<typeof GenrePopupContent>
 
-const Template: ComponentStory<typeof GenrePopupContent> = (args) => (
-  <GenrePopupContent {...args} />
-)
+const Template: ComponentStory<typeof GenrePopupContent> = (args) => {
+  const [selectedGenre, setSelectedGenre] = useState<string>()
+  const handleSelectGenre = (genre: string) => {
+    setSelectedGenre(genre)
+  }
+  const props = {
+    selectedGenre,
+    handleOnClick: handleSelectGenre,
+  }
+  return <GenrePopupContent {...args} {...props} />
+}
 export const Default = Template.bind({})

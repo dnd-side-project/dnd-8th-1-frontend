@@ -1,30 +1,28 @@
-import { Grid, GridItem, Text } from '@chakra-ui/react'
-import { CONSTANT_DANCE_GENRE } from '@constants'
-import { CSSProperties } from 'react'
+import { Button, Grid, GridItem, Text } from '@chakra-ui/react'
+import { DANCE_GENRE } from '@constants'
 
 interface GenrePopupContentProps {
-  containerStyle?: CSSProperties
-  textStyle?: CSSProperties
-  clickGenre?: string
-  handlerFn?: (danceGenre: string) => void
+  containerStyle?: string
+  textStyle?: string
+  selectedGenre?: string
+  handleOnClick?: (danceGenre: string) => void
 }
 
 const GenrePopupContent = ({
-  clickGenre,
-  handlerFn,
+  selectedGenre,
+  handleOnClick,
   containerStyle,
   textStyle,
 }: GenrePopupContentProps) => {
-  console.log(clickGenre)
   return (
     <Grid
       justifyContent="center"
       gap="16px"
       width="200px"
       templateColumns="repeat(2, 1fr)"
-      style={{ ...containerStyle }}
+      className={containerStyle}
     >
-      {CONSTANT_DANCE_GENRE.map((danceGenre) => {
+      {DANCE_GENRE.map((danceGenre) => {
         return (
           <GridItem
             width="100%"
@@ -32,16 +30,18 @@ const GenrePopupContent = ({
             justifyContent="center"
             key={danceGenre}
           >
-            <Text
-              onClick={handlerFn && (() => handlerFn(danceGenre))}
-              style={{
-                cursor: 'pointer',
-                color: clickGenre === danceGenre ? 'black' : 'gray',
-                ...textStyle,
-              }}
+            <Button
+              variant="unstyled"
+              onClick={handleOnClick && (() => handleOnClick(danceGenre))}
             >
-              {danceGenre}
-            </Text>
+              <Text
+                className={`font-normal ${
+                  selectedGenre === danceGenre ? 'text-black' : 'text-gray-200'
+                } ${textStyle}`}
+              >
+                {danceGenre}
+              </Text>
+            </Button>
           </GridItem>
         )
       })}
