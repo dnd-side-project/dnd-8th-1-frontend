@@ -7,6 +7,11 @@ import { theme } from '@styles'
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
+
+  if (process.env.NEXT_PUBLIC_API_MOCKING) {
+    import('@mocks')
+  }
+
   return (
     <ChakraBaseProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
