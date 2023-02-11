@@ -6,11 +6,11 @@ interface HeaderProps {
 
 const Header = ({ children }: HeaderProps) => {
   return (
-    <nav
+    <header
       className={`fixed top-0 z-[999] px-[16px] py-[14px] sm:h-[52px] sm:w-[375px] sm:max-w-[375px]`}
     >
       {children}
-    </nav>
+    </header>
   )
 }
 
