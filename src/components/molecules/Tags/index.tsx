@@ -1,6 +1,5 @@
 import { Box, Center, Tag, Text } from '@chakra-ui/react'
 import { GenreTypes, RegionTypes } from '@types'
-import { Icon } from '@components'
 
 type TagTypes = GenreTypes | RegionTypes
 
@@ -63,7 +62,7 @@ const Tags = ({
               className={`${isTag(tag) ? 'mr-[0px]' : 'mr-[4px]'} ${tagStyle}`}
             >
               <Center className="w-full">
-                <Icon icon="vercel" size={16} />
+                {/* <Icon icon="vercel" size={16} /> */}
                 <Text className={`ml-2 ${textStyle}`}>{tag}</Text>
               </Center>
             </Tag>

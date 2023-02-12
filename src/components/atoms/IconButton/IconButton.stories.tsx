@@ -6,9 +6,9 @@ export default {
   title: 'Atoms/IconButton',
   argTypes: {
     icon: {
-      defaultValue: 'vercel',
+      defaultValue: 'heart',
       control: 'inline-radio',
-      options: ['vercel'],
+      options: ['heart'],
     },
     size: {
       defaultValue: 16,

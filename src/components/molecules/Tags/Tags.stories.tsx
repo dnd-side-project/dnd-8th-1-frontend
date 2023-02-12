@@ -21,7 +21,7 @@ export default {
      * TODO : iconType 추가 시 정의 할 것
      */
     iconType: {
-      defaultValue: 'vercel',
+      // defaultValue: 'vercel',
     },
   },
 } as ComponentMeta<typeof Tags>

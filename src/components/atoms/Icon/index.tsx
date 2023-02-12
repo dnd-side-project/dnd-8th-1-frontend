@@ -6,7 +6,7 @@ const Icon = ({ icon, size = 16, color }: IconProps) => {
     <svg
       height={size}
       viewBox={IconSet[icon].viewBox}
-      fill={color}
+      fill={color ? color : IconSet[icon].fill}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d={IconSet[icon].path} />
