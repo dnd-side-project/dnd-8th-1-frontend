@@ -1,14 +1,15 @@
 import Icon from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { IconSet } from './Iconset'
 
 export default {
   component: Icon,
   title: 'Atoms/Icon',
   argTypes: {
     icon: {
-      defaultValue: 'vercel',
+      defaultValue: 'arrow-decrease',
       control: 'inline-radio',
-      options: ['vercel'],
+      options: Object.keys(IconSet),
     },
     size: {
       defaultValue: 16,
@@ -21,6 +22,13 @@ export default {
   parameters: {
     componentSubtitle: 'Icon 컴포넌트',
   },
+  decorators: [
+    (Story) => (
+      <div className="flex h-[30px] w-[30px] items-center justify-center bg-neutral-100">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof Icon>
 
 const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />
