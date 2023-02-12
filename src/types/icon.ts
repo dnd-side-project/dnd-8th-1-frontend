@@ -26,6 +26,7 @@ export type iconName =
 export type icon = {
   path: string
   viewBox: string
+  fill: string
 }
 
 export interface IconProps {
