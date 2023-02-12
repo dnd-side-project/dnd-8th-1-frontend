@@ -11,7 +11,6 @@ export default {
   },
   argTypes: {
     selectedGenre: {
-      defaultValue: 'vercel',
       control: 'inline-radio',
       options: GENRE,
     },
