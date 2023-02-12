@@ -1,9 +1,11 @@
 // inline CSS에서 사용하기 위한 스타일 상수
+
 export const theme = {
   colors: {
     green: {
       light: '#69FFA5',
       DEFAULT: '#18FF74',
+      opacity_10: 'rgba(105, 255, 165, 0.1);',
     },
     blue: {
       light: '#55ADFF',
@@ -30,10 +32,19 @@ export const theme = {
     violent_gradient: 'linear-gradient(61.53deg, #673CFF 30.27%, #1D77FF 100%)',
   },
   boxShadow: {
-    shadow: '0px 1px 0px rgba(255, 255, 255, 0.1)',
+    shadow: 'inset 0px 1px 0px rgba(255, 255, 255, 0.1)',
     blur: '0px 0px 20px rgba(164, 170, 172, 0.25)',
   },
   screens: {
-    mobile: '325px',
+    mobile: '375px',
+  },
+  fontSize: {
+    title1: '30px',
+    title2: '24px',
+    headline: '20px',
+    subtitle: '18px',
+    body1: '16px',
+    body2: '14px',
+    caption: '12px',
   },
 }
