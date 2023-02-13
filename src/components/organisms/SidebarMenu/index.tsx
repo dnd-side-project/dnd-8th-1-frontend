@@ -5,18 +5,29 @@ import { useClickAway } from '@hooks'
 
 const SideBarMenu = () => {
   const [showSidebar, setShowSidebar] = useState(false)
+
+  const iconButtonRef = useRef<HTMLDivElement>(null)
   const sidebarRef = useRef(null)
-  useClickAway(sidebarRef, () => setShowSidebar(false))
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useClickAway(sidebarRef, (e: any) => {
+    // useClickAway와 IconButton의 동시 실행 방지
+    const { current: triggerWrapper } = iconButtonRef
+    triggerWrapper &&
+      !triggerWrapper.contains(e.target) &&
+      setShowSidebar(false)
+  })
 
   return (
     <>
-      <IconButton
-        icon={'line-three'}
-        areaLabel={'사이드바 메뉴 버튼'}
-        size={18.4}
-        handleOnClick={() => setShowSidebar(!showSidebar)}
-        styleClass="z-[999]"
-      />
+      <div ref={iconButtonRef} className="trigger z-[999]">
+        <IconButton
+          icon={'line-three'}
+          areaLabel={'사이드바 메뉴 버튼'}
+          size={18.4}
+          handleOnClick={() => setShowSidebar(!showSidebar)}
+        />
+      </div>
 
       {showSidebar && (
         <div className="absolute top-0 left-0 h-[100vh] w-[375px] bg-gray-900 bg-opacity-60">

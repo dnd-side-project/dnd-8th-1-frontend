@@ -1,28 +1,28 @@
 import { useRouter, usePathname } from 'next/navigation'
 import SidebarContentItem from './SidebarContentItem'
 
+const CONTENTS_ITEMS = [
+  {
+    title: '홈',
+    path: '/',
+  },
+  {
+    title: '만나기',
+    path: '/meet',
+  },
+  {
+    title: '공연 정보',
+    path: '/performance',
+  },
+]
+
 const SidebarContent = () => {
   const router = useRouter()
   const pathName = usePathname() as string
 
-  const contentItems = [
-    {
-      title: '홈',
-      path: '/',
-    },
-    {
-      title: '만나기',
-      path: '/meet',
-    },
-    {
-      title: '공연 정보',
-      path: '/performance',
-    },
-  ]
-
   return (
     <ul className="py-[18px] px-[20px]">
-      {contentItems.map(({ title, path }) => {
+      {CONTENTS_ITEMS.map(({ title, path }) => {
         const isCurrentPath =
           title === '홈' ? pathName === path : pathName.includes(path)
 
