@@ -54,6 +54,9 @@ module.exports = {
       body2: '14px',
       caption: '12px',
     },
+    fontFamily: {
+      pretendard: ['Pretendard', 'sans-serif'],
+    },
   },
   plugins: [],
 }
