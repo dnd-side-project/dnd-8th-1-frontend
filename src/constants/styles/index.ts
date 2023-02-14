@@ -39,12 +39,12 @@ export const theme = {
     mobile: '375px',
   },
   fontSize: {
-    title1: '30px',
-    title2: '24px',
-    headline: '20px',
-    subtitle: '18px',
-    body1: '16px',
-    body2: '14px',
-    caption: '12px',
+    title1: ['30px', '38px'], // [fontSize, lineHeight]
+    title2: ['24px', '32px'],
+    headline: ['20px', '28px'],
+    subtitle: ['18px', '26px'],
+    body1: ['16px', '24px'],
+    body2: ['14px', '22px'],
+    caption: ['12px', '20px'],
   },
 }
