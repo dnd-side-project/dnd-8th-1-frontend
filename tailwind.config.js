@@ -55,7 +55,7 @@ module.exports = {
       caption: ['12px', '20px'],
     },
     fontFamily: {
-      pretendard: ['Pretendard', 'sans-serif'],
+      pretendard: ['PretendardVariable', 'sans-serif'],
     },
   },
   plugins: [],
