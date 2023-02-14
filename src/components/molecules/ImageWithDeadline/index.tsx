@@ -15,14 +15,16 @@ const ImageWithDeadLine = ({ deadLine, imgUrl }: ImageWithDeadeLineProps) => {
   return (
     <div className="relative h-[110px] w-[96px] overflow-hidden rounded-[6px]">
       {isDead && (
-        <Center className="absolute h-[100%] w-[100%] bg-gray-700 bg-opacity-60 text-gray-100">
-          <Text className="s z-10 text-[12px] text-gray-100">마감</Text>
+        <Center className="absolute h-[100%] w-[100%] bg-gray-700 bg-opacity-60">
+          <Text className="s z-10 text-caption font-bold text-gray-100">
+            마감
+          </Text>
         </Center>
       )}
 
       {showDday && !isDead && (
-        <span className="absolute top-[6px] left-[4px] box-border h-[24px] w-[50px] break-keep rounded-[20px] bg-gray-700 px-[14px] py-[6px]  text-center text-[12px] font-[700] text-gray-300">
-          {`D-${dday}`}
+        <span className="absolute left-[4px] top-[6px] inline-block h-[24px] w-[50px] rounded-[20px]  bg-gray-700  py-[6px] text-center text-caption font-bold leading-none text-gray-300">
+          <span>{`D-${dday}`}</span>
         </span>
       )}
 
