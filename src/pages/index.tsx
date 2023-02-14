@@ -12,7 +12,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main></main>
+      <main>
+        <div className="font-pretendard text-[44px]">폰트 테스트</div>
+        <div className=" text-[44px]">폰트 테스트</div>
+        <div className="font-pretendard text-[44px] font-extrabold">
+          123456789
+        </div>
+        <div className="text-[44px] font-extrabold">123456789</div>
+      </main>
     </>
   )
 }
