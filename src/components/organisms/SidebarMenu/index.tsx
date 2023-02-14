@@ -1,10 +1,11 @@
 import SidebarContent from './SidebarContent'
 import { useRef, useState } from 'react'
 import { IconButton } from '@components'
-import { useClickAway } from '@hooks'
+import { useClickAway, useDelayUnmount } from '@hooks'
 
 const SideBarMenu = () => {
   const [showSidebar, setShowSidebar] = useState(false)
+  const shouldRenderSidebar = useDelayUnmount(showSidebar, 200)
 
   const iconButtonRef = useRef<HTMLDivElement>(null)
   const sidebarRef = useRef(null)
@@ -29,10 +30,16 @@ const SideBarMenu = () => {
         />
       </div>
 
-      {showSidebar && (
-        <div className="absolute top-0 left-0 h-[100vh] w-[375px] bg-gray-900 bg-opacity-60">
+      {shouldRenderSidebar && (
+        <div
+          className={`absolute top-0 left-0 h-[100vh] w-[100%] ${
+            showSidebar ? 'animate-fadeIn' : 'animate-fadeOut'
+          } overflow-hidden bg-gray-900 bg-opacity-60`}
+        >
           <nav
-            className={`absolute top-[52px] right-0 z-[999] h-[100vh] w-[192px] bg-gray-900`}
+            className={`absolute top-[52px] right-0 z-[999] h-[100vh] w-[192px] ${
+              showSidebar ? 'animate-slideIn' : 'animate-slideOut'
+            } bg-gray-900`}
             ref={sidebarRef}
           >
             <SidebarContent />

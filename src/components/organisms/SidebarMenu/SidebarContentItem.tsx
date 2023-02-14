@@ -16,7 +16,7 @@ const SidebarContentItem = ({
       onClick={handleOnClick}
       className={`mb-[36px] cursor-pointer  ${
         isCurrentPath ? 'text-green-light' : 'text-gray-300'
-      } ${styleClass} `}
+      } text-subtitle font-bold ${styleClass} `}
     >
       {content}
     </li>

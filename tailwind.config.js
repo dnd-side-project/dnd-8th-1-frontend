@@ -57,6 +57,32 @@ module.exports = {
     fontFamily: {
       pretendard: ['PretendardVariable', 'sans-serif'],
     },
+    animation: {
+      fadeIn: 'fadeIn .2s ease-in',
+      fadeOut: 'fadeOut .2s ease-out',
+      slideIn: 'slideIn .3s ease-in',
+      slideOut: 'slideOut .3s ease-out',
+    },
+    keyframes: {
+      fadeIn: {
+        '0%': { backgroundColor: 'rgba(0.8, 0.8, 0.8, 0)' },
+        '50%': { backgroundColor: 'rgba(0.8, 0.8, 0.8, 0.3)' },
+        '100%': { backgroundColor: 'rgba(0.8, 0.8, 0.8, 0.6)' },
+      },
+      slideIn: {
+        '0%': { transform: 'translateX(100%)' },
+        '100%': { transform: 'translateX(0)' },
+      },
+      fadeOut: {
+        '0%': { backgroundColor: 'rgba(0.8, 0.8, 0.8, 0.6)' },
+        '50%': { backgroundColor: 'rgba(0.8, 0.8, 0.8, 0.3)' },
+        '100%': { backgroundColor: 'rgba(0.8, 0.8, 0.8, 0.0)' },
+      },
+      slideOut: {
+        '0%': { transform: 'translateX(0)' },
+        '100%': { transform: 'translateX(100%)' },
+      },
+    },
   },
   plugins: [],
 }
