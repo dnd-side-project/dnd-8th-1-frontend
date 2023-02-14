@@ -21,7 +21,10 @@ const StyledImage = ({
   placeholder,
 }: StyledImageProps) => {
   return (
-    <div className={styleClass} style={{ ...style, width, height }}>
+    <div
+      className={`${styleClass} overflow-hidden`}
+      style={{ ...style, width, height }}
+    >
       <Image
         src={src}
         alt={alt}
