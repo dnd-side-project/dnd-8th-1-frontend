@@ -20,7 +20,7 @@ const CalandarSlider = ({
       <IconButton
         size={24}
         color={theme.colors.gray[500]}
-        areaLabel="왼쪽 화살표 버튼"
+        areaLabel="이전 월로 이동하기"
         icon="arrow-left"
         handleOnClick={() => {
           handleSetMonth(-1)
@@ -33,7 +33,7 @@ const CalandarSlider = ({
       <IconButton
         size={24}
         color={theme.colors.gray[500]}
-        areaLabel="오른쪽 화살표 버튼"
+        areaLabel="다음 월로 이동하기"
         icon="arrow-right"
         handleOnClick={() => {
           handleSetMonth(1)
