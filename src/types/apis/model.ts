@@ -1,3 +1,4 @@
+import { extendBaseTheme } from '@chakra-ui/react'
 import { GenreTypes, MeetTypes } from '@types'
 
 export interface User {
@@ -22,32 +23,37 @@ export interface User {
   }
 }
 
-export interface Meet
-  extends Pick<User, 'profileId' | 'profileName' | 'profileImg'> {
-  eventId?: number
-  title?: string
-  location?: string
-  type?: MeetTypes
-  eventImg?: string
-  eventDeadLine?: string
-  /**
-   * TODO : 마감 여부 boolean 필요
-   */
+// TODO: User와 일부 통합될 여지가 있음
+export interface Profile {
+  id: string // 프로필 아이디
+  imgUrl: string // 프로필 이미지 url
+  name: string // 프로필 댄스팀 이름
 }
 
-export interface MeetDetail
-  extends Omit<Meet, 'profileId' | 'profileName' | 'profileImg'> {
-  /**
-   * TODO : 왜 meet랑 meetdetail의 profile 필드가 각각 다를까?
-   */
-  profile?: Pick<Meet, 'profileId' | 'profileName' | 'profileImg'>
-  recruitType?: string
-  description?: string
-  recruitCount?: number
-  /**
-   * TODO : 마감 여부 boolean 필요
-   */
+export interface Meet {
+  id: number
+  title: string
+  location: string
+  type: string
+  imgUrl: string
+  deadline: string
+  profile: Profile
 }
+
+// TODO: 명세 변경 부분 있으므로 임시 주석 처리 (해당 부분 작업할 때 채워넣기)
+// export interface MeetDetail
+//    {
+//   /**
+//    * TODO : 왜 meet랑 meetdetail의 profile 필드가 각각 다를까?
+//    */
+//   profile?: Pick<Meet, 'profileId' | 'profileName' | 'profileImg'>
+//   recruitType?: string
+//   description?: string
+//   recruitCount?: number
+//   /**
+//    * TODO : 마감 여부 boolean 필요
+//    */
+// }
 
 export interface MeetCandicate
   extends Pick<
