@@ -1,9 +1,7 @@
 import CollaboList from '.'
 import CollaboListItem from './CollaboListItem'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Layout } from '@components'
-
-import { Box } from '@chakra-ui/react'
+import { Meet } from '@types'
 
 export default {
   component: CollaboList,
@@ -36,6 +34,8 @@ const COLLABO_ITEM_DUMMY = {
   },
 }
 
+const EMPTY_ITEMS: Meet[] = []
+
 const COLLABO_ITEMS = Array.from({ length: 15 }, (v, i) => {
   return { ...COLLABO_ITEM_DUMMY, id: COLLABO_ITEM_DUMMY.id + i }
 })
@@ -45,9 +45,17 @@ const CollaboItem: ComponentStory<typeof CollaboListItem> = () => {
 }
 
 const CollaboItemListTemplate: ComponentStory<typeof CollaboList> = (args) => (
-  <CollaboList collaboItems={COLLABO_ITEMS} />
+  <CollaboList {...args} />
 )
 
-export const CollaboItemList = CollaboItemListTemplate.bind({})
+export const CollaboItemListDefault = CollaboItemListTemplate.bind({})
+CollaboItemListDefault.args = {
+  collaboItems: COLLABO_ITEMS,
+}
+
+export const CollaboItemsEmpty = CollaboItemListTemplate.bind({})
+CollaboItemsEmpty.args = {
+  collaboItems: EMPTY_ITEMS,
+}
 
 export const CollaboItemDefault = CollaboItem.bind({})
