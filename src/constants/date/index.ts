@@ -1,0 +1,1 @@
+export const ONE_DAY_TO_MILLISECONDS = 1000 * 60 * 60 * 24
