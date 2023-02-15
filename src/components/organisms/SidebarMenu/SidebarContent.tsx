@@ -23,7 +23,7 @@ const SidebarContent = () => {
   // TODO: 전역 로그인 상태 로직
 
   return (
-    <ul className="py-[18px] px-[20px]">
+    <ul className="py-[16px] px-[20px]">
       {CONTENTS_ITEMS.map(({ title, path }) => {
         const isCurrentPath =
           title === '홈' ? pathName === path : pathName.includes(path)
