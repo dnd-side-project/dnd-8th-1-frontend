@@ -3,7 +3,7 @@ import { Meet } from '@types'
 import CollaboListItem from './CollaboListItem'
 
 interface CollaboListProps {
-  collaboItems: Array<Meet>
+  collaboItems: Meet[]
 }
 
 const CollaboList = ({ collaboItems }: CollaboListProps) => {
