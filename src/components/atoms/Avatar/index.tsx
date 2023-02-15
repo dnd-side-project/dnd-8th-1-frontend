@@ -5,14 +5,14 @@ interface AvatarProps {
   profileImage: string
   shape?: 'circle' | 'round' | 'square'
   size: number
-  style?: CSSProperties // 외부 커스텀 스타일
+  styleClass?: string // 외부 커스텀 스타일
 }
 
 const Avatar = ({
   profileImage,
   shape = 'circle',
   size,
-  style,
+  styleClass,
 }: AvatarProps) => {
   const avatarStyle: CSSProperties = {
     width: size,
@@ -34,10 +34,10 @@ const Avatar = ({
   return (
     <StyledImage
       src={profileImage}
-      styleClass={`${wrapperStyle}`}
+      styleClass={`${wrapperStyle} ${styleClass}`}
       alt={'user-avatar'}
       placeholder="blur"
-      style={{ ...avatarStyle, ...style }}
+      style={{ ...avatarStyle }}
       width={size}
       height={size}
     />
