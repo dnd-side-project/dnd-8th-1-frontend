@@ -51,7 +51,6 @@ const useCalendar = () => {
   const month =
     monthYear.month[0] !== '0' ? monthYear.month : monthYear.month.slice(1)
   const calandar = Array.from({ length: monthYear.lastDate })
-  console.log(monthYear)
   return {
     monthYear,
     handleSetMonth,
