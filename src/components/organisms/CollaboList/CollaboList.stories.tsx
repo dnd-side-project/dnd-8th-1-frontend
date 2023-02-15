@@ -1,8 +1,9 @@
 import CollaboList from '.'
 import CollaboListItem from './CollaboListItem'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { MeetTypes, RegionTypes } from '@types'
-import { Meet } from '@types'
+import { Layout } from '@components'
+
+import { Box } from '@chakra-ui/react'
 
 export default {
   component: CollaboList,
@@ -11,15 +12,21 @@ export default {
     componentSubtitle: '만나기 페이지에서 사용될 콜라보 리스트',
   },
 
-  decorators: [(Story) => <Story />],
+  decorators: [
+    (Story) => (
+      <div className="w-[375px] bg-gray-900">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof CollaboList>
 
-const COLLABO_ITEM_DUMMY: Meet = {
+const COLLABO_ITEM_DUMMY = {
   id: 1,
   title:
     '저희 팀과 함께 콜라보 영상 어쩌고 저쩌고 아주 긴 제목을 가진 콜라보 글글글글글',
-  location: '부산' as RegionTypes,
-  type: '콜라보' as MeetTypes,
+  location: '부산',
+  type: '콜라보',
   imgUrl: 'https://picsum.photos/200/300',
   deadline: '2023-02-19T12:00:00',
   profile: {
@@ -29,27 +36,18 @@ const COLLABO_ITEM_DUMMY: Meet = {
   },
 }
 
-const CollaboItem: ComponentStory<typeof CollaboListItem> = () => {
-  const { id, title, location, type, imgUrl, deadline, profile } =
-    COLLABO_ITEM_DUMMY
+const COLLABO_ITEMS = Array.from({ length: 15 }, (v, i) => {
+  return { ...COLLABO_ITEM_DUMMY, id: COLLABO_ITEM_DUMMY.id + i }
+})
 
-  return (
-    <CollaboListItem
-      id={id}
-      title={title}
-      location={location}
-      type={type}
-      imgUrl={imgUrl}
-      deadline={deadline}
-      profile={profile}
-    />
-  )
+const CollaboItem: ComponentStory<typeof CollaboListItem> = () => {
+  return <CollaboListItem collaboListItem={COLLABO_ITEM_DUMMY} />
 }
 
-const Template: ComponentStory<typeof CollaboList> = () => <CollaboList />
+const CollaboItemListTemplate: ComponentStory<typeof CollaboList> = (args) => (
+  <CollaboList collaboItems={COLLABO_ITEMS} />
+)
 
-export const Default = Template.bind({})
+export const CollaboItemList = CollaboItemListTemplate.bind({})
 
 export const CollaboItemDefault = CollaboItem.bind({})
-
-Default.args = {}

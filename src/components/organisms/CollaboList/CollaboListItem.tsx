@@ -3,15 +3,10 @@ import { Avatar, Tag, ImageWithDeadLine } from '@components'
 import Link from 'next/link'
 import { Meet } from '@types'
 
-const CollaboListItem = ({
-  id,
-  title,
-  location,
-  type,
-  imgUrl,
-  deadline,
-  profile,
-}: Meet) => {
+const CollaboListItem = ({ collaboListItem }: { collaboListItem: Meet }) => {
+  const { id, title, location, type, imgUrl, deadline, profile } =
+    collaboListItem
+
   return (
     <Link href={`meet/${id}`} className="cursor-pointer">
       <li className="mb-[18px] h-[110px] w-[343px] bg-gray-900">
