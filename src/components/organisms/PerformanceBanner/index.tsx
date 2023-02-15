@@ -27,7 +27,6 @@ const PerformanceBanner = ({
                 style={{
                   height: '100%',
                   width: '100%',
-                  backgroundImage: `url(${imminentPerformance.image})`,
                   background: `linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, #080808 89.06%), url(${imminentPerformance.image})`,
                 }}
               >
