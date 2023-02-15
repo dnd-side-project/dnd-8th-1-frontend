@@ -10,7 +10,7 @@ export default {
       options: {
         defaultValue: '2023-02-20T12:00:00',
         isdead: '2021-03-01T12:00:00', // 마감된 경우
-        tooLongDdayed: '2023-12-01T12:00:00', // 일주일 이상 남은 경우
+        tooLongDdayed: '2023-12-01T12:00:00', // 일주일이 넘어가는 경우
       },
       control: { type: 'radio' },
     },

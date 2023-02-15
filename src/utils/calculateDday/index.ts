@@ -1,4 +1,4 @@
-const ONE_DAY_TO_MILLISECONDS = 1000 * 60 * 60 * 24
+import { ONE_DAY_TO_MILLISECONDS } from '@constants'
 
 const calculateDday = (date: string) => {
   const present = new Date()
