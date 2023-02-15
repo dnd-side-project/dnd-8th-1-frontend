@@ -7,7 +7,7 @@ import { Layout } from '@components'
  */
 export default {
   component: PerformanceList,
-  title: 'Molecules/PerformanceList',
+  title: 'Organisms/PerformanceList',
   parameters: {
     componentSubtitle: 'PerformanceList 컴포넌트',
   },
