@@ -10,6 +10,10 @@ interface TagInterface {
   isHighlighted?: boolean
   styleClass?: string
   iconColor?: string // 색상 코드
+  width?: number
+  height?: number
+  px?: number
+  py?: number
 }
 
 const { colors } = theme
@@ -20,14 +24,20 @@ const Tag = ({
   isHighlighted,
   styleClass,
   iconColor,
+  width,
+  px,
+  py,
 }: TagInterface) => {
   const isRegion = type === 'region'
   return (
-    // TODO: 패딩 부분 스타일 통일 요청
     <Center
       className={`${
-        isRegion ? 'w-[67px]' : 'w-[45px]'
-      } inline-block h-[24px] rounded-[4px] bg-gray-700 px-[12px] py-[4px] text-center text-caption ${
+        width ? `w-[${width}]` : isRegion ? 'w-[67px]' : 'w-[45px]'
+      } 
+      inline-block h-[24px] rounded-[4px] bg-gray-700 
+      ${px ? `px-[${px}px]` : `px-[12px]`} 
+      ${py ? `px-[${py}px]` : `py-[4px]`} 
+      text-center text-caption ${
         isHighlighted ? 'text-green-light' : 'text-gray-300'
       }  ${styleClass}`}
     >
