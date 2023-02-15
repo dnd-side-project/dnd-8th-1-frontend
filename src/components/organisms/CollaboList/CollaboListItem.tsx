@@ -31,7 +31,7 @@ const CollaboListItem = ({ collaboListItem }: { collaboListItem: Meet }) => {
                   size={24}
                   styleClass="border-solid border-[0.5px] border-gray-700"
                 />
-                <Text className="ml-[8px] text-body2 text-gray-100">
+                <Text className="ml-[8px] overflow-hidden text-ellipsis whitespace-nowrap text-body2 text-gray-100">
                   {profile.name}
                 </Text>
               </Flex>

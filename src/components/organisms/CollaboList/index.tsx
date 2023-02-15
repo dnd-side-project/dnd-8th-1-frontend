@@ -1,4 +1,3 @@
-import { Center } from '@chakra-ui/react'
 import { Meet } from '@types'
 import CollaboListItem from './CollaboListItem'
 
@@ -19,7 +18,7 @@ const CollaboList = ({ collaboItems }: CollaboListProps) => {
       </p>
     </div>
   ) : (
-    <div className="w-[100%] bg-gray-900 px-[16px] pt-[29px] pb-[49px]">
+    <div className="w-[100%] bg-gray-900 px-[16px] pt-[29px]">
       {collaboItems.map((collaboItem) => {
         return (
           <CollaboListItem key={collaboItem.id} collaboListItem={collaboItem} />

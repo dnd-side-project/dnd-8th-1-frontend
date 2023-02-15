@@ -1,5 +1,4 @@
-import { extendBaseTheme } from '@chakra-ui/react'
-import { GenreTypes, MeetTypes } from '@types'
+import { GenreTypes } from '@types'
 
 export interface User {
   memberId?: string

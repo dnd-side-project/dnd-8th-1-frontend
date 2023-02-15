@@ -6,6 +6,7 @@ interface AvatarProps {
   shape?: 'circle' | 'round' | 'square'
   size: number
   styleClass?: string // 외부 커스텀 스타일
+  style?: CSSProperties // inline style을 위한 prop
 }
 
 const Avatar = ({
@@ -27,8 +28,7 @@ const Avatar = ({
     shape === 'circle'
       ? 'rounded-full'
       : shape === 'round'
-      ? // TODO: 디자인 명세가 나오면 변경
-        'rounded'
+      ? 'rounded'
       : 'roundend-none'
 
   return (
