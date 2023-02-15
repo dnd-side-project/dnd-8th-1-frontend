@@ -32,15 +32,7 @@ const PerformanceBanner = ({
               >
                 <div className="absolute left-[16px] bottom-[40px]">
                   <span
-                    style={{
-                      display: 'block',
-                      background: theme.backgroundImage.green_gradient,
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      fontWeight: 700,
-                      fontSize: theme.fontSize.subtitle[0],
-                      lineHeight: theme.fontSize.subtitle[1],
-                    }}
+                    className={`block bg-green_gradient bg-clip-text text-subtitle font-bold text-[transparent]`}
                   >
                     NEW!
                   </span>
