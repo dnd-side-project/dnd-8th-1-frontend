@@ -27,7 +27,7 @@ const RegionButtonGroup = ({
           >
             <button className="w-[100%]">
               <span
-                className={`font-normal ${
+                className={`text-body2 ${
                   isSelect(region)
                     ? 'font-bold text-green-light'
                     : 'font-normal text-gray-400'
