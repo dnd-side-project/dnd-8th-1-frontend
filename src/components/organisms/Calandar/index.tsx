@@ -6,9 +6,15 @@ import CalandarSwiper from './CalandarSwiper'
 
 interface CalendarProps {
   setIsSearchOpen: Dispatch<SetStateAction<boolean>>
+  isEntire: boolean
+  setIsEntire: Dispatch<SetStateAction<boolean>>
 }
 
-const Calendar = ({ setIsSearchOpen }: CalendarProps) => {
+const Calendar = ({
+  setIsSearchOpen,
+  isEntire,
+  setIsEntire,
+}: CalendarProps) => {
   const {
     month,
     handleSetMonth,
@@ -44,6 +50,8 @@ const Calendar = ({ setIsSearchOpen }: CalendarProps) => {
         </div>
       </div>
       <CalandarSwiper
+        isEntire={isEntire}
+        setIsEntire={setIsEntire}
         calandar={calandar}
         currentDay={currentDay}
         isSunday={isSunday}

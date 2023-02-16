@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react'
+import { SetStateAction } from 'react'
 import DayList from './DayList'
 
 interface CalandarSwiperProps {
@@ -7,6 +7,8 @@ interface CalandarSwiperProps {
   isSunday: (day: number) => boolean
   setCurrentDay: (value: SetStateAction<number>) => void
   getDay: (day: number) => number
+  isEntire: boolean
+  setIsEntire: (value: SetStateAction<boolean>) => void
 }
 
 const CalandarSwiper = ({
@@ -15,8 +17,9 @@ const CalandarSwiper = ({
   isSunday,
   setCurrentDay,
   getDay,
+  isEntire,
+  setIsEntire,
 }: CalandarSwiperProps) => {
-  const [isEntire, setIsEntire] = useState(true)
   return (
     <div className="no-scrollbar flex w-[100%] resize-none overflow-x-scroll pl-[58px]">
       <div>
