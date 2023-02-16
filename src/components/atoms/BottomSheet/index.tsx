@@ -4,10 +4,10 @@ import { useRef, ReactElement, Dispatch, SetStateAction } from 'react'
 import { theme } from '@constants'
 
 interface BottomSheetProps {
-  children: ReactElement
-  hasCloseButton: boolean
-  showBottomSheet: boolean
-  setShowBottomSheet: Dispatch<SetStateAction<boolean>>
+  children: ReactElement // BottomSheet 안쪽에 들어갈 content
+  hasCloseButton: boolean // x 버튼 유무
+  showBottomSheet: boolean // 커스텀 훅과 함께 사용
+  setShowBottomSheet: Dispatch<SetStateAction<boolean>> // 커스텀 훅과 함께 사용
 }
 
 const BottomSheet = ({
