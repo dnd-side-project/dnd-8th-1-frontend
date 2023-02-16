@@ -1,12 +1,12 @@
-import { StyledImage } from '@components'
+import meetBannerImage from '@images/meetBannarImage.png'
+import Image from 'next/image'
 
 const MeetBanner = () => {
   return (
-    <div className="relative">
-      <div className="z-1 absolute h-[278px] w-[375px] bg-darken_gradient" />
-      {/* TODO: 디자이너에게 정확한 이미지 받기 */}
-      <StyledImage
-        src="https://picsum.photos/500/500"
+    <div className="relative overflow-hidden">
+      <div className="z-1 absolute h-[278px] w-[375px] overflow-hidden bg-darken_gradient" />
+      <Image
+        src={meetBannerImage}
         width={375}
         height={278}
         alt="만나기 (콜라보, 쉐어) 페이지 배너"
