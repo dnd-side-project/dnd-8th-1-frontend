@@ -1,5 +1,3 @@
-import { GenreTypes } from '@types'
-
 export interface User {
   memberId?: string
   memberName?: string
@@ -83,7 +81,7 @@ export interface Performance {
   performImg?: string
   performStartDate?: string
   performLocation?: string
-  performGenres?: GenreTypes[]
+  // performGenres?: GenreTypes[]
   profile?: {
     id?: string
     imgUrl?: string
