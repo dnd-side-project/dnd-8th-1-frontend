@@ -22,15 +22,15 @@ const ImageWithDeadLine = ({
       className={`relative h-[110px] w-[96px] overflow-hidden rounded-[6px] ${styleClass}`}
     >
       {isDead && (
-        <Center className="absolute h-[100%] w-[100%] bg-gray-700 bg-opacity-60">
-          <Text className="z-10 text-caption font-bold text-gray-100">
+        <Center className="absolute z-[1] h-[100%] w-[100%] bg-gray-700 bg-opacity-60">
+          <Text className="z-[2] text-caption font-bold text-gray-100">
             마감
           </Text>
         </Center>
       )}
 
       {showDday && !isDead && (
-        <div className="absolute left-[4px] top-[6px] inline-block h-[24px] w-[50px] rounded-[20px]  bg-gray-700  py-[6px] text-center text-caption font-bold leading-none text-gray-300">
+        <div className="absolute left-[4px] top-[6px] z-[1] inline-block h-[24px] w-[50px] rounded-[20px]  bg-gray-700  py-[6px] text-center text-caption font-bold leading-none text-gray-300">
           <span>{`D-${dday}`}</span>
         </div>
       )}

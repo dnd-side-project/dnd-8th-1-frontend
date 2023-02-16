@@ -18,7 +18,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
   const isSelected = selectedFilter !== ''
 
   const buttonDefaultStyle =
-    'h-[28px] w-[69px] bg-gray-700 text-green-light rounded-[37px] text-body2'
+    'h-[28px] bg-gray-700 py-[3px] px-[22px] text-green-light rounded-[37px] text-body2'
 
   return !isSelected ? (
     <Popover>
@@ -31,7 +31,12 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
           <button className={buttonDefaultStyle}>장르</button>
         )}
       </PopoverTrigger>
-      <PopoverContent border="none" width="fit-content">
+      <PopoverContent
+        border="none"
+        width="fit-content"
+        overflow="hidden"
+        backgroundColor="transparent"
+      >
         {type === 'region' ? (
           <RegionButtonGroup
             handleOnClick={(region) => {
@@ -57,7 +62,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
       </PopoverContent>
     </Popover>
   ) : (
-    <div className="flex h-[28px] w-[70px] items-center justify-center gap-[10.95px] rounded-[37px] border-[1px] border-solid border-green-light bg-gray-700 text-body2 text-green-light">
+    <div className="flex h-[28px] w-fit items-center justify-center gap-[10.95px] rounded-[37px] border-[1px] border-solid border-green-light bg-gray-700 py-[3px] px-[12px] text-body2 text-green-light">
       <span>{selectedFilter}</span>
       <IconButton
         icon="x-active"
