@@ -1,4 +1,4 @@
-import { Button, Center, Grid, Text } from '@chakra-ui/react'
+import { Center, Grid } from '@chakra-ui/react'
 import { REGIONS } from '@constants'
 
 interface RegionButtonGroupProps {
@@ -6,7 +6,7 @@ interface RegionButtonGroupProps {
   handleOnClick?: (region: string) => void
 }
 
-const RegionButtonGroup = ({
+const RegionPopupContent = ({
   selectedRegion,
   handleOnClick,
 }: RegionButtonGroupProps) => {
@@ -43,4 +43,4 @@ const RegionButtonGroup = ({
   )
 }
 
-export default RegionButtonGroup
+export default RegionPopupContent
