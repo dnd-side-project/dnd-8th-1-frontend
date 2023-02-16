@@ -1,7 +1,7 @@
 import RegisterList from '.'
 import RegisterListItem from './RegisterListItem'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { RegionTypes } from '@types'
+import { MeetApplicant } from '@types'
 export default {
   component: RegisterList,
   title: 'Organisms/RegisterList',
@@ -27,7 +27,7 @@ const REGISTER_ITEM_DUMMY = {
     openChatUrl: 'https://www.allsilver.dev/', // 카카오 오픈 채팅 주소
   },
   isMatched: true,
-  location: '부산' as RegionTypes, // 지원자 활동 지역
+  location: '부산', // 지원자 활동 지역
 }
 
 const REGISTER_ITEMS = Array.from({ length: 15 }, (v, i) => {
@@ -38,6 +38,8 @@ const REGISTER_ITEMS = Array.from({ length: 15 }, (v, i) => {
   }
 })
 
+const EMPTY_ITEMS: MeetApplicant[] = []
+
 const RegisterListTemplate: ComponentStory<typeof RegisterList> = (args) => (
   <RegisterList {...args} />
 )
@@ -45,6 +47,11 @@ const RegisterListTemplate: ComponentStory<typeof RegisterList> = (args) => (
 export const RegisterItemListDefault = RegisterListTemplate.bind({})
 RegisterItemListDefault.args = {
   registerItems: REGISTER_ITEMS,
+}
+
+export const RegisterItemLisEmpty = RegisterListTemplate.bind({})
+RegisterItemLisEmpty.args = {
+  registerItems: EMPTY_ITEMS,
 }
 
 const RegisterItem: ComponentStory<typeof RegisterListItem> = () => {
