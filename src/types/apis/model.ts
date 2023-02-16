@@ -1,5 +1,4 @@
-import { GenreTypes } from '@types'
-
+import { GenreTypes, MeetTypes, RegionTypes } from '@types'
 export interface User {
   memberId?: string
   memberName?: string
@@ -78,16 +77,16 @@ export interface PerformanceImminent {
 }
 
 export interface Performance {
-  performId?: string
-  performTitle?: string
-  performImg?: string
-  performStartDate?: string
-  performLocation?: string
-  performGenres?: GenreTypes[]
-  profile?: {
-    id?: string
-    imgUrl?: string
-    name?: string
+  performId: string
+  performTitle: string
+  performImg: string
+  performStartDate: string
+  performLocation: RegionTypes
+  performGenres: GenreTypes[]
+  profile: {
+    id: string
+    imgUrl: string
+    name: string
   }
 }
 

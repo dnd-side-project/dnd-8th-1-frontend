@@ -37,6 +37,8 @@ module.exports = {
         'linear-gradient(61.53deg, #2400A2 -5.41%, #374BFF 35.21%, #18FF74 100%)',
       violent_gradient:
         'linear-gradient(61.53deg, #673CFF 30.27%, #1D77FF 100%)',
+      darken_gradient:
+        'linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, #080808 72.93%)',
     },
     boxShadow: {
       shadow: 'inset 0px 1px 0px rgba(255, 255, 255, 0.1)',

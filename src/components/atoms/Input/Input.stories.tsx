@@ -11,7 +11,7 @@ export default {
     },
     styleClass: {
       defaultValue:
-        'sm:w-[330px] sm:rounded-md sm:h-10 sm:px-3 sm:text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 bg-white text-gray-600',
+        'w-[330px] rounded-md h-10 px-3 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 bg-white text-gray-600',
     },
   },
   parameters: {
@@ -26,13 +26,13 @@ export const Default = Template.bind({})
 export const Flushed = Template.bind({})
 Flushed.args = {
   styleClass:
-    'sm:w-[330px] sm:text-sm sm:py-2 border-0 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-400 bg-white text-gray-600',
+    'w-[330px] text-sm sm:py-2 border-0 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-400 bg-white text-gray-600',
 }
 
 export const Rounded = Template.bind({})
 Rounded.args = {
   styleClass:
-    'sm:w-[330px] sm:rounded-3xl sm:h-10 sm:px-3 sm:text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 bg-white text-gray-600',
+    'w-[330px] rounded-3xl h-10 px-3 text-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 bg-white text-gray-600',
 }
 
 export const Filled = Template.bind({})

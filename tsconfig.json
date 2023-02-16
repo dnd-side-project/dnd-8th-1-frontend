@@ -34,7 +34,11 @@
       "@types": ["types"],
       "@types/*": ["types/"],
       "@utils": ["utils"],
-      "@utils/*": ["utils/"]
+      "@utils/*": ["utils/"],
+      "@assets": ["public/assets"],
+      "@assets/*": ["public/assets"],
+      "@images": ["public/assets/images"],
+      "@images/*": ["public/assets/images"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
