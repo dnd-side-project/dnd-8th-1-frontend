@@ -1,4 +1,4 @@
-import meetBannerImage from '@images/meetBannarImage.png'
+import meetBannerImage from '/public/assets/images/meetBannarImage.png'
 import Image from 'next/image'
 
 const MeetBanner = () => {

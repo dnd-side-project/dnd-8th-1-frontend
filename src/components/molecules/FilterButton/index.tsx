@@ -31,7 +31,12 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
           <button className={buttonDefaultStyle}>장르</button>
         )}
       </PopoverTrigger>
-      <PopoverContent border="none" width="fit-content">
+      <PopoverContent
+        border="none"
+        width="fit-content"
+        overflow="hidden"
+        backgroundColor="transparent"
+      >
         {type === 'region' ? (
           <RegionButtonGroup
             handleOnClick={(region) => {

@@ -6,7 +6,7 @@ interface MeetPopupContentProps {
 
 const MeetPopupContent = ({ handleOnClick }: MeetPopupContentProps) => {
   return (
-    <ul className=" flex h-[94px] w-[90px] flex-col gap-[9px] rounded-[8px] border-[1px] border-[gray-600] border-[solid] bg-gray-700 px-[6px] py-[6px]">
+    <ul className=" flex h-[94px] w-[90px] flex-col gap-[9px] rounded-[8px] border-[1px]  border-gray-600 bg-gray-700 px-[6px] py-[6px]">
       {MEET_TYPE.map((type) => (
         <li
           key={type}
