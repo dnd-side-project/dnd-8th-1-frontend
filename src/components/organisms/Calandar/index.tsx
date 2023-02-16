@@ -13,8 +13,8 @@ const Calendar = () => {
     calandar,
   } = useCalendar()
   return (
-    <div className="relative flex flex-col border bg-gray-900">
-      <div className="flex w-full justify-between">
+    <div className="relative flex flex-col bg-gray-900">
+      <div className="flex w-full justify-between pt-[50px] pb-[20px]">
         <CalandarSlider
           handleSetMonth={handleSetMonth}
           setCurrentDay={setCurrentDay}
