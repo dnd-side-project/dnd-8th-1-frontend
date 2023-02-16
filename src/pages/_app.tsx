@@ -1,9 +1,10 @@
 import '@/styles/globals.css'
+import '@/styles/swiper.css'
+import { theme } from '@styles'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { AppProps } from 'next/app'
 import { ChakraBaseProvider } from '@chakra-ui/react'
-import { theme } from '@styles'
 import { useEffect, useState } from 'react'
 import { Layout } from '@components'
 
