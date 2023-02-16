@@ -1,4 +1,4 @@
-import { Dimmed, IconButton, Input } from '@components'
+import { Dimmed, Icon, IconButton, Input } from '@components'
 import { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -27,28 +27,27 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
           onSubmit={handleSubmit}
           className="relative flex w-full items-center"
         >
-          <IconButton
-            handleOnClick={() => {
+          <div
+            className="cursor-pointer"
+            onClick={() => {
               setOpen(!open)
             }}
-            areaLabel="헤더를 닫는 용도의 버튼"
-            size={20}
-            icon="arrow-left"
-          />
+          >
+            <Icon size={20} icon="arrow-left" />
+          </div>
           <Input
             placeholder="댄서/팀 이름으로 공연 검색"
             styleClass="ml-[6px] w-[322px] h-[41px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 bg-white text-gray-600 text-body1 placeholder:text-gray-500 text-gray-100"
             {...register('search')}
           />
-          <IconButton
-            areaLabel="검색어를 지우는 용도의 버튼"
-            handleOnClick={() => {
+          <div
+            className="absolute right-[11.83px] cursor-pointer"
+            onClick={() => {
               reset()
             }}
-            styleClass="absolute right-[11.83px] cursor-pointer"
-            icon="x-circle"
-            size={20}
-          />
+          >
+            <Icon size={20} icon="x-circle" />
+          </div>
         </form>
         <div className="absolute bottom-[-30px] left-[42px] flex h-[38px] w-[251px] items-center rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] bg-gray-100 py-[9px] px-[14px]">
           <p className="w-[274px] text-center text-caption font-bold text-gray-700">
