@@ -1,11 +1,7 @@
-import { Button, Grid, GridItem, Text } from '@chakra-ui/react'
-import { GENRE } from '@constants'
+import { Center, Grid } from '@chakra-ui/react'
+import { GENRES } from '@constants'
 
 interface GenrePopupContentProps {
-  containerStyle?: string
-  textStyle?: string
-  gridItemStyle?: string
-  buttonStyle?: string
   selectedGenre?: string
   handleOnClick?: (danceGenre: string) => void
 }
@@ -13,35 +9,34 @@ interface GenrePopupContentProps {
 const GenrePopupContent = ({
   selectedGenre,
   handleOnClick,
-  containerStyle,
-  textStyle,
-  buttonStyle,
-  gridItemStyle,
 }: GenrePopupContentProps) => {
+  const isSelect = (genre: string) => {
+    return selectedGenre === genre
+  }
   return (
-    <Grid
-      className={`w-[200px] grid-cols-2 justify-center gap-[16px] ${containerStyle}`}
-    >
-      {GENRE.map((danceGenre) => {
+    <Grid width="315px" height="178px" templateColumns="repeat(3, 1fr)">
+      {GENRES.map((genre) => {
         return (
-          <GridItem
-            key={danceGenre}
-            className={`flex w-full items-center justify-center ${gridItemStyle}`}
+          <Center
+            width="100%"
+            className={`
+            rounded-[4px]
+              ${isSelect(genre) ? 'bg-green-opacity_10' : 'bg-gray-600'}`}
+            key={genre}
+            onClick={handleOnClick && (() => handleOnClick(genre))}
           >
-            <Button
-              variant="unstyled"
-              onClick={handleOnClick && (() => handleOnClick(danceGenre))}
-              className={buttonStyle}
-            >
-              <Text
-                className={`font-normal ${
-                  selectedGenre === danceGenre ? 'text-black' : 'text-gray-400'
-                } ${textStyle}`}
+            <button className="w-[100%]">
+              <span
+                className={`text-body2 ${
+                  isSelect(genre)
+                    ? 'font-bold text-green-light'
+                    : 'font-normal text-gray-400'
+                }`}
               >
-                {danceGenre}
-              </Text>
-            </Button>
-          </GridItem>
+                {genre}
+              </span>
+            </button>
+          </Center>
         )
       })}
     </Grid>
