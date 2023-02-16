@@ -78,16 +78,6 @@ export interface PerformanceImminent {
 }
 
 export interface Performance {
-  performId?: string
-  performTitle?: string
-  performImg?: string
-  performStartDate?: string
-  performLocation?: string
-  performGenres?: GenreTypes[]
-  profile?: {
-    id?: string
-    imgUrl?: string
-    name?: string
   performId: string
   performTitle: string
   performImg: string
