@@ -19,20 +19,18 @@ const Pagination = ({
   const [pageNumber, setPageNumber] = useState(currentPage)
 
   const offset =
-    pageNumber % 5 == 0
+    pageNumber % 5 === 0
       ? Math.floor(pageNumber / SEEN_PAGE_NUMBER) - 1
       : Math.floor(pageNumber / SEEN_PAGE_NUMBER)
 
   const pageStartNumber = 5 * offset + 1
+  const currentPageCount = totalPages - pageStartNumber + 1
 
   const pages = Array.from(
     {
-      length:
-        totalPages - pageStartNumber + 1 < 5
-          ? totalPages - pageStartNumber + 1
-          : 5,
+      length: currentPageCount < 5 ? currentPageCount : 5,
     },
-    (_, index) => index + 1 + 5 * offset,
+    (_, index) => index + pageStartNumber,
   )
 
   const hasPrevPage = pages[FIRST_PAGE_INDEX] - 1 >= 1
@@ -54,7 +52,7 @@ const Pagination = ({
       >
         <Icon
           icon="arrow-left"
-          size={11.8}
+          size={17.5}
           color={hasPrevPage ? theme.colors.gray[300] : theme.colors.gray[600]}
         />
       </div>
@@ -78,6 +76,7 @@ const Pagination = ({
         className={`flex h-[32px] w-[32px] ${
           hasNextPage && 'cursor-pointer'
         } items-center justify-center rounded-full bg-gray-700 
+        ${!hasNextPage && 'hidden'}
            `}
         onClick={() => {
           if (hasNextPage) {
@@ -86,11 +85,7 @@ const Pagination = ({
           }
         }}
       >
-        <Icon
-          icon="arrow-right"
-          size={11.8}
-          color={hasNextPage ? theme.colors.gray[300] : theme.colors.gray[600]}
-        />
+        <Icon icon="arrow-right" size={17.5} color={theme.colors.gray[300]} />
       </div>
     </div>
   )

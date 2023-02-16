@@ -20,14 +20,14 @@ export default {
 } as ComponentMeta<typeof Pagination>
 
 const Template: ComponentStory<typeof Pagination> = () => {
-  const [pageNumber, setPageNuimber] = useState(1)
+  const [pageNumber, setPageNumber] = useState(1)
 
   return (
     <>
       <Pagination
         currentPage={1}
         totalPages={13}
-        handleChangePage={(page) => setPageNuimber(page)}
+        handleChangePage={(page) => setPageNumber(page)}
       />
       <div className="mt-[11px]">
         현재 페이지 번호 :
