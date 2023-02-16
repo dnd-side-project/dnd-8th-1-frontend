@@ -44,6 +44,7 @@ const BottomSheet = ({
                   color={theme.colors.gray[400]}
                   size={20.18}
                   areaLabel="바텀시트 닫기 버튼"
+                  handleOnClick={() => setShowBottomSheet(false)}
                 />
               </div>
             )}
