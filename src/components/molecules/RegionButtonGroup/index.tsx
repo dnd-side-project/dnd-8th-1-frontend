@@ -2,10 +2,6 @@ import { Button, Center, Grid, Text } from '@chakra-ui/react'
 import { REGIONS } from '@constants'
 
 interface RegionButtonGroupProps {
-  containerStyle?: string
-  textStyle?: string
-  gridItemStyle?: string
-  buttonStyle?: string
   selectedRegion?: string
   handleOnClick?: (region: string) => void
 }
@@ -13,37 +9,33 @@ interface RegionButtonGroupProps {
 const RegionButtonGroup = ({
   selectedRegion,
   handleOnClick,
-  containerStyle,
-  gridItemStyle,
-  buttonStyle,
-  textStyle,
 }: RegionButtonGroupProps) => {
+  const isSelect = (region: string) => {
+    return selectedRegion === region
+  }
   return (
-    <Grid templateColumns="repeat(4, 1fr)" className={containerStyle}>
+    <Grid width="333px" height="160px" templateColumns="repeat(4, 1fr)">
       {REGIONS.map((region) => {
         return (
           <Center
             width="100%"
+            className={`
+            rounded-[4px]
+              ${isSelect(region) ? 'bg-green-opacity_10' : 'bg-gray-600'}`}
             key={region}
-            className={gridItemStyle}
             onClick={handleOnClick && (() => handleOnClick(region))}
           >
-            <Button
-              width="100%"
-              variant="unstyled"
-              borderRadius="5px"
-              transition="all 0.01s ease-in-out"
-              bgColor={selectedRegion === region ? '#191919' : 'white'}
-              className={buttonStyle}
-            >
-              <Text
+            <button className="w-[100%]">
+              <span
                 className={`font-normal ${
-                  selectedRegion === region ? 'text-green-200' : 'text-black'
-                } ${textStyle}`}
+                  isSelect(region)
+                    ? 'font-bold text-green-light'
+                    : 'font-normal text-gray-400'
+                }`}
               >
                 {region}
-              </Text>
-            </Button>
+              </span>
+            </button>
           </Center>
         )
       })}
