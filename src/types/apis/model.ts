@@ -1,6 +1,4 @@
 import { GenreTypes, MeetTypes, RegionTypes } from '@types'
-import { GenreTypes } from '@types'
-
 export interface User {
   memberId?: string
   memberName?: string
