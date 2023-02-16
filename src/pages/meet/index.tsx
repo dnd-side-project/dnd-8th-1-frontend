@@ -2,12 +2,13 @@ import Head from 'next/head'
 import { MeetResponse } from '@types'
 import { MeetBanner, FilterButton, Pagination, CollaboList } from '@components'
 import { useEffect, useState } from 'react'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { MEET_DUMMUMY } from '../../dummy'
 import { Center } from '@chakra-ui/react'
 
 // TODO: api 붙이기
 const MeetPage = ({ data }: MeetResponse) => {
+  const router = useRouter()
   const { page } = router.query
 
   const { content, pageNumber, totalPages } =
