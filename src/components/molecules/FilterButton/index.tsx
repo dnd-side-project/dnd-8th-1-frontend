@@ -61,7 +61,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
       <span>{selectedFilter}</span>
       <IconButton
         icon="x-active"
-        size={10.27}
+        size={16}
         areaLabel="선택한 필터 해제 버튼"
         handleOnClick={() => {
           setSelectedFilter('')
