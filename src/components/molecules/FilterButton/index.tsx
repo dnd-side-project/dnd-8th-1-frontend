@@ -5,7 +5,7 @@ import {
   GenrePopupContent,
   IconButton,
   MeetPopupContent,
-  RegionButtonGroup,
+  RegionPopupContent,
 } from '@components'
 
 interface FilterButtonProps {
@@ -38,7 +38,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
         backgroundColor="transparent"
       >
         {type === 'region' ? (
-          <RegionButtonGroup
+          <RegionPopupContent
             handleOnClick={(region) => {
               setSelectedFilter(region)
               handleSelected(region)
