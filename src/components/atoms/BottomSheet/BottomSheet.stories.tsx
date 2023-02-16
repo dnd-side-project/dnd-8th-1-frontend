@@ -1,7 +1,7 @@
 import BottomSheet from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Layout } from '@components'
-import { useBottomSheet } from '@hooks'
+import { useDisclosure } from '@hooks'
 
 export default {
   component: BottomSheet,
@@ -19,7 +19,7 @@ export default {
 } as ComponentMeta<typeof BottomSheet>
 
 const Template: ComponentStory<typeof BottomSheet> = () => {
-  const [showBottomSheet, setShowBottomSheet, toggle] = useBottomSheet()
+  const [showBottomSheet, setShowBottomSheet, toggle] = useDisclosure()
 
   return (
     <>
