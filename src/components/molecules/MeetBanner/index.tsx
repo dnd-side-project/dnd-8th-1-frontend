@@ -4,7 +4,7 @@ import Image from 'next/image'
 const MeetBanner = () => {
   return (
     <div className="relative overflow-hidden">
-      <div className="z-1 absolute h-[278px] w-[375px] overflow-hidden bg-darken_gradient" />
+      <div className="absolute h-[278px] w-[375px] overflow-hidden bg-darken_gradient" />
       <Image
         src={meetBannerImage}
         width={375}
@@ -13,7 +13,7 @@ const MeetBanner = () => {
         placeholder="blur"
       />
 
-      <div className="z-2 absolute top-[153px] left-[16px]">
+      <div className="absolute top-[153px] left-[16px]">
         <h2 className="h-[55px] text-title2 font-bold text-gray-100">
           다같이 창작하고,
           <br />
