@@ -1,7 +1,15 @@
 import { IconButton } from '@components'
 import { useClickAway, useDelayUnmount } from '@hooks'
-import { useRef, ReactElement, Dispatch, SetStateAction } from 'react'
+import {
+  useRef,
+  ReactElement,
+  Dispatch,
+  SetStateAction,
+  useMemo,
+  useEffect,
+} from 'react'
 import { theme } from '@constants'
+import ReactDOM from 'react-dom'
 
 interface BottomSheetProps {
   children: ReactElement // BottomSheet 안쪽에 들어갈 content
@@ -23,11 +31,21 @@ const BottomSheet = ({
     setShowBottomSheet(false)
   })
 
-  return (
+  const portalDivFragment = useMemo(() => {
+    return document.createElement('div')
+  }, [])
+  useEffect(() => {
+    document.querySelector('#layout')?.appendChild(portalDivFragment)
+    return () => {
+      document.querySelector('#layout')?.removeChild(portalDivFragment)
+    }
+  })
+
+  return ReactDOM.createPortal(
     <>
       {shouldRenderBottomSheet && (
         <div
-          className={`absolute top-0  h-[100vh] w-[385px] ${
+          className={`absolute top-0  h-[100%] w-[100%] ${
             showBottomSheet ? 'animate-fadeIn' : 'animate-fadeOut'
           } overflow-hidden bg-gray-900 bg-opacity-60`}
         >
@@ -52,7 +70,8 @@ const BottomSheet = ({
           </nav>
         </div>
       )}
-    </>
+    </>,
+    portalDivFragment,
   )
 }
 
