@@ -10,7 +10,7 @@ import {
 
 // 만나기 전체 조회 응답
 export interface MeetResponse extends BaseResponse {
-  data?: PaginationResponse<Meet>
+  data: PaginationResponse<Meet>
 }
 
 // TODO: MeetDetail 수정 후 주석 해제
