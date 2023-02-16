@@ -5,9 +5,10 @@ import Image from 'next/image'
 
 interface RegisterListProps {
   registerItems: MeetApplicant[]
+  handleOnClick: (id: number) => void
 }
 
-const RegisterList = ({ registerItems }: RegisterListProps) => {
+const RegisterList = ({ registerItems, handleOnClick }: RegisterListProps) => {
   const isEmpty = !registerItems.length
 
   return isEmpty ? (
@@ -31,6 +32,7 @@ const RegisterList = ({ registerItems }: RegisterListProps) => {
           <RegisterListItem
             key={registerItem.profile.id}
             registerItem={registerItem}
+            handleOnClick={handleOnClick}
           />
         )
       })}

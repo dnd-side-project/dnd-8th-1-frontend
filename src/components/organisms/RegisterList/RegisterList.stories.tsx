@@ -33,20 +33,24 @@ const REGISTER_ITEM_DUMMY = {
 const REGISTER_ITEMS = Array.from({ length: 15 }, (v, i) => {
   return {
     ...REGISTER_ITEM_DUMMY,
-    id: REGISTER_ITEM_DUMMY.profile.id + i,
+    profile: {
+      ...REGISTER_ITEM_DUMMY.profile,
+      id: REGISTER_ITEM_DUMMY.profile.id + i,
+    },
     isMatched: i % 2 === 0 ? true : false,
   }
 })
 
 const EMPTY_ITEMS: MeetApplicant[] = []
 
-const RegisterListTemplate: ComponentStory<typeof RegisterList> = (args) => (
-  <RegisterList {...args} />
-)
+const RegisterListTemplate: ComponentStory<typeof RegisterList> = (args) => {
+  return <RegisterList {...args} />
+}
 
 export const RegisterItemListDefault = RegisterListTemplate.bind({})
 RegisterItemListDefault.args = {
   registerItems: REGISTER_ITEMS,
+  handleOnClick: (id) => console.log(id),
 }
 
 export const RegisterItemLisEmpty = RegisterListTemplate.bind({})
@@ -55,7 +59,12 @@ RegisterItemLisEmpty.args = {
 }
 
 const RegisterItem: ComponentStory<typeof RegisterListItem> = () => {
-  return <RegisterListItem registerItem={REGISTER_ITEM_DUMMY} />
+  return (
+    <RegisterListItem
+      registerItem={REGISTER_ITEM_DUMMY}
+      handleOnClick={(id) => console.log(id)}
+    />
+  )
 }
 
 export const RegisterSingleItem = RegisterItem.bind({})
