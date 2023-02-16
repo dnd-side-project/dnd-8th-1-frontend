@@ -27,7 +27,7 @@ const BottomSheet = ({
     <>
       {shouldRenderBottomSheet && (
         <div
-          className={`relative h-[100vh] w-[385px] ${
+          className={`absolute top-0  h-[100vh] w-[385px] ${
             showBottomSheet ? 'animate-fadeIn' : 'animate-fadeOut'
           } overflow-hidden bg-gray-900 bg-opacity-60`}
         >
@@ -42,7 +42,7 @@ const BottomSheet = ({
                 <IconButton
                   icon="x-active"
                   color={theme.colors.gray[400]}
-                  size={20.18}
+                  size={24}
                   areaLabel="바텀시트 닫기 버튼"
                   handleOnClick={() => setShowBottomSheet(false)}
                 />

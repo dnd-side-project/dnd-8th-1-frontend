@@ -6,10 +6,8 @@ const useDisclosure = (): [
   () => void,
 ] => {
   const [showDisclosure, setShowDisclosure] = useState(false)
-
-  const toggle = () => setShowDisclosure(!showDisclosure)
-
-  return [showDisclosure, setShowDisclosure, toggle]
+  const handleToggle = () => setShowDisclosure(!showDisclosure)
+  return [showDisclosure, setShowDisclosure, handleToggle]
 }
 
 export default useDisclosure

@@ -5,14 +5,16 @@ import { useDisclosure } from '@hooks'
 
 export default {
   component: BottomSheet,
-  title: 'Atoms/BottomSheet',
+  title: 'Templates/BottomSheet',
   parameters: {
     componentSubtitle: '공통 컴포넌트로 사용되는 바텀 시트 컴포넌트',
   },
   decorators: [
     (Story) => (
       <Layout>
-        <Story />
+        <main className="h-[100vh] bg-gray-100">
+          <Story />
+        </main>
       </Layout>
     ),
   ],
