@@ -1,13 +1,13 @@
 interface DimmedProps {
-  handlerFn?: () => void
+  handleOnClick?: () => void
   styleClass?: string
 }
 
-const Dimmed = ({ handlerFn, styleClass }: DimmedProps) => {
+const Dimmed = ({ handleOnClick, styleClass }: DimmedProps) => {
   return (
     <div
-      onClick={handlerFn}
-      className={`absolute inset-0 z-[999] bg-black bg-opacity-20 sm:w-[375px] ${styleClass}`}
+      onClick={handleOnClick}
+      className={`fixed z-[999] mx-[auto] w-[375px] ${styleClass}`}
     />
   )
 }
