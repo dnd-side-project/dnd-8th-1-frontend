@@ -18,6 +18,10 @@ const PerformanceListItem = ({
     profile: { imgUrl, name },
   },
 }: PerformanceListItemProps) => {
+  const date = `${performStartDate.slice(0, 4)}.${performStartDate.slice(
+    5,
+    7,
+  )}.${performStartDate.slice(8, 10)}`
   return (
     <Link
       className="mb-[18px] flex h-[110px] w-[343px] items-center bg-gray-900 last:mb-0"
@@ -45,9 +49,7 @@ const PerformanceListItem = ({
             {name}
           </span>
         </div>
-        <span className="mb-2 text-body2 text-gray-400">
-          {performStartDate}
-        </span>
+        <span className="mb-2 text-body2 text-gray-400">{date}</span>
         <Tags
           containerStyle="mb-1"
           textStyle="text-gray-400"
