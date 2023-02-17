@@ -2,9 +2,9 @@ import {
   BaseResponse,
   Meet,
   MeetAccept,
-  MeetCandicate,
+  MeetApplicant,
   // TODO: MeetDetail 수정 후 주석 해제
-  // MeetDetail,
+  MeetDetail,
   PaginationResponse,
 } from '@types'
 
@@ -26,8 +26,19 @@ export interface MeetResponse extends BaseResponse {
 // export type MeetDeleteRequest = Pick<MeetDetail, 'eventId'>
 
 // 만나기 신청자 조회 응답
-export interface MeetCandicateResponse extends BaseResponse {
-  data?: MeetCandicate[]
+export interface MeetApplicantsResponse extends BaseResponse {
+  data?: MeetApplicant[]
+}
+
+export interface MeetCreateRequest {
+  title: string
+  location: string
+  type: string
+  imgUrl: string
+  recruitType: string
+  description: string
+  recruitCount: string
+  deadline: string
 }
 
 // 만나기 매칭 하기 요청

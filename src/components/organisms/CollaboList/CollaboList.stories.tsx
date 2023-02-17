@@ -19,7 +19,7 @@ export default {
   ],
 } as ComponentMeta<typeof CollaboList>
 
-const COLLABO_ITEM_DUMMY = {
+const COLLABO_ITEM_DUMMY: Meet = {
   id: 1,
   title:
     '저희 팀과 함께 콜라보 영상 어쩌고 저쩌고 아주 긴 제목을 가진 콜라보 글글글글글',
@@ -28,7 +28,7 @@ const COLLABO_ITEM_DUMMY = {
   imgUrl: 'https://picsum.photos/200/300',
   deadline: '2023-02-19T12:00:00',
   profile: {
-    id: '프로필ID',
+    id: 1,
     imgUrl: 'https://picsum.photos/200',
     name: 'HOOK',
   },

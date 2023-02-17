@@ -24,9 +24,11 @@ export interface User {
 
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
-  id: string // 프로필 아이디
+  id: number // 프로필 아이디
   imgUrl: string // 프로필 이미지 url
   name: string // 프로필 댄스팀 이름
+  description: string // 프로필 상세 설명
+  openChatUrl: string // 카카오 오픈 채팅 주소
 }
 
 export interface Meet {
@@ -36,36 +38,28 @@ export interface Meet {
   type: string
   imgUrl: string
   deadline: string
-  profile: Profile
+  profile: Pick<Profile, 'id' | 'imgUrl' | 'name'>
 }
 
 // TODO: 명세 변경 부분 있으므로 임시 주석 처리 (해당 부분 작업할 때 채워넣기)
-// export interface MeetDetail
-//    {
-//   /**
-//    * TODO : 왜 meet랑 meetdetail의 profile 필드가 각각 다를까?
-//    */
-//   profile?: Pick<Meet, 'profileId' | 'profileName' | 'profileImg'>
-//   recruitType?: string
-//   description?: string
-//   recruitCount?: number
-//   /**
-//    * TODO : 마감 여부 boolean 필요
-//    */
-// }
-
-export interface MeetCandicate
-  extends Pick<
-    User,
-    'profileId' | 'profileImg' | 'profileName' | 'openChatUrl' | 'location'
-  > {
-  /**
-   * TODO : descrption이랑 profileDescription이 다른건가? 같은거 같은데 필드가 User와 다르다
-   */
-  profileDescription?: string
-  isMatched?: boolean
+export interface MeetDetail {
+  id: number
+  profile: Profile
+  title: string
+  location: string
+  type: string
+  imgUrl: string
+  recruitType: string
+  description: string
+  recruitCount: number
+  deadline: string
 }
 
+export interface MeetApplicant {
+  profile: Profile
+  isMatched: boolean
+  location: string // 지원자 활동 지역
+}
 export interface MeetAccept {
   profileIds?: string[]
 }
