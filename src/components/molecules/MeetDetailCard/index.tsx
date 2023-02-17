@@ -1,4 +1,7 @@
 interface MeetDetailCardProps {
+  /**
+   * TODO : 추후 '개인' | '팀'에 대한 타입 교체 필요
+   */
   recruitType: '개인' | '팀'
   recruitCount: number
   deadline: string
