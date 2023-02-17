@@ -1,4 +1,3 @@
-import { useCalendar } from '@hooks'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
 import CalandarSlider from './CalandarSlider'
@@ -8,22 +7,27 @@ interface CalendarProps {
   setIsSearchOpen: Dispatch<SetStateAction<boolean>>
   isEntire: boolean
   setIsEntire: Dispatch<SetStateAction<boolean>>
+  handleSetMonth: (monthIncrement: number) => void
+  isSunday: (day: number) => boolean
+  currentDay: number
+  setCurrentDay: Dispatch<SetStateAction<number>>
+  getDay: (day: number) => number
+  month: string
+  calandar: unknown[]
 }
 
 const Calendar = ({
+  isSunday,
+  currentDay,
+  setCurrentDay,
+  getDay,
+  calandar,
+  month,
+  handleSetMonth,
   setIsSearchOpen,
   isEntire,
   setIsEntire,
 }: CalendarProps) => {
-  const {
-    month,
-    handleSetMonth,
-    isSunday,
-    setCurrentDay,
-    currentDay,
-    getDay,
-    calandar,
-  } = useCalendar()
   const router = useRouter()
   return (
     <div className="relative flex flex-col bg-gray-900">
