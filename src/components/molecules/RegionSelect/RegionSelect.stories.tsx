@@ -17,7 +17,7 @@ export default {
 } as ComponentMeta<typeof RegionSelect>
 
 const Template: ComponentStory<typeof RegionSelect> = () => {
-  return <RegionSelect handleOnClick={(region) => console.log(region)} />
+  return <RegionSelect handleRegionSelect={(region) => console.log(region)} />
 }
 
 export const Default = Template.bind({})
