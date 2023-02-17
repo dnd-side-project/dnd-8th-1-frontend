@@ -1,5 +1,5 @@
 import { Dimmed, Icon, IconButton, Input } from '@components'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface SearchHeaderProps {
@@ -18,6 +18,15 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
      */
     console.log(data)
   }
+  const [isBanner, setIsBanner] = useState(true)
+  useEffect(() => {
+    const closeBanner = setTimeout(() => {
+      setIsBanner(false)
+    }, 2000)
+    return () => {
+      clearTimeout(closeBanner)
+    }
+  }, [])
   return (
     <>
       <header
@@ -49,11 +58,13 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
             <Icon size={20} icon="x-circle" />
           </div>
         </form>
-        <div className="absolute bottom-[-30px] left-[42px] flex h-[38px] w-[251px] items-center rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] bg-gray-100 py-[9px] px-[14px]">
-          <p className="w-[274px] text-center text-caption font-bold text-gray-700">
-            댄서/댄스팀 이름을 통한 공연 검색만 가능해요
-          </p>
-        </div>
+        {isBanner && (
+          <div className="absolute bottom-[-30px] left-[42px] flex h-[38px] w-[251px] items-center rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] bg-gray-100 py-[9px] px-[14px]">
+            <p className="w-[274px] text-center text-caption font-bold text-gray-700">
+              댄서/댄스팀 이름을 통한 공연 검색만 가능해요
+            </p>
+          </div>
+        )}
       </header>
       {open && (
         <Dimmed
