@@ -30,7 +30,7 @@ const CalandarSwiper = ({
           className={`b-0 absolute left-0 h-[57px] bg-gray-900 px-[16px] text-[16px] font-bold  ${
             isEntire
               ? 'border-b-[3px] border-b-green-light text-green-light'
-              : 'border-b-[3px] border-b-gray-700 text-gray-400'
+              : 'border-b-[2px] border-b-gray-700 text-gray-400'
           }`}
         >
           전체
