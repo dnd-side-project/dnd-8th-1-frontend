@@ -2,7 +2,11 @@
 import { useState } from 'react'
 import { Icon } from '@components'
 
-const ImageUpload = () => {
+interface ImageUploadProps {
+  handleSetImage?: (img: File) => void
+}
+
+const ImageUpload = ({ handleSetImage }: ImageUploadProps) => {
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
@@ -37,6 +41,7 @@ const ImageUpload = () => {
             // TODO: 파일 확인을 위한 콘솔, 나중에 지울 것!
             console.log(event.target.files[0])
             setSelectedImage(event.target.files[0])
+            handleSetImage && handleSetImage(event.target.files[0])
           }}
         />
       </div>
