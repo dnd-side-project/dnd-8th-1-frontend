@@ -39,7 +39,6 @@ const Modal = ({
       document.querySelector('#layout')?.removeChild(portalDivFragment)
     }
   })
-
   return (
     <>
       {shouldRenderModal && (
@@ -55,7 +54,10 @@ const Modal = ({
             ref={ModalRef}
           >
             {hasCloseButton && (
-              <div className="mt-[14px] mr-[14px] flex items-center justify-end">
+              <div
+                onClick={() => setShowModal(false)}
+                className="mt-[14px] mr-[14px] flex items-center justify-end"
+              >
                 <IconButton
                   icon="x-active"
                   color={theme.colors.gray[400]}
