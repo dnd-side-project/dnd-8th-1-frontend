@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react'
 import { BottomSheet, Checkbox, Input } from '@components'
 import { Dispatch, SetStateAction } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 
 interface CandidateBottomSheetProps {
   showBottomSheet: boolean
@@ -14,12 +14,13 @@ const CandidateBottomSheet = ({
   setShowBottomSheet,
   openchatUrl,
 }: CandidateBottomSheetProps) => {
-  const { register, handleSubmit, getValues } = useForm<{
+  const { register, setValue, control, handleSubmit } = useForm<{
     candidate: string
     toggleText: boolean
   }>({
     defaultValues: {
       candidate: openchatUrl,
+      toggleText: false,
     },
   })
   const handleCompleted = (data: {
@@ -30,9 +31,15 @@ const CandidateBottomSheet = ({
      * TODO : data를 통한 API 호출 로직(mutate) 추가
      */
     console.log(data)
+
+    // 전체 데이터 날리기
+    setValue('toggleText', false)
     setShowBottomSheet(false)
   }
-  const isDisabled = getValues('toggleText') === false
+
+  const toggleTextState = useWatch({ control, name: 'toggleText' })
+  const isDisabled = toggleTextState === false
+
   return (
     <BottomSheet
       hasCloseButton={true}
