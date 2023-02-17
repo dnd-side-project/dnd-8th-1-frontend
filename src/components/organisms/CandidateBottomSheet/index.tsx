@@ -14,7 +14,7 @@ const CandidateBottomSheet = ({
   setShowBottomSheet,
   openchatUrl,
 }: CandidateBottomSheetProps) => {
-  const { register, handleSubmit, getValues, watch } = useForm<{
+  const { register, handleSubmit, getValues } = useForm<{
     candidate: string
     toggleText: boolean
   }>({
@@ -26,11 +26,13 @@ const CandidateBottomSheet = ({
     candidate: string
     toggleText: boolean
   }) => {
+    /**
+     * TODO : data를 통한 API 호출 로직(mutate) 추가
+     */
     console.log(data)
     setShowBottomSheet(false)
   }
   const isDisabled = getValues('toggleText') === false
-  console.log(watch())
   return (
     <BottomSheet
       hasCloseButton={true}
