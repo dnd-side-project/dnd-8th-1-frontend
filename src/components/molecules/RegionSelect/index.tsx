@@ -1,11 +1,11 @@
-import { Icon, IconButton, RegionPopupContent } from '@components'
+import { IconButton, RegionPopupContent } from '@components'
 import { useRef, useState } from 'react'
 import { useClickAway } from '@hooks'
 
 interface RegionSelectProps {
-  handleOnClick: (region: string) => void
+  handleRegionSelect: (region: string) => void
 }
-const RegionSelect = ({ handleOnClick }: RegionSelectProps) => {
+const RegionSelect = ({ handleRegionSelect }: RegionSelectProps) => {
   const [selectedRegion, setSelectedRegion] = useState('')
   const [isPopupOpen, setIsPopUpOpen] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
@@ -50,22 +50,26 @@ const RegionSelect = ({ handleOnClick }: RegionSelectProps) => {
           size={15}
           areaLabel="팝업 열기 버튼"
           styleClass="absolute top-[20px] right-[17px]"
-          handleOnClick={() => setIsPopUpOpen(!isPopupOpen)}
+          handleOnClick={() => {
+            setIsPopUpOpen(!isPopupOpen)
+          }}
         />
 
-        {!isPopupOpen && selectedRegion === '' && '지역을 선택해주세요'}
+        {!isPopupOpen && selectedRegion === '' && (
+          <span className="cursor-default">지역을 선택해주세요</span>
+        )}
       </div>
 
       {isPopupOpen && (
         <div
           ref={popupRef}
-          className="rounded-b-[8px] bg-gray-700 px-[10px] pb-[20px]"
+          className="rounded-b-[8px] border-[1px] border-x-gray-600 border-b-gray-600 border-t-gray-700 bg-gray-700 px-[10px] pb-[20px]"
         >
           <RegionPopupContent
             handleOnClick={(region) => {
               setSelectedRegion(region)
               setIsPopUpOpen(false)
-              handleOnClick(region)
+              handleRegionSelect && handleRegionSelect(region)
             }}
             selectedRegion={selectedRegion}
           />
