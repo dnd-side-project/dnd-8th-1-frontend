@@ -34,28 +34,3 @@ a {
 li {
   list-style: none;
 }
-
-.swiper .swiper-pagination {
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 16px;
-  margin-bottom: 8px;
-}
-
-.swiper .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #69ffa5;
-}
-
-.swiper .swiper-pagination-bullet {
-  background-color: #515151;
-  width: 6px;
-  height: 4px;
-  border-radius: 6px;
-  margin: 0 2px !important;
-  opacity: 1;
-}
-
-.swiper .swiper-pagination-bullet:first-child {
-  width: 17px;
-  height: 4px;
-}

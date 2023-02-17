@@ -6,6 +6,8 @@
 }
 
 .swiper .swiper-pagination .swiper-pagination-bullet-active {
+  width: 17px;
+  height: 4px;
   background-color: #69ffa5;
 }
 
@@ -16,9 +18,4 @@
   border-radius: 6px;
   margin: 0 2px !important;
   opacity: 1;
-}
-
-.swiper .swiper-pagination-bullet:first-child {
-  width: 17px;
-  height: 4px;
 }
