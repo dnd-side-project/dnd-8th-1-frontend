@@ -1,6 +1,11 @@
-import { Dimmed, Icon, IconButton, Input } from '@components'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import { Dimmed, Icon, Input } from '@components'
+import { useRouter } from 'next/router'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+
+interface SearchForm {
+  search: string
+}
 
 interface SearchHeaderProps {
   open: boolean
@@ -8,15 +13,10 @@ interface SearchHeaderProps {
 }
 
 const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
-  const { register, reset } = useForm()
-  /**
-   * TODO : object가 아닌 다른 타입으로 수정 예정
-   */
-  const handleSubmit = (data: object) => {
-    /**
-     * TODO : 검색 페이지로 이동하는 로직 구현해야 하는데 마크업 작업 때 좀 더 생각해볼 예정입니다.
-     */
-    console.log(data)
+  const router = useRouter()
+  const { register, reset, handleSubmit } = useForm<SearchForm>()
+  const handleGoSearchPage = (data: SearchForm) => {
+    router.push(`/performance/search?query=${data.search}`)
   }
   const [isBanner, setIsBanner] = useState(true)
   useEffect(() => {
@@ -33,7 +33,7 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
         className={`fixed top-0 z-[9998] box-border flex w-[375px] justify-between bg-gray-900 px-[16px] py-[14px]`}
       >
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(handleGoSearchPage)}
           className="relative flex w-full items-center"
         >
           <div
