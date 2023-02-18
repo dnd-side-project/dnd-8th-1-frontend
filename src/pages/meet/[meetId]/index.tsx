@@ -7,7 +7,7 @@ import {
   Tags,
 } from '@components'
 import { useDisclosure } from '@hooks'
-import { GenreTypes, RegionTypes } from '@types'
+import { GenreTypes, RecruitmentType, RegionTypes } from '@types'
 import { isDeadLine } from '@utils'
 import { MEET_DETAIL } from 'dummy'
 import dynamic from 'next/dynamic'
@@ -149,6 +149,9 @@ const MeetDetailPage = () => {
           {title}
         </p>
         <div className="mb-[26px]">
+          {/**
+           *TODO: as 키워드 붙인 부분 모두 수정 예정
+           */}
           <Tags
             tagStyle="bg-gray-700"
             textStyle="text-gray-300"
@@ -156,9 +159,9 @@ const MeetDetailPage = () => {
           />
         </div>
         <MeetDetailCard
-          location={location}
+          location={location as RegionTypes}
           deadline={deadline}
-          recruitType={recruitType as '개인' | '팀'}
+          recruitType={recruitType as RecruitmentType}
           recruitCount={recruitCount}
         />
         <p className="whitespace-pre-wrap break-words">{description}</p>
