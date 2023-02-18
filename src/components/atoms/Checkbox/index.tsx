@@ -1,14 +1,20 @@
-import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react'
+import {
+  ChangeEvent,
+  Dispatch,
+  forwardRef,
+  InputHTMLAttributes,
+  MouseEvent,
+  SetStateAction,
+} from 'react'
 import { Icon } from '@components'
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  checked?: boolean
+  isChecked: boolean
+  setIsChecked: Dispatch<SetStateAction<boolean>>
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ ...rest }: CheckboxProps, ref) => {
-    const [checked, setChecked] = useState(false)
-
+  ({ isChecked, setIsChecked, ...rest }: CheckboxProps, ref) => {
     return (
       <>
         <label
@@ -18,7 +24,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {
             <Icon
               icon={`${
-                checked ? 'check-circle-active' : 'check-circle-inactive'
+                isChecked ? 'check-circle-active' : 'check-circle-inactive'
               }`}
               size={20}
             />
@@ -29,9 +35,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           ref={ref}
           className="hidden"
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onClick={(e: any) => {
-            setChecked(e.target.checked)
+          onClick={(
+            e: MouseEvent<HTMLInputElement> & ChangeEvent<HTMLInputElement>,
+          ) => {
+            setIsChecked(e.target.checked)
           }}
           {...rest}
         />

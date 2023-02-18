@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 import { BottomSheet, Checkbox, Input } from '@components'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 interface CandidateBottomSheetProps {
@@ -39,7 +39,7 @@ const CandidateBottomSheet = ({
 
   const toggleTextState = useWatch({ control, name: 'toggleText' })
   const isDisabled = toggleTextState === false
-
+  const [isChecked, setIsChecked] = useState(toggleTextState)
   return (
     <BottomSheet
       hasCloseButton={true}
@@ -71,7 +71,11 @@ const CandidateBottomSheet = ({
           alignItems="center"
           className="absolute bottom-[101.83px]"
         >
-          <Checkbox {...register('toggleText')} />
+          <Checkbox
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            {...register('toggleText')}
+          />
           <Text className="ml-[10.83px] text-body2 font-normal text-gray-100">
             콜라보 게시자에게 내 오픈채팅 링크를 제공할게요.
           </Text>
