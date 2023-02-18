@@ -13,7 +13,7 @@ const MEET_CREATE_DUMMY = {
   location: '부산',
   type: '콜라보',
   imgUrl: 'https://picsum.photos/500/500?random=1',
-  recruitType: '팀' as RecruitmentType,
+  recruitType: '댄스 팀' as RecruitmentType,
   description: '상세정보',
   recruitCount: 4,
   deadline: '2023-03-14T17:00:00',

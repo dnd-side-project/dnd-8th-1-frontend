@@ -1,9 +1,9 @@
 import { IconButton } from '@components'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const FormHeader = () => {
   const router = useRouter()
-  const pathname = usePathname()
+
   return (
     <div
       className={`top-0 z-[999] block flex justify-end  bg-gray-900 px-[16px] py-[12px]`}
