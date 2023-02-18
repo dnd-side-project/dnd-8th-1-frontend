@@ -45,10 +45,10 @@ export interface Meet {
 // TODO: 명세 변경 부분 있으므로 임시 주석 처리 (해당 부분 작업할 때 채워넣기)
 export interface MeetDetail {
   id: number
-  profile: Profile
+  profile: Pick<Profile, 'id' | 'imgUrl' | 'name'>
   title: string
   location: string
-  type: string
+  type: MeetTypes
   imgUrl: string
   recruitType: string
   description: string
