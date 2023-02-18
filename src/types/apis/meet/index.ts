@@ -47,7 +47,7 @@ export interface MeetCreateRequest {
   imgUrl: string
   recruitType: string
   description: string
-  recruitCount: string
+  recruitCount: number
   deadline: string
 }
 
