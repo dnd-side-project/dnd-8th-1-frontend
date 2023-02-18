@@ -19,6 +19,7 @@ const MeetPage = () => {
   const { data = fallback } = useMeet(currentQueryString)
   const { data: meetData } = data
   const router = useRouter()
+
   return (
     <>
       <Head>
@@ -55,7 +56,7 @@ const MeetPage = () => {
         <Center className="mb-[30px]">
           <Pagination
             currentPage={currentPage}
-            totalPages={meetData?.totalPage}
+            totalPages={meetData?.totalPages}
             handleChangePage={(page) => {
               setCurrentQueryString({ ...currentQueryString, page: page - 1 })
             }}
