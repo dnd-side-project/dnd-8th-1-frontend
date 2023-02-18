@@ -24,7 +24,7 @@ export default {
     ),
   ],
   parameters: {
-    componentSubtitle: '아바타 컴포넌트 (유저의 프로필 사진 표시)',
+    componentSubtitle: '작성 폼에 사용될 인원 선택 컴포넌트',
   },
 } as ComponentMeta<typeof CountPeople>
 
