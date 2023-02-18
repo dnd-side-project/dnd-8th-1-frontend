@@ -5,7 +5,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
   return (
     <div
       id="layout"
-      className="relative mx-auto h-[100vh] w-[375px] overflow-hidden bg-gray-900 text-gray-100"
+      className="relative mx-auto w-[375px] overflow-hidden bg-gray-900 text-gray-100"
     >
       <Header />
       {children}
