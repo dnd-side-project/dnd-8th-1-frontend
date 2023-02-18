@@ -29,6 +29,7 @@ export interface Profile {
   name: string // 프로필 댄스팀 이름
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
+  location?: string
 }
 
 export interface Meet {
@@ -58,7 +59,6 @@ export interface MeetDetail {
 export interface MeetApplicant {
   profile: Profile
   isMatched: boolean
-  location: string // 지원자 활동 지역
 }
 export interface MeetAccept {
   profileIds?: string[]
