@@ -1,6 +1,6 @@
 import { IconButton } from '@components'
 import { theme } from '@constants'
-import { useClickAway, useDelayUnmount } from '@hooks'
+import { useClickAway } from '@hooks'
 import {
   Dispatch,
   ReactElement,
@@ -23,7 +23,6 @@ const Modal = ({
   showModal,
   setShowModal,
 }: ModalProps) => {
-  const shouldRenderModal = useDelayUnmount(showModal, 200)
   const ModalRef = useRef(null)
 
   useClickAway(ModalRef, () => {
@@ -41,7 +40,7 @@ const Modal = ({
   })
   return (
     <>
-      {shouldRenderModal && (
+      {showModal && (
         <div
           className={`absolute top-0 h-[100%] w-[100%] ${
             showModal ? 'animate-fadeIn' : 'animate-fadeOut'

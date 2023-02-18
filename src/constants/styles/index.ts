@@ -48,3 +48,6 @@ export const theme = {
     caption: ['12px', '20px'],
   },
 }
+
+export const FORM_INPUT_STYLE =
+  'placeholder-text-body1 w-[343px] h-[52px] px-[18px] py-[14px] text-body1 rounded-[8px] bg-gray-700 border-[1px] border-gray-600 focus:outline-none focus:border-green-light'

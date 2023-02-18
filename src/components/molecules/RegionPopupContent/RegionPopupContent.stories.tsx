@@ -1,13 +1,13 @@
-import RegionButtonGroup from '.'
+import RegionPopupContent from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { REGIONS } from '@constants'
 import { useState } from 'react'
 
 export default {
-  component: RegionButtonGroup,
-  title: 'Molecules/RegionButtonGroup',
+  component: RegionPopupContent,
+  title: 'Molecules/RegionPopupContent',
   parameters: {
-    componentSubtitle: 'RegionButtonGroup 컴포넌트',
+    componentSubtitle: 'RegionPopupContent 컴포넌트',
   },
   argTypes: {
     selectedRegion: {
@@ -28,9 +28,9 @@ export default {
       defaultValue: '',
     },
   },
-} as ComponentMeta<typeof RegionButtonGroup>
+} as ComponentMeta<typeof RegionPopupContent>
 
-const Template: ComponentStory<typeof RegionButtonGroup> = (args) => {
+const Template: ComponentStory<typeof RegionPopupContent> = (args) => {
   const [selectedRegion, setSelectedRegion] = useState<string>('서울')
   const handleSelectRegion = (region: string) => {
     setSelectedRegion(region)
@@ -39,11 +39,11 @@ const Template: ComponentStory<typeof RegionButtonGroup> = (args) => {
     selectedRegion,
     handleOnClick: handleSelectRegion,
   }
-  return <RegionButtonGroup {...args} {...props} />
+  return <RegionPopupContent {...args} {...props} />
 }
 export const Default = Template.bind({})
 
-const WithContainerTemplate: ComponentStory<typeof RegionButtonGroup> = (
+const WithContainerTemplate: ComponentStory<typeof RegionPopupContent> = (
   args,
 ) => {
   const [selectedRegion, setSelectedRegion] = useState<string>('서울')
@@ -56,7 +56,7 @@ const WithContainerTemplate: ComponentStory<typeof RegionButtonGroup> = (
   }
   return (
     <div className="flex h-[250px] w-[353px] items-center justify-center bg-gray-600 px-[10px]">
-      <RegionButtonGroup {...args} {...props} />
+      <RegionPopupContent {...args} {...props} />
     </div>
   )
 }
