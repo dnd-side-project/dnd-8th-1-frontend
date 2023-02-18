@@ -4,10 +4,14 @@ import { useClickAway } from '@hooks'
 import { Portal } from '@chakra-ui/react'
 
 interface RegionSelectProps {
+  selectedRegion?: string
   handleRegionSelect: (region: string) => void
 }
-const RegionSelect = ({ handleRegionSelect }: RegionSelectProps) => {
-  const [selectedRegion, setSelectedRegion] = useState('')
+const RegionSelect = ({
+  handleRegionSelect,
+  selectedRegion,
+}: RegionSelectProps) => {
+  const [selected, setSelected] = useState(selectedRegion ? selectedRegion : '')
   const [isPopupOpen, setIsPopUpOpen] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
   const regionInputRef = useRef<HTMLDivElement>(null)
@@ -32,15 +36,15 @@ const RegionSelect = ({ handleRegionSelect }: RegionSelectProps) => {
           isPopupOpen && ' border-b-gray-700'
         } relative py-[15px] text-body2 text-gray-400`}
       >
-        {selectedRegion !== '' && (
+        {selected !== '' && (
           <div className="absolute top-[10px] left-[10px] flex h-[32px] w-fit items-center gap-[10.95px] rounded-[4px] bg-gray-600 py-[8px] px-[10.87px] text-body2 font-bold text-green-light">
-            <span>{selectedRegion}</span>
+            <span>{selected}</span>
             <IconButton
               icon="x-active"
               size={16}
               areaLabel="지역 선택 취소 버튼"
               handleOnClick={() => {
-                setSelectedRegion('')
+                setSelected('')
               }}
             />
           </div>
@@ -58,7 +62,7 @@ const RegionSelect = ({ handleRegionSelect }: RegionSelectProps) => {
           />
         </Portal>
 
-        {!isPopupOpen && selectedRegion === '' && (
+        {!isPopupOpen && selected === '' && (
           <span className="cursor-default">지역을 선택해주세요</span>
         )}
       </div>
@@ -70,11 +74,11 @@ const RegionSelect = ({ handleRegionSelect }: RegionSelectProps) => {
         >
           <RegionPopupContent
             handleOnClick={(region) => {
-              setSelectedRegion(region)
+              setSelected(region)
               setIsPopUpOpen(false)
               handleRegionSelect && handleRegionSelect(region)
             }}
-            selectedRegion={selectedRegion}
+            selectedRegion={selected}
           />
         </div>
       )}

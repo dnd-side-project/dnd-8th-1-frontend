@@ -3,11 +3,15 @@ import { useState } from 'react'
 import { Icon } from '@components'
 
 interface ImageUploadProps {
+  initialImage?: string
   handleSetImage?: (img: File) => void
 }
 
-const ImageUpload = ({ handleSetImage }: ImageUploadProps) => {
+const ImageUpload = ({ handleSetImage, initialImage }: ImageUploadProps) => {
   const [selectedImage, setSelectedImage] = useState(null)
+  const [selectedImageURL, setSelectedImageURL] = useState(
+    initialImage ? initialImage : '',
+  )
 
   return (
     <div className="h-[173px] w-[343px] overflow-hidden rounded-[8px] border-[1px] border-gray-600">
@@ -22,11 +26,11 @@ const ImageUpload = ({ handleSetImage }: ImageUploadProps) => {
             <span>{selectedImage ? '이미지 변경' : '이미지 업로드'}</span>
           </div>
 
-          {selectedImage && (
+          {selectedImageURL && (
             <img
-              alt="not fount"
+              alt="선택된 이미지"
               width={'100%'}
-              src={URL.createObjectURL(selectedImage)}
+              src={selectedImageURL}
               className="absolute top-[0] z-[0] brightness-[.6]"
             />
           )}
@@ -41,6 +45,7 @@ const ImageUpload = ({ handleSetImage }: ImageUploadProps) => {
             // TODO: 파일 확인을 위한 콘솔, 나중에 지울 것!
             console.log(event.target.files[0])
             setSelectedImage(event.target.files[0])
+            setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
             handleSetImage && handleSetImage(event.target.files[0])
           }}
         />

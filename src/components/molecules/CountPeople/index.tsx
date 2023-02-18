@@ -5,10 +5,15 @@ import { useState } from 'react'
 interface CountPeopleProps {
   currentType: RecruitmentType
   handleCountPeople: (count: number) => void
+  initialCount?: number
 }
 
-const CountPeople = ({ currentType, handleCountPeople }: CountPeopleProps) => {
-  const [count, setCount] = useState(1)
+const CountPeople = ({
+  currentType,
+  handleCountPeople,
+  initialCount,
+}: CountPeopleProps) => {
+  const [count, setCount] = useState(initialCount ? initialCount : 1)
 
   return (
     <div className="mt-[23px] flex items-center justify-center gap-[36.83px]">

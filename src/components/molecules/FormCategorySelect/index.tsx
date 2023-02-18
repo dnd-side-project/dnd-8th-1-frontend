@@ -1,6 +1,7 @@
 import { Tabs, TabList, Tab, Flex } from '@chakra-ui/react'
+import { RECRUITMENT_TYPE } from '@constants'
 import { CSSProperties } from 'react'
-
+import { RecruitmentType } from '@types'
 interface FormCategorySelectProps {
   active?: string
   categories: string[]
