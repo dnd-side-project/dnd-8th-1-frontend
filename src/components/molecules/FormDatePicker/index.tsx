@@ -47,7 +47,7 @@ const FormDatePicker = ({
     </div>
   ))
 
-  CustomInput.displayName = 'CustomInput'
+  CustomInput.displayName = 'customInput'
 
   return (
     <ReactDatePicker
@@ -56,7 +56,7 @@ const FormDatePicker = ({
         setStartDate(date)
         handleStartDate(date)
       }}
-      customInput={<CustomInput inputRef={inputRef} />}
+      customInput={<CustomInput inputref={inputRef} />}
     />
   )
 }
