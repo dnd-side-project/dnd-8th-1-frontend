@@ -20,7 +20,30 @@ export interface MeetResponse extends BaseResponse {
 // }
 
 // 만나기 글 등록 / 수정 요청
-// export type MeetEditRequest = Omit<MeetDetail, 'profile'>
+export interface MeetEditRequest {
+  deadline: string
+  description: string
+  imgUrl: string
+  location: string
+  recruitCount: number
+  recruitType: string
+  title: string
+  type: string
+}
+
+// 이벤트 지원자 요청 수락
+export interface MeetAcceptRequest {
+  profileId: number
+}
+
+// 이벤트 지원자 요청 신청
+export interface MeetApplyRequest {
+  profileId: number
+}
+
+export interface MeetCloseRequest {
+  eventId: number
+}
 
 // // 만나기 글 삭제 요청
 // export type MeetDeleteRequest = Pick<MeetDetail, 'eventId'>
