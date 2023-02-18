@@ -5,11 +5,18 @@ import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
 import { Icon } from '@components'
 interface FormDatePickerProps {
+  initialStartDate?: string
   handleStartDate: (date: Date | null) => void
 }
 // TODO: 디자인 확정되면 디자인 반영하기
-const FormDatePicker = ({ handleStartDate }: FormDatePickerProps) => {
-  const [startDate, setStartDate] = useState<Date | null>(null)
+const FormDatePicker = ({
+  initialStartDate,
+  handleStartDate,
+}: FormDatePickerProps) => {
+  const [startDate, setStartDate] = useState<string | Date | null>(
+    initialStartDate ? initialStartDate : null,
+  )
+
   const inputRef = useRef(null)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,16 +47,16 @@ const FormDatePicker = ({ handleStartDate }: FormDatePickerProps) => {
     </div>
   ))
 
-  CustomInput.displayName = 'CustomInput'
+  CustomInput.displayName = 'customInput'
 
   return (
     <ReactDatePicker
-      selected={startDate}
+      selected={startDate ? new Date(startDate) : null}
       onChange={(date) => {
         setStartDate(date)
         handleStartDate(date)
       }}
-      customInput={<CustomInput inputRef={inputRef} />}
+      customInput={<CustomInput inputref={inputRef} />}
     />
   )
 }

@@ -24,7 +24,7 @@ const MeetDetailImage = ({ imgUrl, deadline }: MeetDetailImageProps) => {
           </div>
         </div>
       ) : (
-        <div className="h-[214px] w-[375px]">
+        <div className="relative h-[214px] w-[375px]">
           <Image
             src={imgUrl}
             alt="만나기 상세 이미지"

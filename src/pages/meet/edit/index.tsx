@@ -1,5 +1,9 @@
+import { MeetCreateForm } from '@components'
+
 const MeetCreatePage = () => {
-  return <div>MeetCreatePage</div>
+  return (
+    <MeetCreateForm handleOnSubmit={(formValues) => console.log(formValues)} />
+  )
 }
 
 export default MeetCreatePage

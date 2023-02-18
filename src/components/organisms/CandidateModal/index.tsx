@@ -7,7 +7,7 @@ interface CandidateModalProps {
   showModal: boolean
   setShowModal: Dispatch<SetStateAction<boolean>>
   title: string
-  profileId: string
+  profileId: number
 }
 
 const CandidateModal = ({
