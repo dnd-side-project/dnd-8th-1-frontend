@@ -16,7 +16,7 @@ const CandidateBottomSheet = ({
   setShowBottomSheet,
   openchatUrl,
 }: CandidateBottomSheetProps) => {
-  const { register, setValue, control, handleSubmit } = useForm<{
+  const { register, control, handleSubmit } = useForm<{
     candidate: string
     toggleText: boolean
   }>({
@@ -25,6 +25,8 @@ const CandidateBottomSheet = ({
       toggleText: false,
     },
   })
+  const toggleTextState = useWatch({ control, name: 'toggleText' })
+  const [isChecked, setIsChecked] = useState(toggleTextState)
   const handleCompleted = (data: {
     candidate: string
     toggleText: boolean
@@ -35,13 +37,10 @@ const CandidateBottomSheet = ({
     console.log(data)
 
     // 전체 데이터 날리기
-    setValue('toggleText', false)
+    setIsChecked(false)
     setShowBottomSheet(false)
   }
 
-  const toggleTextState = useWatch({ control, name: 'toggleText' })
-  const isDisabled = toggleTextState === false
-  const [isChecked, setIsChecked] = useState(toggleTextState)
   return (
     <BottomSheet
       hasCloseButton={true}
@@ -83,9 +82,11 @@ const CandidateBottomSheet = ({
           </Text>
         </Box>
         <button
-          onClick={handleOnClickSubmit}
+          onClick={() => {
+            handleOnClickSubmit()
+          }}
           className="absolute bottom-[32px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900 disabled:bg-gray-600"
-          disabled={isDisabled}
+          disabled={!isChecked}
         >
           신청 완료하기
         </button>
