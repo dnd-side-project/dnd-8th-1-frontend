@@ -8,7 +8,16 @@ import { useEffect, useState } from 'react'
 import { Layout } from '@components'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        retry: 0,
+      },
+    },
+  })
   const [shouldRender, setShouldRender] = useState(
     !process.env.NEXT_PUBLIC_API_MOCKING,
   )
