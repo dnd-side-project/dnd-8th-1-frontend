@@ -40,6 +40,7 @@ const ImageUpload = ({ handleSetImage, initialImage }: ImageUploadProps) => {
           id="input-file"
           name="myImage"
           className="hidden"
+          accept="image/*"
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(event: any) => {
             // TODO: 파일 확인을 위한 콘솔, 나중에 지울 것!
