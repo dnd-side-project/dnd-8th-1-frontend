@@ -1,0 +1,49 @@
+import { authInstance, unAuthInstance } from 'apis/utils'
+
+import { MeetEditRequest, MeetAcceptRequest, MeetApplyRequest } from '@types'
+
+export const eventAPI = {
+  // 이벤트 전체 조회
+  getAll: () => {
+    return unAuthInstance.get(`api/v1/events`)
+  },
+  //이벤트 글 상세 조회
+  getDetail: (eventId: number) => {
+    return unAuthInstance.get(`api/v1/events/${eventId}`)
+  },
+  // 이벤트 글 등록
+  create: (payload: MeetEditRequest) => {
+    return authInstance.post(`api/v1/events/`, payload)
+  },
+  // TODO: 이벤트 글 삭제 (미구현)
+  // delete: () => {
+  //   return authInstance.delete(`/api/v1/events/${eventId}`)
+  // },
+  // TODO: 이벤트 글 수정 (미구현)
+  // update: (eventId: number, payload: MeetEditRequest) => {
+  //   return authInstance.patch(`api/v1/events/${eventId}`, payload)
+  // },
+  // 이벤트 신청
+  apply: (payload: MeetApplyRequest) => {
+    return authInstance.post(`api/v1/events/match`, payload)
+  },
+  // TODO: 조기 마감(미구현)
+  // close: (eventId: number, payload: MeetCloseRequest) => {
+  //   return authInstance.patch(`api/v1/events/`, payload)
+  // },
+  // 이벤트 지원 취소
+  cancel: (eventId: number) => {
+    return authInstance.delete(`api/v1/events/${eventId}/cancel-apply`)
+  },
+  // 이벤트 신청자 리스트 조회
+  getApplicants: (eventId: number) => {
+    return authInstance.post(`api/v1/${eventId}/applicants`)
+  },
+  // 이벤트 지원자 요청 수락
+  accept: (eventId: number, payload: MeetAcceptRequest) => {
+    return authInstance.post(`api/v1/events/${eventId}`, payload)
+  },
+  uploadImage: () => {
+    return authInstance.post(`api/v1/events/image`)
+  },
+}
