@@ -10,8 +10,8 @@ const RegisterListItem = ({
   registerItem,
   handleOnClick,
 }: RegisterListItemProps) => {
-  const { profile, isMatched, location } = registerItem
-  const { id, imgUrl, name, description, openChatUrl } = profile
+  const { profile, isMatched } = registerItem
+  const { id, imgUrl, name, description, openChatUrl, location } = profile
 
   return (
     <li className="mb-[16px] h-[166px] w-[343px] rounded-[12px] border-[1px] border-gray-700 bg-[#121212] p-[16px]">
