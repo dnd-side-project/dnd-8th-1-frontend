@@ -6,6 +6,7 @@ import {
   // TODO: MeetDetail 수정 후 주석 해제
   MeetDetail,
   PaginationResponse,
+  RecruitmentType,
 } from '@types'
 
 // 만나기 전체 조회 응답
@@ -20,7 +21,16 @@ export interface MeetResponse extends BaseResponse {
 // }
 
 // 만나기 글 등록 / 수정 요청
-// export type MeetEditRequest = Omit<MeetDetail, 'profile'>
+export type MeetEditRequest = {
+  title: string
+  location: string
+  type: string
+  imgUrl: string
+  recruitType: RecruitmentType
+  description: string
+  recruitCount: number
+  deadline: string
+}
 
 // // 만나기 글 삭제 요청
 // export type MeetDeleteRequest = Pick<MeetDetail, 'eventId'>
