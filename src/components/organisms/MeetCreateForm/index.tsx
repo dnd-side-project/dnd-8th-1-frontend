@@ -18,8 +18,7 @@ import {
 import { useState } from 'react'
 
 interface MeetCreateFormProps {
-  // 값이 이미 존재하는 경우
-  previousValue?: MeetEditRequest
+  previousValue?: MeetEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
   handleOnSubmit: (formValues: MeetEditRequest) => void
 }
 
@@ -42,18 +41,19 @@ const MeetCreateForm = ({
         description: previousValue ? previousValue.description : '',
         deadline: previousValue ? previousValue.deadline : '',
       },
+      shouldUnregister: false,
     })
 
   // TODO: 로직 관련 상의 하기
   const fieldValues = useWatch<MeetEditRequest>({ control })
 
   const isAllFull = (fieldValues: MeetEditRequest) => {
-    const { title, location, description, deadline } = fieldValues
+    const { title, location, description, deadline, imgUrl } = fieldValues
 
     return (
       title !== '' &&
       location !== '' &&
-      image &&
+      (image || previousValue?.imgUrl || imgUrl !== '') &&
       description !== '' &&
       deadline !== ''
     )
@@ -85,14 +85,17 @@ const MeetCreateForm = ({
           // TODO: 이미지를 url로 받아오는 api를 호출한다.
           // 우선은 더미 이미지 활용
           const dummyImg = 'https://picsum.photos/200/300'
-          setValue('imgUrl', dummyImg)
-          console.log('fomr', formValues)
-          handleOnSubmit(formValues)
+          handleOnSubmit({
+            ...formValues,
+            imgUrl: dummyImg,
+          })
         })}
       >
+        {/* 활동 유형 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>활동 유형</label>
           <FormCategorySelect
+            active={previousValue?.type}
             categories={MEET_TYPE}
             tabWrapperStyle={tabWrapperStyle}
             tabItemStyle={tabItemStyle}
@@ -101,6 +104,7 @@ const MeetCreateForm = ({
           />
         </div>
 
+        {/* 제목 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>제목</label>
           <Input
@@ -110,9 +114,11 @@ const MeetCreateForm = ({
           />
         </div>
 
+        {/* 모집 유형 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>모집 유형</label>
           <FormCategorySelect
+            active={previousValue?.recruitType}
             categories={RECRUITMENT_TYPE}
             tabWrapperStyle={tabWrapperStyle}
             tabItemStyle={tabItemStyle}
@@ -122,7 +128,9 @@ const MeetCreateForm = ({
             }
           />
 
+          {/* 모집 인원 */}
           <CountPeople
+            initialCount={previousValue?.recruitCount}
             currentType={fieldValues.recruitType as RecruitmentType}
             handleCountPeople={(recruitCount) =>
               setValue('recruitCount', recruitCount)
@@ -130,25 +138,30 @@ const MeetCreateForm = ({
           />
         </div>
 
+        {/* 마감일 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>마감일</label>
 
           <FormDatePicker
+            initialStartDate={previousValue?.deadline}
             handleStartDate={(date) =>
               setValue('deadline', date ? date.toDateString() : '')
             }
           />
         </div>
 
+        {/* 지역 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>지역</label>
           <RegionSelect
+            selectedRegion={previousValue?.location}
             handleRegionSelect={(location) => {
               setValue('location', location)
             }}
           />
         </div>
 
+        {/* 상세 설명 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>상세설명</label>
           <Textarea
@@ -158,6 +171,7 @@ const MeetCreateForm = ({
           />
         </div>
 
+        {/* 이미지 */}
         <div className={formSectionStyle}>
           <label className={labelStyle}>이미지 추가</label>
           <p className="text-body-400 text-gray-400">
@@ -165,12 +179,14 @@ const MeetCreateForm = ({
             해주세요!
           </p>
           <ImageUpload
+            initialImage={previousValue?.imgUrl}
             handleSetImage={(image) => {
               setImage(image)
             }}
           />
         </div>
 
+        {/* 등록 버튼 */}
         {!isAllFull(fieldValues as MeetEditRequest) ? (
           <div className="flex items-center justify-center rounded-[8px] bg-gray-600 py-[12px] px-[155.5px] text-subtitle font-bold text-gray-400">
             완료
