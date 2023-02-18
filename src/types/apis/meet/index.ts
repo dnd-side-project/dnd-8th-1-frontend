@@ -30,5 +30,16 @@ export interface MeetApplicantsResponse extends BaseResponse {
   data?: MeetApplicant[]
 }
 
+export interface MeetCreateRequest {
+  title: string
+  location: string
+  type: string
+  imgUrl: string
+  recruitType: string
+  description: string
+  recruitCount: string
+  deadline: string
+}
+
 // 만나기 매칭 하기 요청
 export type MeetMatchRequest = MeetAccept
