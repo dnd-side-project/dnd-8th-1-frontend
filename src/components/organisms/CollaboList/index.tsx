@@ -7,7 +7,7 @@ interface CollaboListProps {
 }
 
 const CollaboList = ({ collaboItems }: CollaboListProps) => {
-  const isEmpty = !collaboItems.length
+  const isEmpty = !collaboItems?.length
 
   return isEmpty ? (
     <div className="mt-[77.87px] mb-[118px] flex w-[100%] flex-col items-center justify-center">
