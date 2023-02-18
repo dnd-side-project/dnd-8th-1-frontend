@@ -39,7 +39,7 @@ const BottomSheet = ({
     return () => {
       document.querySelector('#layout')?.removeChild(portalDivFragment)
     }
-  })
+  }, [])
 
   return ReactDOM.createPortal(
     <>
