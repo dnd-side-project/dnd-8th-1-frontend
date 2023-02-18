@@ -1,1 +1,2 @@
-export { default as eventAPI } from './event'
+export * from './domains'
+export * from './utils'
