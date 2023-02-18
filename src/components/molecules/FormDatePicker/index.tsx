@@ -36,11 +36,7 @@ const FormDatePicker = ({ handleStartDate }: FormDatePickerProps) => {
           </div>
         )}
       </label>
-      <input
-        id="input-date"
-        className="hidden"
-        // placeholder="마감일을 설정해주세요."
-      />
+      <input id="input-date" className="hidden" />
     </div>
   ))
 
