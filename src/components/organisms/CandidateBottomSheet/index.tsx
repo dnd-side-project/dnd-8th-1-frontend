@@ -4,12 +4,14 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 interface CandidateBottomSheetProps {
+  handleOnClickSubmit: () => void
   showBottomSheet: boolean
   setShowBottomSheet: Dispatch<SetStateAction<boolean>>
   openchatUrl: string
 }
 
 const CandidateBottomSheet = ({
+  handleOnClickSubmit,
   showBottomSheet,
   setShowBottomSheet,
   openchatUrl,
@@ -81,6 +83,7 @@ const CandidateBottomSheet = ({
           </Text>
         </Box>
         <button
+          onClick={handleOnClickSubmit}
           className="absolute bottom-[32px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900 disabled:bg-gray-600"
           disabled={isDisabled}
         >
