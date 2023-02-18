@@ -1,16 +1,21 @@
 import { Modal } from '@components'
 import { Dispatch, SetStateAction } from 'react'
 
-interface MeetDeleteModalProps {
+interface CancelSubmitModaleModalProps {
   showModal: boolean
   setShowModal: Dispatch<SetStateAction<boolean>>
+  handleOnSubmit: () => void
+  modalContent: string
+  submitMessage: string
 }
 
-// TODO: 템플릿화 된 부분으로 리팩터링
-const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
-  /**
-   * TODO : 삭제 버튼 클릭 시 삭제 api 호출 하기 위한 함수 필요
-   */
+const CancelSubmitModal = ({
+  showModal,
+  setShowModal,
+  handleOnSubmit,
+  modalContent,
+  submitMessage,
+}: CancelSubmitModaleModalProps) => {
   return (
     <Modal
       hasCloseButton={false}
@@ -19,7 +24,7 @@ const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
     >
       <div className="relative flex h-[180px] w-[290px] flex-col items-center justify-center bg-gray-700">
         <span className="absolute top-[49px] w-[fit] text-subtitle font-bold text-gray-100">
-          게시물을 삭제하시겠어요?
+          {modalContent}
         </span>
         <div className="absolute bottom-0">
           <button
@@ -28,9 +33,11 @@ const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
           >
             취소
           </button>
-          {/** TODO : onClick handler 추가 */}
-          <button className="h-[50px] w-[145px] bg-green-light text-body1 font-bold text-gray-900">
-            네, 삭제할게요
+          <button
+            className="h-[50px] w-[145px] bg-green-light text-body1 font-bold text-gray-900"
+            onClick={handleOnSubmit}
+          >
+            {submitMessage}
           </button>
         </div>
       </div>
@@ -38,4 +45,4 @@ const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
   )
 }
 
-export default MeetDeleteModal
+export default CancelSubmitModal
