@@ -7,11 +7,16 @@ import {
   Tags,
 } from '@components'
 import { useDisclosure } from '@hooks'
-import { GenreTypes, RecruitmentType, RegionTypes } from '@types'
+import {
+  GenreTypes,
+  MeetDetailResponse,
+  RecruitmentType,
+  RegionTypes,
+} from '@types'
 import { isDeadLine } from '@utils'
-import { MEET_DETAIL } from 'dummy'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import useMeetDetail from 'queries/meet/useMeetDetail'
 import { useState } from 'react'
 const MeetDeleteModal = dynamic(
   () => import('../../../components/organisms/MeetDeleteModal'),
@@ -39,19 +44,12 @@ const CandidateModal = dynamic(
 )
 
 const MeetDetailPage = () => {
-  const {
-    id,
-    title,
-    location,
-    type,
-    imgUrl,
-    recruitCount,
-    recruitType,
-    description,
-    deadline,
-    profile,
-  } = MEET_DETAIL
-  const { id: profileId, imgUrl: profileImgUrl, name } = profile
+  const { query } = useRouter()
+  const fallback = {} as MeetDetailResponse
+  const { data = fallback, isLoading } = useMeetDetail(
+    parseInt(query.meetId as string),
+  )
+  const detailData = data?.data
   const router = useRouter()
   const [isStatusBarOpen, setIsStatusBarOpen] = useState(false)
   const [showDeleteModal, setDeleteShowModal, handleDeleteModalToggle] =
@@ -68,8 +66,12 @@ const MeetDetailPage = () => {
   /**
    *TODO: 임시 유저 데이터
    */
-  const [isUser, setIsUser] = useState(false)
+  const DUMMY_USER_ID = 1
+  const isUser = DUMMY_USER_ID === detailData?.profile.id
   const [isCompleted, setIsCompleted] = useState(false)
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <>
       {showDeleteModal && (
@@ -82,15 +84,15 @@ const MeetDetailPage = () => {
         <CandidateModal
           showModal={showCandidateModal}
           setShowModal={setShowCandidateModal}
-          title={title}
-          profileId={profileId}
+          title={detailData?.title as string}
+          profileId={detailData?.profile.id as number}
         />
       )}
       {showCancelModal && (
         <CandidateCancelModal
           showModal={showCancelModal}
           setShowModal={setShowCancelModal}
-          title={title}
+          title={detailData?.title as string}
         />
       )}
       <CandidateBottomSheet
@@ -106,19 +108,22 @@ const MeetDetailPage = () => {
         openchatUrl="https://open.kakao.com/o/g2g5b5b9"
       />
       <header className="w-full">
-        <MeetDetailImage imgUrl={imgUrl} deadline={deadline} />
+        <MeetDetailImage
+          imgUrl={detailData?.imgUrl as string}
+          deadline={detailData?.deadline as string}
+        />
       </header>
       <main className="relative z-[0] mt-[-10px] w-[375px] rounded-t-[10px] bg-gray-900 px-[16px] py-[18px]">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Avatar
-              profileImage={profileImgUrl}
+              profileImage={detailData?.profile.imgUrl as string}
               shape="circle"
               size={30}
               styleClass="border border-gray-700"
             />
             <span className="ml-[10px] text-body2 font-bold text-gray-300">
-              {name}
+              {detailData?.profile.name}
             </span>
           </div>
           {/**
@@ -139,14 +144,14 @@ const MeetDetailPage = () => {
           <div className="absolute right-[16px] z-[990] rounded-[8px] bg-gray-700 py-[14px] px-[10px]">
             <StatusPopupContent
               handleOnModify={() => {
-                router.push(`/meet/edit/${id}`)
+                router.push(`/meet/edit/${detailData?.id}`)
               }}
               handleOnDelete={handleDeleteModalToggle}
             />
           </div>
         )}
         <p className="mt-[26px] mb-[24px] text-headline font-bold text-gray-100">
-          {title}
+          {detailData?.title}
         </p>
         <div className="mb-[26px]">
           {/**
@@ -155,31 +160,36 @@ const MeetDetailPage = () => {
           <Tags
             tagStyle="bg-gray-700"
             textStyle="text-gray-300"
-            tags={[location as RegionTypes, type as GenreTypes]}
+            tags={[
+              detailData?.location as RegionTypes,
+              detailData?.type as GenreTypes,
+            ]}
           />
         </div>
         <MeetDetailCard
-          location={location as RegionTypes}
-          deadline={deadline}
-          recruitType={recruitType as RecruitmentType}
-          recruitCount={recruitCount}
+          location={detailData?.location as RegionTypes}
+          deadline={detailData?.deadline as string}
+          recruitType={detailData?.recruitType as RecruitmentType}
+          recruitCount={detailData?.recruitCount as number}
         />
-        <p className="whitespace-pre-wrap break-words">{description}</p>
+        <p className="mt-[24px] whitespace-pre-wrap break-words">
+          {detailData?.description}
+        </p>
       </main>
       <div className="fixed bottom-[17px] mx-[auto] h-[102px] w-[375px] bg-darken_gradient">
-        {isDeadLine(deadline) ? (
+        {isDeadLine(detailData?.deadline as string) ? (
           <button
             disabled
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-gray-600 text-subtitle font-bold text-gray-400"
           >
             마감되었어요!
           </button>
-        ) : !isUser ? (
+        ) : isUser ? (
           /**
            * TODO: 유저 데이터 받을 경우 새롭게 분기 처리 필요
            */
           <button
-            onClick={() => router.push(`/meet/${id}/candidate`)}
+            onClick={() => router.push(`/meet/${detailData?.id}/candidate`)}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
             신청자 확인하기
