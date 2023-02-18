@@ -1,21 +1,42 @@
 import {
   Avatar,
   IconButton,
-  MeetDeleteModal,
   MeetDetailCard,
   MeetDetailImage,
   StatusPopupContent,
   Tags,
-  CandidateBottomSheet,
-  CandidateCancelModal,
 } from '@components'
 import { useDisclosure } from '@hooks'
 import { GenreTypes, RegionTypes } from '@types'
 import { isDeadLine } from '@utils'
-import CandidateModal from 'components/organisms/CandidateModal'
 import { MEET_DETAIL } from 'dummy'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+const MeetDeleteModal = dynamic(
+  () => import('../../../components/organisms/MeetDeleteModal'),
+  {
+    ssr: false,
+  },
+)
+const CandidateBottomSheet = dynamic(
+  () => import('../../../components/organisms/CandidateBottomSheet'),
+  {
+    ssr: false,
+  },
+)
+const CandidateCancelModal = dynamic(
+  () => import('../../../components/organisms/CandidateCancelModal'),
+  {
+    ssr: false,
+  },
+)
+const CandidateModal = dynamic(
+  () => import('../../../components/organisms/CandidateModal'),
+  {
+    ssr: false,
+  },
+)
 
 const MeetDetailPage = () => {
   const {
