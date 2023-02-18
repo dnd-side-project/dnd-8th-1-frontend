@@ -6,6 +6,7 @@ interface MeetDeleteModalProps {
   setShowModal: Dispatch<SetStateAction<boolean>>
 }
 
+// TODO: 템플릿화 된 부분으로 리팩터링
 const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
   /**
    * TODO : 삭제 버튼 클릭 시 삭제 api 호출 하기 위한 함수 필요
