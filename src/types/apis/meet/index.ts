@@ -19,17 +19,16 @@ export interface MeetResponse extends BaseResponse {
 // export interface MeetDetailResponse extends BaseResponse {
 //   data?: MeetDetail
 // }
-
-// 만나기 글 등록 / 수정 요청
-export type MeetEditRequest = {
-  title: string
-  location: string
-  type: string
-  imgUrl: string
-  recruitType: RecruitmentType
-  description: string
-  recruitCount: number
+export interface MeetEditRequest {
   deadline: string
+  description: string
+  imgUrl: string
+  location: string
+  recruitCount: number
+  recruitType: string
+  title: string
+  type: string
+}
 
 // 이벤트 지원자 요청 수락
 export interface MeetAcceptRequest {
@@ -42,10 +41,6 @@ export interface MeetApplyRequest {
 }
 
 export interface MeetCloseRequest {
-  eventId: number
-}
-
-export interface MeetApplyRequest {
   eventId: number
 }
 
