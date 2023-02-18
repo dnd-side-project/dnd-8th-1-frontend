@@ -16,9 +16,9 @@ export interface MeetResponse extends BaseResponse {
 
 // TODO: MeetDetail 수정 후 주석 해제
 // 만나기 상세 조회 응답
-// export interface MeetDetailResponse extends BaseResponse {
-//   data?: MeetDetail
-// }
+export interface MeetDetailResponse extends BaseResponse {
+  data?: MeetDetail
+}
 export interface MeetEditRequest {
   deadline: string
   description: string
