@@ -1,80 +1,24 @@
 import Head from 'next/head'
-import { MeetResponse } from '@types'
 import { MeetBanner, FilterButton, Pagination, CollaboList } from '@components'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { MEET_DUMMUMY } from '../../dummy'
 import { Center } from '@chakra-ui/react'
+import { useMeet } from '@queries'
+import { MeetResponse } from '@types'
 
 // TODO: api 붙이기
-const MeetPage = ({ data }: MeetResponse) => {
+const MeetPage = () => {
+  const fallback = {} as MeetResponse
+  const [currentQueryString, setCurrentQueryString] = useState({
+    page: 0,
+    size: 15,
+    location: '',
+    type: '',
+  })
+  const currentPage = currentQueryString.page + 1
+  const { data = fallback } = useMeet(currentQueryString)
+  const { data: meetData } = data
   const router = useRouter()
-  const { page } = router.query
-
-  const { content, pageNumber, totalPages } =
-    MEET_DUMMUMY[page ? parseInt(page as string) - 1 : 0]
-  const [currentPage, setCurrentPage] = useState(pageNumber)
-
-  const [currentRegion, setCurrentRegion] = useState('')
-  const [currentType, setCurrentType] = useState('')
-
-  const [collaboItems, setCollaboItems] = useState(content)
-
-  // TODO: 임시 페이지네이션 로직
-  useEffect(() => {
-    router.push(`?page=${currentPage + 1}`)
-    setCollaboItems(MEET_DUMMUMY[currentPage].content)
-  }, [currentPage])
-
-  // TODO: 임시 필터 로직
-  useEffect(() => {
-    console.log(currentRegion)
-    if (currentRegion === '') {
-      if (currentType === '') {
-        setCollaboItems([...content])
-      } else {
-        const filtered = content.filter((item) => item.type === currentType)
-        setCollaboItems([...filtered])
-      }
-    } else {
-      if (currentType === '') {
-        const filtered = content.filter(
-          (item) => item.location == currentRegion,
-        )
-        console.log(filtered)
-        setCollaboItems([...filtered])
-      } else {
-        const filtered = content.filter(
-          (item) => item.location == currentRegion && item.type === currentType,
-        )
-        setCollaboItems([...filtered])
-      }
-    }
-  }, [currentRegion])
-
-  useEffect(() => {
-    if (currentType === '') {
-      if (currentRegion === '') {
-        setCollaboItems([...content])
-      } else {
-        const filtered = content.filter(
-          (item) => item.location === currentRegion,
-        )
-        setCollaboItems([...filtered])
-      }
-    } else {
-      if (currentRegion === '') {
-        const filtered = content.filter((item) => item.type == currentType)
-        setCollaboItems([...filtered])
-      } else {
-        const filtered = content.filter(
-          (item) => item.location == currentRegion && item.type === currentType,
-        )
-        setCollaboItems([...filtered])
-      }
-    }
-  }, [currentType])
-
   return (
     <>
       <Head>
@@ -82,32 +26,38 @@ const MeetPage = ({ data }: MeetResponse) => {
       </Head>
 
       <MeetBanner />
-
       <main>
         <div className="mt-[43px] flex items-center justify-between px-[16px]">
           <div className="flex gap-[8px]">
             <FilterButton
               type="region"
-              handleSelected={(filter) => setCurrentRegion(filter)}
+              handleSelected={(filter) =>
+                setCurrentQueryString({
+                  ...currentQueryString,
+                  location: filter,
+                })
+              }
             />
             <FilterButton
               type="meet"
-              handleSelected={(filter) => setCurrentType(filter)}
+              handleSelected={(filter) =>
+                setCurrentQueryString({ ...currentQueryString, type: filter })
+              }
             />
           </div>
           <button onClick={() => router.push('meet/edit')}>작성하기</button>
         </div>
 
         <section>
-          <CollaboList collaboItems={collaboItems} />
+          <CollaboList collaboItems={meetData?.content} />
         </section>
 
         <Center className="mb-[30px]">
           <Pagination
-            currentPage={pageNumber + 1}
-            totalPages={totalPages}
+            currentPage={currentPage}
+            totalPages={meetData?.totalPage}
             handleChangePage={(page) => {
-              setCurrentPage(page - 1)
+              setCurrentQueryString({ ...currentQueryString, page: page - 1 })
             }}
           />
         </Center>
