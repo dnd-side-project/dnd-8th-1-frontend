@@ -1,11 +1,13 @@
-import { authInstance, unAuthInstance } from 'apis/utils'
+import { authInstance, unAuthInstance } from '@apis'
 
 import { MeetEditRequest, MeetAcceptRequest, MeetApplyRequest } from '@types'
 
 export const eventAPI = {
   // 이벤트 전체 조회
-  getAll: () => {
-    return unAuthInstance.get(`api/v1/events`)
+  getAll: (location = '', type = '', page = 1, size = 15) => {
+    return unAuthInstance.get(
+      `api/v1/events?location=${location}&type=${type}&page=${page}&size=${size}`,
+    )
   },
   //이벤트 글 상세 조회
   getDetail: (eventId: number) => {

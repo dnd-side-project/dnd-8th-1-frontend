@@ -6,6 +6,7 @@ import {
   // TODO: MeetDetail 수정 후 주석 해제
   MeetDetail,
   PaginationResponse,
+  RecruitmentType,
 } from '@types'
 
 // 만나기 전체 조회 응답
@@ -18,8 +19,6 @@ export interface MeetResponse extends BaseResponse {
 // export interface MeetDetailResponse extends BaseResponse {
 //   data?: MeetDetail
 // }
-
-// 만나기 글 등록 / 수정 요청
 export interface MeetEditRequest {
   deadline: string
   description: string
@@ -60,7 +59,7 @@ export interface MeetCreateRequest {
   imgUrl: string
   recruitType: string
   description: string
-  recruitCount: string
+  recruitCount: number
   deadline: string
 }
 

@@ -23,7 +23,7 @@ const Template: ComponentStory<typeof MeetDetailCard> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  recruitType: '개인',
+  recruitType: '댄서',
   recruitCount: 3,
   deadline: '2023-03-01T12:00:00',
   location: '서울',
