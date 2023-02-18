@@ -3,14 +3,12 @@ import { Header, FormHeader } from '@components'
 import { usePathname } from 'next/navigation'
 const Layout = ({ children }: { children: ReactElement }) => {
   const pathname = usePathname()
-  console.log(pathname)
-
   const isFormHeader = pathname?.includes('/edit')
 
   return (
     <div
       id="layout"
-      className="relative mx-auto w-[375px] overflow-hidden bg-gray-900 text-gray-100"
+      className="relative mx-auto min-h-[100vh] w-[375px] overflow-hidden bg-gray-900 text-gray-100"
     >
       {isFormHeader ? <FormHeader /> : <Header />}
       {children}

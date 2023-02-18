@@ -31,6 +31,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
           <button className={buttonDefaultStyle}>장르</button>
         )}
       </PopoverTrigger>
+
       <PopoverContent
         border="none"
         width="fit-content"
@@ -38,12 +39,14 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
         backgroundColor="transparent"
       >
         {type === 'region' ? (
-          <RegionPopupContent
-            handleOnClick={(region) => {
-              setSelectedFilter(region)
-              handleSelected(region)
-            }}
-          />
+          <div className=" ml-[19px] mb-[19px] w-[336px] rounded-[8px] border-[1px] border-gray-600 bg-gray-700 px-[10px] py-[15px]">
+            <RegionPopupContent
+              handleOnClick={(region) => {
+                setSelectedFilter(region)
+                handleSelected(region)
+              }}
+            />
+          </div>
         ) : type === 'meet' ? (
           <MeetPopupContent
             handleOnClick={(meet) => {
