@@ -49,7 +49,7 @@ const Modal = ({
           `}
         >
           <div
-            className={`fixed left-0 right-0 z-[999] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}
+            className={`fixed top-[250px] left-0 right-0 z-[999] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}
             ref={ModalRef}
           >
             {hasCloseButton && (

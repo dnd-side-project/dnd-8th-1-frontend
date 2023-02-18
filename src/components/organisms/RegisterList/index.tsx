@@ -12,7 +12,7 @@ const RegisterList = ({ registerItems, handleOnClick }: RegisterListProps) => {
   const isEmpty = !registerItems.length
 
   return isEmpty ? (
-    <div className="flex w-[375px] items-center justify-center bg-gray-700">
+    <div className="mt-[63.24px] flex w-[375px] items-center justify-center bg-gray-900">
       <div className="flex flex-col items-center justify-center">
         <Image
           src={noneItemLogo}

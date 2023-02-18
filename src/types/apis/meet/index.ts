@@ -30,15 +30,25 @@ export type MeetEditRequest = {
   description: string
   recruitCount: number
   deadline: string
-}
 
+// 이벤트 지원자 요청 수락
 export interface MeetAcceptRequest {
   profileId: number
+}
+
+// 이벤트 지원자 요청 신청
+export interface MeetApplyRequest {
+  profileId: number
+}
+
+export interface MeetCloseRequest {
+  eventId: number
 }
 
 export interface MeetApplyRequest {
   eventId: number
 }
+
 // // 만나기 글 삭제 요청
 // export type MeetDeleteRequest = Pick<MeetDetail, 'eventId'>
 

@@ -1,20 +1,22 @@
 import { Box, Text } from '@chakra-ui/react'
 import { BottomSheet, Checkbox, Input } from '@components'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 interface CandidateBottomSheetProps {
+  handleOnClickSubmit: () => void
   showBottomSheet: boolean
   setShowBottomSheet: Dispatch<SetStateAction<boolean>>
   openchatUrl: string
 }
 
 const CandidateBottomSheet = ({
+  handleOnClickSubmit,
   showBottomSheet,
   setShowBottomSheet,
   openchatUrl,
 }: CandidateBottomSheetProps) => {
-  const { register, setValue, control, handleSubmit } = useForm<{
+  const { register, control, handleSubmit } = useForm<{
     candidate: string
     toggleText: boolean
   }>({
@@ -23,6 +25,8 @@ const CandidateBottomSheet = ({
       toggleText: false,
     },
   })
+  const toggleTextState = useWatch({ control, name: 'toggleText' })
+  const [isChecked, setIsChecked] = useState(toggleTextState)
   const handleCompleted = (data: {
     candidate: string
     toggleText: boolean
@@ -33,12 +37,9 @@ const CandidateBottomSheet = ({
     console.log(data)
 
     // 전체 데이터 날리기
-    setValue('toggleText', false)
+    setIsChecked(false)
     setShowBottomSheet(false)
   }
-
-  const toggleTextState = useWatch({ control, name: 'toggleText' })
-  const isDisabled = toggleTextState === false
 
   return (
     <BottomSheet
@@ -71,14 +72,21 @@ const CandidateBottomSheet = ({
           alignItems="center"
           className="absolute bottom-[101.83px]"
         >
-          <Checkbox {...register('toggleText')} />
+          <Checkbox
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+            {...register('toggleText')}
+          />
           <Text className="ml-[10.83px] text-body2 font-normal text-gray-100">
             콜라보 게시자에게 내 오픈채팅 링크를 제공할게요.
           </Text>
         </Box>
         <button
+          onClick={() => {
+            handleOnClickSubmit()
+          }}
           className="absolute bottom-[32px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900 disabled:bg-gray-600"
-          disabled={isDisabled}
+          disabled={!isChecked}
         >
           신청 완료하기
         </button>
