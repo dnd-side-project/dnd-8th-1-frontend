@@ -16,6 +16,8 @@ import {
   FORM_INPUT_STYLE,
 } from '@constants'
 import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { postCreateImageUrl } from 'queries/meet/useCreateImageUrl'
 
 interface MeetCreateFormProps {
   previousValue?: MeetEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -28,7 +30,7 @@ const MeetCreateForm = ({
 }: MeetCreateFormProps) => {
   const [image, setImage] = useState<File>()
 
-  const { register, control, handleSubmit, setValue } =
+  const { register, control, handleSubmit, setValue, watch } =
     useForm<MeetEditRequest>({
       mode: 'onSubmit',
       defaultValues: {
@@ -43,6 +45,18 @@ const MeetCreateForm = ({
       },
       shouldUnregister: false,
     })
+  const { mutate: requestImgUrl } = useMutation(
+    (payload: FormData) => postCreateImageUrl(payload),
+    {
+      /**
+       *TODO: 시간 날 때 data 타입 형식 정하기
+       */
+      onSuccess: (data) => {
+        setValue('imgUrl', data.data.imgUrl)
+      },
+    },
+  )
+  console.log(watch())
 
   // TODO: 로직 관련 상의 하기
   const fieldValues = useWatch<MeetEditRequest>({ control })
@@ -182,6 +196,9 @@ const MeetCreateForm = ({
             initialImage={previousValue?.imgUrl}
             handleSetImage={(image) => {
               setImage(image)
+              const formData = new FormData()
+              formData.append('img', image)
+              requestImgUrl(formData)
             }}
           />
         </div>
