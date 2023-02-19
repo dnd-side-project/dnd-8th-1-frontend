@@ -22,10 +22,10 @@ export const eventAPI = {
   create: (payload: MeetEditRequest) => {
     return authInstance.post(`api/v1/events/`, payload)
   },
-  // TODO: 이벤트 글 삭제 (미구현)
-  // delete: () => {
-  //   return authInstance.delete(`/api/v1/events/${eventId}`)
-  // },
+  // 이벤트 글 삭제
+  delete: (eventId: number) => {
+    return authInstance.delete(`/api/v1/events/${eventId}`)
+  },
   // 이벤트 글 수정
   update: (payload: MeetEditRequest) => {
     return authInstance.patch(`api/v1/events`, payload)
