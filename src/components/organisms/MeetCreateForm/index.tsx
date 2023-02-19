@@ -96,12 +96,12 @@ const MeetCreateForm = ({
       <form
         className="mt-[40px] flex flex-col gap-[34px] p-[16px]"
         onSubmit={handleSubmit((formValues) => {
-          // TODO: 이미지를 url로 받아오는 api를 호출한다.
-          // 우선은 더미 이미지 활용
-          const dummyImg = 'https://picsum.photos/200/300'
+          const deadline = new Date(formValues.deadline)
+            .toISOString()
+            .slice(0, 19)
           handleOnSubmit({
             ...formValues,
-            imgUrl: dummyImg,
+            deadline,
           })
         })}
       >
