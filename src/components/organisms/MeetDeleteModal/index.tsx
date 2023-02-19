@@ -1,16 +1,20 @@
 import { Modal } from '@components'
+import { useDeleteMeet } from '@queries'
 import { Dispatch, SetStateAction } from 'react'
 
 interface MeetDeleteModalProps {
+  id: number
   showModal: boolean
   setShowModal: Dispatch<SetStateAction<boolean>>
 }
 
 // TODO: 템플릿화 된 부분으로 리팩터링
-const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
-  /**
-   * TODO : 삭제 버튼 클릭 시 삭제 api 호출 하기 위한 함수 필요
-   */
+const MeetDeleteModal = ({
+  id,
+  showModal,
+  setShowModal,
+}: MeetDeleteModalProps) => {
+  const { mutate: requestDeleteMeet } = useDeleteMeet()
   return (
     <Modal
       hasCloseButton={false}
@@ -29,7 +33,10 @@ const MeetDeleteModal = ({ showModal, setShowModal }: MeetDeleteModalProps) => {
             취소
           </button>
           {/** TODO : onClick handler 추가 */}
-          <button className="h-[50px] w-[145px] bg-green-light text-body1 font-bold text-gray-900">
+          <button
+            onClick={() => requestDeleteMeet(id)}
+            className="h-[50px] w-[145px] bg-green-light text-body1 font-bold text-gray-900"
+          >
             네, 삭제할게요
           </button>
         </div>
