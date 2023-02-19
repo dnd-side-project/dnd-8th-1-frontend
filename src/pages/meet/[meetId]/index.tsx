@@ -8,7 +8,7 @@ import {
   Tags,
 } from '@components'
 import { useDisclosure } from '@hooks'
-import { useRequestCandidate } from '@queries'
+import { useCancelCandidate, useRequestCandidate } from '@queries'
 import {
   GenreTypes,
   MeetDetailResponse,
@@ -74,6 +74,11 @@ const MeetDetailPage = ({ params }: any) => {
 
   const { mutate: requestMeetCandidate } = useRequestCandidate(
     params?.meetId as number,
+    setIsCompleted,
+  )
+  const { mutate: requestCancelCandidate } = useCancelCandidate(
+    params?.meetId as number,
+    setIsCompleted,
   )
   if (isLoading) {
     return <div></div>
@@ -104,7 +109,6 @@ const MeetDetailPage = ({ params }: any) => {
       <CandidateBottomSheet
         handleOnClickSubmit={() => {
           handleCandidateModalToggle()
-          setIsCompleted(true)
           requestMeetCandidate({ eventId: params?.meetId as number })
         }}
         showBottomSheet={showBottomSheet}
@@ -212,8 +216,8 @@ const MeetDetailPage = ({ params }: any) => {
           <button
             onClick={(e) => {
               e.stopPropagation()
-              setIsCompleted(false)
               handleCancelModalToggle()
+              requestCancelCandidate(params?.meetId as number)
             }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
