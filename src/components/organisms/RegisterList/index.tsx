@@ -9,7 +9,7 @@ interface RegisterListProps {
 }
 
 const RegisterList = ({ registerItems, handleOnClick }: RegisterListProps) => {
-  const isEmpty = !registerItems.length
+  const isEmpty = !registerItems?.length
 
   return isEmpty ? (
     <div className="mt-[63.24px] flex w-[375px] items-center justify-center bg-gray-900">
