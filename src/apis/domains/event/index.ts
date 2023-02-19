@@ -1,6 +1,11 @@
 import { authInstance, unAuthInstance } from '@apis'
 
-import { MeetEditRequest, MeetAcceptRequest, MeetApplyRequest } from '@types'
+import {
+  MeetEditRequest,
+  MeetAcceptRequest,
+  MeetApplyRequest,
+  MeetCloseRequest,
+} from '@types'
 
 export const eventAPI = {
   // 이벤트 전체 조회
@@ -30,9 +35,9 @@ export const eventAPI = {
     return authInstance.post(`api/v1/events/match`, payload)
   },
   // TODO: 조기 마감(미구현)
-  // close: (eventId: number, payload: MeetCloseRequest) => {
-  //   return authInstance.patch(`api/v1/events/`, payload)
-  // },
+  close: (payload: MeetCloseRequest) => {
+    return authInstance.patch(`api/v1/events/deadline`, payload)
+  },
   // 이벤트 지원 취소
   cancel: (eventId: number) => {
     return authInstance.delete(`api/v1/events/${eventId}/cancel-apply`)
