@@ -6,7 +6,6 @@ import {
   // TODO: MeetDetail 수정 후 주석 해제
   MeetDetail,
   PaginationResponse,
-  RecruitmentType,
 } from '@types'
 
 // 만나기 전체 조회 응답
@@ -37,7 +36,7 @@ export interface MeetAcceptRequest {
 
 // 이벤트 지원자 요청 신청
 export interface MeetApplyRequest {
-  profileId: number
+  eventId: number
 }
 
 export interface MeetCloseRequest {
