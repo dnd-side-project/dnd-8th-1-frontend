@@ -45,7 +45,11 @@ export const eventAPI = {
   accept: (eventId: number, payload: MeetAcceptRequest) => {
     return authInstance.post(`api/v1/events/${eventId}`, payload)
   },
-  uploadImage: () => {
-    return authInstance.post(`api/v1/events/image`)
+  uploadImage: (payload: FormData) => {
+    return authInstance.post(`api/v1/events/image`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
   },
 }
