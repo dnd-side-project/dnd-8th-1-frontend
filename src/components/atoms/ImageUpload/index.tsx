@@ -43,11 +43,13 @@ const ImageUpload = ({ handleSetImage, initialImage }: ImageUploadProps) => {
           accept="image/*"
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(event: any) => {
-            // TODO: 파일 확인을 위한 콘솔, 나중에 지울 것!
-            console.log(event.target.files[0])
-            setSelectedImage(event.target.files[0])
-            setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
-            handleSetImage && handleSetImage(event.target.files[0])
+            const current = event.target.files[0]
+
+            if (current) {
+              setSelectedImage(event.target.files[0])
+              setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
+              handleSetImage && handleSetImage(event.target.files[0])
+            }
           }}
         />
       </div>
