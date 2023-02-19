@@ -21,10 +21,10 @@ const Modal = dynamic(
 const MeetCandidatePage = ({ params }: any) => {
   const router = useRouter()
   const [showModal, setShowModal, toggle] = useDisclosure()
-  console.log(params.meetId)
+  console.log(params?.meetId)
   const fallback = {} as MeetApplicantsResponse
   const { data = fallback, isLoading } = useCandidate(
-    parseInt(params.meetId as string),
+    parseInt(params?.meetId as string),
   )
   const candidateData = data?.data as MeetApplicant[]
   const { mutate: requestAcceptCandidate } = useAcceptCandidate()
@@ -55,8 +55,8 @@ const MeetCandidatePage = ({ params }: any) => {
             setShowModal={setShowModal}
             handleOnSubmit={() => {
               // TODO: 모집 마감 api 호출
-              console.log(params.meetId, '모집 마감')
-              router.push(`/meet/${params.meetId}`)
+              console.log(params?.meetId, '모집 마감')
+              router.push(`/meet/${params?.meetId}`)
             }}
             modalContent="모집을 마감하시겠어요?"
             submitMessage="네, 마감할게요"
@@ -69,7 +69,7 @@ const MeetCandidatePage = ({ params }: any) => {
         handleOnClick={(id) => {
           // TODO: API 호출 로직 작성
           requestAcceptCandidate({
-            eventId: parseInt(params.meetId as string),
+            eventId: parseInt(params?.meetId as string),
             profileId: id,
           })
         }}
