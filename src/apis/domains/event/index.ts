@@ -32,7 +32,7 @@ export const eventAPI = {
   // },
   // 이벤트 신청
   apply: (payload: MeetApplyRequest) => {
-    return authInstance.post(`api/v1/events/match`, payload)
+    return authInstance.post(`api/v1/events/apply`, payload)
   },
   // TODO: 조기 마감(미구현)
   close: (payload: MeetCloseRequest) => {

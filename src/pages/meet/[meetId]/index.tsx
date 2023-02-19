@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Avatar,
   IconButton,
@@ -7,6 +8,7 @@ import {
   Tags,
 } from '@components'
 import { useDisclosure } from '@hooks'
+import { useRequestCandidate } from '@queries'
 import {
   GenreTypes,
   MeetDetailResponse,
@@ -14,6 +16,7 @@ import {
   RegionTypes,
 } from '@types'
 import { isDeadLine } from '@utils'
+import { GetServerSideProps } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import useMeetDetail from 'queries/meet/useMeetDetail'
@@ -43,11 +46,10 @@ const CandidateModal = dynamic(
   },
 )
 
-const MeetDetailPage = () => {
-  const { query } = useRouter()
+const MeetDetailPage = ({ params }: any) => {
   const fallback = {} as MeetDetailResponse
   const { data = fallback, isLoading } = useMeetDetail(
-    parseInt(query.meetId as string),
+    parseInt(params?.meetId as string),
   )
   const detailData = data?.data
   const router = useRouter()
@@ -69,6 +71,10 @@ const MeetDetailPage = () => {
   const DUMMY_USER_ID = 1
   const isUser = DUMMY_USER_ID === detailData?.profile.id
   const [isCompleted, setIsCompleted] = useState(false)
+
+  const { mutate: requestMeetCandidate } = useRequestCandidate(
+    params?.meetId as number,
+  )
   if (isLoading) {
     return <div></div>
   }
@@ -99,11 +105,12 @@ const MeetDetailPage = () => {
         handleOnClickSubmit={() => {
           handleCandidateModalToggle()
           setIsCompleted(true)
+          requestMeetCandidate({ eventId: params?.meetId as number })
         }}
         showBottomSheet={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
         /**
-         * TODO : 변경 되어야 할 부분(유저 데이터로 채워야 함)
+         *TODO: 변경 되어야 할 부분(유저 데이터로 채워야 함)
          */
         openchatUrl="https://open.kakao.com/o/g2g5b5b9"
       />
@@ -129,7 +136,7 @@ const MeetDetailPage = () => {
           {/**
            * TODO: 유저 데이터 받을 경우 새로운 분기 처리 필요
            */}
-          {!isUser && (
+          {isUser && (
             <IconButton
               handleOnClick={() => {
                 setIsStatusBarOpen(!isStatusBarOpen)
@@ -216,6 +223,16 @@ const MeetDetailPage = () => {
       </div>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+}: any) => {
+  return {
+    props: {
+      params,
+    },
+  }
 }
 
 export default MeetDetailPage
