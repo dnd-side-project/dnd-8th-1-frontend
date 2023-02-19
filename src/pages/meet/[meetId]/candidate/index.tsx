@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter } from 'next/router'
 import { RegisterList } from '@components'
 import { useDisclosure } from '@hooks'
 import dynamic from 'next/dynamic'
-import useCandidate from 'queries/meet/useCandidate'
 import { MeetApplicant, MeetApplicantsResponse } from '@types'
-import { useAcceptCandidate } from '@queries'
+import { useAcceptCandidate, useCandidate, useMeetDeadline } from '@queries'
 import { GetServerSideProps } from 'next'
 
 const Modal = dynamic(
@@ -19,15 +17,16 @@ const Modal = dynamic(
  *TODO: params 타입 추론 필요
  */
 const MeetCandidatePage = ({ params }: any) => {
-  const router = useRouter()
   const [showModal, setShowModal, toggle] = useDisclosure()
-  console.log(params?.meetId)
   const fallback = {} as MeetApplicantsResponse
   const { data = fallback, isLoading } = useCandidate(
     parseInt(params?.meetId as string),
   )
   const candidateData = data?.data as MeetApplicant[]
   const { mutate: requestAcceptCandidate } = useAcceptCandidate()
+  const { mutate: requestEarlyDeadline } = useMeetDeadline(
+    params?.meetId as number,
+  )
   if (isLoading) {
     return <div></div>
   }
@@ -39,7 +38,8 @@ const MeetCandidatePage = ({ params }: any) => {
             신청자 확인하기
           </h1>
           <p className="text-body2 text-gray-100">
-            신청자와 연락 후 마감버튼을 <br /> 눌러주세요 이런 느낌
+            함께 할 상대를 매칭 해주세요. <br /> 매칭이 완료된 경우 모집을
+            마감해주세요.
           </p>
         </div>
 
@@ -54,9 +54,9 @@ const MeetCandidatePage = ({ params }: any) => {
             showModal={showModal}
             setShowModal={setShowModal}
             handleOnSubmit={() => {
-              // TODO: 모집 마감 api 호출
-              console.log(params?.meetId, '모집 마감')
-              router.push(`/meet/${params?.meetId}`)
+              requestEarlyDeadline({
+                eventId: parseInt(params?.meetId as string),
+              })
             }}
             modalContent="모집을 마감하시겠어요?"
             submitMessage="네, 마감할게요"
@@ -67,7 +67,6 @@ const MeetCandidatePage = ({ params }: any) => {
       <RegisterList
         registerItems={candidateData}
         handleOnClick={(id) => {
-          // TODO: API 호출 로직 작성
           requestAcceptCandidate({
             eventId: parseInt(params?.meetId as string),
             profileId: id,
