@@ -12,10 +12,10 @@ const DetailCard = ({
   deadline,
   location,
 }: MeetDetailCardProps) => {
-  const deadlineDate = `${deadline.slice(0, 4)}.${deadline.slice(
+  const deadlineDate = `${deadline?.slice(0, 4)}.${deadline?.slice(
     5,
     7,
-  )}.${deadline.slice(8, 10)}`
+  )}.${deadline?.slice(8, 10)}`
   return (
     <div className="flex h-[98px] w-[343px] flex-col items-start justify-center rounded-[10px] border border-gray-700 bg-gray-900 px-[18px] py-[18px]">
       <div>
