@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import { RegisterList } from '@components'
-import { MEET_CANDIDATE_DUMMY } from 'dummy/MeetCandidateDummy'
 import { useDisclosure } from '@hooks'
 import dynamic from 'next/dynamic'
+import useCandidate from 'queries/meet/useCandidate'
+import { MeetApplicant, MeetApplicantsResponse } from '@types'
 
 const Modal = dynamic(
   () => import('../../../../components/templates/CancelSubmitModal'),
@@ -16,8 +17,9 @@ const MeetCandidatePage = () => {
   const { meetId } = router.query
   const [showModal, setShowModal, toggle] = useDisclosure()
 
-  console.log(meetId)
-
+  const fallback = {} as MeetApplicantsResponse
+  const { data = fallback } = useCandidate(parseInt(meetId as string))
+  const candidateData = data?.data as MeetApplicant[]
   return (
     <main>
       <div>
@@ -52,7 +54,7 @@ const MeetCandidatePage = () => {
       </div>
 
       <RegisterList
-        registerItems={MEET_CANDIDATE_DUMMY}
+        registerItems={candidateData}
         handleOnClick={(id) => {
           // TODO: API 호출 로직 작성
           console.log(id)
