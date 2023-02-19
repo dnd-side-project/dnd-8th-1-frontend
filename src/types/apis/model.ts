@@ -58,7 +58,7 @@ export interface MeetDetail {
 
 export interface MeetApplicant {
   profile: Profile
-  isMatched: boolean
+  matched: boolean
 }
 export interface MeetAccept {
   profileIds?: string[]
