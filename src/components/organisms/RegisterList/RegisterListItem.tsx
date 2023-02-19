@@ -10,7 +10,7 @@ const RegisterListItem = ({
   registerItem,
   handleOnClick,
 }: RegisterListItemProps) => {
-  const { profile, isMatched } = registerItem
+  const { profile, matched } = registerItem
   const { id, imgUrl, name, description, openChatUrl, location } = profile
 
   return (
@@ -34,16 +34,16 @@ const RegisterListItem = ({
       <div className="flex items-center justify-center gap-[8px]">
         <button
           className={`text-body1 font-bold
-          ${isMatched ? 'text-green-light' : 'text-gray-100'} 
-          ${isMatched ? 'cursor-default' : 'cursor-pointer'} 
+          ${matched ? 'text-green-light' : 'text-gray-100'} 
+          ${matched ? 'cursor-default' : 'cursor-pointer'} 
           flex h-[48px] items-center gap-[8.83px] rounded-[8px] bg-[#262626] p-[14px]`}
-          onClick={() => !isMatched && handleOnClick(id)}
+          onClick={() => !matched && handleOnClick(id)}
         >
           <Icon
-            icon={isMatched ? 'check-circle-active' : 'check-circle-inactive'}
+            icon={matched ? 'check-circle-active' : 'check-circle-inactive'}
             size={18.33}
           />
-          <span>{isMatched ? '매칭 완료' : '매칭 하기'}</span>
+          <span>{matched ? '매칭 완료' : '매칭 하기'}</span>
         </button>
         <Link href={openChatUrl} target="_blank">
           <button

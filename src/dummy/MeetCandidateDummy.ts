@@ -10,7 +10,7 @@ export const MEET_CANDIDATE_DUMMY: MeetApplicant[] = [
       openChatUrl: 'https://www.allsilver.dev/',
       location: '부산',
     },
-    isMatched: false,
+    matched: false,
   },
   {
     profile: {
@@ -21,7 +21,7 @@ export const MEET_CANDIDATE_DUMMY: MeetApplicant[] = [
       openChatUrl: 'https://www.allsilver.dev/',
       location: '경기',
     },
-    isMatched: true,
+    matched: true,
   },
   {
     profile: {
@@ -32,6 +32,6 @@ export const MEET_CANDIDATE_DUMMY: MeetApplicant[] = [
       openChatUrl: 'https://www.allsilver.dev/',
       location: '서울',
     },
-    isMatched: true,
+    matched: true,
   },
 ]

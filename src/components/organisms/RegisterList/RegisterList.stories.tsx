@@ -26,7 +26,7 @@ const REGISTER_ITEM_DUMMY = {
     description: '안녕하세요! 저는 눈누난나카라 난나카라 나카라카카카라', // 프로필 상세 설명
     openChatUrl: 'https://www.allsilver.dev/', // 카카오 오픈 채팅 주소
   },
-  isMatched: true,
+  matched: true,
   location: '부산', // 지원자 활동 지역
 }
 

@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRouter } from 'next/router'
 import { RegisterList } from '@components'
 import { useDisclosure } from '@hooks'
 import dynamic from 'next/dynamic'
 import useCandidate from 'queries/meet/useCandidate'
 import { MeetApplicant, MeetApplicantsResponse } from '@types'
+import { useAcceptCandidate } from '@queries'
+import { GetServerSideProps } from 'next'
 
 const Modal = dynamic(
   () => import('../../../../components/templates/CancelSubmitModal'),
@@ -12,14 +15,22 @@ const Modal = dynamic(
   },
 )
 
-const MeetCandidatePage = () => {
+/**
+ *TODO: params 타입 추론 필요
+ */
+const MeetCandidatePage = ({ params }: any) => {
   const router = useRouter()
-  const { meetId } = router.query
   const [showModal, setShowModal, toggle] = useDisclosure()
-
+  console.log(params?.meetId)
   const fallback = {} as MeetApplicantsResponse
-  const { data = fallback } = useCandidate(parseInt(meetId as string))
+  const { data = fallback, isLoading } = useCandidate(
+    parseInt(params?.meetId as string),
+  )
   const candidateData = data?.data as MeetApplicant[]
+  const { mutate: requestAcceptCandidate } = useAcceptCandidate()
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <main>
       <div>
@@ -44,8 +55,8 @@ const MeetCandidatePage = () => {
             setShowModal={setShowModal}
             handleOnSubmit={() => {
               // TODO: 모집 마감 api 호출
-              console.log(meetId, '모집 마감')
-              router.push(`/meet/${meetId}`)
+              console.log(params?.meetId, '모집 마감')
+              router.push(`/meet/${params?.meetId}`)
             }}
             modalContent="모집을 마감하시겠어요?"
             submitMessage="네, 마감할게요"
@@ -57,11 +68,27 @@ const MeetCandidatePage = () => {
         registerItems={candidateData}
         handleOnClick={(id) => {
           // TODO: API 호출 로직 작성
-          console.log(id)
+          requestAcceptCandidate({
+            eventId: parseInt(params?.meetId as string),
+            profileId: id,
+          })
         }}
       />
     </main>
   )
+}
+
+/**
+ *TODO: 추후 리팩토링 필요한 로직
+ */
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+}: any) => {
+  return {
+    props: {
+      params,
+    },
+  }
 }
 
 export default MeetCandidatePage

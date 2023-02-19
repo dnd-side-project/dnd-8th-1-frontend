@@ -43,7 +43,7 @@ export const eventAPI = {
   },
   // 이벤트 지원자 요청 수락
   accept: (eventId: number, payload: MeetAcceptRequest) => {
-    return authInstance.post(`api/v1/events/${eventId}`, payload)
+    return authInstance.patch(`api/v1/events/${eventId}/accept`, payload)
   },
   uploadImage: (payload: FormData) => {
     return authInstance.post(`api/v1/events/image`, payload, {
