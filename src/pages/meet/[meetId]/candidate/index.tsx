@@ -38,7 +38,8 @@ const MeetCandidatePage = ({ params }: any) => {
             신청자 확인하기
           </h1>
           <p className="text-body2 text-gray-100">
-            신청자와 연락 후 마감버튼을 <br /> 눌러주세요 이런 느낌
+            함께 할 상대를 매칭 해주세요. <br /> 매칭이 완료된 경우 모집을
+            마감해주세요.
           </p>
         </div>
 
