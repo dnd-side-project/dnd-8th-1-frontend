@@ -39,7 +39,7 @@ export const eventAPI = {
   },
   // 이벤트 신청자 리스트 조회
   getApplicants: (eventId: number) => {
-    return authInstance.post(`api/v1/${eventId}/applicants`)
+    return authInstance.get(`api/v1/events/${eventId}/applicants`)
   },
   // 이벤트 지원자 요청 수락
   accept: (eventId: number, payload: MeetAcceptRequest) => {
