@@ -27,6 +27,7 @@ export interface MeetEditRequest {
   recruitType: string
   title: string
   type: string
+  id: number
 }
 
 // 이벤트 지원자 요청 수락

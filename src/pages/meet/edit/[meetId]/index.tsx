@@ -1,56 +1,50 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MeetCreateForm } from '@components'
-import { useRouter } from 'next/router'
-import { RecruitmentType } from '@types'
+import { MeetDetail, MeetDetailResponse } from '@types'
+import { useMeetDetail, useModifyMeet } from '@queries'
+import { GetServerSideProps } from 'next'
 
-const MEET_CREATE_DUMMY = {
-  id: 1,
-  profile: {
-    id: 23,
-    name: '카라',
-    imgUrl: 'https://picsum.photos/500/500?random=1',
-  },
-  title: '저희 팀과 함께해요!',
-  location: '부산',
-  type: '콜라보',
-  imgUrl: 'https://picsum.photos/500/500?random=1',
-  recruitType: '댄스 팀' as RecruitmentType,
-  description: '상세정보',
-  recruitCount: 4,
-  deadline: '2023-03-14T17:00:00',
-}
+const MeetCreatePage = ({ params }: any) => {
+  const fallback = {} as MeetDetailResponse
+  const { data = fallback, isLoading } = useMeetDetail(params?.meetId)
+  const detailData = data?.data as MeetDetail
+  const { mutate: requestModifyMeet } = useModifyMeet(detailData?.id)
 
-const MeetCreatePage = () => {
-  const router = useRouter()
-
-  // TODO: meetId를 통하서 상세 조회 api 호출 후 필요한 데이터만 걸러내기
-  const { meetId } = router.query
-
-  const {
-    title,
-    location,
-    type,
-    imgUrl,
-    recruitType,
-    description,
-    recruitCount,
-    deadline,
-  } = MEET_CREATE_DUMMY
-
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <MeetCreateForm
       previousValue={{
-        title,
-        location,
-        type,
-        imgUrl,
-        recruitType,
-        description,
-        recruitCount,
-        deadline,
+        id: detailData?.id,
+        title: detailData?.title,
+        location: detailData?.location,
+        type: detailData?.type,
+        imgUrl: detailData?.imgUrl,
+        recruitType: detailData?.recruitType,
+        description: detailData?.description,
+        recruitCount: detailData?.recruitCount,
+        deadline: detailData?.deadline,
       }}
-      handleOnSubmit={(formValues) => console.log(formValues)}
+      handleOnSubmit={(formValues) => {
+        const payload = {
+          ...formValues,
+          id: detailData?.id,
+        }
+        requestModifyMeet(payload)
+      }}
     />
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+}: any) => {
+  return {
+    props: {
+      params,
+    },
+  }
 }
 
 export default MeetCreatePage

@@ -26,15 +26,15 @@ export const eventAPI = {
   // delete: () => {
   //   return authInstance.delete(`/api/v1/events/${eventId}`)
   // },
-  // TODO: 이벤트 글 수정 (미구현)
-  // update: (eventId: number, payload: MeetEditRequest) => {
-  //   return authInstance.patch(`api/v1/events/${eventId}`, payload)
-  // },
+  // 이벤트 글 수정
+  update: (payload: MeetEditRequest) => {
+    return authInstance.patch(`api/v1/events`, payload)
+  },
   // 이벤트 신청
   apply: (payload: MeetApplyRequest) => {
     return authInstance.post(`api/v1/events/apply`, payload)
   },
-  // TODO: 조기 마감(미구현)
+  // 조기 마감
   close: (payload: MeetCloseRequest) => {
     return authInstance.patch(`api/v1/events/deadline`, payload)
   },

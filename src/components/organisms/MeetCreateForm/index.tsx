@@ -18,6 +18,7 @@ import {
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { postCreateImageUrl } from 'queries/meet/useCreateImageUrl'
+import dayjs from 'dayjs'
 
 interface MeetCreateFormProps {
   previousValue?: MeetEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -96,9 +97,10 @@ const MeetCreateForm = ({
       <form
         className="mt-[40px] flex flex-col gap-[34px] p-[16px]"
         onSubmit={handleSubmit((formValues) => {
-          const deadline = new Date(formValues.deadline)
+          const day = dayjs(formValues.deadline).day()
+          const deadline = dayjs(formValues.deadline)
+            .set('day', day + 1)
             .toISOString()
-            .slice(0, 19)
           handleOnSubmit({
             ...formValues,
             deadline,
