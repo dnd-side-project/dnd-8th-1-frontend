@@ -1,7 +1,7 @@
 export { default as useMeet } from './meet/useMeet'
 export { default as useMeetDetail } from './meet/useMeetDetail'
 export { default as useCreateMeet } from './meet/useCreateMeet'
-export { default as useCreateImageUrl } from './meet/useCreateImageUrl'
+export { default as useUploadImageUrl } from './meet/useUploadImageUrl'
 export { default as useCandidate } from './meet/useCandidate'
 export { default as useAcceptCandidate } from './meet/useAcceptCandidate'
 export { default as useMeetDeadline } from './meet/useMeetDeadline'

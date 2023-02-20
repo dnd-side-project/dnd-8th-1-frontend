@@ -27,16 +27,7 @@ const CandidateBottomSheet = ({
   })
   const toggleTextState = useWatch({ control, name: 'toggleText' })
   const [isChecked, setIsChecked] = useState(toggleTextState)
-  const handleCompleted = (data: {
-    candidate: string
-    toggleText: boolean
-  }) => {
-    /**
-     * TODO : data를 통한 API 호출 로직(mutate) 추가
-     */
-    console.log(data)
-
-    // 전체 데이터 날리기
+  const handleCompleted = () => {
     setIsChecked(false)
     setShowBottomSheet(false)
   }

@@ -17,7 +17,7 @@ import {
 } from '@constants'
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { postCreateImageUrl } from 'queries/meet/useCreateImageUrl'
+import { uploadImageUrl } from 'queries/meet/useUploadImageUrl'
 import dayjs from 'dayjs'
 
 interface MeetCreateFormProps {
@@ -31,7 +31,7 @@ const MeetCreateForm = ({
 }: MeetCreateFormProps) => {
   const [image, setImage] = useState<File>()
 
-  const { register, control, handleSubmit, setValue, watch } =
+  const { register, control, handleSubmit, setValue } =
     useForm<MeetEditRequest>({
       mode: 'onSubmit',
       defaultValues: {
@@ -47,19 +47,18 @@ const MeetCreateForm = ({
       shouldUnregister: false,
     })
   const { mutate: requestImgUrl } = useMutation(
-    (payload: FormData) => postCreateImageUrl(payload),
+    (payload: FormData) => uploadImageUrl(payload),
     {
+      // TODO: useUploadImageUrl과 함께보기
       /**
-       *TODO: 시간 날 때 data 타입 형식 정하기
+       *TODO: 시간 날 때 data 타입 형식 정하기 (autocomplete 를 위함)
        */
-      onSuccess: (data) => {
-        setValue('imgUrl', data.data.imgUrl)
+      onSuccess: ({ data: { imgUrl } }) => {
+        setValue('imgUrl', imgUrl)
       },
     },
   )
-  console.log(watch())
 
-  // TODO: 로직 관련 상의 하기
   const fieldValues = useWatch<MeetEditRequest>({ control })
 
   const isAllFull = (fieldValues: MeetEditRequest) => {
