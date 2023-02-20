@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Avatar,
+  Dimmed,
   IconButton,
   MeetDetailCard,
   MeetDetailImage,
@@ -95,26 +96,44 @@ const MeetDetailPage = ({ params }: any) => {
   return (
     <>
       {showDeleteModal && (
-        <MeetDeleteModal
-          id={detailData?.id as number}
-          showModal={showDeleteModal}
-          setShowModal={setDeleteShowModal}
-        />
+        <>
+          <MeetDeleteModal
+            id={detailData?.id as number}
+            showModal={showDeleteModal}
+            setShowModal={setDeleteShowModal}
+          />
+          <Dimmed
+            styleClass="min-h-full"
+            handleOnClick={() => setDeleteShowModal(false)}
+          />
+        </>
       )}
       {showCandidateModal && isCandidate && (
-        <CandidateModal
-          showModal={showCandidateModal}
-          setShowModal={setShowCandidateModal}
-          title={detailData?.title as string}
-          profileId={detailData?.profile.id as number}
-        />
+        <>
+          <CandidateModal
+            showModal={showCandidateModal}
+            setShowModal={setShowCandidateModal}
+            title={detailData?.title as string}
+            profileId={detailData?.profile.id as number}
+          />
+          <Dimmed
+            styleClass="min-h-full"
+            handleOnClick={() => setShowCandidateModal(false)}
+          />
+        </>
       )}
       {showCancelModal && (
-        <CandidateCancelModal
-          showModal={showCancelModal}
-          setShowModal={setShowCancelModal}
-          title={detailData?.title as string}
-        />
+        <>
+          <CandidateCancelModal
+            showModal={showCancelModal}
+            setShowModal={setShowCancelModal}
+            title={detailData?.title as string}
+          />
+          <Dimmed
+            styleClass="min-h-full"
+            handleOnClick={() => setShowCandidateModal(false)}
+          />
+        </>
       )}
       <CandidateBottomSheet
         handleOnClickSubmit={() => {
