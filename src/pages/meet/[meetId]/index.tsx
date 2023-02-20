@@ -49,9 +49,7 @@ const CandidateModal = dynamic(
 
 const MeetDetailPage = ({ params }: any) => {
   const fallback = {} as MeetDetailResponse
-  const { data = fallback, isLoading } = useMeetDetail(
-    parseInt(params?.meetId as string),
-  )
+  const { data = fallback, isLoading } = useMeetDetail(params?.meetId)
   const detailData = data?.data
   const router = useRouter()
   const [isStatusBarOpen, setIsStatusBarOpen] = useState(false)
@@ -82,12 +80,12 @@ const MeetDetailPage = ({ params }: any) => {
   const [isCompleted, setIsCompleted] = useState(false)
 
   const { mutate: requestMeetCandidate } = useRequestCandidate(
-    params?.meetId as number,
+    params?.meetId,
     setIsCompleted,
     setIsCandidate,
   )
   const { mutate: requestCancelCandidate } = useCancelCandidate(
-    params?.meetId as number,
+    params?.meetId,
     setIsCompleted,
   )
   if (isLoading) {
@@ -98,7 +96,7 @@ const MeetDetailPage = ({ params }: any) => {
       {showDeleteModal && (
         <>
           <MeetDeleteModal
-            id={detailData?.id as number}
+            id={params?.meetId}
             showModal={showDeleteModal}
             setShowModal={setDeleteShowModal}
           />
@@ -138,7 +136,7 @@ const MeetDetailPage = ({ params }: any) => {
       <CandidateBottomSheet
         handleOnClickSubmit={() => {
           handleCandidateModalToggle()
-          requestMeetCandidate({ eventId: params?.meetId as number })
+          requestMeetCandidate({ eventId: params?.meetId })
         }}
         showBottomSheet={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
@@ -247,7 +245,7 @@ const MeetDetailPage = ({ params }: any) => {
             onClick={(e) => {
               e.stopPropagation()
               handleCancelModalToggle()
-              requestCancelCandidate(params?.meetId as number)
+              requestCancelCandidate(params?.meetId)
             }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
