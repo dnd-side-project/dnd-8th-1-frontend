@@ -1,6 +1,6 @@
 import { Meet } from '@types'
 import CollaboListItem from './CollaboListItem'
-import nonItemLogo from '../../../../public/assets/images/noneItemLogo.png'
+import nonItemLogo from '/public/assets/images/graphic_1.png'
 import Image from 'next/image'
 interface CollaboListProps {
   collaboItems: Meet[]

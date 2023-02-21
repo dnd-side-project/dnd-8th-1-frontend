@@ -1,4 +1,4 @@
-import meetBannerImage from '/public/assets/images/meetBannarImage.png'
+import meetBannerImage from '/public/assets/images/collabo_share_main.png'
 import Image from 'next/image'
 
 const MeetBanner = () => {
@@ -20,7 +20,7 @@ const MeetBanner = () => {
           다같이 공유해요!
         </h2>
 
-        <p className="mt-[22px] text-gray-300 marker:text-body2">
+        <p className="mt-[22px] text-body2 text-gray-300">
           <span className="text-body2 font-bold text-green-light">콜라보</span>{' '}
           에서 다양한 댄서와 함께 창작하고, <br />
           <span className="text-body2 font-bold text-green-light">
