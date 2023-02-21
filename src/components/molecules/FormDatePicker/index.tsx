@@ -4,10 +4,12 @@ import { FORM_INPUT_STYLE } from '@constants'
 import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
 import { Icon } from '@components'
+import { isPossibleDay } from '@utils'
 interface FormDatePickerProps {
   initialStartDate?: string
   handleStartDate: (date: Date | null) => void
 }
+
 // TODO: 디자인 확정되면 디자인 반영하기
 const FormDatePicker = ({
   initialStartDate,
@@ -57,6 +59,7 @@ const FormDatePicker = ({
         handleStartDate(date)
       }}
       customInput={<CustomInput inputref={inputRef} />}
+      filterDate={isPossibleDay}
     />
   )
 }

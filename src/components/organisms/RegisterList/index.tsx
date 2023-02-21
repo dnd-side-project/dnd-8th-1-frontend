@@ -1,6 +1,6 @@
 import { MeetApplicant } from '@types'
 import RegisterListItem from './RegisterListItem'
-import noneItemLogo from '../../../../public/assets/images/noneItemLogo.png'
+import noneItemLogo from '/public/assets/images/graphic_2.png'
 import Image from 'next/image'
 
 interface RegisterListProps {

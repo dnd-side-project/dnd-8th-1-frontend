@@ -17,9 +17,7 @@ import {
 } from '@constants'
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import useUploadImageUrl, {
-  uploadImageUrl,
-} from 'queries/meet/useUploadImageUrl'
+import { uploadImageUrl } from '@queries'
 import dayjs from 'dayjs'
 
 interface MeetCreateFormProps {

@@ -102,5 +102,19 @@ export interface Comment {
   createdDate?: string
 }
 
+export interface SearchResult {
+  id: number
+  imgUrl: string
+  title: string
+  startDate: string
+  location: RegionTypes
+  genres: GenreTypes[]
+  profile: {
+    id: string
+    imgUrl: string
+    name: string
+  }
+}
+
 // export interface PerformanceSearch {
 // }
