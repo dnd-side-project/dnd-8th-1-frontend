@@ -1,5 +1,7 @@
 interface SpacerProps {
   size: number
+  // vertical : 세로 요소 간에 간격을 줍니다.
+  // horizontal : 가로 요소 간에 간격을 줍니다.
   axis?: 'vertical' | 'horizontal'
 }
 
