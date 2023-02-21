@@ -42,7 +42,7 @@ const SideBarMenu = () => {
             } bg-gray-900`}
             ref={sidebarRef}
           >
-            <SidebarContent />
+            <SidebarContent handleOnClick={() => setShowSidebar(false)} />
           </nav>
         </div>
       )}

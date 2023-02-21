@@ -1,6 +1,10 @@
 import { useRouter, usePathname } from 'next/navigation'
 import SidebarContentItem from './SidebarContentItem'
 
+interface SidebarContentProps {
+  handleOnClick: () => void
+}
+
 const CONTENTS_ITEMS = [
   {
     title: '홈',
@@ -16,7 +20,7 @@ const CONTENTS_ITEMS = [
   },
 ]
 
-const SidebarContent = () => {
+const SidebarContent = ({ handleOnClick }: SidebarContentProps) => {
   const router = useRouter()
   const pathName = usePathname() as string
 
@@ -31,7 +35,10 @@ const SidebarContent = () => {
         return (
           <SidebarContentItem
             key={title}
-            handleOnClick={() => router.push(path)}
+            handleOnClick={() => {
+              router.push(path)
+              handleOnClick()
+            }}
             content={title}
             isCurrentPath={isCurrentPath}
           />
