@@ -22,19 +22,22 @@ const GenreSelect = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useClickAway(popupRef, (e: any) => {
-    // TODO: 정확한 동작 방식 확인
     const { current: triggerWrapper } = regionInputRef
     triggerWrapper &&
       !triggerWrapper.contains(e.target) &&
       setIsPopUpOpen(false)
   })
-  console.log(selected)
+  const isFullSelected = selected.length === 3
+  const isEmptySelected = selected.length === 0
   useEffect(() => {
     handleGenreSelect && handleGenreSelect(selected)
-    if (selected.length === 3 || selected.length === 0) {
+    if (isFullSelected || isEmptySelected) {
       setIsPopUpOpen(false)
     }
   }, [selected])
+  const isFullSelect = (tagIndex: number) => {
+    return tagIndex === 2
+  }
   return (
     <div className="relative w-[343px]">
       <div
@@ -52,7 +55,7 @@ const GenreSelect = ({
             <div
               key={i}
               className={`flex h-[32px] w-fit items-center gap-[10.95px] rounded-[4px] bg-gray-600 py-[8px] px-[10.87px] text-body2 font-bold text-green-light ${
-                i === 2 ? 'mr-[0px]' : 'mr-[5px]'
+                isFullSelect(i) ? 'mr-[0px]' : 'mr-[5px]'
               }`}
             >
               <span>{select}</span>
@@ -84,7 +87,7 @@ const GenreSelect = ({
           />
         </Portal>
 
-        {!isPopupOpen && selected.length === 0 && (
+        {!isPopupOpen && isEmptySelected && (
           <span className="cursor-default">장르를 선택해주세요</span>
         )}
       </div>
@@ -96,7 +99,7 @@ const GenreSelect = ({
         >
           <GenreSelectPopupContent
             handleOnClick={(genres) => {
-              if (selected.length === 3) {
+              if (isFullSelected) {
                 if (selected.includes(genres)) {
                   setSelected((prev) => {
                     const deleteNum = prev.indexOf(genres)
@@ -110,9 +113,9 @@ const GenreSelect = ({
               // 만약 두 번 클릭 한 경우 해당 장르 삭제하는 로직
               if (selected.includes(genres)) {
                 setSelected((prev) => {
-                  const deleteNum = prev.indexOf(genres)
+                  const deleteIndex = prev.indexOf(genres)
                   const copy = [...prev]
-                  copy.splice(deleteNum, 1)
+                  copy.splice(deleteIndex, 1)
                   return copy
                 })
               } else {
