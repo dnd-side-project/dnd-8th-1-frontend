@@ -1,7 +1,7 @@
 import { SearchResult } from '@types'
 import { StyledImage } from '@components'
 import SearchResultListItem from './SearchResultListItem'
-import emptyImage from '@assets/images/graphic_1.png'
+import emptyImage from '../../../../public/assets/images/graphic_1.png'
 
 interface SearchResultListProps {
   searchResultList: SearchResult[]
