@@ -28,7 +28,6 @@ const PerformanceDetailSectionTop = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useClickAway(popupRef, (e: any) => {
-    // TODO: 정확한 동작 방식 확인
     const { current: triggerWrapper } = iconButtonRef
     triggerWrapper &&
       !triggerWrapper.contains(e.target) &&
