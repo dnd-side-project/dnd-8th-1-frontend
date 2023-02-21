@@ -25,11 +25,11 @@ export interface User {
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
   id: number // 프로필 아이디
-  imgUrl?: string // 프로필 이미지 url
+  imgUrl: string // 프로필 이미지 url
   name: string // 프로필 댄스팀 이름
-  description?: string // 프로필 상세 설명
-  openChatUrl?: string // 카카오 오픈 채팅 주소
-  location?: string
+  description: string // 프로필 상세 설명
+  openChatUrl: string // 카카오 오픈 채팅 주소
+  location: string
 }
 
 export interface Meet {
@@ -98,7 +98,7 @@ export interface CommentCreate {
 export interface Comment {
   content: string
   reviewId: number
-  profile: Profile
+  profile: Pick<Profile, 'id' | 'name'>
   createdDate: string
 }
 
