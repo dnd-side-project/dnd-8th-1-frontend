@@ -180,7 +180,7 @@ const MeetCreateForm = ({
         <div className={formSectionStyle}>
           <label className={labelStyle}>상세설명</label>
           <Textarea
-            styleClass="bg-gray-700 border-gray-600 rounded-[8px] text-body2 placeholder-text-body2 px-[12px] py-[13px] w-[343px] h-[166px] focus:outline-none focus:ring focus:ring-green-light focus:ring-[1px]"
+            styleClass="bg-gray-700 border border-gray-600 resize-none rounded-[8px] text-body2 placeholder-text-body2 px-[12px] py-[13px] w-[343px] h-[166px] focus:outline-none focus:ring focus:ring-green-light focus:ring-[1px]"
             placeholder="함께 하는 활동의 종류와 장르에 대해 자세히 적어주세요."
             {...register('description')}
           />

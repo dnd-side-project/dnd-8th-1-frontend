@@ -11,7 +11,7 @@ interface MeetPayload {
   type: string
 }
 
-const getMeet = async ({
+export const getMeet = async ({
   page,
   size,
   location,
@@ -33,8 +33,12 @@ const getMeet = async ({
 
 const useMeet = (payload: MeetPayload) => {
   const { page, size, location, type } = payload
-  return useQuery([QUERY_KEY.MEET, page, size, location, type], () =>
-    getMeet(payload),
+  return useQuery(
+    [QUERY_KEY.MEET, page, size, location, type],
+    () => getMeet(payload),
+    {
+      keepPreviousData: true,
+    },
   )
 }
 
