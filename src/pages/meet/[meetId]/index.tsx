@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Avatar,
+  Dimmed,
   IconButton,
   MeetDetailCard,
   MeetDetailImage,
@@ -48,14 +49,17 @@ const CandidateModal = dynamic(
 
 const MeetDetailPage = ({ params }: any) => {
   const fallback = {} as MeetDetailResponse
-  const { data = fallback, isLoading } = useMeetDetail(
-    parseInt(params?.meetId as string),
-  )
+  const { data = fallback, isLoading } = useMeetDetail(params?.meetId)
   const detailData = data?.data
   const router = useRouter()
   const [isStatusBarOpen, setIsStatusBarOpen] = useState(false)
   const [showDeleteModal, setDeleteShowModal, handleDeleteModalToggle] =
     useDisclosure()
+  /**
+   *TODO: 추후 리팩토링 대상(showCandidateModal과 겹치는 상태, 
+    but 현재 모달이 useEffect로 인해 리렌더링 마다 실행되기 때문에 어쩔수 없이 사용)
+   */
+  const [isCandidate, setIsCandidate] = useState(false)
   const [
     showCandidateModal,
     setShowCandidateModal,
@@ -70,14 +74,18 @@ const MeetDetailPage = ({ params }: any) => {
    */
   const DUMMY_USER_ID = 1
   const isUser = DUMMY_USER_ID === detailData?.profile.id
+  /**
+   *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함
+   */
   const [isCompleted, setIsCompleted] = useState(false)
 
   const { mutate: requestMeetCandidate } = useRequestCandidate(
-    params?.meetId as number,
+    params?.meetId,
     setIsCompleted,
+    setIsCandidate,
   )
   const { mutate: requestCancelCandidate } = useCancelCandidate(
-    params?.meetId as number,
+    params?.meetId,
     setIsCompleted,
   )
   if (isLoading) {
@@ -86,31 +94,49 @@ const MeetDetailPage = ({ params }: any) => {
   return (
     <>
       {showDeleteModal && (
-        <MeetDeleteModal
-          id={detailData?.id as number}
-          showModal={showDeleteModal}
-          setShowModal={setDeleteShowModal}
-        />
+        <>
+          <MeetDeleteModal
+            id={params?.meetId}
+            showModal={showDeleteModal}
+            setShowModal={setDeleteShowModal}
+          />
+          <Dimmed
+            styleClass="min-h-full"
+            handleOnClick={() => setDeleteShowModal(false)}
+          />
+        </>
       )}
-      {showCandidateModal && (
-        <CandidateModal
-          showModal={showCandidateModal}
-          setShowModal={setShowCandidateModal}
-          title={detailData?.title as string}
-          profileId={detailData?.profile.id as number}
-        />
+      {showCandidateModal && isCandidate && (
+        <>
+          <CandidateModal
+            showModal={showCandidateModal}
+            setShowModal={setShowCandidateModal}
+            title={detailData?.title as string}
+            profileId={detailData?.profile.id as number}
+          />
+          <Dimmed
+            styleClass="min-h-full"
+            handleOnClick={() => setShowCandidateModal(false)}
+          />
+        </>
       )}
       {showCancelModal && (
-        <CandidateCancelModal
-          showModal={showCancelModal}
-          setShowModal={setShowCancelModal}
-          title={detailData?.title as string}
-        />
+        <>
+          <CandidateCancelModal
+            showModal={showCancelModal}
+            setShowModal={setShowCancelModal}
+            title={detailData?.title as string}
+          />
+          <Dimmed
+            styleClass="min-h-full"
+            handleOnClick={() => setShowCandidateModal(false)}
+          />
+        </>
       )}
       <CandidateBottomSheet
         handleOnClickSubmit={() => {
           handleCandidateModalToggle()
-          requestMeetCandidate({ eventId: params?.meetId as number })
+          requestMeetCandidate({ eventId: params?.meetId })
         }}
         showBottomSheet={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
@@ -219,7 +245,7 @@ const MeetDetailPage = ({ params }: any) => {
             onClick={(e) => {
               e.stopPropagation()
               handleCancelModalToggle()
-              requestCancelCandidate(params?.meetId as number)
+              requestCancelCandidate(params?.meetId)
             }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
