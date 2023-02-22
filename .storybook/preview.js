@@ -1,8 +1,6 @@
 import '../src/styles/globals.css'
-import '../src/styles/Home.module.css'
 import * as nextImage from 'next/image'
 import { theme } from '../src/styles/theme/chakraTheme'
-import '../src/styles/globals.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 export const parameters = {
