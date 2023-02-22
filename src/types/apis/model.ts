@@ -115,6 +115,3 @@ export interface SearchResult {
     name: string
   }
 }
-
-// export interface PerformanceSearch {
-// }
