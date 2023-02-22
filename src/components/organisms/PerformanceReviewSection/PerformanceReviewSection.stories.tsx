@@ -12,7 +12,6 @@ export default {
     (Story) => (
       <div className="w-[375px]">
         <Story />
-        <s></s>
       </div>
     ),
   ],

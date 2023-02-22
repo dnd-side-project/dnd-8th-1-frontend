@@ -30,7 +30,7 @@ const PerformanceSectionMiddle = ({
           )}
         </div>
 
-        <h1 className="mb-[29px] text-headline">{title}</h1>
+        <h1 className="mb-[29px] text-headline font-bold">{title}</h1>
 
         <div className="flex gap-[8px]">
           <Tag type={'region'} content={location} />

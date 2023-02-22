@@ -1,4 +1,4 @@
-import { SidebarMenu, StyledImage } from '@components'
+import { SidebarMenu } from '@components'
 import { usePathname } from 'next/navigation'
 import Logo from '/public/assets/logo/logo_small.png'
 import Image from 'next/image'
@@ -6,7 +6,6 @@ import Link from 'next/link'
 
 const Header = () => {
   const pathname = usePathname()
-  console.log(pathname)
 
   return (
     <div
