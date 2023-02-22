@@ -11,7 +11,7 @@ const SearchResultHeader = () => {
   const router = useRouter()
   return (
     <header
-      className={`fixed top-0 z-[9998] box-border flex w-[375px] justify-between bg-gray-900 px-[16px] py-[14px]`}
+      className={`fixed top-0 z-[9998] mx-[auto] box-border flex w-[375px] justify-between bg-gray-900 px-[16px] py-[14px]`}
     >
       <form
         onSubmit={handleSubmit((data: SearchResultForm) => {
