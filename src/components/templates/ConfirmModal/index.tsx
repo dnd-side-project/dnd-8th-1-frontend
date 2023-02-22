@@ -21,25 +21,11 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   return (
     <Modal
-      hasCloseButton={false}
+      hasCloseButton={hasCloseButton}
       showModal={showModal}
       setShowModal={setShowModal}
     >
       <>
-        {hasCloseButton && (
-          <div
-            onClick={() => setShowModal(false)}
-            className="mt-[14px] mr-[14px] flex items-center justify-end"
-          >
-            <IconButton
-              icon="x-active"
-              color={theme.colors.gray[400]}
-              size={24}
-              areaLabel="모달 닫기 버튼"
-            />
-          </div>
-        )}
-
         <div className="relative flex h-[180px] w-[290px] flex-col items-center justify-center bg-gray-700">
           <span
             className={`absolute ${
