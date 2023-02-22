@@ -14,11 +14,11 @@ const SearchResultTab = ({
   setIsComming,
 }: SearchResultTabProps) => {
   const commonTagStyle =
-    'flex items-center ml-[14px] justify-center rounded-[4px] text-caption font-bold text-gray-900 h-[20px] w-[31px]'
+    'flex items-center ml-[14px] justify-center rounded-[4px] text-caption font-bold text-gray-900 h-[20px] w-[fit] px-[5px]'
   const commingTagStyle = `${commonTagStyle} ${
     isComming ? 'bg-[#00FFA3]' : 'bg-gray-500'
   }`
-  const endedTagStyle = `${commonTagStyle} h-[20px] w-[31px] ${
+  const endedTagStyle = `${commonTagStyle} ${
     !isComming ? 'bg-[#00FFA3]' : 'bg-gray-500'
   }`
   const commonTextStyle = 'cursor-pointer text-body2 font-bold'
