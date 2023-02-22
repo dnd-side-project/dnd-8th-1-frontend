@@ -46,6 +46,7 @@ module.exports = {
       '@queries': path.resolve(__dirname, '../src/queries'),
       '@assets': path.resolve(__dirname, '../public/assets'),
       '@images': path.resolve(__dirname, '../public/assets/images'),
+      public: path.resolve(__dirname, '../public'),
     }
 
     return config
