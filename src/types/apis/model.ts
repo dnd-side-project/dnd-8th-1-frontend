@@ -68,7 +68,7 @@ export interface PerformanceImminent {
   id?: string
   title?: string
   startDate?: string
-  image?: string
+  imgUrl?: string
 }
 
 export interface Performance {
