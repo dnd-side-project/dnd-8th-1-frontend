@@ -1,8 +1,11 @@
 import { SearchResult } from '@types'
-import { StyledImage } from '@components'
 import SearchResultListItem from './SearchResultListItem'
-import emptyImage from 'public/assets/images/graphic_1.png'
+import emptyImage from '/public/assets/images/graphic_1.png'
+import Image from 'next/image'
+import { PLACEHOLDER_IMG } from '@constants'
 import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
+dayjs.locale('ko')
 
 interface SearchResultListProps {
   searchResultList: SearchResult[]
@@ -11,17 +14,20 @@ interface SearchResultListProps {
 const SearchResultList = ({ searchResultList }: SearchResultListProps) => {
   const makeDate = (date: string) => {
     const day = dayjs(date)
-    return `${day.year()}년 ${day.month() + 1}월 ${day.date()}일`
+    return day.format('YYYY년 M월 D일')
   }
 
   const entireDate = Array.from(
-    new Set(searchResultList.map((item) => makeDate(item.startDate))),
+    new Set(searchResultList.map((item) => item.startDate)),
   )
+    .sort((a, b) => {
+      return dayjs(b).valueOf() - dayjs(a).valueOf()
+    })
+    .map((item) => makeDate(item))
 
   const filterResults = (date: string) => {
     return searchResultList.filter((item) => {
       const searchStartDate = makeDate(item.startDate)
-      console.log(date, searchStartDate)
       return date === searchStartDate
     })
   }
@@ -38,20 +44,22 @@ const SearchResultList = ({ searchResultList }: SearchResultListProps) => {
     <>
       {isEmptyResults ? (
         <div className="mt-[77.87px] mb-[118px] flex w-[100%] flex-col items-center justify-center">
-          <StyledImage
-            /**
-             *TODO: props에 StaticImageData 타입 추가 필요
-             */
-            src={emptyImage as unknown as string}
-            width={165}
-            height={133}
-            alt="없는 결과에 대한 이미지"
-            styleClass="flex items-center justify-center ml-[18px]"
-            placeholder="blur"
-          />
-          <p className="text-center text-body1 text-gray-500 ">
-            검색된 공연이 없습니다.
-          </p>
+          {/**
+           *TODO: StyledImage 사용 시 렌더링 사이즈가 375px로 잡혀서 Image 컴포넌트 사용하는 것으로 변경 됨
+           */}
+          <div className="relative w-[fit] pl-[20px]">
+            <Image
+              src={emptyImage}
+              alt="emptyImage"
+              width={200}
+              height={200}
+              placeholder="empty"
+              blurDataURL={PLACEHOLDER_IMG}
+            />
+            <p className="absolute left-[34px] bottom-0 text-center text-body1 text-gray-500 ">
+              검색된 공연이 없습니다.
+            </p>
+          </div>
         </div>
       ) : (
         searchResults.map((dates, i) => (
