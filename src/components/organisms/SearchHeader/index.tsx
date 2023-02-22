@@ -16,7 +16,7 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
   const router = useRouter()
   const { register, reset, handleSubmit } = useForm<SearchForm>()
   const handleGoSearchPage = (data: SearchForm) => {
-    router.push(`/performance/search?query=${data.search}`)
+    router.push(`/performance/search?team=${data.search}`)
   }
   const [isBanner, setIsBanner] = useState(true)
   useEffect(() => {
