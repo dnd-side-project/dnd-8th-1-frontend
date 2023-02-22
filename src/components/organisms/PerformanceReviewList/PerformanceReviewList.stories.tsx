@@ -43,13 +43,20 @@ const PERFORMANCE_REVIEW_DUMMY: Comment[] = [
   },
 ]
 
-const Template: ComponentStory<typeof PerformanceReviewList> = () => {
-  return (
-    <PerformanceReviewList
-      reviews={PERFORMANCE_REVIEW_DUMMY}
-      handleOnDelete={(reviewId) => alert(`${reviewId}번의 리뷰를 삭제?`)}
-    />
-  )
+const EMPTY_REVIEW_DUMMY: Comment[] = []
+
+const Template: ComponentStory<typeof PerformanceReviewList> = (args) => {
+  return <PerformanceReviewList {...args} />
 }
 
 export const Default = Template.bind({})
+Default.args = {
+  reviews: PERFORMANCE_REVIEW_DUMMY,
+  handleOnDelete: (reviewId) => alert(`${reviewId}번의 리뷰를 삭제?`),
+}
+
+export const Empty = Template.bind({})
+Empty.args = {
+  reviews: EMPTY_REVIEW_DUMMY,
+  handleOnDelete: (reviewId) => alert(`${reviewId}번의 리뷰를 삭제?`),
+}
