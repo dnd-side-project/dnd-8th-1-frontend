@@ -11,6 +11,7 @@ const SearchResultHeader = () => {
   const router = useRouter()
   const onSubmit = (data: SearchResultForm) => {
     router.push(`/performance/search?team=${data.searchResult}`)
+    reset()
   }
 
   return (
