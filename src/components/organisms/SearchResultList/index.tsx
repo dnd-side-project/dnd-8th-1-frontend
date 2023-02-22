@@ -1,9 +1,11 @@
 import { SearchResult } from '@types'
 import SearchResultListItem from './SearchResultListItem'
 import emptyImage from '../../../../public/assets/images/graphic_1.png'
-import dayjs from 'dayjs'
 import Image from 'next/image'
 import { PLACEHOLDER_IMG } from '@constants'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
+dayjs.locale('ko')
 
 interface SearchResultListProps {
   searchResultList: SearchResult[]
@@ -12,17 +14,20 @@ interface SearchResultListProps {
 const SearchResultList = ({ searchResultList }: SearchResultListProps) => {
   const makeDate = (date: string) => {
     const day = dayjs(date)
-    return `${day.year()}년 ${day.month() + 1}월 ${day.date()}일`
+    return day.format('YYYY년 M월 D일')
   }
 
   const entireDate = Array.from(
-    new Set(searchResultList.map((item) => makeDate(item.startDate))),
+    new Set(searchResultList.map((item) => item.startDate)),
   )
+    .sort((a, b) => {
+      return dayjs(b).valueOf() - dayjs(a).valueOf()
+    })
+    .map((item) => makeDate(item))
 
   const filterResults = (date: string) => {
     return searchResultList.filter((item) => {
       const searchStartDate = makeDate(item.startDate)
-      console.log(date, searchStartDate)
       return date === searchStartDate
     })
   }
