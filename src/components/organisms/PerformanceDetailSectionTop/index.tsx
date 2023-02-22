@@ -53,6 +53,7 @@ const PerformanceDetailSectionTop = ({
         height={195}
         alt={`${title} 공연 이미지`}
         styleClass="rounded-[5px] absolute top-[45px] z-[2] mx-[110px]"
+        placeholder="blur"
       />
       {/* TODO: 전역 로그인 정보 필요 */}
       {/* 현재 게시글이 본인의 게시글일 때만 렌더링 한다. */}
