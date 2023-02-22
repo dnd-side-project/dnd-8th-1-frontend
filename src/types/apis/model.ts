@@ -115,3 +115,8 @@ export interface SearchResult {
     name: string
   }
 }
+
+export interface PerformanceSearchResult {
+  comming: SearchResult[] | []
+  ended: SearchResult[] | []
+}
