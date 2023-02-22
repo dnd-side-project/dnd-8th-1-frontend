@@ -31,9 +31,7 @@ const Tag = ({
   const isRegion = type === 'region'
   return (
     <Center
-      className={`${
-        width ? `w-[${width}]` : isRegion ? 'w-[67px]' : 'w-[45px]'
-      } 
+      className={`${width && `w-[${width}]`} 
       inline-block h-[24px] rounded-[4px] bg-gray-700 
       ${px ? `px-[${px}px]` : `px-[12px]`} 
       ${py ? `px-[${py}px]` : `py-[4px]`} 
