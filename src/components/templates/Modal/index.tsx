@@ -1,6 +1,6 @@
 import { IconButton } from '@components'
 import { theme } from '@constants'
-import { useClickAway, useDelayUnmount } from '@hooks'
+import { useClickAway } from '@hooks'
 import {
   Dispatch,
   ReactElement,
@@ -23,7 +23,6 @@ const Modal = ({
   showModal,
   setShowModal,
 }: ModalProps) => {
-  const shouldRenderModal = useDelayUnmount(showModal, 200)
   const ModalRef = useRef(null)
 
   useClickAway(ModalRef, () => {
@@ -39,23 +38,24 @@ const Modal = ({
       document.querySelector('#layout')?.removeChild(portalDivFragment)
     }
   })
-
   return (
     <>
-      {shouldRenderModal && (
+      {showModal && (
         <div
-          className={`absolute top-0 h-[100%] w-[100%] ${
-            showModal ? 'animate-fadeIn' : 'animate-fadeOut'
-          } flex items-center justify-items-center
-          overflow-hidden bg-gray-900  bg-opacity-60
+          className={`absolute top-0 z-[990] flex h-[100%] w-[100%] items-center
+          justify-items-center overflow-hidden  bg-[#000]
+          bg-opacity-60
           `}
         >
           <div
-            className={`absolute left-0 right-0 z-[999] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}
+            className={`fixed top-[250px] left-0 right-0 z-[999] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}
             ref={ModalRef}
           >
             {hasCloseButton && (
-              <div className="mt-[14px] mr-[14px] flex items-center justify-end">
+              <div
+                onClick={() => setShowModal(false)}
+                className="mt-[14px] mr-[14px] flex items-center justify-end"
+              >
                 <IconButton
                   icon="x-active"
                   color={theme.colors.gray[400]}

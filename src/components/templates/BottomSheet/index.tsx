@@ -39,7 +39,7 @@ const BottomSheet = ({
     return () => {
       document.querySelector('#layout')?.removeChild(portalDivFragment)
     }
-  })
+  }, [])
 
   return ReactDOM.createPortal(
     <>
@@ -50,7 +50,7 @@ const BottomSheet = ({
           } overflow-hidden bg-gray-900 bg-opacity-60`}
         >
           <nav
-            className={`absolute bottom-0 z-[999] w-[100%] ${
+            className={`fixed bottom-0 z-[999] w-[375px] ${
               showBottomSheet ? 'animate-slideUp' : 'animate-slideDown'
             } rounded-t-[8px] bg-gray-700`}
             ref={bottomSheetRef}

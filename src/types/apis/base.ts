@@ -10,5 +10,5 @@ export interface PaginationResponse<T> {
   pageNumber: number //페이지 넘버
   pageSize: number //페이지 사이즈
   totalElements: number // 전체 요소 수
-  totalPage: number
+  totalPages: number
 }

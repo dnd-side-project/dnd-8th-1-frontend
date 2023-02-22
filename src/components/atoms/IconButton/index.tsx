@@ -19,7 +19,10 @@ const IconButton = ({
     <button
       className={styleClass}
       aria-label={areaLabel}
-      onClick={handleOnClick}
+      onClick={(e) => {
+        e.preventDefault()
+        handleOnClick && handleOnClick()
+      }}
     >
       <Icon icon={icon} size={size} color={color} />
     </button>

@@ -38,7 +38,11 @@
       "@assets": ["public/assets"],
       "@assets/*": ["public/assets"],
       "@images": ["public/assets/images"],
-      "@images/*": ["public/assets/images"]
+      "@images/*": ["public/assets/images"],
+      "@apis": ["apis"],
+      "@apis/*": ["apis/"],
+      "@queries": ["queries"],
+      "@queries/*": ["queries/"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

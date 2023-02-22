@@ -22,6 +22,7 @@ export type iconName =
   | 'x-circle'
   | 'x-active'
   | 'x-inactive'
+  | 'image'
 
 export type icon = {
   path: string

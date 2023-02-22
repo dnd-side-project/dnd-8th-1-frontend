@@ -14,18 +14,18 @@ const RegionPopupContent = ({
     return selectedRegion === region
   }
   return (
-    <Grid width="333px" height="160px" templateColumns="repeat(4, 1fr)">
+    <Grid height="160px" templateColumns="repeat(4, 1fr)">
       {REGIONS.map((region) => {
         return (
           <Center
             width="100%"
             className={`
             rounded-[4px]
-              ${isSelect(region) ? 'bg-green-opacity_10' : 'bg-gray-600'}`}
+              ${isSelect(region) ? 'bg-green-opacity_10' : 'bg-gray-700'}`}
             key={region}
             onClick={handleOnClick && (() => handleOnClick(region))}
           >
-            <button className="w-[100%]">
+            <button className="w-[78px]">
               <span
                 className={`text-body2 ${
                   isSelect(region)

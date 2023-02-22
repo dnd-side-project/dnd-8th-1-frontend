@@ -23,7 +23,7 @@ export const MEET_DUMMUMY = [
         imgUrl: `https://picsum.photos/400/500?random=${i + 1}`,
         deadline: '2023-02-12T12:00:00',
         profile: {
-          id: '1',
+          id: 1,
           imgUrl: `https://picsum.photos/200/200?random=${i + 1}`,
           name: '댄스팀',
         },
@@ -46,7 +46,7 @@ export const MEET_DUMMUMY = [
         imgUrl: `https://picsum.photos/400/500?random=${i + 2}`,
         deadline: '2023-02-19T12:00:00',
         profile: {
-          id: '1',
+          id: 1,
           imgUrl: `https://picsum.photos/200/200?random=${i + 2}`,
           name: '댄스팀',
         },
@@ -70,7 +70,7 @@ export const MEET_DUMMUMY = [
         imgUrl: `https://picsum.photos/400/500?random=${i + 3}`,
         deadline: '2023-02-28T12:00:00',
         profile: {
-          id: '1',
+          id: 1,
           imgUrl: `https://picsum.photos/200/200?random=${i + 3}`,
           name: '댄스팀',
         },
