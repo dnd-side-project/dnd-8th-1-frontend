@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <div
-      className={`relative top-0 z-[999] box-border block flex flex h-[52px]  w-[375px] items-center bg-gray-900 py-[14px] px-[18.77px]`}
+      className={`fixed top-0 z-[999] box-border flex h-[52px] w-[375px] items-center bg-gray-900 py-[14px] px-[18.77px]`}
     >
       <Link href={'/'}>
         <Image src={Logo} width={23.89} height={23.89} alt="사이트 로고" />

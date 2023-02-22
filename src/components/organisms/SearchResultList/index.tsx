@@ -1,6 +1,6 @@
 import { SearchResult } from '@types'
 import SearchResultListItem from './SearchResultListItem'
-import emptyImage from '../../../../public/assets/images/graphic_1.png'
+import emptyImage from '/public/assets/images/graphic_1.png'
 import Image from 'next/image'
 import { PLACEHOLDER_IMG } from '@constants'
 import dayjs from 'dayjs'
