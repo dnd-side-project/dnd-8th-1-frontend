@@ -1,4 +1,4 @@
-import { SidebarMenu, StyledImage } from '@components'
+import { SidebarMenu } from '@components'
 import { usePathname } from 'next/navigation'
 import Logo from '/public/assets/logo/logo_small.png'
 import Image from 'next/image'
@@ -17,6 +17,11 @@ const Header = () => {
       {pathname === '/meet' && (
         <h1 className="ml-[9.93px] cursor-default text-subtitle font-bold text-gray-100">
           콜라보 · 쉐어
+        </h1>
+      )}
+      {pathname?.includes('/performance') && (
+        <h1 className="ml-[9.93px] cursor-default text-subtitle font-bold text-gray-100">
+          공연
         </h1>
       )}
       <SidebarMenu />
