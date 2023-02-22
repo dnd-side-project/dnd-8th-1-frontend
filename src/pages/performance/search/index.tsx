@@ -1,13 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   SearchResultHeader,
   SearchResultList,
   SearchResultTab,
 } from '@components'
-import { PERFORMANCE_SEARCH } from 'dummy'
+import { useSearchResult } from '@queries'
+import { SearchResult, SearchResultResponse } from '@types'
+import { GetServerSideProps } from 'next'
 import { useState } from 'react'
 
-const PerformanceSearchPage = () => {
-  const { comming, ended } = PERFORMANCE_SEARCH
+const PerformanceSearchPage = ({ query }: any) => {
+  const teamName = query?.team
+  const fallback = {} as SearchResultResponse
+  const { data = fallback } = useSearchResult(teamName)
+  const searchData = data?.data
+  const comming = searchData?.comming
+  const ended = searchData?.ended
   const [isComming, setIsComming] = useState(true)
   return (
     <div className="relative min-h-screen w-full bg-[#131313] px-[16px]">
@@ -17,22 +25,34 @@ const PerformanceSearchPage = () => {
       <>
         <section className="mb-[26px] pt-[86px]">
           <SearchResultTab
-            commingCount={comming.length}
-            endedCount={ended.length}
+            commingCount={comming?.length as number}
+            endedCount={ended?.length as number}
             isComming={isComming}
             setIsComming={setIsComming}
           />
         </section>
         <section>
           {isComming ? (
-            <SearchResultList searchResultList={comming} />
+            <SearchResultList
+              searchResultList={comming as SearchResult[] | []}
+            />
           ) : (
-            <SearchResultList searchResultList={ended} />
+            <SearchResultList searchResultList={ended as SearchResult[] | []} />
           )}
         </section>
       </>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+}: any) => {
+  return {
+    props: {
+      query,
+    },
+  }
 }
 
 export default PerformanceSearchPage
