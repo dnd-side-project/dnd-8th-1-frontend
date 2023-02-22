@@ -5,7 +5,6 @@ interface SpacerProps {
   axis?: 'vertical' | 'horizontal'
 }
 
-import React from 'react'
 const Spacer = ({ size, axis = 'vertical' }: SpacerProps) => {
   const width = axis === 'vertical' ? 1 : size
   const height = axis === 'horizontal' ? 1 : size
