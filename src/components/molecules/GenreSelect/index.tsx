@@ -3,19 +3,22 @@ import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from '@hooks'
 import { Portal } from '@chakra-ui/react'
 import GenreSelectPopupContent from './GenreSelectPopupContent'
+import { GenreTypes } from '@types'
 
 /**
  *TODO: 전체적으로 string[]에 대한 리팩토링 필요 + selected도 지네릭 적용 필요
  */
 interface RegionSelectProps {
-  selectedGenres?: string[]
-  handleGenreSelect: (genres: string[]) => void
+  selectedGenres?: GenreTypes[]
+  handleGenreSelect: (genres: GenreTypes[]) => void
 }
 const GenreSelect = ({
   handleGenreSelect,
   selectedGenres,
 }: RegionSelectProps) => {
-  const [selected, setSelected] = useState(selectedGenres ? selectedGenres : [])
+  const [selected, setSelected] = useState<GenreTypes[]>(
+    selectedGenres ? selectedGenres : [],
+  )
   const [isPopupOpen, setIsPopUpOpen] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
   const regionInputRef = useRef<HTMLDivElement>(null)
@@ -98,7 +101,7 @@ const GenreSelect = ({
           className="absolute top-[52px] w-[343px] rounded-b-[8px] border-[1px] border-x-gray-600 border-b-gray-600 border-t-gray-700 bg-gray-700 px-[10px] pb-[20px]"
         >
           <GenreSelectPopupContent
-            handleOnClick={(genres) => {
+            handleOnClick={(genres: GenreTypes) => {
               if (isFullSelected) {
                 if (selected.includes(genres)) {
                   setSelected((prev) => {
