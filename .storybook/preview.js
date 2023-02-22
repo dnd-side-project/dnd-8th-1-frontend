@@ -1,4 +1,5 @@
 import '../src/styles/globals.css'
+import '../src/styles/variable.css'
 import * as nextImage from 'next/image'
 import { theme } from '../src/styles/theme/chakraTheme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
