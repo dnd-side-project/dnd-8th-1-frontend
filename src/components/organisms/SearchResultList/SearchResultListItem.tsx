@@ -1,6 +1,7 @@
-import { Avatar, StyledImage, Tags } from '@components'
+import { Avatar, SearchResultImage, Tags } from '@components'
 import { theme } from '@constants'
 import { SearchResult } from '@types'
+
 import Link from 'next/link'
 
 interface SearchResultListItemProps {
@@ -11,6 +12,7 @@ const SearchResultListItem = ({
   searchResult: {
     id,
     title,
+    startDate,
     location,
     genres,
     imgUrl,
@@ -19,17 +21,10 @@ const SearchResultListItem = ({
 }: SearchResultListItemProps) => {
   return (
     <Link
-      className="mb-[18px] flex h-[110px] w-[343px] items-start bg-gray-900 last:mb-0"
+      className="mb-[18px] flex h-[110px] w-[343px] items-start bg-[#131313] last:mb-0"
       href={`/performance/${id}`}
     >
-      <StyledImage
-        width={96}
-        height={110}
-        alt="performance image"
-        src={imgUrl}
-        placeholder="blur"
-        styleClass="overflow-hidden rounded-[4px] w-[96px] h-[110px] relative"
-      />
+      <SearchResultImage startDate={startDate} imgUrl={imgUrl} />
       <div className="ml-[12px] flex w-[247px] flex-col justify-center">
         <h3 className="h-[30px] w-[247px] overflow-hidden text-ellipsis whitespace-nowrap text-subtitle font-bold text-gray-100">
           {title}
