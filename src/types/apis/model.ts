@@ -65,10 +65,10 @@ export interface MeetAccept {
 }
 
 export interface PerformanceImminent {
-  id?: number
+  id?: string
   title?: string
   startDate?: string
-  imgUrl?: string
+  image?: string
 }
 
 export interface Performance {
