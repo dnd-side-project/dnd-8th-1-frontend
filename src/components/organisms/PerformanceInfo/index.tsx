@@ -17,7 +17,9 @@ const PerformanceInfo = ({ startTime, address }: PerformanceInfoProps) => {
       <div className={`${rowStyle}`}>
         <span className={`${columnStyle}`}>공연시간</span>
         <span className={`${valueStyle}`}>
-          {dayjs(startTime).format('YYYY년 M월 D일 (ddd) a h시 m분')}
+          {dayjs(startTime)
+            .format('YYYY년 M월 D일 (ddd) a h시 m분')
+            .replace(' 0분', '')}
         </span>
       </div>
       <div className={`${rowStyle}`}>
