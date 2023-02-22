@@ -16,7 +16,7 @@ const CalandarSlider = ({
   month,
 }: CalandarSliderProps) => {
   return (
-    <div className="flex items-center justify-center py-[24px] pl-[10px]">
+    <div className="flex items-center justify-center pl-[10px]">
       <IconButton
         size={24}
         color={theme.colors.gray[500]}
