@@ -12,6 +12,7 @@ const postRequestCandidate = async (payload: MeetApplyRequest) => {
 const useRequestCandidate = (
   eventId: number,
   setIsCompleted: Dispatch<SetStateAction<boolean>>,
+  setIsCandidate: Dispatch<SetStateAction<boolean>>,
 ) => {
   const queryClient = useQueryClient()
   return useMutation(
@@ -20,6 +21,10 @@ const useRequestCandidate = (
       onSuccess: () => {
         queryClient.invalidateQueries([QUERY_KEY.MEET_CANDIDATE_VIEW, eventId])
         setIsCompleted(true)
+        setIsCandidate(true)
+      },
+      onError: () => {
+        setIsCandidate(false)
       },
     },
   )

@@ -16,10 +16,15 @@ const MeetPage = () => {
     type: '',
   })
   const currentPage = currentQueryString.page + 1
-  const { data = fallback } = useMeet(currentQueryString)
+  const { data = fallback, isLoading } = useMeet(currentQueryString)
   const { data: meetData } = data
   const router = useRouter()
-
+  /**
+   *TODO: 임시 loading 로직
+   */
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <>
       <Head>
