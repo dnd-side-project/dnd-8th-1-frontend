@@ -98,7 +98,7 @@ const GenreSelect = ({
       {isPopupOpen && (
         <div
           ref={popupRef}
-          className="absolute top-[52px] w-[343px] rounded-b-[8px] border-[1px] border-x-gray-600 border-b-gray-600 border-t-gray-700 bg-gray-700 px-[10px] pb-[20px]"
+          className="absolute top-[52px] z-[999] w-[343px] rounded-b-[8px] border-[1px] border-x-gray-600 border-b-gray-600 border-t-gray-700 bg-gray-700 px-[10px] pb-[20px]"
         >
           <GenreSelectPopupContent
             handleOnClick={(genres: GenreTypes) => {
