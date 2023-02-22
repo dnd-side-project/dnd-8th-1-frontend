@@ -7,6 +7,7 @@ interface CancelSubmitModaleModalProps {
   handleOnSubmit: () => void
   modalContent: string
   submitMessage: string
+  modalDescription?: string
 }
 
 const CancelSubmitModal = ({
@@ -15,6 +16,7 @@ const CancelSubmitModal = ({
   handleOnSubmit,
   modalContent,
   submitMessage,
+  modalDescription,
 }: CancelSubmitModaleModalProps) => {
   return (
     <Modal
@@ -22,10 +24,23 @@ const CancelSubmitModal = ({
       showModal={showModal}
       setShowModal={setShowModal}
     >
-      <div className="relative flex h-[180px] w-[290px] flex-col items-center justify-center bg-gray-700">
-        <span className="absolute top-[49px] w-[fit] text-subtitle font-bold text-gray-100">
+      <div
+        className={`relative flex  w-[290px] flex-col items-center justify-center bg-gray-700 ${
+          modalDescription ? 'h-[210px]' : 'h-[180px]'
+        }`}
+      >
+        <span
+          className={`absolute  w-[fit] text-subtitle font-bold text-gray-100 ${
+            modalDescription ? 'top-[54px]' : 'top-[49px]'
+          }`}
+        >
           {modalContent}
         </span>
+        {modalDescription && (
+          <span className="absolute top-[86px] text-body2 text-gray-400 ">
+            {modalDescription}
+          </span>
+        )}
         <div className="absolute bottom-0">
           <button
             onClick={() => setShowModal(false)}
