@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 const Header = () => {
   const pathname = usePathname()
+  console.log(pathname)
 
   return (
     <div
@@ -17,6 +18,11 @@ const Header = () => {
       {pathname === '/meet' && (
         <h1 className="ml-[9.93px] cursor-default text-subtitle font-bold text-gray-100">
           콜라보 · 쉐어
+        </h1>
+      )}
+      {pathname?.includes('/performance') && (
+        <h1 className="ml-[9.93px] cursor-default text-subtitle font-bold text-gray-100">
+          공연
         </h1>
       )}
       <SidebarMenu />
