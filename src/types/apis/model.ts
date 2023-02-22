@@ -29,7 +29,7 @@ export interface Profile {
   name: string // 프로필 댄스팀 이름
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
-  location?: string
+  location: string
 }
 
 export interface Meet {
@@ -68,7 +68,7 @@ export interface PerformanceImminent {
   id?: string
   title?: string
   startDate?: string
-  image?: string
+  imgUrl?: string
 }
 
 export interface Performance {
@@ -96,10 +96,10 @@ export interface CommentCreate {
 }
 
 export interface Comment {
-  reviewContent?: string
-  reviewId?: string
-  writerName?: string
-  createdDate?: string
+  content: string
+  reviewId: number
+  profile: Pick<Profile, 'id' | 'name'>
+  createdDate: string
 }
 
 export interface SearchResult {

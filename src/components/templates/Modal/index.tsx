@@ -42,10 +42,9 @@ const Modal = ({
     <>
       {showModal && (
         <div
-          className={`absolute top-0 h-[100%] w-[100%] ${
-            showModal ? 'animate-fadeIn' : 'animate-fadeOut'
-          } flex items-center justify-items-center
-          overflow-hidden bg-gray-900  bg-opacity-60
+          className={`absolute top-0 z-[990] flex h-[100%] w-[100%] items-center
+          justify-items-center overflow-hidden  bg-[#000]
+          bg-opacity-60
           `}
         >
           <div
