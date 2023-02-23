@@ -20,21 +20,21 @@ export interface PerformanceResponse extends BaseResponse {
 
 // 공연 상세 조회 응답
 export interface PerformanceDetailResponse extends BaseResponse {
-  data?: PerformanceDetail
+  data: PerformanceDetail
 }
 
 // 공연 글 등록 / 수정 요청
-export interface PerformanceEditRequest
-  extends Pick<
-      Performance,
-      'performTitle' | 'performStartDate' | 'performLocation' | 'performGenres'
-    >,
-    Pick<
-      PerformanceDetail,
-      'performStartTime' | 'performDescription' | 'performAddress'
-    > {
-  performImgUrl?: string
-}
+// export interface PerformanceEditRequest
+//   extends Pick<
+//       Performance,
+//       'performTitle' | 'performStartDate' | 'performLocation' | 'performGenres'
+//     >,
+//     Pick<
+//       PerformanceDetail,
+//       'performStartTime' | 'performDescription' | 'performAddress'
+//     > {
+//   performImgUrl?: string
+// }
 
 // 후기 글 등록 요청
 export type CommentCreateRequest = CommentCreate
