@@ -9,15 +9,22 @@ import {
   SearchHeader,
 } from '@components'
 import { useCalendar } from '@hooks'
+import { PerformancePayload, usePerformance } from '@queries'
+import {
+  GenreTypes,
+  Performance,
+  PerformanceResponse,
+  RegionTypes,
+} from '@types'
 import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
-import { PERFORMANCE_DAY, PERFORMANCE_IMMINENT, PERFORMANCE_MONTH } from 'dummy'
-import { useRouter } from 'next/router'
+import { PERFORMANCE_IMMINENT } from 'dummy'
 import { useEffect, useState } from 'react'
 
 const PerformancePage = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isEntire, setIsEntire] = useState(false)
   const {
+    monthYear,
     month,
     handleSetMonth,
     isSunday,
@@ -26,6 +33,20 @@ const PerformancePage = () => {
     getDay,
     calandar,
   } = useCalendar()
+  const [performancePayload, setPerformancePayload] =
+    useState<PerformancePayload>({
+      year: parseInt(monthYear.year),
+      month: parseInt(monthYear.month),
+      day: currentDay + 1,
+      location: '',
+      genre: '',
+      pageNumber: 0,
+      pageSize: 15,
+    })
+  const { month: payloadMonth, year, day } = performancePayload
+  const fallback = {} as PerformanceResponse
+  const { data = fallback, isLoading } = usePerformance(performancePayload)
+  const { data: performanceData } = data
   const calandarProps = {
     month,
     handleSetMonth,
@@ -34,80 +55,85 @@ const PerformancePage = () => {
     currentDay,
     getDay,
     calandar,
+    setPerformancePayload,
+    performancePayload,
   }
-  const [dayItems, setDayItems] = useState(PERFORMANCE_DAY[0].content)
-  const [entireItems, setEntireItems] = useState(PERFORMANCE_MONTH[0].content)
-  const router = useRouter()
-  const { page } = router.query
-  const { pageNumber } = isEntire
-    ? PERFORMANCE_MONTH[page ? parseInt(page as string) - 1 : 0]
-    : PERFORMANCE_DAY[page ? parseInt(page as string) - 1 : 0]
-  const totalPages = isEntire ? PERFORMANCE_MONTH.length : dayItems.length
-  const [currentPage, setCurrentPage] = useState(pageNumber)
+  const currentPage = performancePayload.pageNumber + 1
 
-  // TODO: 임시 페이지네이션 로직
   useEffect(() => {
-    router.push(`?page=${currentPage + 1}`)
-    setEntireItems(PERFORMANCE_MONTH[currentPage].content)
-  }, [currentPage])
-  useEffect(() => {
-    router.push(`?page=${currentPage + 1}`)
-    setDayItems(PERFORMANCE_DAY[currentPage].content)
-  }, [currentPage])
-  useEffect(() => {
-    setCurrentPage(0)
-    router.push(`?page=${1}`)
-  }, [isEntire, currentDay])
+    setPerformancePayload({
+      ...performancePayload,
+      pageNumber: 0,
+    })
+  }, [payloadMonth, year, day])
+
+  if (isLoading) {
+    return <div></div>
+  }
   console.log(currentPage)
-
-  //TODO : 필터 로직 처리 하기
-  const [currentRegion, setCurrentRegion] = useState('')
-  const [currentGenre, setCurrentGenre] = useState('')
-
   return (
     <>
       {isSearchOpen && (
         <SearchHeader open={isSearchOpen} setOpen={setIsSearchOpen} />
       )}
-      <PerformanceBanner imminentPerformances={PERFORMANCE_IMMINENT as any} />
-      <Calandar
-        {...calandarProps}
-        isEntire={isEntire}
-        setIsEntire={setIsEntire}
-        setIsSearchOpen={setIsSearchOpen}
-      />
-      <div className="flex w-full px-[16px] py-[22px]">
-        <FilterButton
-          handleSelected={(region) => setCurrentRegion(region)}
-          type="region"
+      <section className="mt-[52px]">
+        <PerformanceBanner imminentPerformances={PERFORMANCE_IMMINENT as any} />
+        <Calandar
+          {...calandarProps}
+          isEntire={isEntire}
+          setIsEntire={setIsEntire}
+          setIsSearchOpen={setIsSearchOpen}
         />
-        <div className="ml-[8px]">
+        <div className="flex w-full px-[16px] py-[22px]">
           <FilterButton
-            handleSelected={(genre) => setCurrentGenre(genre)}
-            type="genre"
+            handleSelected={(region) =>
+              setPerformancePayload({
+                ...performancePayload,
+                location: region as RegionTypes,
+              })
+            }
+            type="region"
           />
+          <div className="ml-[8px]">
+            <FilterButton
+              handleSelected={(genre) =>
+                setPerformancePayload({
+                  ...performancePayload,
+                  genre: genre as GenreTypes,
+                })
+              }
+              type="genre"
+            />
+          </div>
         </div>
-      </div>
-      <>
-        {isEntire ? (
-          <div className="flex flex-col items-center justify-center px-[16px]">
-            <PerformanceEntireList performances={entireItems as any} />
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center px-[16px]">
-            <PerformanceList performances={dayItems} />
-          </div>
-        )}
-        <Center className={isEntire ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
-          <Pagination
-            currentPage={currentPage + 1}
-            totalPages={totalPages}
-            handleChangePage={(page) => {
-              setCurrentPage(page - 1)
-            }}
-          />
-        </Center>
-      </>
+        <>
+          {isEntire ? (
+            <div className="flex flex-col items-center justify-center px-[16px]">
+              <PerformanceEntireList
+                performances={performanceData?.content as Performance[]}
+              />
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center px-[16px]">
+              <PerformanceList
+                performances={performanceData?.content as Performance[]}
+              />
+            </div>
+          )}
+          <Center className={isEntire ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
+            <Pagination
+              currentPage={currentPage as number}
+              totalPages={performanceData?.totalPages as number}
+              handleChangePage={(page) => {
+                setPerformancePayload({
+                  ...performancePayload,
+                  pageNumber: page - 1,
+                })
+              }}
+            />
+          </Center>
+        </>
+      </section>
     </>
   )
 }
