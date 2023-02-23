@@ -24,17 +24,20 @@ export interface PerformanceDetailResponse extends BaseResponse {
 }
 
 // 공연 글 등록 / 수정 요청
-export interface PerformanceEditRequest
-  extends Pick<
-      Performance,
-      'performTitle' | 'performStartDate' | 'performLocation' | 'performGenres'
-    >,
-    Pick<
-      PerformanceDetail,
-      'performStartTime' | 'performDescription' | 'performAddress'
-    > {
-  performImgUrl?: string
-}
+/**
+ *TODO: 관련 api 작성 때 수정 할 것
+ */
+// export interface PerformanceEditRequest
+//   extends Pick<
+//       Performance,
+//       'performTitle' | 'performStartDate' | 'performLocation' | 'performGenres'
+//     >,
+//     Pick<
+//       PerformanceDetail,
+//       'performStartTime' | 'performDescription' | 'performAddress'
+//     > {
+//   performImgUrl?: string
+// }
 
 // 후기 글 등록 요청
 export type CommentCreateRequest = CommentCreate
