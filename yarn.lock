@@ -2783,6 +2783,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@date-io/core@npm:^1.3.13":
+  version: 1.3.13
+  resolution: "@date-io/core@npm:1.3.13"
+  checksum: 5a9e9d1de20f0346a3c7d2d5946190caef4bfb0b64d82ba1f4c566657a9192667c94ebe7f438d11d4286d9c190974daad4fb2159294225cd8af4d9a140239879
+  languageName: node
+  linkType: hard
+
+"@date-io/date-fns@npm:1.x":
+  version: 1.3.13
+  resolution: "@date-io/date-fns@npm:1.3.13"
+  dependencies:
+    "@date-io/core": ^1.3.13
+  peerDependencies:
+    date-fns: ^2.0.0
+  checksum: 0026c0e538ea4add57a11936ff6bdb07e99f25275f8bb28c4702bbb7e82c3a41b3e8124132aa719180d462c01a26a3b4801e41b7349cdb73813749d4bf5e8fbd
+  languageName: node
+  linkType: hard
+
 "@design-systems/utils@npm:2.12.0":
   version: 2.12.0
   resolution: "@design-systems/utils@npm:2.12.0"
@@ -8462,6 +8480,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:next":
+  version: 2.0.0-beta.5
+  resolution: "date-fns@npm:2.0.0-beta.5"
+  checksum: 03bba2c985dcf3e89c23cb162695d4a11b178116c236e8552db52ee1629bc18ae4b0fa44287f3eb8a68c0c6ac4cbc6b6574df0f94fb4de22a0dd26604c9a024a
+  languageName: node
+  linkType: hard
+
 "dayjs@npm:^1.11.7":
   version: 1.11.7
   resolution: "dayjs@npm:1.11.7"
@@ -8804,6 +8829,7 @@ __metadata:
     "@chakra-ui/storybook-addon": ^4.0.16
     "@chakra-ui/styled-system": ^2.5.1
     "@chakra-ui/theme": ^2.2.4
+    "@date-io/date-fns": 1.x
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     "@hookform/resolvers": ^2.9.10
@@ -8828,6 +8854,7 @@ __metadata:
     autoprefixer: ^10.4.13
     axios: ^1.2.2
     babel-loader: ^8.3.0
+    date-fns: next
     dayjs: ^1.11.7
     eslint: 8.32.0
     eslint-config-next: 13.1.2
