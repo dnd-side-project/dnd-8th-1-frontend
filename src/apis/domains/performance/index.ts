@@ -19,4 +19,8 @@ export const performanceAPI = {
       `/api/v1/performances?year=${year}&month=${month}&day=${day}&location=${location}&genre=${genre}&page=${pageNumber}&size=${pageSize}`,
     )
   },
+  // 임박한 공연 정보 조회
+  imminent: () => {
+    return unAuthInstance.get(`/api/v1/performances/imminent`)
+  },
 }
