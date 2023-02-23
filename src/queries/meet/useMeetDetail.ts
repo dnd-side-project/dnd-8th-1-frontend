@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { eventAPI } from '@apis'
 import { AxiosResponse } from 'axios'
-import { MeetDetail, MeetDetailResponse } from '@types'
+import { MeetDetailResponse } from '@types'
 
 export const getMeetDetail = async (eventId: number) => {
   const { data }: AxiosResponse<MeetDetailResponse> = await eventAPI.getDetail(
@@ -10,7 +10,10 @@ export const getMeetDetail = async (eventId: number) => {
   return data
 }
 
-const useMeetDetail = (eventId: number, meetDetailData: MeetDetailResponse) => {
+const useMeetDetail = (
+  eventId: number,
+  meetDetailData?: MeetDetailResponse,
+) => {
   return useQuery(['meetDetail', eventId], () => getMeetDetail(eventId), {
     enabled: !!eventId,
     initialData: meetDetailData,
