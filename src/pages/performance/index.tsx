@@ -7,7 +7,7 @@ import {
   PerformanceList,
   SearchHeader,
 } from '@components'
-import { CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR } from '@constants'
+import { CURRENT_MONTH, CURRENT_YEAR, QUERY_KEY } from '@constants'
 import { useCalendar } from '@hooks'
 import {
   getAllPerformance,
@@ -16,6 +16,7 @@ import {
   useImminentPerformance,
   usePerformance,
 } from '@queries'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   GenreTypes,
   Performance,
@@ -26,6 +27,7 @@ import {
 } from '@types'
 import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
 import { GetServerSideProps } from 'next'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 
 interface PerformanceProps {
@@ -38,7 +40,7 @@ const PerformancePage = ({
   imminentPerformanceData,
 }: PerformanceProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [isEntire, setIsEntire] = useState(false)
+  const [isEntire, setIsEntire] = useState(true)
   const {
     monthYear,
     month,
@@ -53,18 +55,23 @@ const PerformancePage = ({
     useState<PerformancePayload>({
       year: CURRENT_YEAR,
       month: CURRENT_MONTH,
-      day: CURRENT_DAY,
+      day: '',
       location: '',
       genre: '',
       pageNumber: 0,
       pageSize: 15,
     })
-  const { month: payloadMonth, year, day } = performancePayload
+  const {
+    month: payloadMonth,
+    year,
+    day,
+    location,
+    genre,
+    pageNumber,
+    pageSize,
+  } = performancePayload
   const fallback = {} as PerformanceResponse
-  const { data = fallback, isLoading } = usePerformance(
-    performancePayload,
-    allData,
-  )
+  const { data = fallback } = usePerformance(performancePayload, allData)
   const { data: performanceData } = data
   const calandarProps = {
     month,
@@ -89,11 +96,31 @@ const PerformancePage = ({
   const { data: imminentPerformances = imminentFallback } =
     useImminentPerformance(imminentPerformanceData)
 
-  if (isLoading) {
-    return <div></div>
-  }
+  const queryClient = useQueryClient()
+  useEffect(() => {
+    if (day && day >= monthYear.lastDate) {
+      return
+    } else {
+      queryClient.prefetchQuery(
+        [
+          QUERY_KEY.PERFORMANCE,
+          year,
+          payloadMonth,
+          day && day + 1,
+          location,
+          genre,
+          pageNumber,
+          pageSize,
+        ],
+        () => getAllPerformance(performancePayload),
+      )
+    }
+  }, [day])
   return (
     <>
+      <Head>
+        <title>공연 정보 - Danverse</title>
+      </Head>
       {isSearchOpen && (
         <SearchHeader open={isSearchOpen} setOpen={setIsSearchOpen} />
       )}
@@ -168,7 +195,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const allData = await getAllPerformance({
     year: CURRENT_YEAR,
     month: CURRENT_MONTH,
-    day: CURRENT_DAY,
+    day: '',
     location: '',
     genre: '',
     pageNumber: 0,
