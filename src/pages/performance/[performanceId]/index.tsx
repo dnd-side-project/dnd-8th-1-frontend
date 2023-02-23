@@ -10,7 +10,15 @@ import {
 import { useDisclosure } from '@hooks'
 import { Center } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { Comment } from '@types'
+import {
+  Comment,
+  CommentCreate,
+  CommentResponse,
+  PerformanceDetailResponse,
+} from '@types'
+import { performanceAPI } from '@apis'
+import { GetServerSideProps } from 'next'
+import { useCreateReview, useDeletePerformance } from '@queries'
 
 const CancelSubmitModal = dynamic(
   () => import('../../../components/templates/CancelSubmitModal'),
@@ -18,24 +26,6 @@ const CancelSubmitModal = dynamic(
     ssr: false,
   },
 )
-
-const PERFORMANCE_DETAIL_DUMMY = {
-  id: 1,
-  title: '공연제목 어쩌고저쩌고',
-  imgUrl: 'https://picsum.photos/500/500?random=3',
-  startDate: '2023-02-14T17:00:00',
-  startTime: '2023-02-14T17:00:00',
-  location: '부산',
-  genres: ['힙합', '커버댄스'],
-  description:
-    '로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트이다. 로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소',
-  address: '소환사의 협곡',
-  profile: {
-    id: 2,
-    imgUrl: 'https://picsum.photos/500/500?random=2',
-    name: '댄스팀',
-  },
-}
 
 const PERFORMANCE_REVIEW_DUMMY: Comment[] = [
   {
@@ -60,7 +50,13 @@ const PERFORMANCE_REVIEW_DUMMY: Comment[] = [
   },
 ]
 
-const PerformanceDetailPage = () => {
+const PerformanceDetailPage = ({
+  performance,
+  review, // TODO: API 미구현
+}: {
+  performance: PerformanceDetailResponse
+  review: PerformanceDetailResponse
+}) => {
   const {
     id,
     title,
@@ -72,9 +68,13 @@ const PerformanceDetailPage = () => {
     startTime,
     address,
     description,
-  } = PERFORMANCE_DETAIL_DUMMY
+  } = performance.data
   const [showDeleteModal, setShowDeleteModal, handleDeleteModalToggle] =
     useDisclosure()
+
+  // TODO: API 미구현
+  // const { mutate: requestModifyReview } = useCreateReview(id)
+  // const { mutate: requestDeletePerformance } = useDeletePerformance(id)
 
   return (
     <>
@@ -101,9 +101,10 @@ const PerformanceDetailPage = () => {
               modalDescription="삭제한 공연은 되돌릴 수 없어요."
               submitMessage="네, 삭제할게요"
               handleOnSubmit={() => {
-                // TODO: 삭제 api 호출
+                // TODO: 삭제 api 호출 - API 구현 안됨
                 console.log('개시글 삭제')
                 setShowDeleteModal(false)
+                // requestDeletePerformance(id)
               }}
             />
           )}
@@ -116,25 +117,26 @@ const PerformanceDetailPage = () => {
           />
 
           <Spacer size={12} />
-
           <PerformanceInfo startTime={startTime} address={address} />
+        </Center>
 
-          <Spacer size={17} />
+        <Spacer size={17} />
 
-          <div className="px-[16px]">
-            <h2 className=" text-body1 leading-none">공연 설명</h2>
-            <Spacer size={9} />
-            <p className="text-body2">{description}</p>
-          </div>
+        <div className="px-[16px] ">
+          <h2 className=" text-body1 leading-none">공연 설명</h2>
+          <Spacer size={9} />
+          <p className="text-body2">{description}</p>
+        </div>
 
-          <Spacer size={34} />
+        <Spacer size={34} />
 
+        <div className="px-[16px]">
           <ProfileLinkButton
             profileId={profile.id}
             profileImage={profile.imgUrl}
             profileName={profile.name}
           />
-        </Center>
+        </div>
 
         <Spacer size={60} />
 
@@ -142,16 +144,37 @@ const PerformanceDetailPage = () => {
           startDate={startDate}
           reviews={PERFORMANCE_REVIEW_DUMMY}
           handleOnDelete={(reviewId) => {
-            // TODO: 삭제 api 호출
+            // 공연 리뷰 삭제 (TODO: api 미구현, 명세에 없음)
             console.log(reviewId, '삭제!')
           }}
           handleOnSubmit={(reviewContent: string) => {
-            console.log(reviewContent)
+            // TODO: API 구현 안된 부분
+            // requestModifyReview({ review: reviewContent })
+            // console.log(reviewContent)
           }}
         />
       </main>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context
+  const { data: performanceData } = await performanceAPI.getDetail(
+    parseInt(params?.performanceId as string),
+  )
+
+  // TODO: 후기 조회 미구현
+  // const { data: reviewData } = await performanceAPI.getReviews(
+  //   params.performanceId,
+  // )
+
+  return {
+    props: {
+      performance: performanceData,
+      review: PERFORMANCE_REVIEW_DUMMY,
+    },
+  }
 }
 
 export default PerformanceDetailPage
