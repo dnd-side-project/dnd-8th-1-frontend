@@ -5,9 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
 import { Icon } from '@components'
 import { isPossibleDay } from '@utils'
-import { ko } from 'date-fns/esm/locale'
-
-import './style.css'
+import { ko } from 'date-fns/locale'
 
 interface FormDatePickerProps {
   initialStartDate?: string
@@ -69,7 +67,6 @@ const FormDatePicker = ({
       customInput={<CustomInput inputref={inputRef} />}
       filterDate={isPossibleDay}
       locale={ko}
-      className=" border-[1px] border-green-light"
       onCalendarOpen={() => setIsOpen(true)}
       onCalendarClose={() => setIsOpen(false)}
     />
