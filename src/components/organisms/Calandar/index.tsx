@@ -1,3 +1,4 @@
+import { PerformancePayload } from '@queries'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
 import CalandarSlider from './CalandarSlider'
@@ -14,6 +15,8 @@ interface CalendarProps {
   getDay: (day: number) => number
   month: string
   calandar: unknown[]
+  setPerformancePayload: Dispatch<SetStateAction<PerformancePayload>>
+  performancePayload: PerformancePayload
 }
 
 const Calendar = ({
@@ -27,15 +30,18 @@ const Calendar = ({
   setIsSearchOpen,
   isEntire,
   setIsEntire,
+  setPerformancePayload,
+  performancePayload,
 }: CalendarProps) => {
   const router = useRouter()
   return (
     <div className="relative flex flex-col bg-gray-900">
       <div className="flex w-full justify-between pt-[50px] pb-[20px]">
         <CalandarSlider
+          performancePayload={performancePayload}
+          setPerformancePayload={setPerformancePayload}
           handleSetMonth={handleSetMonth}
           setCurrentDay={setCurrentDay}
-          month={month}
           currentDay={currentDay}
         />
         <div className="flex">
@@ -61,6 +67,7 @@ const Calendar = ({
         isSunday={isSunday}
         setCurrentDay={setCurrentDay}
         getDay={getDay}
+        setPerformancePayload={setPerformancePayload}
       />
     </div>
   )

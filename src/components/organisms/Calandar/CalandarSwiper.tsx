@@ -1,3 +1,4 @@
+import { PerformancePayload } from '@queries'
 import { SetStateAction } from 'react'
 import DayList from './DayList'
 
@@ -9,6 +10,7 @@ interface CalandarSwiperProps {
   getDay: (day: number) => number
   isEntire: boolean
   setIsEntire: (value: SetStateAction<boolean>) => void
+  setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
 
 const CalandarSwiper = ({
@@ -19,12 +21,17 @@ const CalandarSwiper = ({
   getDay,
   isEntire,
   setIsEntire,
+  setPerformancePayload,
 }: CalandarSwiperProps) => {
   return (
     <div className="no-scrollbar flex w-[100%] resize-none overflow-x-scroll pl-[58px]">
       <div>
         <button
           onClick={() => {
+            setPerformancePayload((prev) => ({
+              ...prev,
+              day: '',
+            }))
             setIsEntire(true)
           }}
           className={`b-0 absolute left-0 h-[57px] bg-gray-900 px-[16px] text-[16px] font-bold  ${
@@ -44,6 +51,7 @@ const CalandarSwiper = ({
         isSunday={isSunday}
         setCurrentDay={setCurrentDay}
         getDay={getDay}
+        setPerformancePayload={setPerformancePayload}
       />
     </div>
   )

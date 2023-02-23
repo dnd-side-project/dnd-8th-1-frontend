@@ -1,3 +1,4 @@
+import { PerformancePayload } from '@queries'
 import { SetStateAction } from 'react'
 import DayListItem from './DayListItem'
 
@@ -9,6 +10,7 @@ interface DayListProps {
   getDay: (day: number) => number
   isEntire: boolean
   setIsEntire: (value: SetStateAction<boolean>) => void
+  setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
 
 const DayList = ({
@@ -19,6 +21,7 @@ const DayList = ({
   setCurrentDay,
   getDay,
   setIsEntire,
+  setPerformancePayload,
 }: DayListProps) => {
   return (
     <>
@@ -32,6 +35,7 @@ const DayList = ({
           getDay={getDay}
           day={day}
           setIsEntire={setIsEntire}
+          setPerformancePayload={setPerformancePayload}
         />
       ))}
     </>
