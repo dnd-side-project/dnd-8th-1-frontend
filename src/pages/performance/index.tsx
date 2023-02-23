@@ -9,15 +9,20 @@ import {
   SearchHeader,
 } from '@components'
 import { useCalendar } from '@hooks'
-import { PerformancePayload, usePerformance } from '@queries'
+import {
+  PerformancePayload,
+  useImminentPerformance,
+  usePerformance,
+} from '@queries'
 import {
   GenreTypes,
   Performance,
+  PerformanceImminent,
+  PerformanceImminentResponse,
   PerformanceResponse,
   RegionTypes,
 } from '@types'
 import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
-import { PERFORMANCE_IMMINENT } from 'dummy'
 import { useEffect, useState } from 'react'
 
 const PerformancePage = () => {
@@ -66,18 +71,23 @@ const PerformancePage = () => {
       pageNumber: 0,
     })
   }, [payloadMonth, year, day])
+  const imminentFallback = {} as PerformanceImminentResponse
+  const { data: imminentPerformances = imminentFallback } =
+    useImminentPerformance()
+  const imminentData = imminentPerformances?.data
 
   if (isLoading) {
     return <div></div>
   }
-  console.log(currentPage)
   return (
     <>
       {isSearchOpen && (
         <SearchHeader open={isSearchOpen} setOpen={setIsSearchOpen} />
       )}
       <section className="mt-[52px]">
-        <PerformanceBanner imminentPerformances={PERFORMANCE_IMMINENT as any} />
+        <PerformanceBanner
+          imminentPerformances={imminentData as PerformanceImminent[]}
+        />
         <Calandar
           {...calandarProps}
           isEntire={isEntire}
