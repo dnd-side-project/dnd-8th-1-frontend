@@ -117,6 +117,6 @@ export interface SearchResult {
 }
 
 export interface PerformanceSearchResult {
-  comming: SearchResult[] | []
-  ended: SearchResult[] | []
+  comming: SearchResult[]
+  ended: SearchResult[]
 }
