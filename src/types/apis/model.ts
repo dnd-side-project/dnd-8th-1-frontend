@@ -68,7 +68,7 @@ export interface PerformanceImminent {
   id?: string
   title?: string
   startDate?: string
-  image?: string
+  imgUrl?: string
 }
 
 export interface Performance {
@@ -116,5 +116,7 @@ export interface SearchResult {
   }
 }
 
-// export interface PerformanceSearch {
-// }
+export interface PerformanceSearchResult {
+  comming: SearchResult[]
+  ended: SearchResult[]
+}
