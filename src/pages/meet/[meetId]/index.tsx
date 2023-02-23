@@ -192,7 +192,10 @@ const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
               handleOnModify={() => {
                 router.push(`/meet/edit/${detailData?.id}`)
               }}
-              handleOnDelete={handleDeleteModalToggle}
+              handleOnDelete={() => {
+                setIsStatusBarOpen(false)
+                handleDeleteModalToggle()
+              }}
             />
           </div>
         )}
