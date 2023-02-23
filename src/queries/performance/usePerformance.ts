@@ -14,7 +14,7 @@ export interface PerformancePayload {
   pageSize: number
 }
 
-const getAllPerformance = async ({
+export const getAllPerformance = async ({
   year,
   month,
   day,
@@ -36,15 +36,18 @@ const getAllPerformance = async ({
   return data
 }
 
-const usePerformance = ({
-  year,
-  month,
-  day,
-  location,
-  genre,
-  pageNumber,
-  pageSize,
-}: PerformancePayload) => {
+const usePerformance = (
+  {
+    year,
+    month,
+    day,
+    location,
+    genre,
+    pageNumber,
+    pageSize,
+  }: PerformancePayload,
+  allData: PerformanceResponse,
+) => {
   return useQuery(
     [
       QUERY_KEY.PERFORMANCE,
@@ -68,6 +71,7 @@ const usePerformance = ({
       }),
     {
       keepPreviousData: true,
+      initialData: allData,
     },
   )
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Center } from '@chakra-ui/react'
 import {
   Calandar,
@@ -8,8 +7,11 @@ import {
   PerformanceList,
   SearchHeader,
 } from '@components'
+import { CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR } from '@constants'
 import { useCalendar } from '@hooks'
 import {
+  getAllPerformance,
+  getImminentPerformances,
   PerformancePayload,
   useImminentPerformance,
   usePerformance,
@@ -23,9 +25,18 @@ import {
   RegionTypes,
 } from '@types'
 import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
+import { GetServerSideProps } from 'next'
 import { useEffect, useState } from 'react'
 
-const PerformancePage = () => {
+interface PerformanceProps {
+  allData: PerformanceResponse
+  imminentPerformanceData: PerformanceImminentResponse
+}
+
+const PerformancePage = ({
+  allData,
+  imminentPerformanceData,
+}: PerformanceProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isEntire, setIsEntire] = useState(false)
   const {
@@ -40,9 +51,9 @@ const PerformancePage = () => {
   } = useCalendar()
   const [performancePayload, setPerformancePayload] =
     useState<PerformancePayload>({
-      year: parseInt(monthYear.year),
-      month: parseInt(monthYear.month),
-      day: currentDay + 1,
+      year: CURRENT_YEAR,
+      month: CURRENT_MONTH,
+      day: CURRENT_DAY,
       location: '',
       genre: '',
       pageNumber: 0,
@@ -50,7 +61,10 @@ const PerformancePage = () => {
     })
   const { month: payloadMonth, year, day } = performancePayload
   const fallback = {} as PerformanceResponse
-  const { data = fallback, isLoading } = usePerformance(performancePayload)
+  const { data = fallback, isLoading } = usePerformance(
+    performancePayload,
+    allData,
+  )
   const { data: performanceData } = data
   const calandarProps = {
     month,
@@ -73,8 +87,7 @@ const PerformancePage = () => {
   }, [payloadMonth, year, day])
   const imminentFallback = {} as PerformanceImminentResponse
   const { data: imminentPerformances = imminentFallback } =
-    useImminentPerformance()
-  const imminentData = imminentPerformances?.data
+    useImminentPerformance(imminentPerformanceData)
 
   if (isLoading) {
     return <div></div>
@@ -86,7 +99,7 @@ const PerformancePage = () => {
       )}
       <section className="mt-[52px]">
         <PerformanceBanner
-          imminentPerformances={imminentData as PerformanceImminent[]}
+          imminentPerformances={imminentPerformances as PerformanceImminent[]}
         />
         <Calandar
           {...calandarProps}
@@ -146,6 +159,28 @@ const PerformancePage = () => {
       </section>
     </>
   )
+}
+
+/**
+ *TODO: 추후 initialData로 가져오는 로직이 아닌 dehydrated로 가져오는 로직으로 변경
+ */
+export const getServerSideProps: GetServerSideProps = async () => {
+  const allData = await getAllPerformance({
+    year: CURRENT_YEAR,
+    month: CURRENT_MONTH,
+    day: CURRENT_DAY,
+    location: '',
+    genre: '',
+    pageNumber: 0,
+    pageSize: 15,
+  })
+  const { data: imminentPerformanceData } = await getImminentPerformances()
+  return {
+    props: {
+      allData,
+      imminentPerformanceData,
+    },
+  }
 }
 
 export default PerformancePage
