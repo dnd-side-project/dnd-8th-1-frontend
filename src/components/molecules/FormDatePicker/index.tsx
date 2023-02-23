@@ -5,12 +5,15 @@ import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
 import { Icon } from '@components'
 import { isPossibleDay } from '@utils'
+import { ko } from 'date-fns/esm/locale'
+
+import './style.css'
+
 interface FormDatePickerProps {
   initialStartDate?: string
   handleStartDate: (date: Date | null) => void
 }
 
-// TODO: 디자인 확정되면 디자인 반영하기
 const FormDatePicker = ({
   initialStartDate,
   handleStartDate,
@@ -19,6 +22,9 @@ const FormDatePicker = ({
     initialStartDate ? initialStartDate : null,
   )
 
+  const [isOpen, setIsOpen] = useState(false)
+
+  console.log(new Date())
   const inputRef = useRef(null)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,7 +34,9 @@ const FormDatePicker = ({
         {...props}
         htmlFor="input-date"
         ref={ref}
-        className={`${FORM_INPUT_STYLE} relative block flex w-[343px] items-center justify-center`}
+        className={`${FORM_INPUT_STYLE} relative block flex w-[343px] cursor-pointer items-center justify-center ${
+          isOpen ? 'border-green-light' : 'border-gray-600'
+        }`}
       >
         {!startDate && (
           <p className="absolute top-[16px] left-[11px] text-body2 text-gray-400">
@@ -60,6 +68,10 @@ const FormDatePicker = ({
       }}
       customInput={<CustomInput inputref={inputRef} />}
       filterDate={isPossibleDay}
+      locale={ko}
+      className=" border-[1px] border-green-light"
+      onCalendarOpen={() => setIsOpen(true)}
+      onCalendarClose={() => setIsOpen(false)}
     />
   )
 }
