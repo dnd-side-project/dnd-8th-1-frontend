@@ -1,7 +1,7 @@
-import { isDeadLine } from '@utils'
 import { StyledImage } from '@components'
 import Image from 'next/image'
 import { PLACEHOLDER_IMG } from '@constants'
+import dayjs from 'dayjs'
 
 interface SearchResultImageProps {
   startDate: string
@@ -9,6 +9,11 @@ interface SearchResultImageProps {
 }
 
 const SearchResultImage = ({ startDate, imgUrl }: SearchResultImageProps) => {
+  const isDeadLine = (target: string) => {
+    const current = dayjs()
+    const targetDate = dayjs(target)
+    return current.valueOf() - targetDate.valueOf() > 60000
+  }
   return (
     <>
       {!isDeadLine(startDate) ? (

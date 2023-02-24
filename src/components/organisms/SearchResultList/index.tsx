@@ -18,7 +18,7 @@ const SearchResultList = ({ searchResultList }: SearchResultListProps) => {
   }
 
   const entireDate = Array.from(
-    new Set(searchResultList.map((item) => item.startDate)),
+    new Set(searchResultList?.map((item) => item.startDate)),
   )
     .sort((a, b) => {
       return dayjs(b).valueOf() - dayjs(a).valueOf()
@@ -38,7 +38,7 @@ const SearchResultList = ({ searchResultList }: SearchResultListProps) => {
     }
   })
 
-  const isEmptyResults = searchResultList.length === 0
+  const isEmptyResults = searchResultList?.length === 0
 
   return (
     <>
