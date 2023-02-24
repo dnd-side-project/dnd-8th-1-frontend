@@ -22,7 +22,6 @@ const FormDatePicker = ({
 
   const [isOpen, setIsOpen] = useState(false)
 
-  console.log(new Date())
   const inputRef = useRef(null)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
