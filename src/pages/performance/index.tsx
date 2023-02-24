@@ -40,7 +40,7 @@ const PerformancePage = ({
   imminentPerformanceData,
 }: PerformanceProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [isEntire, setIsEntire] = useState(true)
+  const [isTotal, setIsTotal] = useState(true)
   const {
     monthYear,
     month,
@@ -103,7 +103,7 @@ const PerformancePage = ({
     } else {
       queryClient.prefetchQuery(
         [
-          QUERY_KEY.PERFORMANCE,
+          QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE,
           year,
           payloadMonth,
           day && day + 1,
@@ -130,8 +130,8 @@ const PerformancePage = ({
         />
         <Calandar
           {...calandarProps}
-          isEntire={isEntire}
-          setIsEntire={setIsEntire}
+          isTotal={isTotal}
+          setIsTotal={setIsTotal}
           setIsSearchOpen={setIsSearchOpen}
         />
         <div className="flex w-full px-[16px] py-[22px]">
@@ -157,7 +157,7 @@ const PerformancePage = ({
           </div>
         </div>
         <>
-          {isEntire ? (
+          {isTotal ? (
             <div className="flex flex-col items-center justify-center px-[16px]">
               <PerformanceEntireList
                 performances={performanceData?.content as Performance[]}
@@ -170,7 +170,7 @@ const PerformancePage = ({
               />
             </div>
           )}
-          <Center className={isEntire ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
+          <Center className={isTotal ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
             <Pagination
               currentPage={currentPage as number}
               totalPages={performanceData?.totalPages as number}

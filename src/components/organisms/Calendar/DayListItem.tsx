@@ -7,24 +7,24 @@ interface DayListItemProps {
   setCurrentDay: (value: SetStateAction<number>) => void
   getDay: (day: number) => number
   day: number
-  isEntire: boolean
-  setIsEntire: (value: SetStateAction<boolean>) => void
+  isTotal: boolean
+  setIsTotal: (value: SetStateAction<boolean>) => void
   setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
 const DayListItem = ({
-  isEntire,
+  isTotal,
   currentDay,
   isSunday,
   setCurrentDay,
   getDay,
   day,
-  setIsEntire,
+  setIsTotal,
   setPerformancePayload,
 }: DayListItemProps) => {
   return (
     <span
       className={`cursor-pointer text-subtitle font-bold mobile:p-[14px] ${
-        currentDay === day && !isEntire
+        currentDay === day && !isTotal
           ? 'border-b-[3px] border-b-green-light text-green-light'
           : isSunday(day)
           ? 'border-b-[2px] border-b-gray-700 text-[#783232]'
@@ -33,7 +33,7 @@ const DayListItem = ({
       key={day}
       onClick={() => {
         setCurrentDay(day)
-        setIsEntire(false)
+        setIsTotal(false)
         setPerformancePayload((prev) => {
           return {
             ...prev,

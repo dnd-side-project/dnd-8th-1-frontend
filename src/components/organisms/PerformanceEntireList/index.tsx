@@ -46,9 +46,6 @@ const PerformanceEntireList = ({
     <>
       {isEmptyPerformances ? (
         <div className="mt-[77.87px] mb-[118px] flex w-[100%] flex-col items-center justify-center">
-          {/**
-           *TODO: StyledImage 사용 시 렌더링 사이즈가 375px로 잡혀서 Image 컴포넌트 사용하는 것으로 변경 됨
-           */}
           <div className="relative w-[fit] pl-[20px]">
             <Image
               src={emptyImage}

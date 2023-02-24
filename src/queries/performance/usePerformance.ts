@@ -50,7 +50,7 @@ const usePerformance = (
 ) => {
   return useQuery(
     [
-      QUERY_KEY.PERFORMANCE,
+      QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE,
       year,
       month,
       day,
