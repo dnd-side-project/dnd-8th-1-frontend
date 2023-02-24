@@ -21,5 +21,8 @@ export const performanceAPI = {
   delete: (performanceId: number) => {
     return authInstance.delete(`api/v1/performances/${performanceId}`)
   },
-  // 공연 리뷰 삭제 (TODO: 미구현, 명세에 없음)
+  // 팀 이름으로 공연 검색
+  search: (teamName: string) => {
+    return unAuthInstance.get(`/api/v1/performances/team?name=${teamName}`)
+  }
 }

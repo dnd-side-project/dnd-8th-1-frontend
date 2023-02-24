@@ -6,4 +6,5 @@ export const QUERY_KEY = {
   PERFORMANCE: {
     DETAIL: 'performanceDetail',
   },
+  PERFORMANCE_SEARCH: 'performanceSearch',
 }

@@ -16,7 +16,7 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
   const router = useRouter()
   const { register, reset, handleSubmit } = useForm<SearchForm>()
   const handleGoSearchPage = (data: SearchForm) => {
-    router.push(`/performance/search?query=${data.search}`)
+    router.push(`/performance/search?team=${data.search}`)
   }
   const [isBanner, setIsBanner] = useState(true)
   useEffect(() => {
@@ -46,7 +46,7 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
           </div>
           <Input
             placeholder="댄서/팀 이름으로 공연 검색"
-            styleClass="ml-[6px] w-[322px] h-[41px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 bg-white text-gray-600 text-body1 placeholder:text-gray-500 text-gray-100"
+            styleClass="ml-[6px] w-[322px] h-[41px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none bg-white text-body1 placeholder:text-gray-500 text-gray-100"
             {...register('search')}
           />
           <div

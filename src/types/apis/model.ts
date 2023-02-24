@@ -123,5 +123,7 @@ export interface SearchResult {
   }
 }
 
-// export interface PerformanceSearch {
-// }
+export interface PerformanceSearchResult {
+  comming: SearchResult[]
+  ended: SearchResult[]
+}
