@@ -8,8 +8,6 @@ const postReviewCreate = async (
   performanceId: number,
   payload: CommentCreate,
 ) => {
-  console.log(performanceId, payload)
-
   const { data }: AxiosResponse<CommentCreate> =
     await performanceAPI.createReview(performanceId, payload)
   return data
