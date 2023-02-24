@@ -41,5 +41,5 @@ export type CommentCreateRequest = CommentCreate
 
 // 후기 전체 조회 응답
 export interface CommentResponse extends BaseResponse {
-  data?: Comment[]
+  data: Comment[]
 }

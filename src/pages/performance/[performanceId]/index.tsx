@@ -10,15 +10,19 @@ import {
 import { useDisclosure } from '@hooks'
 import { Center } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import {
-  Comment,
-  CommentCreate,
-  CommentResponse,
-  PerformanceDetailResponse,
-} from '@types'
-import { performanceAPI } from '@apis'
 import { GetServerSideProps } from 'next'
-import { useCreateReview, useDeletePerformance } from '@queries'
+import {
+  useCreateReview,
+  useDeletePerformance,
+  useDetailPerformance,
+  fetchPerformanceDetail,
+  useGetReviews,
+  fetchReviews,
+} from '@queries'
+
+import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { performanceKeys } from 'queries/performance/performanceKeys'
+import { useRouter } from 'next/router'
 
 const CancelSubmitModal = dynamic(
   () => import('../../../components/templates/CancelSubmitModal'),
@@ -27,36 +31,58 @@ const CancelSubmitModal = dynamic(
   },
 )
 
-const PERFORMANCE_REVIEW_DUMMY: Comment[] = [
-  {
-    content:
-      '로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트이다.',
-    reviewId: 1,
-    profile: {
-      id: 1,
-      name: '작성자이름',
-    },
-    createdDate: '2023-07-01T12:00:00',
-  },
-  {
-    content:
-      '로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트이다.',
-    reviewId: 2,
-    profile: {
-      id: 2,
-      name: '작성자이름',
-    },
-    createdDate: '2023-07-01T12:00:00',
-  },
-]
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = parseInt(context.params?.performanceId as string)
+  const queryClient = new QueryClient()
 
-const PerformanceDetailPage = ({
-  performance,
-  review, // TODO: API 미구현
-}: {
-  performance: PerformanceDetailResponse
-  review: PerformanceDetailResponse
-}) => {
+  await Promise.all([
+    queryClient.prefetchQuery(performanceKeys.detail(id), () =>
+      fetchPerformanceDetail(id),
+    ),
+    queryClient.prefetchQuery(performanceKeys.reviews(id), () =>
+      fetchReviews(id),
+    ),
+  ])
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
+}
+
+const PerformanceDetailPage = () => {
+  const router = useRouter()
+  const { performanceId } = router.query
+  const pathId = parseInt(performanceId as string)
+
+  const {
+    data: performance,
+    isLoading: isPerformanceLoading,
+    isError: isPerformanceError,
+  } = useDetailPerformance(pathId)
+  const {
+    data: review,
+    isLoading: isReviewLoading,
+    isError: isReviewError,
+  } = useGetReviews(pathId)
+
+  const [showDeleteModal, setShowDeleteModal, handleDeleteModalToggle] =
+    useDisclosure()
+
+  // TODO: 로딩 중 처리
+  if (
+    isPerformanceLoading ||
+    isPerformanceError ||
+    isReviewLoading ||
+    isReviewError
+  ) {
+    return <div>상세 조회 로딩중...</div>
+  }
+
+  const performanceData = performance.data
+  const reviewData = review.data
+
   const {
     id,
     title,
@@ -68,13 +94,12 @@ const PerformanceDetailPage = ({
     startTime,
     address,
     description,
-  } = performance.data
-  const [showDeleteModal, setShowDeleteModal, handleDeleteModalToggle] =
-    useDisclosure()
+  } = performanceData
 
-  // TODO: API 미구현
+  // TODO: API 이슈 있음
   // const { mutate: requestModifyReview } = useCreateReview(id)
   // const { mutate: requestDeletePerformance } = useDeletePerformance(id)
+  // const { mutate: requestCreateReview } = useCreateReview(id)
 
   return (
     <>
@@ -142,39 +167,20 @@ const PerformanceDetailPage = ({
 
         <PerformanceReviewSection
           startDate={startDate}
-          reviews={PERFORMANCE_REVIEW_DUMMY}
+          reviews={reviewData.data}
           handleOnDelete={(reviewId) => {
             // 공연 리뷰 삭제 (TODO: api 미구현, 명세에 없음)
             console.log(reviewId, '삭제!')
           }}
           handleOnSubmit={(reviewContent: string) => {
             // TODO: API 구현 안된 부분
-            // requestModifyReview({ review: reviewContent })
+            // requestCreateReview({ review: reviewContent })
             // console.log(reviewContent)
           }}
         />
       </main>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { params } = context
-  const { data: performanceData } = await performanceAPI.getDetail(
-    parseInt(params?.performanceId as string),
-  )
-
-  // TODO: 후기 조회 미구현
-  // const { data: reviewData } = await performanceAPI.getReviews(
-  //   params.performanceId,
-  // )
-
-  return {
-    props: {
-      performance: performanceData,
-      review: PERFORMANCE_REVIEW_DUMMY,
-    },
-  }
 }
 
 export default PerformanceDetailPage
