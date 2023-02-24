@@ -8,33 +8,33 @@ interface DayListProps {
   isSunday: (day: number) => boolean
   setCurrentDay: (value: SetStateAction<number>) => void
   getDay: (day: number) => number
-  isEntire: boolean
-  setIsEntire: (value: SetStateAction<boolean>) => void
+  isTotal: boolean
+  setIsTotal: (value: SetStateAction<boolean>) => void
   setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
 
 const DayList = ({
-  isEntire,
+  isTotal,
   calandar,
   currentDay,
   isSunday,
   setCurrentDay,
   getDay,
-  setIsEntire,
+  setIsTotal,
   setPerformancePayload,
 }: DayListProps) => {
   return (
     <>
       {calandar.map((_, day) => (
         <DayListItem
-          isEntire={isEntire}
+          isTotal={isTotal}
           key={day}
           currentDay={currentDay}
           isSunday={isSunday}
           setCurrentDay={setCurrentDay}
           getDay={getDay}
           day={day}
-          setIsEntire={setIsEntire}
+          setIsTotal={setIsTotal}
           setPerformancePayload={setPerformancePayload}
         />
       ))}

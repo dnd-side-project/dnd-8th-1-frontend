@@ -19,7 +19,7 @@ const useRequestCandidate = (
     (payload: MeetApplyRequest) => postRequestCandidate(payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.MEET_CANDIDATE_VIEW, eventId])
+        queryClient.invalidateQueries([QUERY_KEY.MEET.CANDIDATE, eventId])
         setIsCompleted(true)
         setIsCandidate(true)
       },
