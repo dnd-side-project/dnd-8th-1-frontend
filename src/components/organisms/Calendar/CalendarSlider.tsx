@@ -3,7 +3,7 @@ import { IconButton } from '@components'
 import { SetStateAction } from 'react'
 import { PerformancePayload } from '@queries'
 
-interface CalandarSliderProps {
+interface CalendarSliderProps {
   handleSetMonth: (monthIncrement: number) => void
   setCurrentDay: (value: SetStateAction<number>) => void
   currentDay: number
@@ -11,13 +11,13 @@ interface CalandarSliderProps {
   performancePayload: PerformancePayload
 }
 
-const CalandarSlider = ({
+const CalendarSlider = ({
   handleSetMonth,
   setCurrentDay,
   currentDay,
   setPerformancePayload,
   performancePayload: { month },
-}: CalandarSliderProps) => {
+}: CalendarSliderProps) => {
   return (
     <div className="flex items-center justify-center pl-[10px]">
       <IconButton
@@ -81,4 +81,4 @@ const CalandarSlider = ({
   )
 }
 
-export default CalandarSlider
+export default CalendarSlider

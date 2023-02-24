@@ -1,13 +1,13 @@
 import { PerformancePayload } from '@queries'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
-import CalandarSlider from './CalandarSlider'
-import CalandarSwiper from './CalandarSwiper'
+import CalandarSlider from './CalendarSlider'
+import CalandarSwiper from './CalendarSwiper'
 
 interface CalendarProps {
   setIsSearchOpen: Dispatch<SetStateAction<boolean>>
-  isEntire: boolean
-  setIsEntire: Dispatch<SetStateAction<boolean>>
+  isTotal: boolean
+  setIsTotal: Dispatch<SetStateAction<boolean>>
   handleSetMonth: (monthIncrement: number) => void
   isSunday: (day: number) => boolean
   currentDay: number
@@ -25,11 +25,10 @@ const Calendar = ({
   setCurrentDay,
   getDay,
   calandar,
-  month,
   handleSetMonth,
   setIsSearchOpen,
-  isEntire,
-  setIsEntire,
+  isTotal,
+  setIsTotal,
   setPerformancePayload,
   performancePayload,
 }: CalendarProps) => {
@@ -60,8 +59,8 @@ const Calendar = ({
         </div>
       </div>
       <CalandarSwiper
-        isEntire={isEntire}
-        setIsEntire={setIsEntire}
+        isTotal={isTotal}
+        setIsTotal={setIsTotal}
         calandar={calandar}
         currentDay={currentDay}
         isSunday={isSunday}

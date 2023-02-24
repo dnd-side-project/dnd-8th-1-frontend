@@ -6,14 +6,14 @@ import { AxiosResponse } from 'axios'
 
 export const getImminentPerformances = async () => {
   const { data }: AxiosResponse<PerformanceImminentResponse> =
-    await performanceAPI.imminent()
+    await performanceAPI.getImminent()
   return data
 }
 
 const useImminentPerformance = (
   imminentPerformanceData: PerformanceImminentResponse,
 ) => {
-  return useQuery([QUERY_KEY.PERFORMANCE_IMMINENT], getImminentPerformances, {
+  return useQuery([QUERY_KEY.PERFORMANCE.IMMINENT], getImminentPerformances, {
     initialData: imminentPerformanceData,
   })
 }

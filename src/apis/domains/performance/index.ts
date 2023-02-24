@@ -2,7 +2,7 @@ import { unAuthInstance } from '@apis'
 import { CURRENT_YEAR, CURRENT_MONTH, CURRENT_DAY } from '@constants'
 export const performanceAPI = {
   // 공연 정보 검색 조회
-  search: (teamName: string) => {
+  getSearchResult: (teamName: string) => {
     return unAuthInstance.get(`/api/v1/performances/team?name=${teamName}`)
   },
   // 공연 정보 전체 조회(페이지네이션)
@@ -20,7 +20,7 @@ export const performanceAPI = {
     )
   },
   // 임박한 공연 정보 조회
-  imminent: () => {
+  getImminent: () => {
     return unAuthInstance.get(`/api/v1/performances/imminent`)
   },
 }

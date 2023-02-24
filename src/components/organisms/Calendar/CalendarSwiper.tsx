@@ -2,27 +2,27 @@ import { PerformancePayload } from '@queries'
 import { SetStateAction } from 'react'
 import DayList from './DayList'
 
-interface CalandarSwiperProps {
+interface CalendarSwiperProps {
   calandar: unknown[]
   currentDay: number
   isSunday: (day: number) => boolean
   setCurrentDay: (value: SetStateAction<number>) => void
   getDay: (day: number) => number
-  isEntire: boolean
-  setIsEntire: (value: SetStateAction<boolean>) => void
+  isTotal: boolean
+  setIsTotal: (value: SetStateAction<boolean>) => void
   setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
 
-const CalandarSwiper = ({
+const CalendarSwiper = ({
   calandar,
   currentDay,
   isSunday,
   setCurrentDay,
   getDay,
-  isEntire,
-  setIsEntire,
+  isTotal,
+  setIsTotal,
   setPerformancePayload,
-}: CalandarSwiperProps) => {
+}: CalendarSwiperProps) => {
   return (
     <div className="no-scrollbar flex w-[100%] resize-none overflow-x-scroll pl-[58px]">
       <div>
@@ -32,10 +32,10 @@ const CalandarSwiper = ({
               ...prev,
               day: '',
             }))
-            setIsEntire(true)
+            setIsTotal(true)
           }}
           className={`b-0 absolute left-0 h-[57px] bg-gray-900 px-[16px] text-[16px] font-bold  ${
-            isEntire
+            isTotal
               ? 'border-b-[3px] border-b-green-light text-green-light'
               : 'border-b-[2px] border-b-gray-700 text-gray-400'
           }`}
@@ -44,8 +44,8 @@ const CalandarSwiper = ({
         </button>
       </div>
       <DayList
-        isEntire={isEntire}
-        setIsEntire={setIsEntire}
+        isTotal={isTotal}
+        setIsTotal={setIsTotal}
         calandar={calandar}
         currentDay={currentDay}
         isSunday={isSunday}
@@ -57,4 +57,4 @@ const CalandarSwiper = ({
   )
 }
 
-export default CalandarSwiper
+export default CalendarSwiper

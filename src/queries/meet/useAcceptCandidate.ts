@@ -18,7 +18,7 @@ const useAcceptCandidate = () => {
       patchAcceptCandidate(payload.eventId, payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.MEET_CANDIDATE_VIEW])
+        queryClient.invalidateQueries([QUERY_KEY.MEET.CANDIDATE])
       },
     },
   )

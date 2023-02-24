@@ -12,7 +12,7 @@ const useDeleteMeet = () => {
   const queryClient = useQueryClient()
   return useMutation((eventId: number) => deleteMeet(eventId), {
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.MEET])
+      queryClient.invalidateQueries([QUERY_KEY.MEET.TOTAL_MEET])
       router.push('/meet')
     },
   })
