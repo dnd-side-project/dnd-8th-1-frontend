@@ -21,7 +21,7 @@
   position: relative !important;
   border: none !important;
   border-radius: 8px !important;
-  height: 68px;
+  /* height: 68px; */
 }
 
 .react-datepicker__day--today {
@@ -89,8 +89,6 @@
   justify-content: space-around !important;
   padding: 0px 20px !important;
   color: var(--gray-400) !important;
-  /* margin-bottom: 22px !important;
-  height: 32.5px !important; */
 }
 
 .react-datepicker__day-name,
@@ -116,7 +114,7 @@
 }
 
 .react-datepicker__month {
-  margin-top: 35px !important;
+  margin-top: 92px !important;
 }
 .react-datepicker__day {
   color: var(--gray-100) !important;
@@ -181,4 +179,81 @@
 .react-datepicker__day--keyboard-selected {
   background-color: var(--gray-700) !important;
   font-weight: 400 !important;
+}
+
+/* 프로필 캘린더 (월 only) */
+
+/* 년 표시  */
+.react-datepicker-year-header {
+  position: absolute;
+  top: 23px;
+  color: var(--gray-100) !important;
+  font-size: 18px !important;
+}
+
+.react-datepicker__month-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 한 row 당 스타일 */
+.react-datepicker__month-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: var(--gray-400);
+}
+
+.react-datepicker__month-text {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 59px;
+  height: 42px;
+  line-height: 15px;
+  text-align: center !important;
+}
+
+.react-datepicker__month-wrapper:last-child {
+  margin-bottom: 0px;
+}
+
+.react-datepicker__month.react-datepicker__monthPicker {
+  margin-top: 32px !important;
+}
+
+/* 초기 선택되는 스타일 해제 */
+.react-datepicker__month-text.react-datepicker__month-text--keyboard-selected.react-datepicker__month-text--today {
+  background-color: var(--gray-700);
+  color: var(--gray-400);
+  font-weight: 400 !important;
+}
+
+/* 현재 값 스타일 해제 */
+.react-datepicker__month-text--today {
+  font-weight: 400 !important;
+}
+
+/* 선택된 값 스타일 변경  */
+.react-datepicker__month-text.react-datepicker__month--selected.react-datepicker__month-text--keyboard-selected {
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  font-weight: 700;
+  border-radius: 6px !important;
+}
+
+/* 호버 시 스타일 삭제 */
+.react-datepicker__month-text:hover {
+  background-color: var(--gray-700) !important;
+  color: var(--gray-400) !important;
+  font-weight: 400 !important;
+}
+
+/* 선택된 값 호버 시 스타일 삭제 */
+.react-datepicker__month-text.react-datepicker__month--selected.react-datepicker__month-text--keyboard-selected:hover {
+  background-color: var(--gray-500) !important;
+  color: var(--gray-100) !important;
+  font-weight: 700 !important;
 }
