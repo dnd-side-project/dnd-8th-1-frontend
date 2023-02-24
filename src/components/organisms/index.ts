@@ -21,3 +21,4 @@ export { default as PerformanceReviewTextArea } from './PerformanceReviewTextAre
 export { default as PerformanceSectionMiddle } from './PerformanceSectionMiddle'
 export { default as PerformanceReviewSection } from './PerformanceReviewSection'
 export { default as MainProfileList } from './MainProfileList'
+export { default as MainProfileSection } from './MainProfileSection'
