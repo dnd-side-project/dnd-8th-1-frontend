@@ -58,7 +58,7 @@ export interface MeetDetail {
 }
 
 export interface MeetApplicant {
-  profile: Profile
+  profile: Omit<Profile, 'type'>
   matched: boolean
 }
 export interface MeetAccept {
@@ -117,11 +117,7 @@ export interface SearchResult {
   startDate: string
   location: RegionTypes
   genres: GenreTypes[]
-  profile: {
-    id: string
-    imgUrl: string
-    name: string
-  }
+  profile: Pick<Profile, 'id' | 'imgUrl' | 'name'>
 }
 
 export interface PerformanceSearchResult {
