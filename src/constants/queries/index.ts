@@ -3,4 +3,7 @@ export const QUERY_KEY = {
   MEET_DETAIL: 'meetDetail',
   MEET_CANDIDATE_VIEW: 'meet-candidate-view',
   PERFORMANCE_SEARCH: 'performanceSearch',
+  PERFORMANCE: {
+    TOTAL_PERFORMANCE: 'totalPerformance',
+  },
 }
