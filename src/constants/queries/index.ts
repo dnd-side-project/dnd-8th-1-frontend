@@ -1,3 +1,4 @@
+// TODO: 나중에 query key collocation 적용
 export const QUERY_KEY = {
   MEET: 'meet',
   MEET_DETAIL: 'meetDetail',
