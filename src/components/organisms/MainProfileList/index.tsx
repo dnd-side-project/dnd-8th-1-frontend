@@ -6,7 +6,7 @@ interface MainProfileListProps {
 }
 const MainProfileList = ({ profileItems }: MainProfileListProps) => {
   return (
-    <ul className="no-scrollbar ml-[16px] flex w-[375px] gap-[22px] overflow-scroll">
+    <ul className="no-scrollbar flex w-[375px] gap-[22px] overflow-scroll">
       {profileItems.map((item) => (
         <MainProfileItem key={item.id} profile={item} />
       ))}
