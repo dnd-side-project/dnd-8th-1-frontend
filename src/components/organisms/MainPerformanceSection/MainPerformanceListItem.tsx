@@ -1,6 +1,8 @@
 import { GenreTypes, Performance, RegionTypes } from '@types'
-import { Avatar, StyledImage, Tags } from '@components'
+import { Avatar, Tags } from '@components'
 import Link from 'next/link'
+import Image from 'next/image'
+import { PLACEHOLDER_IMG } from '@constants'
 
 interface MainMeetListItemProps {
   performanceItem: Omit<Performance, 'performStartDate'>
@@ -22,18 +24,20 @@ const MainPerformanceListItem = ({
       key={id}
       href={`/performance/${id}`}
     >
-      <StyledImage
-        styleClass="rounded-[8px] border border-gray-700"
-        alt="공연 이미지"
-        width={239}
-        src={imgUrl}
-        height={130}
-        placeholder="blur"
-      />
+      <div className="rounded-[8px] border border-gray-700">
+        <Image
+          alt="공연 이미지"
+          width={239}
+          src={imgUrl}
+          height={130}
+          placeholder="blur"
+          blurDataURL={PLACEHOLDER_IMG}
+        />
+      </div>
       <Tags
         containerStyle="mt-[12px] mb-[8px]"
         textStyle="text-caption text-gray-400"
-        tags={[location, genres] as (GenreTypes | RegionTypes)[]}
+        tags={[location, genres[0]] as (GenreTypes | RegionTypes)[]}
       />
       <span className="mb-[8px] block w-[95%] overflow-hidden text-ellipsis whitespace-nowrap text-body1 font-bold">
         {title}
