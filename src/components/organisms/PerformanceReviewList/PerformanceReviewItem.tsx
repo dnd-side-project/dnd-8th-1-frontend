@@ -45,7 +45,9 @@ const PerformanceReviewItem = ({
               삭제
             </button>
           </div>
-          <p className="text-body2 text-gray-100">{content}</p>
+          <p className="whitespace-pre-wrap text-body2 text-gray-100">
+            {content}
+          </p>
         </div>
       </li>
 
