@@ -74,7 +74,7 @@ export interface PerformanceImminent {
 
 // TODO: 이거 통합해서 써도 될것 같습니다..
 export interface Performance {
-  id: string
+  id: number
   title: string
   imgUrl: string
   startDate: string
