@@ -127,3 +127,19 @@ export interface PerformanceSearchResult {
   comming: SearchResult[]
   ended: SearchResult[]
 }
+
+export interface MainComment {
+  content: string
+  createDate: string
+  hasProfile: boolean
+  performance: {
+    id: number
+    imgUrl: string
+    title: string
+  }
+  reviewId: number
+  writer: {
+    id: number
+    name: string
+  }
+}
