@@ -8,35 +8,35 @@ interface MainMeetListItemProps {
 
 const MainPerformanceListItem = ({
   performanceItem: {
-    performId,
-    performImg,
-    performLocation,
-    performGenres,
-    performTitle,
+    id,
+    imgUrl,
+    location,
+    genres,
+    title,
     profile: { name, imgUrl: profileImgUrl },
   },
 }: MainMeetListItemProps) => {
   return (
     <Link
       className="flex w-[255px] flex-col justify-center pr-[16px] last:pr-0"
-      key={performId}
-      href={`/performance/${performId}`}
+      key={id}
+      href={`/performance/${id}`}
     >
       <StyledImage
         styleClass="rounded-[8px] border border-gray-700"
         alt="공연 이미지"
         width={239}
-        src={performImg}
+        src={imgUrl}
         height={130}
         placeholder="blur"
       />
       <Tags
         containerStyle="mt-[12px] mb-[8px]"
         textStyle="text-caption text-gray-400"
-        tags={[performLocation, performGenres] as (GenreTypes | RegionTypes)[]}
+        tags={[location, genres] as (GenreTypes | RegionTypes)[]}
       />
       <span className="mb-[8px] block w-[95%] overflow-hidden text-ellipsis whitespace-nowrap text-body1 font-bold">
-        {performTitle}
+        {title}
       </span>
       <div className="flex items-center">
         <Avatar

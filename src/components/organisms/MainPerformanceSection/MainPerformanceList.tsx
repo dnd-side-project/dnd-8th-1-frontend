@@ -10,7 +10,7 @@ const MainPerformanceList = ({ performanceList }: MainMeetSectionProps) => {
     <section className="no-scrollbar mt-[28px] flex overflow-x-scroll">
       {performanceList.map((performanceListItem) => (
         <MainPerformanceListItem
-          key={performanceListItem.performId}
+          key={performanceListItem.id}
           performanceItem={performanceListItem}
         />
       ))}

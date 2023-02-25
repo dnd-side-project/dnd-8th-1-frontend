@@ -30,6 +30,7 @@ export interface Profile {
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
   location: string
+  type: string // 계정 유형, 댄서 or 댄스팀
 }
 
 export interface Meet {
@@ -57,7 +58,7 @@ export interface MeetDetail {
 }
 
 export interface MeetApplicant {
-  profile: Profile
+  profile: Omit<Profile, 'type'>
   matched: boolean
 }
 export interface MeetAccept {
@@ -116,17 +117,15 @@ export interface SearchResult {
   startDate: string
   location: RegionTypes
   genres: GenreTypes[]
-  profile: {
-    id: string
-    imgUrl: string
-    name: string
-  }
+  profile: Pick<Profile, 'id' | 'imgUrl' | 'name'>
 }
 
 export interface PerformanceSearchResult {
   comming: SearchResult[]
   ended: SearchResult[]
 }
+
+export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
 
 export interface MainComment {
   content: string
