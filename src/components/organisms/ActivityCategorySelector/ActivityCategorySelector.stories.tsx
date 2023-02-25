@@ -18,7 +18,6 @@ export default {
 } as ComponentMeta<typeof ActivityCategorySelector>
 
 const Template: ComponentStory<typeof ActivityCategorySelector> = () => {
-  //  const [selected, setSelected] = useState('등록')
   const [category, setCategory] = useState('만나기')
   const [subCategory, setSubcategory] = useState('등록')
 
