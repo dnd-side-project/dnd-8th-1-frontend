@@ -7,7 +7,7 @@ export default {
   component: WrittenEventList,
   title: 'Organisms/WrittenEventList',
   parameters: {
-    componentSubtitle: '공통 컴포넌트로 사용되는 컴포넌트',
+    componentSubtitle: '활동 내역 페이지의 작성한 만나기 내역 리스트 ',
   },
   decorators: [
     (Story) => (
