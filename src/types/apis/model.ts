@@ -127,3 +127,14 @@ export interface PerformanceSearchResult {
   comming: SearchResult[]
   ended: SearchResult[]
 }
+
+// 작성한 이벤트
+export interface WrittenEvent {
+  id: number // 이벤트 고유 id
+  createdAt: string // 이벤트 게시글 등록된 시간 ex) 2022-12-31T23:59:59,
+  imgUrl: string // 이벤트 이미지,
+  title: string // 이벤트 제목,
+  profile: Pick<Profile, 'name'>
+  isMatched: boolean // 이벤트 매칭 여부, 지원자 한명이라도 매칭되면 true,
+  type: MeetTypes // 콜라보 or 쉐어
+}
