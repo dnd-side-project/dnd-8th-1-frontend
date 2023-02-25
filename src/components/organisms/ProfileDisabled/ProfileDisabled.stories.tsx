@@ -21,6 +21,7 @@ const Template: ComponentStory<typeof ProfileDisabled> = () => (
   <ProfileDisabled
     profileImage="https://picsum.photos/500/500"
     name="구글 계정 이름"
+    id={1}
   />
 )
 
