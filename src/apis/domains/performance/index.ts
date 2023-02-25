@@ -1,5 +1,4 @@
 import { authInstance, unAuthInstance } from '@apis'
-import { CURRENT_YEAR, CURRENT_MONTH, CURRENT_DAY } from '@constants'
 import { CommentCreate } from '@types'
 export const performanceAPI = {
   // 공연 정보 검색 조회
@@ -8,9 +7,9 @@ export const performanceAPI = {
   },
   // 공연 정보 전체 조회(페이지네이션)
   getAll: (
-    year = CURRENT_YEAR,
-    month = CURRENT_MONTH,
-    day: number | '' = CURRENT_DAY,
+    year: number | '' = '',
+    month: number | '' = '',
+    day: number | '' = '',
     location = '',
     genre = '',
     pageNumber = 0,
