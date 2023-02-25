@@ -20,7 +20,7 @@ export const useModifyPerformance = (performanceId: number) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(performanceKeys.detail(performanceId))
-        router.push('/performance')
+        router.push(`/performance/${performanceId}`)
       },
     },
   )
