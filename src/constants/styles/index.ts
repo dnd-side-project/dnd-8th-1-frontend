@@ -51,3 +51,7 @@ export const theme = {
 
 export const FORM_INPUT_STYLE =
   'placeholder-text-body1 w-[343px] h-[52px] px-[18px] py-[14px] text-body1 rounded-[8px] bg-gray-700 border-[1px] border-gray-600 focus:outline-none focus:border-green-light'
+
+// TODO: 추후 해당 스타일 사용하는 부분 리팩터링
+export const TEXT_OVERFLOW_STYLE =
+  'overflow-hidden text-ellipsis whitespace-nowrap'
