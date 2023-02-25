@@ -1,5 +1,6 @@
-import { unAuthInstance } from '@apis'
+import { authInstance, unAuthInstance } from '@apis'
 import { CURRENT_YEAR, CURRENT_MONTH, CURRENT_DAY } from '@constants'
+import { CommentCreate } from '@types'
 export const performanceAPI = {
   // 공연 정보 검색 조회
   getSearchResult: (teamName: string) => {
@@ -23,7 +24,7 @@ export const performanceAPI = {
   getImminent: () => {
     return unAuthInstance.get(`/api/v1/performances/imminent`)
   },
-  // 공연 상세 조회 
+  // 공연 상세 조회
   getDetail: (performanceId: number) => {
     return unAuthInstance.get(`api/v1/performances/${performanceId}`)
   },
@@ -45,5 +46,5 @@ export const performanceAPI = {
   // 팀 이름으로 공연 검색
   search: (teamName: string) => {
     return unAuthInstance.get(`/api/v1/performances/team?name=${teamName}`)
-  }
+  },
 }
