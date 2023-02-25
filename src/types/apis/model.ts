@@ -72,18 +72,18 @@ export interface PerformanceImminent {
   imgUrl: string
 }
 
+// TODO: 이거 통합해서 써도 될것 같습니다..
 export interface Performance {
-  id: string
+  id: number
   title: string
   imgUrl: string
   startDate: string
-  location: RegionTypes
-  genres: GenreTypes[]
-  profile: {
-    id: string
-    imgUrl: string
-    name: string
-  }
+  startTime: string
+  location: string
+  genres: string[]
+  description: string
+  address: string
+  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
 }
 
 export interface PerformanceDetail {
@@ -135,6 +135,7 @@ export interface MyEvent {
   isMatched: boolean // 이벤트 매칭 여부, 지원자 한명이라도 매칭되면 true
   type: MeetTypes // 콜라보 or 쉐어
 }
+
 export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
 
 export interface MainComment {
@@ -151,4 +152,10 @@ export interface MainComment {
     id: number
     name: string
   }
+}
+export interface MyReview {
+  id: number // 후기 고유 ID
+  createdAt: string // 2022-12-31T23:59:59
+  review: string // 후기 내용
+  performance: Pick<Performance, 'id' | 'title'>
 }
