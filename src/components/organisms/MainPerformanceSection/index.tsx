@@ -29,9 +29,9 @@ const MainMeetSection = ({
       </div>
 
       {/** 공연 정보 설명 */}
-      <span className="text-subtitle font-bold text-gray-100">
+      <h3 className="text-subtitle font-bold text-gray-100">
         취향저격 댄스 공연을 찾아요 👀
-      </span>
+      </h3>
       <p className="mt-[12px] text-body2 text-gray-300">
         지역, 장르에 따라 나에게 딱 맞는 공연을 발견해요.
       </p>
@@ -50,16 +50,16 @@ const MainMeetSection = ({
         <Icon icon="arrow-right" size={24} color={theme.colors.gray[100]} />
       </Link>
 
-      {/** 후기 label */}
-      <span className="text-subtitle font-bold text-gray-100">
+      {/** 후기 section */}
+      <h3 className="text-subtitle font-bold text-gray-100">
         따듯한 응원과 <br /> 피드백으로 함께 성장해요😀
-      </span>
+      </h3>
 
       {/** 후기 관련 스크롤 리스트 */}
       <MainPerformanceCommentList commentList={commentList} />
 
       {/** 버튼 */}
-      <section className="mt-[40px] mb-[38px] flex justify-center">
+      <div className="mt-[40px] mb-[38px] flex justify-center">
         <Link
           href={'/meet'}
           className="flex h-[50px] w-[174px] justify-center rounded-[24.5px] bg-violent_gradient px-[1px] py-[1px]"
@@ -72,7 +72,7 @@ const MainMeetSection = ({
             </span>
           </button>
         </Link>
-      </section>
+      </div>
     </section>
   )
 }
