@@ -66,19 +66,19 @@ export interface MeetAccept {
 }
 
 export interface PerformanceImminent {
-  id?: string
-  title?: string
-  startDate?: string
-  imgUrl?: string
+  id: string
+  title: string
+  startDate: string
+  imgUrl: string
 }
 
 export interface Performance {
-  performId: string
-  performTitle: string
-  performImg: string
-  performStartDate: string
-  performLocation: RegionTypes
-  performGenres: GenreTypes[]
+  id: string
+  title: string
+  imgUrl: string
+  startDate: string
+  location: RegionTypes
+  genres: GenreTypes[]
   profile: {
     id: string
     imgUrl: string
@@ -126,3 +126,19 @@ export interface PerformanceSearchResult {
 }
 
 export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
+
+export interface MainComment {
+  content: string
+  createDate: string
+  hasProfile: boolean
+  performance: {
+    id: number
+    imgUrl: string
+    title: string
+  }
+  reviewId: number
+  writer: {
+    id: number
+    name: string
+  }
+}

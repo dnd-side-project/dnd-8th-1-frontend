@@ -1,5 +1,5 @@
 import { Icon } from '@components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { theme } from '@constants'
 interface PaginationProps {
   currentPage: number
@@ -17,6 +17,10 @@ const Pagination = ({
   handleChangePage,
 }: PaginationProps) => {
   const [pageNumber, setPageNumber] = useState(currentPage)
+
+  useEffect(() => {
+    setPageNumber(currentPage)
+  }, [currentPage])
 
   const offset =
     pageNumber % 5 === 0

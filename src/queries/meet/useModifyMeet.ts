@@ -16,7 +16,7 @@ const useModifyMeet = (eventId: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries([
         QUERY_KEY.MEET,
-        QUERY_KEY.MEET_DETAIL,
+        QUERY_KEY.MEET.DETAIL,
         eventId,
       ])
       router.push('/meet')
