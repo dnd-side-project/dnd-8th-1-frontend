@@ -73,7 +73,9 @@ const PerformanceDetailSectionTop = ({
           className="absolute top-[36px] right-[16px] z-[4] rounded-[8px] bg-gray-700 px-[10px] py-[14px]"
         >
           <StatusPopupContent
-            handleOnModify={() => router.push(`/edit/${performanceId}`)}
+            handleOnModify={() =>
+              router.push(`/performance/edit/${performanceId}`)
+            }
             // TODO: 삭제 API 호출
             handleOnDelete={() => {
               handleOnDelete && handleOnDelete()

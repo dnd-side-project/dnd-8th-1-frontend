@@ -19,7 +19,7 @@ const PerformanceBanner = ({
         modules={[Pagination]}
         className="flex h-[275px] w-[100%]"
       >
-        {imminentPerformances.map((imminentPerformance) => (
+        {imminentPerformances?.map((imminentPerformance) => (
           <SwiperSlide key={imminentPerformance.id}>
             <Link href={`performance/${imminentPerformance.id}`}>
               <div
@@ -36,7 +36,8 @@ const PerformanceBanner = ({
                     NEW!
                   </span>
                   <span className="text-title2 font-bold text-gray-100">
-                    {imminentPerformance.title}
+                    {imminentPerformance.title.slice(0, 11)} <br />{' '}
+                    {imminentPerformance.title.slice(11)}
                   </span>
                 </div>
               </div>
