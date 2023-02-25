@@ -1,7 +1,7 @@
 import { authInstance, unAuthInstance } from '@apis'
 import { CommentCreate, PerformanceEditRequest } from '@types'
 import { CURRENT_YEAR, CURRENT_MONTH, CURRENT_DAY } from '@constants'
-import { CommentCreate } from '@types'
+
 export const performanceAPI = {
   // 공연 정보 검색 조회
   getSearchResult: (teamName: string) => {
