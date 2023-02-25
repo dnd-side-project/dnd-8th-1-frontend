@@ -24,7 +24,7 @@ export const getMeet = async ({ page, size, location, type }: MeetPayload) => {
 const useMeet = (payload: MeetPayload, meetAllData: MeetResponse) => {
   const { page, size, location, type } = payload
   return useQuery(
-    [QUERY_KEY.MEET, page, size, location, type],
+    [QUERY_KEY.MEET.TOTAL_MEET, page, size, location, type],
     () => getMeet(payload),
     {
       keepPreviousData: true,

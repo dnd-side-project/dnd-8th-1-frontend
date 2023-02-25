@@ -55,12 +55,14 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
             }}
           />
         ) : (
-          <GenrePopupContent
-            handleOnClick={(genre) => {
-              setSelectedFilter(genre)
-              handleSelected(genre)
-            }}
-          />
+          <div className="ml-[20px] mt-[6px] flex h-[208px] w-[336px] items-center justify-center rounded-[8px] border border-gray-600 bg-gray-700 px-[10px]">
+            <GenrePopupContent
+              handleOnClick={(genre) => {
+                setSelectedFilter(genre)
+                handleSelected(genre)
+              }}
+            />
+          </div>
         )}
       </PopoverContent>
     </Popover>

@@ -12,7 +12,7 @@ const getCandidate = async (eventId: number) => {
 
 const useCandidate = (eventId: number) => {
   return useQuery(
-    [QUERY_KEY.MEET_CANDIDATE_VIEW, eventId],
+    [QUERY_KEY.MEET.CANDIDATE, eventId],
     () => getCandidate(eventId),
     {
       enabled: !!eventId,
