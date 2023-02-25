@@ -6,7 +6,7 @@ import { mainKeys } from '../mainKeys'
 
 export const getProfile = async () => {
   const { data }: AxiosResponse<MainProfileResponse> =
-    await mainAPI.getProfile()
+    await mainAPI.getRandomProfile()
   return data
 }
 

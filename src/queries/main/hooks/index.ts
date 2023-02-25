@@ -1,2 +1,2 @@
-export * from './useComment'
+export * from './useLastestReviews'
 export * from './useProfile'

@@ -4,12 +4,12 @@ import { mainAPI } from 'apis/domains/main'
 import { AxiosResponse } from 'axios'
 import { mainKeys } from '../mainKeys'
 
-export const getComment = async () => {
+export const getLatestReviews = async () => {
   const { data }: AxiosResponse<MainCommentResponse> =
-    await mainAPI.getComment()
+    await mainAPI.getLatestReviews()
   return data
 }
 
-export const useComment = () => {
-  return useQuery(mainKeys.comment, getComment)
+export const useLatestReviews = () => {
+  return useQuery(mainKeys.comment, getLatestReviews)
 }

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { PLACEHOLDER_IMG } from '@constants'
 
 interface MainMeetListItemProps {
-  performanceItem: Omit<Performance, 'performStartDate'>
+  performanceItem: Omit<Performance, 'startDate'>
 }
 
 const MainPerformanceListItem = ({
@@ -32,6 +32,7 @@ const MainPerformanceListItem = ({
           height={130}
           placeholder="blur"
           blurDataURL={PLACEHOLDER_IMG}
+          style={{ objectFit: 'cover' }}
         />
       </div>
       <Tags

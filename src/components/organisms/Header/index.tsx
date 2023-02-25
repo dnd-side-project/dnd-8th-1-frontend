@@ -25,7 +25,7 @@ const Header = () => {
             공연
           </h1>
         )}
-        {pathname?.includes('/') && (
+        {pathname === '/' && (
           <h1 className="ml-[9.93px] cursor-default text-subtitle font-bold text-gray-100">
             댄버스
           </h1>

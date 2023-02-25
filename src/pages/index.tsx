@@ -8,11 +8,11 @@ import {
 import { QUERY_KEY } from '@constants'
 import {
   getAllPerformance,
-  getComment,
+  getLatestReviews,
   getMeet,
   getProfile,
   mainKeys,
-  useComment,
+  useLatestReviews,
   useMeet,
   usePerformance,
   useProfile,
@@ -28,11 +28,11 @@ import {
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-const performancePayload = {
+const performanceParams = {
   pageNumber: 0,
   pageSize: 6,
 }
-const meetPayload = {
+const meetParams = {
   location: '',
   type: '',
   page: 0,
@@ -42,9 +42,9 @@ const meetPayload = {
 export default function Home() {
   const fallback = {} as PerformanceResponse
   const { data: allPerformanceData = fallback } =
-    usePerformance(performancePayload)
-  const { data: allMeetData } = useMeet(meetPayload)
-  const { data: allCommentData } = useComment()
+    usePerformance(performanceParams)
+  const { data: allMeetData } = useMeet(meetParams)
+  const { data: allCommentData } = useLatestReviews()
   const { data: allProfileData } = useProfile()
   const meetData = allMeetData?.data?.content
   const performanceData = allPerformanceData?.data?.content.slice(0, 6)
@@ -92,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         size: 6,
       }),
     ),
-    queryClient.prefetchQuery(mainKeys.comment, getComment),
+    queryClient.prefetchQuery(mainKeys.comment, getLatestReviews),
     queryClient.prefetchQuery(mainKeys.profile, getProfile),
   ])
   return {
