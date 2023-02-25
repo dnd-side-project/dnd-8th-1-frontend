@@ -1,15 +1,15 @@
 import { StyledImage } from '@components'
 import { TEXT_OVERFLOW_STYLE } from '@constants'
-import { WrittenEvent } from '@types'
+import { MyEvent } from '@types'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 
-interface WrittenEventItemProps {
-  writtenEventItem: WrittenEvent
+interface MyEventItemProps {
+  myEventItem: MyEvent
 }
 
-const WrittenEventItem = ({ writtenEventItem }: WrittenEventItemProps) => {
-  const { id, title, createdAt, profile, isMatched, imgUrl } = writtenEventItem
+const MyEventItem = ({ myEventItem }: MyEventItemProps) => {
+  const { id, title, createdAt, profile, isMatched, imgUrl } = myEventItem
   const date = dayjs(createdAt)
 
   return (
@@ -52,4 +52,4 @@ const WrittenEventItem = ({ writtenEventItem }: WrittenEventItemProps) => {
   )
 }
 
-export default WrittenEventItem
+export default MyEventItem

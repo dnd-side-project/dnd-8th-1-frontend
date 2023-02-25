@@ -1,5 +1,5 @@
-import { BaseResponse, WrittenEvent } from '@types'
+import { BaseResponse, MyEvent } from '@types'
 
-interface WrittenEventResponse extends BaseResponse {
-  data: WrittenEvent[]
+interface MyEventResponse extends BaseResponse {
+  data: MyEvent[]
 }

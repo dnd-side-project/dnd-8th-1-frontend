@@ -1,11 +1,11 @@
-import WrittenEventList from '.'
-import WrittenEventItem from './WrittenEventItem'
+import MyEventList from '.'
+import MyEventItem from './MyEventItem'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { WrittenEvent } from '@types'
+import { MyEvent } from '@types'
 
 export default {
-  component: WrittenEventList,
-  title: 'Organisms/WrittenEventList',
+  component: MyEventList,
+  title: 'Organisms/MyEventList',
   parameters: {
     componentSubtitle: '활동 내역 페이지의 작성한 만나기 내역 리스트 ',
   },
@@ -16,9 +16,9 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof WrittenEventList>
+} as ComponentMeta<typeof MyEventList>
 
-const MEET_ITEM_DUMMY: WrittenEvent = {
+const MEET_ITEM_DUMMY: MyEvent = {
   id: 1,
   createdAt: '2022-12-31T23:59:59',
   title:
@@ -29,7 +29,7 @@ const MEET_ITEM_DUMMY: WrittenEvent = {
   type: '콜라보',
 }
 
-const MEET_ITEMS_DUMMY: WrittenEvent[] = Array.from({ length: 15 }, (_, i) => {
+const MEET_ITEMS_DUMMY: MyEvent[] = Array.from({ length: 15 }, (_, i) => {
   return {
     ...MEET_ITEM_DUMMY,
     id: i,
@@ -38,22 +38,22 @@ const MEET_ITEMS_DUMMY: WrittenEvent[] = Array.from({ length: 15 }, (_, i) => {
   }
 })
 
-const Template: ComponentStory<typeof WrittenEventList> = (args) => (
-  <WrittenEventList {...args} />
+const Template: ComponentStory<typeof MyEventList> = (args) => (
+  <MyEventList {...args} />
 )
 
-const SingleItem: ComponentStory<typeof WrittenEventList> = () => (
-  <WrittenEventItem writtenEventItem={MEET_ITEM_DUMMY} />
+const SingleItem: ComponentStory<typeof MyEventList> = () => (
+  <MyEventItem myEventItem={MEET_ITEM_DUMMY} />
 )
 
 export const Default = Template.bind({})
 Default.args = {
-  writtenEventItems: MEET_ITEMS_DUMMY,
+  myEventItems: MEET_ITEMS_DUMMY,
 }
 
 export const Empty = Template.bind({})
 Empty.args = {
-  writtenEventItems: [],
+  myEventItems: [],
 }
 
 export const Item = SingleItem.bind({})
