@@ -32,7 +32,7 @@ const PerformanceReviewItem = ({
         <div className="mb-[42px] px-[16px]">
           <div className="relative mb-[9px] flex gap-[8px]">
             <span className="text-body2 font-bold text-gray-300">
-              {profile.name}
+              {profile?.name}
             </span>
             <span className="text-body2 text-gray-500 ">
               {dayjs(createdDate).format('· M월 D일')}
