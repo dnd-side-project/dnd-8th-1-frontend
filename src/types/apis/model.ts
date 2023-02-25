@@ -65,19 +65,19 @@ export interface MeetAccept {
 }
 
 export interface PerformanceImminent {
-  id?: string
-  title?: string
-  startDate?: string
-  imgUrl?: string
+  id: string
+  title: string
+  startDate: string
+  imgUrl: string
 }
 
 export interface Performance {
-  performId: string
-  performTitle: string
-  performImg: string
-  performStartDate: string
-  performLocation: RegionTypes
-  performGenres: GenreTypes[]
+  id: string
+  title: string
+  imgUrl: string
+  startDate: string
+  location: RegionTypes
+  genres: GenreTypes[]
   profile: {
     id: string
     imgUrl: string

@@ -15,7 +15,7 @@ const useCancelCandidate = (
   const queryClient = useQueryClient()
   return useMutation((eventId: number) => deleteCandidate(eventId), {
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.MEET_CANDIDATE_VIEW, eventId])
+      queryClient.invalidateQueries([QUERY_KEY.MEET.CANDIDATE, eventId])
       setIsCompleted(false)
     },
   })

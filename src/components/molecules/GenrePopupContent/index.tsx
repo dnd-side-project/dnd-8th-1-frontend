@@ -21,7 +21,7 @@ const GenrePopupContent = ({
             width="100%"
             className={`
             rounded-[4px]
-              ${isSelect(genre) ? 'bg-green-opacity_10' : 'bg-gray-600'}`}
+              ${isSelect(genre) ? 'bg-green-opacity_10' : 'bg-gray-700'}`}
             key={genre}
             onClick={handleOnClick && (() => handleOnClick(genre))}
           >

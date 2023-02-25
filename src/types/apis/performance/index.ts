@@ -25,7 +25,7 @@ export interface PerformanceDetailResponse extends BaseResponse {
   data: PerformanceDetail
 }
 
-// 공연 글 등록 / 수정 요청
+// 공연 정보 수정 요청
 export interface PerformanceEditRequest {
   title: string
   imgUrl: string
