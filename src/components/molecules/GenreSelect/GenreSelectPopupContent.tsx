@@ -1,9 +1,10 @@
 import { Center, Grid } from '@chakra-ui/react'
 import { GENRES } from '@constants'
+import { GenreTypes } from '@types'
 
 interface GenrePopupContentProps {
   selectedGenre: string[]
-  handleOnClick?: (danceGenre: string) => void
+  handleOnClick?: (danceGenre: GenreTypes) => void
 }
 
 const GenreSelectPopupContent = ({

@@ -24,7 +24,7 @@ const PerformanceReviewList = ({
           />
         ))
       ) : (
-        <Center>
+        <Center className="mb-[250px]">
           <p className="text-body1 text-gray-400 ">작성된 후기가 없어요</p>
         </Center>
       )}

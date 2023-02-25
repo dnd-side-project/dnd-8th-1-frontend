@@ -1,0 +1,184 @@
+.react-datepicker__triangle {
+  display: none !important;
+}
+
+.react-datepicker {
+  position: relative !important;
+  font-family: 'PretendardVariable' !important;
+  border: 1px solid var(--gray-600) !important;
+  font-size: 14px !important;
+  border-radius: 8px !important;
+  background-color: var(--gray-700) !important;
+}
+
+.react-datepicker__month-container {
+  color: var(--gray-100) !important;
+  width: 343px !important;
+  border-radius: 8px !important;
+}
+
+.react-datepicker__header {
+  position: relative !important;
+  border: none !important;
+  border-radius: 8px !important;
+  height: 68px;
+}
+
+.react-datepicker__day--today {
+  color: var(--gray-400) !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  border: none !important;
+  border-radius: 7px !important;
+  background-color: var(--gray-500) !important;
+  color: var(--gray-100) !important;
+  font-weight: bold !important;
+}
+
+.react-datepicker__day--keyboard-selected:focus-visible {
+  outline: none;
+}
+
+/* 호버 효과 없애기 */
+.react-datepicker__day:hover {
+  color: var(--gray-100) !important;
+  background-color: var(--gray-700) !important;
+}
+
+.react-datepicker__day--disabled:hover {
+  color: var(--gray-500) !important;
+  background-color: var(--gray-700) !important;
+}
+
+.react-datepicker__day--disabled {
+  color: var(--gray-500) !important;
+}
+
+/* 다음 달 가는 화살 표 위치 */
+.react-datepicker__navigation {
+  top: 32px !important;
+}
+
+.react-datepicker__navigation--next {
+  right: 98px !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  color: var(--gray-100) !important;
+  top: 28px !important;
+}
+.react-datepicker__navigation--previous {
+  left: 98px !important;
+}
+
+.react-datepicker__header__dropdown
+  .react-datepicker__header__dropdown--scroll {
+  display: none !important;
+}
+
+/* 일 월 화 수 목 금 토 영역 */
+.react-datepicker__day-names {
+  position: absolute !important;
+  width: 343px !important;
+  left: 0 !important;
+  top: 69px !important;
+  display: flex !important;
+  justify-content: space-around !important;
+  padding: 0px 20px !important;
+  color: var(--gray-400) !important;
+  /* margin-bottom: 22px !important;
+  height: 32.5px !important; */
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: var(--gray-400) !important;
+}
+
+.react-datepicker__day-name {
+  color: var(--gray-400);
+}
+
+.react-datepicker__header {
+  background: var(--gray-700) !important;
+  padding: 28px 98px;
+}
+
+/* 달, 요일 까지의 영역  */
+.react-datepicker__current-month {
+  margin-bottom: 20.78px;
+  position: absolute;
+  left: 135px;
+}
+
+.react-datepicker__month {
+  margin-top: 35px !important;
+}
+.react-datepicker__day {
+  color: var(--gray-100) !important;
+}
+
+.react-datepicker__day--disabled {
+  color: var(--gray-500) !important;
+}
+
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-around !important;
+  padding: 0px 20px !important;
+}
+
+/* 선택된 날짜 스타일 */
+.react-datepicker__day--selected {
+  border-radius: 6px !important;
+  background-color: var(--gray-500) !important;
+  color: var(--gray-100) !important;
+  font-weight: bold !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+/* 선택된 경우 호버 효과 없애기 */
+.react-datepicker__day--selected:hover {
+  border: none !important;
+  border-radius: 7px !important;
+  background-color: var(--gray-500) !important;
+  color: var(--gray-100) !important;
+  font-weight: bold !important;
+}
+
+.react-datepicker__month-container {
+  margin-bottom: 28px !important;
+}
+
+/* disalbed 된 경우, 선택되었을 때 스타일링이 자동으로 됨 */
+.react-datepicker__day.react-datepicker__day--disabled.react-datepicker__day--keyboard-selected {
+  color: var(--gray-500) !important;
+  background-color: var(--gray-700) !important;
+}
+
+/* 포커스 효과 방지  */
+.react-datepicker__day--selected:focus {
+  outline: none !important; /* for non-webkit browsers */
+  outline: none -webkit-focus-ring-color !important;
+}
+
+/* 선택할 수 없는 오늘 날짜 스타일 생기는 부분 방지 */
+.react-datepicker__day--today {
+  font-weight: 400 !important;
+  color: var(--gray-500) !important;
+}
+
+.react-datepicker__day--keyboard-selected.react-datepicker__day--disabled {
+  color: var(--gray-500) !important;
+}
+
+/* 날짜가 다른 달에 가더라도 표시되는 효과 방지 */
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--gray-700) !important;
+  font-weight: 400 !important;
+}
