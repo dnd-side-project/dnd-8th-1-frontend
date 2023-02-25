@@ -40,6 +40,9 @@ const ProfileHistoryTab = ({
         {categories.map((category) => (
           <Tab
             key={category}
+            style={{
+              fontSize: fontSize.subtitle[0],
+            }}
             _selected={{
               color: colors.gray[100],
               fontSize: fontSize.subtitle[0],
