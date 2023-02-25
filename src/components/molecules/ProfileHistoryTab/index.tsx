@@ -1,10 +1,11 @@
 import { Tabs, TabList, Tab } from '@chakra-ui/react'
 import { theme } from '@constants'
 import { SetStateAction, useState } from 'react'
+import { HISTORY_MAIN_CATEGORIES } from '@types'
 
 interface ProfileHistoryTabProps {
   // 탭을 전환하였을 때의 콜백
-  handleOnChange: (category: string) => void
+  handleOnChange: (category: HISTORY_MAIN_CATEGORIES) => void
   // 기본값 지정
   defaultValue?: '만나기' | '공연'
 }
@@ -25,7 +26,7 @@ const ProfileHistoryTab = ({
       variant="unstyled"
       onChange={(index) => {
         setSelected(categories[index] as SetStateAction<'만나기' | '공연'>)
-        handleOnChange(categories[index])
+        handleOnChange(categories[index] as HISTORY_MAIN_CATEGORIES)
       }}
       defaultIndex={defaultValue && categories.indexOf(defaultValue)}
     >
