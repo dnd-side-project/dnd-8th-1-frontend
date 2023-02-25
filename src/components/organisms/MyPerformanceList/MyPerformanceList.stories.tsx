@@ -43,17 +43,17 @@ const Template: ComponentStory<typeof MyPerformanceList> = (args) => (
 )
 
 const SingleItem: ComponentStory<typeof MyPerformanceList> = () => (
-  <MyPerformanceItem myPerformanceItem={MY_PERFORMANCE} />
+  <MyPerformanceItem myPerformance={MY_PERFORMANCE} />
 )
 
 export const Default = Template.bind({})
 Default.args = {
-  myPerformanceItems: MY_PERFORMANCE_ITEMS,
+  myPerformances: MY_PERFORMANCE_ITEMS,
 }
 
 export const Empty = Template.bind({})
 Empty.args = {
-  myPerformanceItems: [],
+  myPerformances: [],
 }
 
 export const Item = SingleItem.bind({})

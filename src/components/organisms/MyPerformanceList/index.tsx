@@ -3,18 +3,18 @@ import { MyPerformance } from '@types'
 import { ActivityEmptyHelper } from '@components'
 
 interface MyPerformanceList {
-  myPerformanceItems: MyPerformance[]
+  myPerformances: MyPerformance[]
 }
 
-const MyPerformanceList = ({ myPerformanceItems }: MyPerformanceList) => {
+const MyPerformanceList = ({ myPerformances }: MyPerformanceList) => {
   return (
     <ul>
-      {myPerformanceItems.length === 0 && <ActivityEmptyHelper />}
-      {myPerformanceItems.length !== 0 &&
-        myPerformanceItems.map((myPerformanceItem) => (
+      {myPerformances.length === 0 && <ActivityEmptyHelper />}
+      {myPerformances.length !== 0 &&
+        myPerformances.map((myPerformance) => (
           <MyPerformanceItem
-            key={myPerformanceItem.id}
-            myPerformanceItem={myPerformanceItem}
+            key={myPerformance.id}
+            myPerformance={myPerformance}
           />
         ))}
     </ul>

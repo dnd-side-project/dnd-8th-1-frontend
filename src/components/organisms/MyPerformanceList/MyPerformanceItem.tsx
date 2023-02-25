@@ -5,11 +5,11 @@ import Link from 'next/link'
 import dayjs from 'dayjs'
 
 interface MyPerformanceItemProps {
-  myPerformanceItem: MyPerformance
+  myPerformance: MyPerformance
 }
 
-const MyPerformanceItem = ({ myPerformanceItem }: MyPerformanceItemProps) => {
-  const { id, title, createdAt, profile, imgUrl } = myPerformanceItem
+const MyPerformanceItem = ({ myPerformance }: MyPerformanceItemProps) => {
+  const { id, title, createdAt, profile, imgUrl } = myPerformance
   const date = dayjs(createdAt)
 
   return (
