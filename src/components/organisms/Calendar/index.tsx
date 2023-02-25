@@ -1,12 +1,13 @@
+import { PerformancePayload } from '@queries'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
-import CalandarSlider from './CalandarSlider'
-import CalandarSwiper from './CalandarSwiper'
+import CalandarSlider from './CalendarSlider'
+import CalandarSwiper from './CalendarSwiper'
 
 interface CalendarProps {
   setIsSearchOpen: Dispatch<SetStateAction<boolean>>
-  isEntire: boolean
-  setIsEntire: Dispatch<SetStateAction<boolean>>
+  isTotal: boolean
+  setIsTotal: Dispatch<SetStateAction<boolean>>
   handleSetMonth: (monthIncrement: number) => void
   isSunday: (day: number) => boolean
   currentDay: number
@@ -14,6 +15,8 @@ interface CalendarProps {
   getDay: (day: number) => number
   month: string
   calandar: unknown[]
+  setPerformancePayload: Dispatch<SetStateAction<PerformancePayload>>
+  performancePayload: PerformancePayload
 }
 
 const Calendar = ({
@@ -22,20 +25,22 @@ const Calendar = ({
   setCurrentDay,
   getDay,
   calandar,
-  month,
   handleSetMonth,
   setIsSearchOpen,
-  isEntire,
-  setIsEntire,
+  isTotal,
+  setIsTotal,
+  setPerformancePayload,
+  performancePayload,
 }: CalendarProps) => {
   const router = useRouter()
   return (
     <div className="relative flex flex-col bg-gray-900">
       <div className="flex w-full justify-between pt-[50px] pb-[20px]">
         <CalandarSlider
+          performancePayload={performancePayload}
+          setPerformancePayload={setPerformancePayload}
           handleSetMonth={handleSetMonth}
           setCurrentDay={setCurrentDay}
-          month={month}
           currentDay={currentDay}
         />
         <div className="flex">
@@ -54,13 +59,14 @@ const Calendar = ({
         </div>
       </div>
       <CalandarSwiper
-        isEntire={isEntire}
-        setIsEntire={setIsEntire}
+        isTotal={isTotal}
+        setIsTotal={setIsTotal}
         calandar={calandar}
         currentDay={currentDay}
         isSunday={isSunday}
         setCurrentDay={setCurrentDay}
         getDay={getDay}
+        setPerformancePayload={setPerformancePayload}
       />
     </div>
   )
