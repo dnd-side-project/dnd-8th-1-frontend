@@ -18,7 +18,7 @@ export default {
   },
 } as ComponentMeta<typeof RegisterList>
 
-const REGISTER_ITEM_DUMMY = {
+const REGISTER_ITEM_DUMMY: MeetApplicant = {
   profile: {
     id: 1,
     imgUrl: 'https://picsum.photos/500/500',

@@ -22,6 +22,11 @@ export interface User {
   }
 }
 
+export interface Portfolio {
+  youtubeUrl: string
+  instagramUrl: string
+  twitterUrl: string
+}
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
   id: number // 프로필 아이디
@@ -29,7 +34,10 @@ export interface Profile {
   name: string // 프로필 댄스팀 이름
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
-  location: string
+  location: RegionTypes
+  genre: GenreTypes[]
+  startDate: string
+  portfolio: Portfolio
   type: string // 계정 유형, 댄서 or 댄스팀
 }
 
@@ -58,7 +66,10 @@ export interface MeetDetail {
 }
 
 export interface MeetApplicant {
-  profile: Omit<Profile, 'type'>
+  profile: Pick<
+    Profile,
+    'id' | 'imgUrl' | 'name' | 'description' | 'openChatUrl' | 'location'
+  >
   matched: boolean
 }
 export interface MeetAccept {
