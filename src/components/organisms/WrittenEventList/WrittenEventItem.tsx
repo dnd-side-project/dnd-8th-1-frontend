@@ -1,5 +1,4 @@
-import { Center } from '@chakra-ui/react'
-import { StyledImage, Spacer } from '@components'
+import { StyledImage } from '@components'
 import { TEXT_OVERFLOW_STYLE } from '@constants'
 import { WrittenEvent } from '@types'
 import Link from 'next/link'
