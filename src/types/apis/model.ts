@@ -135,6 +135,7 @@ export interface MyEvent {
   isMatched: boolean // 이벤트 매칭 여부, 지원자 한명이라도 매칭되면 true
   type: MeetTypes // 콜라보 or 쉐어
 }
+
 export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
 
 export interface MainComment {
@@ -151,4 +152,11 @@ export interface MainComment {
     id: number
     name: string
   }
+}
+export interface MyPerformance {
+  id: number // 공연 고유 ID
+  createdAt: string // 2022-12-31T23:59:59,
+  imgUrl: string // 공연 이미지
+  title: string // 공연 제목
+  profile: Pick<Profile, 'name'>
 }
