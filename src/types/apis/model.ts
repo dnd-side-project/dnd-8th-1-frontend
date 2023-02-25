@@ -134,6 +134,7 @@ export interface MyEvent {
   profile: Pick<Profile, 'name'>
   isMatched: boolean // 이벤트 매칭 여부, 지원자 한명이라도 매칭되면 true
   type: MeetTypes // 콜라보 or 쉐어
+}
 export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
 
 export interface MainComment {
