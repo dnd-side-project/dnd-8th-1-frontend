@@ -41,9 +41,7 @@ const ProfileDatePicker = ({
 
         {startDate && (
           <div className="w-[100%] text-body2 text-gray-100">
-            {`${dayjs(startDate).year()}년 ${dayjs(
-              startDate,
-            ).month()}월에 활동 시작`}
+            {dayjs(startDate).format('YYYY년 M월에 활동 시작')}
           </div>
         )}
       </label>
