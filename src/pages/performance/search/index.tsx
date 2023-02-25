@@ -3,36 +3,74 @@ import {
   SearchResultList,
   SearchResultTab,
 } from '@components'
-import { PERFORMANCE_SEARCH } from 'dummy'
+import { getSearchResult, useSearchResult } from '@queries'
+import { SearchResult, SearchResultResponse } from '@types'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import Head from 'next/head'
+import { ParsedUrlQuery } from 'querystring'
 import { useState } from 'react'
 
-const PerformanceSearchPage = () => {
-  const { comming, ended } = PERFORMANCE_SEARCH
+interface PerformanceSearchPageProps {
+  query: ParsedUrlQuery
+  searchResultData: SearchResultResponse
+}
+
+const PerformanceSearchPage = ({
+  query,
+  searchResultData,
+}: PerformanceSearchPageProps) => {
+  const teamName = query?.team as string
+  const fallback = {} as SearchResultResponse
+  const { data = fallback } = useSearchResult(teamName, searchResultData)
+  const searchData = data?.data
+  const comming = searchData?.comming
+  const ended = searchData?.ended
   const [isComming, setIsComming] = useState(true)
   return (
-    <div className="relative min-h-screen w-full bg-[#131313] px-[16px]">
-      <div className="absolute left-0">
-        <SearchResultHeader />
+    <>
+      <Head>
+        <title>공연 검색 결과 - Danverse</title>
+      </Head>
+      <div className="relative min-h-screen w-full bg-[#131313] px-[16px]">
+        <div className="absolute left-0">
+          <SearchResultHeader />
+        </div>
+        <>
+          <section className="mb-[26px] pt-[86px]">
+            <SearchResultTab
+              commingCount={comming?.length as number}
+              endedCount={ended?.length as number}
+              isComming={isComming}
+              setIsComming={setIsComming}
+            />
+          </section>
+          <section>
+            {isComming ? (
+              <SearchResultList
+                searchResultList={comming as SearchResult[] | []}
+              />
+            ) : (
+              <SearchResultList
+                searchResultList={ended as SearchResult[] | []}
+              />
+            )}
+          </section>
+        </>
       </div>
-      <>
-        <section className="mb-[26px] pt-[86px]">
-          <SearchResultTab
-            commingCount={comming.length}
-            endedCount={ended.length}
-            isComming={isComming}
-            setIsComming={setIsComming}
-          />
-        </section>
-        <section>
-          {isComming ? (
-            <SearchResultList searchResultList={comming} />
-          ) : (
-            <SearchResultList searchResultList={ended} />
-          )}
-        </section>
-      </>
-    </div>
+    </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+}: GetServerSidePropsContext) => {
+  const searchResultData = await getSearchResult(query?.team as string)
+  return {
+    props: {
+      query,
+      searchResultData,
+    },
+  }
 }
 
 export default PerformanceSearchPage

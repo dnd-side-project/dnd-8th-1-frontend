@@ -32,7 +32,6 @@ const MeetDeleteModal = ({
           >
             취소
           </button>
-          {/** TODO : onClick handler 추가 */}
           <button
             onClick={() => requestDeleteMeet(id)}
             className="h-[50px] w-[145px] bg-green-light text-body1 font-bold text-gray-900"

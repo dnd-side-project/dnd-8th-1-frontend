@@ -85,14 +85,21 @@ export interface Performance {
   }
 }
 
-export interface PerformanceDetail extends Performance {
-  performStartTime?: string
-  performDescription?: string
-  performAddress?: string
+export interface PerformanceDetail {
+  id: number
+  title: string
+  imgUrl: string
+  startDate: string
+  startTime: string
+  location: string
+  genres: string[]
+  description: string
+  address: string
+  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
 }
 
 export interface CommentCreate {
-  review?: string
+  review: string
 }
 
 export interface Comment {
@@ -114,4 +121,9 @@ export interface SearchResult {
     imgUrl: string
     name: string
   }
+}
+
+export interface PerformanceSearchResult {
+  comming: SearchResult[]
+  ended: SearchResult[]
 }

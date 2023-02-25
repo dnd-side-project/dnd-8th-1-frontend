@@ -1,13 +1,18 @@
 import Head from 'next/head'
 import { MeetBanner, FilterButton, Pagination, CollaboList } from '@components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Center } from '@chakra-ui/react'
-import { useMeet } from '@queries'
+import { getMeet, useMeet } from '@queries'
 import { MeetResponse } from '@types'
+import { useQueryClient } from '@tanstack/react-query'
+import { QUERY_KEY } from '@constants'
 
-// TODO: api 붙이기
-const MeetPage = () => {
+interface MeetPageProps {
+  meetAllData: MeetResponse
+}
+
+const MeetPage = ({ meetAllData }: MeetPageProps) => {
   const fallback = {} as MeetResponse
   const [currentQueryString, setCurrentQueryString] = useState({
     page: 0,
@@ -16,9 +21,22 @@ const MeetPage = () => {
     type: '',
   })
   const currentPage = currentQueryString.page + 1
-  const { data = fallback, isLoading } = useMeet(currentQueryString)
+  const { data = fallback, isLoading } = useMeet(
+    currentQueryString,
+    meetAllData,
+  )
   const { data: meetData } = data
   const router = useRouter()
+  const queryClient = useQueryClient()
+  const { page, size, location, type } = currentQueryString
+  useEffect(() => {
+    if (currentQueryString.page < data?.data?.totalPages) {
+      queryClient.prefetchQuery(
+        [QUERY_KEY.MEET, page + 1, size, location, type],
+        () => getMeet(currentQueryString),
+      )
+    }
+  }, [currentQueryString.page])
   /**
    *TODO: 임시 loading 로직
    */
@@ -70,6 +88,20 @@ const MeetPage = () => {
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async () => {
+  const meetAllData = await getMeet({
+    page: 0,
+    size: 15,
+    location: '',
+    type: '',
+  })
+  return {
+    props: {
+      meetAllData,
+    },
+  }
 }
 
 export default MeetPage

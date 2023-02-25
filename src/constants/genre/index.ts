@@ -1,4 +1,6 @@
-const GENRES = [
+import { GenreTypes } from '@types'
+
+const GENRES: GenreTypes[] = [
   '힙합',
   '커버댄스',
   '스트릿댄스',
