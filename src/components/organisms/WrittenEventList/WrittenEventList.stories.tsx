@@ -38,8 +38,8 @@ const MEET_ITEMS_DUMMY: WrittenEvent[] = Array.from({ length: 15 }, (_, i) => {
   }
 })
 
-const Template: ComponentStory<typeof WrittenEventList> = () => (
-  <WrittenEventList writtenEventItems={MEET_ITEMS_DUMMY} />
+const Template: ComponentStory<typeof WrittenEventList> = (args) => (
+  <WrittenEventList {...args} />
 )
 
 const SingleItem: ComponentStory<typeof WrittenEventList> = () => (
@@ -47,4 +47,13 @@ const SingleItem: ComponentStory<typeof WrittenEventList> = () => (
 )
 
 export const Default = Template.bind({})
+Default.args = {
+  writtenEventItems: MEET_ITEMS_DUMMY,
+}
+
+export const Empty = Template.bind({})
+Empty.args = {
+  writtenEventItems: [],
+}
+
 export const Item = SingleItem.bind({})

@@ -1,7 +1,6 @@
 import WrittenEventItem from './WrittenEventItem'
 import { WrittenEvent } from '@types'
-import { Divider } from '@chakra-ui/react'
-import { theme } from '@constants'
+import { ActivityEmptyHelper } from '@components'
 
 interface WrittenEventListProps {
   writtenEventItems: WrittenEvent[]
@@ -10,12 +9,14 @@ interface WrittenEventListProps {
 const WrittenEventList = ({ writtenEventItems }: WrittenEventListProps) => {
   return (
     <ul>
-      {writtenEventItems.map((writtenEventItem) => (
-        <WrittenEventItem
-          key={writtenEventItem.id}
-          writtenEventItem={writtenEventItem}
-        />
-      ))}
+      {writtenEventItems.length === 0 && <ActivityEmptyHelper />}
+      {writtenEventItems.length !== 0 &&
+        writtenEventItems.map((writtenEventItem) => (
+          <WrittenEventItem
+            key={writtenEventItem.id}
+            writtenEventItem={writtenEventItem}
+          />
+        ))}
     </ul>
   )
 }
