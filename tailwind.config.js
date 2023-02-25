@@ -18,8 +18,8 @@ module.exports = {
         DEFAULT: '#1890FF',
       },
       violet: {
-        light: '#6236FD',
-        DEFAULT: '#9577FF',
+        light: '#9577FF',
+        DEFAULT: '#6236FD',
       },
       gray: {
         900: '#080808',
