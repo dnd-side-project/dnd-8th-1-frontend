@@ -31,6 +31,7 @@ const StyledImage = ({
         fill
         placeholder={placeholder}
         blurDataURL={placeholder && PLACEHOLDER_IMG}
+        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
       />
     </div>
   )
