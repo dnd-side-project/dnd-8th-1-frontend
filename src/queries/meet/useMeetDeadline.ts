@@ -16,7 +16,7 @@ const useMeetDeadline = (meetId: number) => {
     (payload: MeetCloseRequest) => patchEarlyDeadline(payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.MEET_DETAIL, meetId])
+        queryClient.invalidateQueries([QUERY_KEY.MEET.DETAIL, meetId])
         router.push(`/meet/${meetId}`)
       },
     },

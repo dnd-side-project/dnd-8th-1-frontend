@@ -19,7 +19,7 @@ export default {
   ],
 } as ComponentMeta<typeof PerformanceList>
 
-const Template: ComponentStory<typeof PerformanceList> = () => {
+const Template: ComponentStory<typeof PerformanceList> = (args) => {
   const DUMMY = {
     performTitle: '1월 부산에서 공연할 예정인 혁오 밴드 입니다!!',
     performImg: 'https://picsum.photos/96/110',
@@ -42,7 +42,7 @@ const Template: ComponentStory<typeof PerformanceList> = () => {
     performances: PERFORMANCE_DUMMY,
   }
 
-  return <PerformanceList {...props} />
+  return <PerformanceList {...props} {...args} />
 }
 
 export const Default = Template.bind({})

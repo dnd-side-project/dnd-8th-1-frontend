@@ -1,5 +1,5 @@
 export { default as Organism } from './Organism'
-export { default as Calandar } from './Calandar'
+export { default as Calandar } from './Calendar'
 export { default as PerformanceBanner } from './PerformanceBanner'
 export { default as SidebarMenu } from './SidebarMenu'
 export { default as Header } from './Header'
@@ -21,3 +21,4 @@ export { default as PerformanceReviewTextArea } from './PerformanceReviewTextAre
 export { default as PerformanceSectionMiddle } from './PerformanceSectionMiddle'
 export { default as PerformanceReviewSection } from './PerformanceReviewSection'
 export { default as MainMeetSection } from './MainMeetSection'
+export { default as MainPerformanceSection } from './MainPerformanceSection'
