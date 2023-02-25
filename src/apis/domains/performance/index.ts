@@ -1,5 +1,5 @@
 import { authInstance, unAuthInstance } from '@apis'
-import { CommentCreate } from '@types'
+import { CommentCreate, PerformanceEditRequest } from '@types'
 
 export const performanceAPI = {
   //공연 상세 조회
@@ -21,8 +21,12 @@ export const performanceAPI = {
   delete: (performanceId: number) => {
     return authInstance.delete(`api/v1/performances/${performanceId}`)
   },
+  // 공연 정보 수정
+  edit: (payload: PerformanceEditRequest & { id: number }) => {
+    return authInstance.patch('/api/v1/performances', payload)
+  },
   // 팀 이름으로 공연 검색
   search: (teamName: string) => {
     return unAuthInstance.get(`/api/v1/performances/team?name=${teamName}`)
-  }
+  },
 }
