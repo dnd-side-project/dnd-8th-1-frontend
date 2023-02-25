@@ -24,7 +24,7 @@ const MainMeetListItem = ({
     >
       <Avatar shape="round" profileImage={imgUrl} size={130} />
       <Tags
-        containerStyle="mt-[12px] mb-[8px]"
+        containerStyle="mt-[12px] mb-[8px] w-[146px]"
         textStyle="text-caption text-gray-400"
         tags={[location, type] as (GenreTypes | RegionTypes)[]}
       />
