@@ -43,17 +43,17 @@ const Template: ComponentStory<typeof MyEventList> = (args) => (
 )
 
 const SingleItem: ComponentStory<typeof MyEventList> = () => (
-  <MyEventItem myEventItem={MEET_ITEM_DUMMY} />
+  <MyEventItem myEvent={MEET_ITEM_DUMMY} />
 )
 
 export const Default = Template.bind({})
 Default.args = {
-  myEventItems: MEET_ITEMS_DUMMY,
+  myEvents: MEET_ITEMS_DUMMY,
 }
 
 export const Empty = Template.bind({})
 Empty.args = {
-  myEventItems: [],
+  myEvents: [],
 }
 
 export const Item = SingleItem.bind({})

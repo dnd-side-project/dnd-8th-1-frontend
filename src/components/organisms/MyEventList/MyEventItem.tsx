@@ -5,11 +5,11 @@ import Link from 'next/link'
 import dayjs from 'dayjs'
 
 interface MyEventItemProps {
-  myEventItem: MyEvent
+  myEvent: MyEvent
 }
 
-const MyEventItem = ({ myEventItem }: MyEventItemProps) => {
-  const { id, title, createdAt, profile, isMatched, imgUrl } = myEventItem
+const MyEventItem = ({ myEvent }: MyEventItemProps) => {
+  const { id, title, createdAt, profile, isMatched, imgUrl } = myEvent
   const date = dayjs(createdAt)
 
   return (
