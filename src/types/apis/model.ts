@@ -74,16 +74,16 @@ export interface PerformanceImminent {
 
 // TODO: 이거 통합해서 써도 될것 같습니다..
 export interface Performance {
-  id: number
+  id: string
   title: string
   imgUrl: string
   startDate: string
+  location: RegionTypes
+  genres: GenreTypes[]
+  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
   startTime: string
-  location: string
-  genres: string[]
   description: string
   address: string
-  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
 }
 
 export interface PerformanceDetail {
