@@ -150,7 +150,7 @@ const PerformanceDetailPage = () => {
         <div className="px-[16px] ">
           <h2 className=" text-body1 leading-none">공연 설명</h2>
           <Spacer size={9} />
-          <p className="text-body2">{description}</p>
+          <p className="whitespace-pre-wrap text-body2">{description}</p>
         </div>
 
         <Spacer size={34} />
