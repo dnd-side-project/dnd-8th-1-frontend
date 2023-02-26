@@ -5,8 +5,8 @@ import { GenreTypes, PerformanceResponse, RegionTypes } from '@types'
 import { AxiosResponse } from 'axios'
 
 export interface PerformancePayload {
-  year?: number
-  month?: number
+  year?: number | ''
+  month?: number | ''
   day?: number | ''
   location?: RegionTypes | ''
   genre?: GenreTypes | ''
@@ -46,7 +46,7 @@ const usePerformance = (
     pageNumber,
     pageSize,
   }: PerformancePayload,
-  allData: PerformanceResponse,
+  allData?: PerformanceResponse,
 ) => {
   return useQuery(
     [
@@ -71,7 +71,7 @@ const usePerformance = (
       }),
     {
       keepPreviousData: true,
-      initialData: allData,
+      initialData: allData && allData,
     },
   )
 }
