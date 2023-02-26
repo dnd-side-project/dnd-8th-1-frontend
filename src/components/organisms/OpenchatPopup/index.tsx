@@ -38,7 +38,7 @@ const OpenchatPopup = ({
       setIsValid(false)
     }
   }, [watch('openChatLink')])
-  console.log(watch('openChatLink'))
+
   return (
     <>
       <AdditionalInfoPopup
@@ -87,6 +87,7 @@ const OpenchatPopup = ({
               href={
                 'https://cs.kakao.com/helps?category=105&locale=ko&service=8'
               }
+              target="_blank"
             >
               혹시 오픈채팅을 모르시나요?
             </Link>
