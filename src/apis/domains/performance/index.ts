@@ -1,7 +1,5 @@
 import { authInstance, unAuthInstance } from '@apis'
-import { CommentCreate } from '@types'
 import { CommentCreate, PerformanceEditRequest } from '@types'
-import { CURRENT_YEAR, CURRENT_MONTH, CURRENT_DAY } from '@constants'
 
 export const performanceAPI = {
   // 공연 정보 검색 조회
