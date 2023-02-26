@@ -174,7 +174,7 @@ export interface AppliedEvent {
   profile: Pick<Profile, 'name'>
   isMatched: boolean //나의 지원이 매칭된 여부 true, false,
   type: MeetTypes // 콜라보 or 쉐어
-
+}
 export interface MyReview {
   id: number // 후기 고유 ID
   createdAt: string // 2022-12-31T23:59:59

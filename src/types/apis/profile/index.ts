@@ -12,7 +12,7 @@ export interface ProfileRandomResponse extends BaseResponse {
 // 활동내역, 내가 지원한 이벤트 조회
 interface AppliedEventResponse extends BaseResponse {
   data: AppliedEvent[]
-
+}
 // 활동내역, 내가 등록한 후기 조회
 interface MyReviewResponse extends BaseResponse {
   data: MyReview[]
