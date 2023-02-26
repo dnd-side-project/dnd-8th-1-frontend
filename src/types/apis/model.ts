@@ -23,9 +23,9 @@ export interface User {
 }
 
 export interface Portfolio {
-  youtubeUrl: string
-  instagramUrl: string
-  tiktokUrl: string
+  youtubeUrl?: string
+  instagramUrl?: string
+  tiktokUrl?: string
 }
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
