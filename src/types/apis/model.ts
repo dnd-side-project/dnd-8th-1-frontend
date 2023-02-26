@@ -23,9 +23,9 @@ export interface User {
 }
 
 export interface Portfolio {
-  youtubeUrl: string
-  instagramUrl: string
-  twitterUrl: string
+  youtubeUrl?: string
+  instagramUrl?: string
+  tiktokUrl?: string
 }
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
@@ -175,6 +175,15 @@ export interface AppliedEvent {
   isMatched: boolean //나의 지원이 매칭된 여부 true, false,
   type: MeetTypes // 콜라보 or 쉐어
 }
+
+export interface MyPerformance {
+  id: number // 공연 고유 ID
+  createdAt: string // 2022-12-31T23:59:59,
+  imgUrl: string // 공연 이미지
+  title: string // 공연 제목
+  profile: Pick<Profile, 'name'>
+}
+
 export interface MyReview {
   id: number // 후기 고유 ID
   createdAt: string // 2022-12-31T23:59:59
