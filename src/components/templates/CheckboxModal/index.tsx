@@ -61,7 +61,7 @@ const CheckboxModal = ({
             className={
               isChecked
                 ? MODAL_BUTTON_ACTIVE_SM
-                : `${MODAL_BUTTON_DISABLED_SM} cursor-not-allowed`
+                : `${MODAL_BUTTON_DISABLED_SM} cursor-not-allowed bg-gray-400`
             }
             onClick={() => {
               handleOnSubmit()
