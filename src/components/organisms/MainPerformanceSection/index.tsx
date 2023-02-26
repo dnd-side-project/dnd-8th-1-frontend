@@ -19,7 +19,7 @@ const MainMeetSection = ({
       {/** 공연 정보 제목 */}
       <div className="mb-[22px] flex items-center">
         <h2
-          className={`mr-[6px] bg-violet-light bg-clip-text text-[20px] font-bold leading-[28px] text-[transparent]`}
+          className={`mr-[6px] bg-violet-light bg-clip-text text-title2 font-bold leading-[28px] text-[transparent]`}
         >
           공연
         </h2>
@@ -61,7 +61,7 @@ const MainMeetSection = ({
       {/** 버튼 */}
       <div className="mt-[40px] mb-[38px] flex justify-center">
         <Link
-          href={'/meet'}
+          href={'/performance'}
           className="flex h-[50px] w-[174px] justify-center rounded-[24.5px] bg-violent_gradient px-[1px] py-[1px]"
         >
           <button className="h-full w-full rounded-[24.5px] bg-gray-900">
