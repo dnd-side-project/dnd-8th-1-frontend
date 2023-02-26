@@ -19,7 +19,7 @@ const OpenchatPopup = ({
   setIsOpenChatOpen,
   handleOnSubmit,
 }: OpenchatPopupProps) => {
-  const [isValid, setIsValid] = useState(false)
+  const [isValid, setIsValid] = useState(true)
   const { register, handleSubmit, reset, control } = useForm<OpenChatForm>({
     defaultValues: {
       openChatLink: previousData ? previousData : '',
@@ -64,7 +64,7 @@ const OpenchatPopup = ({
               styleClass={`w-[330px] bg-gray-900 ${
                 isEmpty
                   ? 'border-gray-300'
-                  : isValid || previousData
+                  : isValid
                   ? 'border-green-light'
                   : 'border-[#EB5526]'
               } text-sm sm:py-2 pb-[9px] border-b focus:outline-none text-gray-100 placeholder:text-gray-600`}
@@ -93,7 +93,7 @@ const OpenchatPopup = ({
               혹시 오픈채팅을 모르시나요?
             </Link>
           )}
-          {!isValid && !isEmpty && !previousData && (
+          {!isValid && !isEmpty && (
             <span className="mt-[6px] text-caption text-[#EB5526]">
               잘못된 링크 형식입니다.
             </span>
