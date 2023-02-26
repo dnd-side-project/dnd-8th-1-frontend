@@ -8,8 +8,9 @@ interface MyAppliedEventItemProps {
   appliedEvent: AppliedEvent
 }
 
-const MyAppliedEventItem = ({ appliedEvent }: MyAppliedEventItemProps) => {
-  const { id, title, appliedAt, profile, isMatched, imgUrl } = appliedEvent
+const MyAppliedEventItem = ({
+  appliedEvent: { id, title, appliedAt, profile, isMatched, imgUrl },
+}: MyAppliedEventItemProps) => {
   const date = dayjs(appliedAt)
 
   return (
