@@ -9,7 +9,7 @@ interface ProfileInfo {
   name: string
   genres: GenreTypes[]
   location: RegionTypes
-  career: string // 경력 TODO: 백엔드에서 주는 대로 변수 이름 변경
+  startDate: string
 }
 
 const ProfileInfo = ({
@@ -17,12 +17,11 @@ const ProfileInfo = ({
   name,
   genres,
   location,
-  career,
+  startDate,
 }: ProfileInfo) => {
-  const startDate = dayjs()
-  const endDate = dayjs(career)
-
-  const months = startDate.diff(endDate, 'month')
+  const now = dayjs()
+  const endDate = dayjs(startDate)
+  const months = now.diff(endDate, 'month')
 
   return (
     <Center className="flex-col">
@@ -40,7 +39,7 @@ const ProfileInfo = ({
       <div className="flex items-center gap-[8.82px]">
         <Icon icon="heart" size={16} />
         <span className="text-subtitle text-gray-100">
-          춤과 <span className="font-bold">{months}개월</span> 째 함께하는 중
+          춤과 <span className="font-bold">{months}개월 째</span> 함께하는 중
         </span>
       </div>
     </Center>

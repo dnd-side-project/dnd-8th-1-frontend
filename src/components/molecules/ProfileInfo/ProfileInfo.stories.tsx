@@ -22,18 +22,18 @@ const DUMMY_PROFILE = {
   name: '아이키',
   genres: ['힙합'] as GenreTypes[],
   location: '부산' as RegionTypes,
-  career: '2011-01-05T12:00:00',
+  startDate: '2011-01-05T12:00:00',
 }
 
 const Template: ComponentStory<typeof ProfileInfo> = (args) => {
-  const { imgUrl, name, genres, location, career } = DUMMY_PROFILE
+  const { imgUrl, name, genres, location, startDate } = DUMMY_PROFILE
   return (
     <ProfileInfo
       imgUrl={imgUrl}
       name={name}
       genres={genres}
       location={location}
-      career={career}
+      startDate={startDate}
     />
   )
 }

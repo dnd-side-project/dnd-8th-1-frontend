@@ -18,27 +18,26 @@ export default {
 } as ComponentMeta<typeof ProfileTopSection>
 
 const DUMMY_PROFILE = {
-  userId: 1,
-  recruitmentType: '댄서' as RecruitmentType,
+  id: 1,
+  type: '댄서' as RecruitmentType,
   imgUrl: 'https://picsum.photos/500',
   name: '아이키',
   genres: ['힙합'] as GenreTypes[],
   location: '부산' as RegionTypes,
-  career: '2011-01-05T12:00:00',
+  startDate: '2011-01-05T12:00:00',
 }
 
 const Template: ComponentStory<typeof ProfileTopSection> = (args) => {
-  const { imgUrl, name, genres, location, career, userId, recruitmentType } =
-    DUMMY_PROFILE
+  const { imgUrl, name, genres, location, startDate, id, type } = DUMMY_PROFILE
   return (
     <ProfileTopSection
       imgUrl={imgUrl}
       name={name}
       genres={genres}
       location={location}
-      career={career}
-      userId={userId}
-      recruitmentType={recruitmentType}
+      startDate={startDate}
+      id={id}
+      type={type}
     />
   )
 }

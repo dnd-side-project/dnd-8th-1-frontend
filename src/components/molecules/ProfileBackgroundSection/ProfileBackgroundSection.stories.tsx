@@ -8,7 +8,7 @@ export default {
     componentSubtitle: '프로필 페이지에 사용되는 계정 유형에 따른 뒷부분',
   },
   argTypes: {
-    recruitmentType: {
+    type: {
       defaultValue: '댄서',
       control: 'inline-radio',
       options: ['댄서', '댄스팀'],
