@@ -38,7 +38,7 @@ const OpenchatPopup = ({
       setIsValid(false)
     }
   }, [watch('openChatLink')])
-
+  console.log(watch('openChatLink'))
   return (
     <>
       <AdditionalInfoPopup
@@ -75,7 +75,9 @@ const OpenchatPopup = ({
                 icon="x-circle"
                 size={16}
                 areaLabel="입력 값을 초기화 시키는 버튼"
-                handleOnClick={() => reset()}
+                handleOnClick={() => {
+                  reset({ openChatLink: '' })
+                }}
               />
             )}
           </div>
