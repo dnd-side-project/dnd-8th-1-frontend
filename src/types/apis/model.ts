@@ -164,6 +164,14 @@ export interface MainComment {
     name: string
   }
 }
+
+export interface MyPerformance {
+  id: number // 공연 고유 ID
+  createdAt: string // 2022-12-31T23:59:59,
+  imgUrl: string // 공연 이미지
+  title: string // 공연 제목
+  profile: Pick<Profile, 'name'>
+}
 export interface MyReview {
   id: number // 후기 고유 ID
   createdAt: string // 2022-12-31T23:59:59
