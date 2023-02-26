@@ -22,7 +22,7 @@ const StyledImage = ({
 }: StyledImageProps) => {
   return (
     <div
-      className={`${styleClass} overflow-hidden`}
+      className={`${styleClass} relative overflow-hidden`}
       style={{ ...style, width, height }}
     >
       <Image
@@ -31,6 +31,7 @@ const StyledImage = ({
         fill
         placeholder={placeholder}
         blurDataURL={placeholder && PLACEHOLDER_IMG}
+        style={{ objectFit: 'cover' }}
       />
     </div>
   )

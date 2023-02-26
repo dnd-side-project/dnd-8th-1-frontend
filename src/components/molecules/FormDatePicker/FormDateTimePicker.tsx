@@ -33,7 +33,7 @@ const FormDateTimePicker = ({
       >
         {!startDate && (
           <p className="absolute top-[16px] left-[11px] text-body2 text-gray-400">
-            마감일을 설정해주세요
+            공연 시간을 선택해주세요
           </p>
         )}
 

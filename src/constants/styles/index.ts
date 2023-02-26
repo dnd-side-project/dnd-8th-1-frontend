@@ -51,3 +51,18 @@ export const theme = {
 
 export const FORM_INPUT_STYLE =
   'placeholder-text-body1 w-[343px] h-[52px] px-[18px] py-[14px] text-body1 rounded-[8px] bg-gray-700 border-[1px] border-gray-600 focus:outline-none focus:border-green-light'
+
+export const ALIGN_CENTER = 'flex justify-center items-center'
+
+// TODO: 추후 해당 스타일 사용하는 부분 리팩터링
+export const TEXT_OVERFLOW_STYLE =
+  'overflow-hidden text-ellipsis whitespace-nowrap'
+ 
+export const ProfileButtonStyle =
+  'flex h-[50px] items-center justify-center gap-[9.25px] rounded-[8px] bg-gray-100 px-[25px] py-[15px] text-body1 font-bold text-gray-900 flex-grow min-w-[165px]'
+
+// TODO: 작은 모달 버튼
+export const MODAL_BUTTON_STYLE_SM = 'h-[50px] w-[145px] text-body1 font-bold'
+export const MODAL_BUTTON_ACTIVE_SM = `${MODAL_BUTTON_STYLE_SM} text-gray-900 bg-green-light`
+export const MODAL_BUTTON_DISABLED_SM = `${MODAL_BUTTON_STYLE_SM} text-gray-900 bg-gray-400`
+

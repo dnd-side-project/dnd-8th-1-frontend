@@ -8,7 +8,7 @@ interface MainMeetSectionProps {
 const MainMeetList = ({ meetLists }: MainMeetSectionProps) => {
   return (
     <section className="no-scrollbar mt-[28px] flex overflow-x-scroll">
-      {meetLists.map((meetItem) => (
+      {meetLists?.map((meetItem) => (
         <MainMeetListItem key={meetItem.id} meetItem={meetItem} />
       ))}
     </section>
