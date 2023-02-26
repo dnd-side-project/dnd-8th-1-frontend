@@ -58,7 +58,7 @@ const Modal = ({
               >
                 <IconButton
                   icon="x-active"
-                  color={theme.colors.gray[400]}
+                  color={theme.colors.gray[300]}
                   size={24}
                   areaLabel="모달 닫기 버튼"
                 />
