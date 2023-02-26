@@ -9,35 +9,35 @@ interface PerformanceListItemProps {
 
 const PerformanceListItem = ({
   performance: {
-    performId,
-    performImg,
-    performTitle,
-    performStartDate,
-    performLocation,
-    performGenres,
-    profile: { imgUrl, name },
+    id,
+    imgUrl,
+    title,
+    startDate,
+    location,
+    genres,
+    profile: { name },
   },
 }: PerformanceListItemProps) => {
-  const date = `${performStartDate.slice(0, 4)}.${performStartDate.slice(
+  const date = `${startDate?.slice(0, 4)}.${startDate?.slice(
     5,
     7,
-  )}.${performStartDate.slice(8, 10)}`
+  )}.${startDate?.slice(8, 10)}`
   return (
     <Link
       className="mb-[18px] flex h-[110px] w-[343px] items-center bg-gray-900 last:mb-0"
-      href={`/performance/${performId}`}
+      href={`/performance/${id}`}
     >
       <StyledImage
         width={96}
         height={110}
         alt="performance image"
-        src={performImg}
+        src={imgUrl}
         placeholder="blur"
         styleClass="overflow-hidden rounded-[4px] w-[96px] h-[110px] relative"
       />
       <div className="ml-[12px] flex h-[120px] w-[247px] flex-col justify-center">
         <h3 className="h-[30px] w-[247px] overflow-hidden text-ellipsis whitespace-nowrap text-subtitle font-bold text-gray-100">
-          {performTitle}
+          {title}
         </h3>
         <div className="mb-1 flex items-center">
           <Avatar
@@ -53,7 +53,7 @@ const PerformanceListItem = ({
         <Tags
           containerStyle="mb-1"
           textStyle="text-gray-400"
-          tags={[performLocation, ...performGenres]}
+          tags={[location, ...genres]}
         />
       </div>
     </Link>

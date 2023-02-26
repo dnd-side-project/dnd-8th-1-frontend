@@ -1,8 +1,13 @@
 import '@/styles/globals.css'
 import '@/styles/swiper.css'
 import '@/styles/variable.css'
+import '@/styles/datepicker.css'
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { AppProps } from 'next/app'
 import { ChakraBaseProvider } from '@chakra-ui/react'
@@ -24,9 +29,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <ChakraBaseProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Hydrate>
       </QueryClientProvider>
     </ChakraBaseProvider>
   )

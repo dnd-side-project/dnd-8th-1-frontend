@@ -11,17 +11,7 @@ interface MeetPayload {
   type: string
 }
 
-export const getMeet = async ({
-  page,
-  size,
-  location,
-  type,
-}: {
-  page: number
-  size: number
-  location: string
-  type: string
-}) => {
+export const getMeet = async ({ page, size, location, type }: MeetPayload) => {
   const { data }: AxiosResponse<MeetResponse> = await eventAPI.getAll(
     location,
     type,
@@ -31,13 +21,14 @@ export const getMeet = async ({
   return data
 }
 
-const useMeet = (payload: MeetPayload) => {
+const useMeet = (payload: MeetPayload, meetAllData?: MeetResponse) => {
   const { page, size, location, type } = payload
   return useQuery(
-    [QUERY_KEY.MEET, page, size, location, type],
+    [QUERY_KEY.MEET.TOTAL_MEET, page, size, location, type],
     () => getMeet(payload),
     {
       keepPreviousData: true,
+      initialData: meetAllData && meetAllData,
     },
   )
 }

@@ -19,7 +19,7 @@ export default {
   ],
 } as ComponentMeta<typeof PerformanceEntireList>
 
-const Template: ComponentStory<typeof PerformanceEntireList> = () => {
+const Template: ComponentStory<typeof PerformanceEntireList> = (args) => {
   const DUMMY_1 = {
     performTitle: '1월 부산에서 공연할 예정인 혁오 밴드 입니다!!',
     performImg: 'https://picsum.photos/96/110',
@@ -53,7 +53,7 @@ const Template: ComponentStory<typeof PerformanceEntireList> = () => {
   const props = {
     performances: PERFORMANCE_DUMMY,
   }
-  return <PerformanceEntireList {...props} />
+  return <PerformanceEntireList {...props} {...args} />
 }
 
 export const Default = Template.bind({})

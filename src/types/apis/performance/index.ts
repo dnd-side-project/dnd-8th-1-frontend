@@ -22,10 +22,10 @@ export interface PerformanceResponse extends BaseResponse {
 
 // 공연 상세 조회 응답
 export interface PerformanceDetailResponse extends BaseResponse {
-  data?: PerformanceDetail
+  data: PerformanceDetail
 }
 
-// 공연 글 등록 / 수정 요청
+// 공연 정보 수정 요청
 export interface PerformanceEditRequest {
   title: string
   imgUrl: string
@@ -42,7 +42,7 @@ export type CommentCreateRequest = CommentCreate
 
 // 후기 전체 조회 응답
 export interface CommentResponse extends BaseResponse {
-  data?: Comment[]
+  data: Comment[]
 }
 
 export interface SearchResultResponse extends BaseResponse {
