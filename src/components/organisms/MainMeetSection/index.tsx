@@ -1,4 +1,5 @@
 import { Icon } from '@components'
+import { theme } from '@constants'
 import { Meet } from '@types'
 import Link from 'next/link'
 import MainMeetList from './MainMeetList'
@@ -13,12 +14,12 @@ const MainMeetSection = ({ meetLists }: MainMeetSectionProps) => {
       {/** 제목 */}
       <div className="mb-[22px] flex items-center">
         <h2
-          className={`w-[110px] bg-green_gradient bg-clip-text text-[20px] font-bold leading-[28px] text-[transparent]`}
+          className={`w-[130px] bg-green_gradient bg-clip-text text-title2 font-bold leading-[28px] text-[transparent]`}
         >
           콜라보 · 쉐어
         </h2>
         <Link href="/meet">
-          <Icon icon="arrow-right" size={24} />
+          <Icon icon="arrow-right" size={20} color={theme.colors.gray[600]} />
         </Link>
       </div>
       {/** 설명 */}
