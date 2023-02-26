@@ -7,12 +7,8 @@ import Link from 'next/link'
 interface PortfolioLinkModalProps {
   showModal: boolean
   setShowModal: Dispatch<SetStateAction<boolean>>
-  // TODO: 일단 없으면 빈 문자열로 가정, 백엔드 확답 필요
   portfolio: Portfolio
 }
-
-// TODO: 데이터 필드 관련 백엔드에게 문의 (트위터 x, 틱톡)
-// TODO: 필드 비어있는 경우 어떻게 되는지?
 
 const PortfolioLinkModal = ({
   showModal,
@@ -35,17 +31,23 @@ const PortfolioLinkModal = ({
           </div>
 
           <div className="flex flex-col gap-[17px]">
-            <Link href={portfolio.instagramUrl} target="_blank">
-              <button className={likeButtonStyle}>인스타그램</button>
-            </Link>
+            {portfolio.instagramUrl && portfolio.instagramUrl !== '' && (
+              <Link href={portfolio.instagramUrl} target="_blank">
+                <button className={likeButtonStyle}>인스타그램</button>
+              </Link>
+            )}
 
-            <Link href={portfolio.youtubeUrl} target="_blank">
-              <button className={likeButtonStyle}>유튜브</button>
-            </Link>
+            {portfolio.youtubeUrl && portfolio.youtubeUrl !== '' && (
+              <Link href={portfolio.youtubeUrl} target="_blank">
+                <button className={likeButtonStyle}>유튜브</button>
+              </Link>
+            )}
 
-            <Link href={portfolio.tiktokUrl} target="_blank">
-              <button className={likeButtonStyle}>틱톡</button>
-            </Link>
+            {portfolio.tiktokUrl && portfolio.tiktokUrl !== '' && (
+              <Link href={portfolio.tiktokUrl} target="_blank">
+                <button className={likeButtonStyle}>틱톡</button>
+              </Link>
+            )}
           </div>
         </Center>
       </div>
