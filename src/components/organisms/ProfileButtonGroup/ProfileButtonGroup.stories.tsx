@@ -2,6 +2,7 @@ import ProfileButtonGroup from '.'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import OpenChatButton from './OpenChatButton'
 import PortfolioButton from './PortfolioButton'
+import { Portfolio } from '@types'
 
 export default {
   component: ProfileButtonGroup,
@@ -23,18 +24,38 @@ const Template: ComponentStory<typeof ProfileButtonGroup> = (args) => (
   <ProfileButtonGroup {...args} />
 )
 
+const portfolio: Portfolio = {
+  youtubeUrl: 'https://www.allsilver.dev/',
+  instagramUrl: 'https://www.allsilver.dev/',
+  tiktokUrl: 'https://www.allsilver.dev/',
+}
+
+const nullPortfolio: Portfolio = {
+  youtubeUrl: '',
+  instagramUrl: null,
+  tiktokUrl: '',
+}
+
 const OpenChatButtonTemplate: ComponentStory<
   typeof ProfileButtonGroup
 > = () => <OpenChatButton openChatUrl="https://www.allsilver.dev/" />
 
 const PortfolioButtonTemplate: ComponentStory<
   typeof ProfileButtonGroup
-> = () => <PortfolioButton />
+> = () => <PortfolioButton portfolio={portfolio} />
 
 export const Default = Template.bind({})
+export const NonPortfolio = Template.bind({})
+
 export const OpenChatButtonExample = OpenChatButtonTemplate.bind({})
 export const PortfolioButtonExample = PortfolioButtonTemplate.bind({})
 
 Default.args = {
   openChatUrl: 'https://www.allsilver.dev/',
+  portfolio,
+}
+
+NonPortfolio.args = {
+  openChatUrl: 'https://www.allsilver.dev/',
+  portfolio: nullPortfolio,
 }
