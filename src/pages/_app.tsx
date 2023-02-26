@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import '@/styles/swiper.css'
 import '@/styles/variable.css'
-import 'components/molecules/FormDatePicker/style.css'
+import '@/styles/datepicker.css'
 
 import {
   Hydrate,

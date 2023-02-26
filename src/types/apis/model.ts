@@ -22,6 +22,11 @@ export interface User {
   }
 }
 
+export interface Portfolio {
+  youtubeUrl: string
+  instagramUrl: string
+  twitterUrl: string
+}
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
   id: number // 프로필 아이디
@@ -29,7 +34,10 @@ export interface Profile {
   name: string // 프로필 댄스팀 이름
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
-  location: string
+  location: RegionTypes
+  genre: GenreTypes[]
+  startDate: string
+  portfolio: Portfolio
   type: string // 계정 유형, 댄서 or 댄스팀
 }
 
@@ -58,7 +66,10 @@ export interface MeetDetail {
 }
 
 export interface MeetApplicant {
-  profile: Omit<Profile, 'type'>
+  profile: Pick<
+    Profile,
+    'id' | 'imgUrl' | 'name' | 'description' | 'openChatUrl' | 'location'
+  >
   matched: boolean
 }
 export interface MeetAccept {
@@ -72,18 +83,18 @@ export interface PerformanceImminent {
   imgUrl: string
 }
 
+// TODO: 이거 통합해서 써도 될것 같습니다..
 export interface Performance {
-  id: string
+  id: number
   title: string
   imgUrl: string
   startDate: string
   location: RegionTypes
   genres: GenreTypes[]
-  profile: {
-    id: string
-    imgUrl: string
-    name: string
-  }
+  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
+  startTime: string
+  description: string
+  address: string
 }
 
 export interface PerformanceDetail {
@@ -153,10 +164,17 @@ export interface MainComment {
     name: string
   }
 }
+
 export interface MyPerformance {
   id: number // 공연 고유 ID
   createdAt: string // 2022-12-31T23:59:59,
   imgUrl: string // 공연 이미지
   title: string // 공연 제목
   profile: Pick<Profile, 'name'>
+
+export interface MyReview {
+  id: number // 후기 고유 ID
+  createdAt: string // 2022-12-31T23:59:59
+  review: string // 후기 내용
+  performance: Pick<Performance, 'id' | 'title'>
 }

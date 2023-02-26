@@ -1,4 +1,5 @@
-import { BaseResponse, MyPerformance, MyEvent, Profile } from '@types'
+
+import { BaseResponse, MyPerformance, MyEvent, Profile, MyReview } from '@types'
 
 interface MyEventResponse extends BaseResponse {
   data: MyEvent[]
@@ -12,4 +13,8 @@ export interface ProfileRandomResponse extends BaseResponse {
 // 활동내역, 내가 등록한 공연 조회
 interface MyPerformanceResponse extends BaseResponse {
   data: MyPerformance[]
+
+// 활동내역, 내가 등록한 후기 조회
+interface MyReviewResponse extends BaseResponse {
+  data: MyReview[]
 }

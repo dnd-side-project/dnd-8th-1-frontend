@@ -8,7 +8,7 @@ interface MainMeetSectionProps {
 const MainPerformanceList = ({ performanceList }: MainMeetSectionProps) => {
   return (
     <section className="no-scrollbar mt-[28px] flex overflow-x-scroll">
-      {performanceList.map((performanceListItem) => (
+      {performanceList?.map((performanceListItem) => (
         <MainPerformanceListItem
           key={performanceListItem.id}
           performanceItem={performanceListItem}
