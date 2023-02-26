@@ -3,22 +3,22 @@ import ReactDatePicker from 'react-datepicker'
 import { FORM_INPUT_STYLE } from '@constants'
 import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
-import { Icon } from '@components'
-import { isPossibleDay } from '@utils'
-interface FormDatePickerProps {
+import { ko } from 'date-fns/locale'
+
+interface ProfileDatePickerProps {
   initialStartDate?: string
-  initialStartTime?: string
   handleStartDate: (date: Date | null) => void
 }
 
-// TODO: 디자인 확정되면 디자인 반영하기
-const FormDateTimePicker = ({
+const ProfileDatePicker = ({
   initialStartDate,
   handleStartDate,
-}: FormDatePickerProps) => {
+}: ProfileDatePickerProps) => {
   const [startDate, setStartDate] = useState<string | Date | null>(
     initialStartDate ? initialStartDate : null,
   )
+
+  const [isOpen, setIsOpen] = useState(false)
 
   const inputRef = useRef(null)
 
@@ -29,20 +29,19 @@ const FormDateTimePicker = ({
         {...props}
         htmlFor="input-date"
         ref={ref}
-        className={`${FORM_INPUT_STYLE} relative block flex w-[343px] items-center justify-center`}
+        className={`${FORM_INPUT_STYLE} relative block flex w-[343px] cursor-pointer items-center justify-center ${
+          isOpen ? 'border-green-light' : 'border-gray-600'
+        }`}
       >
         {!startDate && (
           <p className="absolute top-[16px] left-[11px] text-body2 text-gray-400">
-            공연 시간을 선택해주세요
+            활동 시작 연도와 월을 선택해 주세요.
           </p>
         )}
 
         {startDate && (
-          <div className="flex items-center gap-[9.92px]">
-            <Icon icon="calendar-check" size={20} />
-            <span className="text-body1 text-gray-300">
-              ~ {dayjs(startDate).format('YYYY.MM.DD')}
-            </span>
+          <div className="w-[100%] text-body2 text-gray-100">
+            {dayjs(startDate).format('YYYY년 M월에 활동 시작')}
           </div>
         )}
       </label>
@@ -60,12 +59,13 @@ const FormDateTimePicker = ({
         handleStartDate(date)
       }}
       customInput={<CustomInput inputref={inputRef} />}
-      filterDate={isPossibleDay}
-      showTimeSelect
-      excludeTimes={[]}
-      dateFormat="yyyy.MM.dd HH:mm"
+      locale={ko}
+      onCalendarOpen={() => setIsOpen(true)}
+      onCalendarClose={() => setIsOpen(false)}
+      showMonthYearPicker
+      showFourColumnMonthYearPicker
     />
   )
 }
 
-export default FormDateTimePicker
+export default ProfileDatePicker

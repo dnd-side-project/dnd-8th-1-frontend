@@ -156,7 +156,10 @@ const PerformanceCreateForm = ({
                 'startDate',
                 date ? dayjs(date).format().slice(0, 10) : '',
               )
-              setValue('startTime', date ? dayjs(date).format() : '')
+              setValue(
+                'startTime',
+                date ? dayjs(date).format().slice(0, 19) : '',
+              )
             }}
           />
         </div>
