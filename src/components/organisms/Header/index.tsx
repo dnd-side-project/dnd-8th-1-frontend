@@ -8,7 +8,11 @@ const Header = () => {
   const pathname = usePathname()
 
   return (
-    <div className={`relative h-[52px] w-[375px]`}>
+    <div
+      className={`relative h-[52px] w-[375px] ${
+        pathname?.includes('/signin') && 'hidden'
+      }`}
+    >
       <header
         className={`fixed top-0 z-[999] mb-[52px] box-border flex h-[52px] w-[375px] items-center bg-gray-900 py-[14px] px-[18.77px]`}
       >
