@@ -23,9 +23,9 @@ export interface User {
 }
 
 export interface Portfolio {
-  youtubeUrl: string
-  instagramUrl: string
-  twitterUrl: string
+  youtubeUrl?: string
+  instagramUrl?: string
+  tiktokUrl?: string
 }
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
@@ -83,18 +83,18 @@ export interface PerformanceImminent {
   imgUrl: string
 }
 
+// TODO: 이거 통합해서 써도 될것 같습니다..
 export interface Performance {
-  id: string
+  id: number
   title: string
   imgUrl: string
   startDate: string
   location: RegionTypes
   genres: GenreTypes[]
-  profile: {
-    id: string
-    imgUrl: string
-    name: string
-  }
+  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
+  startTime: string
+  description: string
+  address: string
 }
 
 export interface PerformanceDetail {
@@ -146,6 +146,7 @@ export interface MyEvent {
   isMatched: boolean // 이벤트 매칭 여부, 지원자 한명이라도 매칭되면 true
   type: MeetTypes // 콜라보 or 쉐어
 }
+
 export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
 
 export interface MainComment {
@@ -162,4 +163,30 @@ export interface MainComment {
     id: number
     name: string
   }
+}
+
+// 내가 지원한 이벤트
+export interface AppliedEvent {
+  id: number // 이벤트 고유 ID,
+  appliedAt: string // 내가 이벤트에 지원한 시간 ex) 2022-12-31T23:59:59,
+  imgUrl: string //  이벤트 이미지,
+  title: string // 이벤트 제목,
+  profile: Pick<Profile, 'name'>
+  isMatched: boolean //나의 지원이 매칭된 여부 true, false,
+  type: MeetTypes // 콜라보 or 쉐어
+}
+
+export interface MyPerformance {
+  id: number // 공연 고유 ID
+  createdAt: string // 2022-12-31T23:59:59,
+  imgUrl: string // 공연 이미지
+  title: string // 공연 제목
+  profile: Pick<Profile, 'name'>
+}
+
+export interface MyReview {
+  id: number // 후기 고유 ID
+  createdAt: string // 2022-12-31T23:59:59
+  review: string // 후기 내용
+  performance: Pick<Performance, 'id' | 'title'>
 }
