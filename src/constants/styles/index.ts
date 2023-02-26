@@ -59,4 +59,4 @@ export const TEXT_OVERFLOW_STYLE =
   'overflow-hidden text-ellipsis whitespace-nowrap'
 
 export const ProfileButtonStyle =
-  'flex h-[50px] items-center justify-center gap-[9.25px] rounded-[8px] bg-gray-100 px-[25px] py-[15px] text-body1 font-bold text-gray-900 flex-grow'
+  'flex h-[50px] items-center justify-center gap-[9.25px] rounded-[8px] bg-gray-100 px-[25px] py-[15px] text-body1 font-bold text-gray-900 flex-grow min-w-[165px]'
