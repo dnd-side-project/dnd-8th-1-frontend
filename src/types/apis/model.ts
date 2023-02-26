@@ -165,6 +165,17 @@ export interface MainComment {
   }
 }
 
+// 내가 지원한 이벤트
+export interface AppliedEvent {
+  id: number // 이벤트 고유 ID,
+  appliedAt: string // 내가 이벤트에 지원한 시간 ex) 2022-12-31T23:59:59,
+  imgUrl: string //  이벤트 이미지,
+  title: string // 이벤트 제목,
+  profile: Pick<Profile, 'name'>
+  isMatched: boolean //나의 지원이 매칭된 여부 true, false,
+  type: MeetTypes // 콜라보 or 쉐어
+}
+
 export interface MyPerformance {
   id: number // 공연 고유 ID
   createdAt: string // 2022-12-31T23:59:59,
@@ -172,6 +183,7 @@ export interface MyPerformance {
   title: string // 공연 제목
   profile: Pick<Profile, 'name'>
 }
+
 export interface MyReview {
   id: number // 후기 고유 ID
   createdAt: string // 2022-12-31T23:59:59

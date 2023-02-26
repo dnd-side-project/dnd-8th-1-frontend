@@ -1,32 +1,33 @@
 import { StyledImage } from '@components'
 import { TEXT_OVERFLOW_STYLE } from '@constants'
-import { MyEvent } from '@types'
-import Link from 'next/link'
+import { AppliedEvent } from '@types'
 import dayjs from 'dayjs'
+import Link from 'next/link'
 
-interface MyEventItemProps {
-  myEvent: MyEvent
+interface MyAppliedEventItemProps {
+  appliedEvent: AppliedEvent
 }
 
-const MyEventItem = ({ myEvent }: MyEventItemProps) => {
-  const { id, title, createdAt, profile, isMatched, imgUrl } = myEvent
-  const date = dayjs(createdAt)
+const MyAppliedEventItem = ({
+  appliedEvent: { id, title, appliedAt, profile, isMatched, imgUrl },
+}: MyAppliedEventItemProps) => {
+  const date = dayjs(appliedAt)
 
   return (
     <li>
       <Link href={`meet/${id}`}>
         <div className="px-[16px]">
           <div className="mt-[15px] mb-[9px] text-body2 text-gray-400">
-            {date.format('YYYY.MM.DD 등록')}
+            {date.format('YYYY.MM.DD 지원')}
           </div>
           <div className="mb-[12px] flex gap-[14px]">
             <StyledImage
               src={imgUrl}
               width={80}
               height={90}
-              placeholder="blur"
               styleClass="rounded-[6px] border-[0.5px] border-gray-700"
               alt="활동 내역 이미지"
+              placeholder="blur"
             />
             <div className={`w-[235px] `}>
               <div
@@ -53,4 +54,4 @@ const MyEventItem = ({ myEvent }: MyEventItemProps) => {
   )
 }
 
-export default MyEventItem
+export default MyAppliedEventItem
