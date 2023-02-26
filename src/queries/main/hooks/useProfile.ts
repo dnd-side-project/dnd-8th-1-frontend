@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { MainProfileResponse } from '@types'
-import { mainAPI } from 'apis/domains/main'
+import { mainAPI } from '@apis'
 import { AxiosResponse } from 'axios'
 import { mainKeys } from '../mainKeys'
 
