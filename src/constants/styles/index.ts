@@ -57,3 +57,6 @@ export const ALIGN_CENTER = 'flex justify-center items-center'
 // TODO: 추후 해당 스타일 사용하는 부분 리팩터링
 export const TEXT_OVERFLOW_STYLE =
   'overflow-hidden text-ellipsis whitespace-nowrap'
+
+export const MODAL_BUTTON_ACTIVE_LG =
+  'h-[50px]  bg-green-light text-body1 font-bold text-gray-900'
