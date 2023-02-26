@@ -2,7 +2,7 @@ import { AdditionalInfoPopup, IconButton, Input } from '@components'
 import { VALIDATION_OPEN_CHAT } from '@constants'
 import Link from 'next/link'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 
 interface OpenchatPopupProps {
   previousData?: string
@@ -20,24 +20,25 @@ const OpenchatPopup = ({
   handleOnSubmit,
 }: OpenchatPopupProps) => {
   const [isValid, setIsValid] = useState(false)
-  const { register, handleSubmit, reset, watch } = useForm<OpenChatForm>({
+  const { register, handleSubmit, reset, control } = useForm<OpenChatForm>({
     defaultValues: {
       openChatLink: previousData ? previousData : '',
     },
   })
 
-  const isEmpty = watch('openChatLink').length === 0
+  const { openChatLink } = useWatch({ control })
+  const isEmpty = openChatLink?.length === 0
 
   useEffect(() => {
     if (
-      watch('openChatLink').match(VALIDATION_OPEN_CHAT) &&
-      watch('openChatLink').length === 33
+      openChatLink?.match(VALIDATION_OPEN_CHAT) &&
+      openChatLink?.length === 33
     ) {
       setIsValid(true)
     } else {
       setIsValid(false)
     }
-  }, [watch('openChatLink')])
+  }, [openChatLink])
 
   return (
     <>
