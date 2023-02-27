@@ -42,6 +42,7 @@ const MyProfileMenu = () => {
         handleOnSubmit={() => {
           // TODO: 탈퇴 API 호출
           console.log('탈퇴')
+          setShowModal(false)
         }}
         modalContent="정말 탈퇴하시나요?"
         submitMessage="탈퇴하기"
