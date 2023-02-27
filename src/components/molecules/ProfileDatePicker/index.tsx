@@ -29,7 +29,7 @@ const ProfileDatePicker = ({
         {...props}
         htmlFor="input-date"
         ref={ref}
-        className={`${FORM_INPUT_STYLE} relative block flex w-[343px] cursor-pointer items-center justify-center ${
+        className={`${FORM_INPUT_STYLE} relative z-[995] block flex w-[343px] cursor-pointer items-center justify-center ${
           isOpen ? 'border-green-light' : 'border-gray-600'
         }`}
       >

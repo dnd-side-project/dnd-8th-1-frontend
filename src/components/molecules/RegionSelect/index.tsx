@@ -26,7 +26,7 @@ const RegionSelect = ({
   })
 
   return (
-    <div className="relative w-[343px]">
+    <div className={`relative w-[343px] ${isPopupOpen ? 'z-[998]' : 'z-[1]'}`}>
       <div
         ref={regionInputRef}
         className={`w-[100%] 
