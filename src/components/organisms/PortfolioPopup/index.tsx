@@ -29,9 +29,9 @@ const PortfolioPopup = ({
 
   const { youtubeLink, instaLink, tiktokLink } = useWatch({ control })
 
-  const isEmptyYoutubeLink = youtubeLink?.length === 0
-  const isEmptyInstaLink = instaLink?.length === 0
-  const isEmptyTiktokLink = tiktokLink?.length === 0
+  const isEmpty = (link: string) => {
+    return link.length === 0
+  }
 
   return (
     <>
@@ -58,7 +58,7 @@ const PortfolioPopup = ({
               styleClass={`w-[330px] bg-gray-900 focus:border-green-light 'border-gray-300' text-sm sm:py-2 pb-[9px] border-b focus:outline-none text-gray-100 placeholder:text-gray-600`}
               {...register('youtubeLink')}
             />
-            {!isEmptyYoutubeLink && (
+            {!isEmpty(youtubeLink as string) && (
               <IconButton
                 styleClass="absolute right-[14px] bottom-[14px]"
                 icon="x-circle"
@@ -80,7 +80,7 @@ const PortfolioPopup = ({
               styleClass={`w-[330px] bg-gray-900 focus:border-green-light 'border-gray-300' text-sm sm:py-2 pb-[9px] border-b focus:outline-none text-gray-100 placeholder:text-gray-600`}
               {...register('instaLink')}
             />
-            {!isEmptyInstaLink && (
+            {!isEmpty(instaLink as string) && (
               <IconButton
                 styleClass="absolute right-[14px] bottom-[14px]"
                 icon="x-circle"
@@ -102,7 +102,7 @@ const PortfolioPopup = ({
               styleClass={`w-[330px] bg-gray-900 focus:border-green-light 'border-gray-300' text-sm sm:py-2 pb-[9px] border-b focus:outline-none text-gray-100 placeholder:text-gray-600`}
               {...register('tiktokLink')}
             />
-            {!isEmptyTiktokLink && (
+            {!isEmpty(tiktokLink as string) && (
               <IconButton
                 styleClass="absolute right-[14px] bottom-[14px]"
                 icon="x-circle"
