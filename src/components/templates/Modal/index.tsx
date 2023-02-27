@@ -38,11 +38,12 @@ const Modal = ({
       document.querySelector('#layout')?.removeChild(portalDivFragment)
     }
   })
+
   return (
     <>
       {showModal && (
         <div
-          className={`absolute top-0 z-[999] flex h-[100%] w-[100%] items-center
+          className={`fixed top-0 z-[999] flex h-[100vh] w-[100%] items-center
           justify-items-center overflow-hidden  bg-[#000]
           bg-opacity-60
           `}
