@@ -9,6 +9,7 @@ import {
   useMemo,
   useRef,
 } from 'react'
+import ReactDOM from 'react-dom'
 
 interface ModalProps {
   children: ReactElement // Modal 안쪽에 들어갈 content
@@ -32,18 +33,19 @@ const Modal = ({
   const portalDivFragment = useMemo(() => {
     return document.createElement('div')
   }, [])
+
   useEffect(() => {
     document.querySelector('#layout')?.appendChild(portalDivFragment)
     return () => {
       document.querySelector('#layout')?.removeChild(portalDivFragment)
     }
-  })
+  }, [])
 
-  return (
+  return ReactDOM.createPortal(
     <>
       {showModal && (
         <div
-          className={`fixed top-0 z-[999] flex h-[100vh] w-[100%] items-center
+          className={`absolute top-0 z-[999] flex h-[100vh] w-[100%] items-center
           justify-items-center overflow-hidden  bg-[#000]
           bg-opacity-60
           `}
@@ -69,7 +71,8 @@ const Modal = ({
           </div>
         </div>
       )}
-    </>
+    </>,
+    portalDivFragment,
   )
 }
 
