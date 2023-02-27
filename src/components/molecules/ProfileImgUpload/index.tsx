@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
-import { Icon } from '@components'
+import { ConfirmModal, Icon } from '@components'
+import { useDisclosure } from '@hooks'
+import { MB } from '@constants'
 
 interface ImageUploadProps {
   isPerformance?: boolean
@@ -19,6 +21,9 @@ const ProfileImgUpload = ({
   const [selectedImageURL, setSelectedImageURL] = useState(
     initialImage ? initialImage : '',
   )
+
+  const [showModal, setShowModal] = useDisclosure()
+
   return (
     <div className={`relative h-[118px] w-[118px]`}>
       <div
@@ -49,12 +54,25 @@ const ProfileImgUpload = ({
         onChange={(event: any) => {
           const current = event.target.files[0]
           if (current) {
-            setSelectedImage(event.target.files[0])
-            setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
-            handleSetImage && handleSetImage(event.target.files[0])
+            if (current.size > 2 * MB) {
+              setShowModal(true)
+            } else {
+              setSelectedImage(event.target.files[0])
+              setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
+              handleSetImage && handleSetImage(event.target.files[0])
+            }
           }
         }}
       />
+      {showModal && (
+        <ConfirmModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleOnSubmit={() => setShowModal(false)}
+          modalContent="이미지는 2MB를 초과할 수 없습니다."
+          submitMessage="확인"
+        />
+      )}
     </div>
   )
 }
