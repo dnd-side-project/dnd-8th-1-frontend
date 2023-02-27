@@ -1,6 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import { Icon } from '@components'
+import { MB } from '@constants'
+
+import dynamic from 'next/dynamic'
+
+import { useDisclosure } from '@hooks'
+
+const ConfirmModal = dynamic(() => import('../../templates/ConfirmModal'), {
+  ssr: false,
+})
 
 interface ImageUploadProps {
   isPerformance?: boolean
@@ -13,6 +22,8 @@ const ImageUpload = ({
   handleSetImage,
   initialImage,
 }: ImageUploadProps) => {
+  const [showModal, setShowModal, toggle] = useDisclosure()
+
   const [selectedImage, setSelectedImage] = useState(null)
   const [selectedImageURL, setSelectedImageURL] = useState(
     initialImage ? initialImage : '',
@@ -59,13 +70,27 @@ const ImageUpload = ({
             const current = event.target.files[0]
 
             if (current) {
-              setSelectedImage(event.target.files[0])
-              setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
-              handleSetImage && handleSetImage(event.target.files[0])
+              console.log(current.size, current.size > 2 * MB)
+              console.log(2 * MB)
+              if (current.size > 2 * MB) {
+                setShowModal(true)
+              } else {
+                setSelectedImage(event.target.files[0])
+                setSelectedImageURL(URL.createObjectURL(event.target.files[0]))
+                handleSetImage && handleSetImage(event.target.files[0])
+              }
             }
           }}
         />
       </div>
+
+      <ConfirmModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleOnSubmit={() => setShowModal(false)}
+        modalContent="이미지는 2MB를 초과할 수 없습니다."
+        submitMessage="확인"
+      />
     </div>
   )
 }
