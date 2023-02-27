@@ -23,6 +23,7 @@ export type iconName =
   | 'x-active'
   | 'x-inactive'
   | 'image'
+  | 'user-square-mono'
 
 export type icon = {
   path: string
