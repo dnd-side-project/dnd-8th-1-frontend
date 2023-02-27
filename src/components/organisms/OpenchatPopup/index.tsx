@@ -5,13 +5,13 @@ import { Dispatch, SetStateAction } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 interface OpenchatPopupProps {
-  previousData?: string
+  previousData?: string | null
   setIsOpenChatOpen: Dispatch<SetStateAction<boolean>>
-  handleOnSubmit: (data: string) => void
+  handleOnSubmit: (data: string | null) => void
 }
 
 interface OpenChatForm {
-  openChatLink: string
+  openChatLink: string | null
 }
 
 const OpenchatPopup = ({
@@ -43,7 +43,7 @@ const OpenchatPopup = ({
         <form
           onSubmit={handleSubmit((data: OpenChatForm) => {
             setIsOpenChatOpen(false)
-            handleOnSubmit(data?.openChatLink)
+            handleOnSubmit(data?.openChatLink as string | null)
           })}
           className="mt-[41px] flex flex-col"
         >

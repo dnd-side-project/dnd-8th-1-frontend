@@ -50,17 +50,17 @@ export interface SearchResultResponse extends BaseResponse {
 }
 
 export interface ProfileEditRequest {
-  careerStartDate: string
-  description: string
-  genres: GenreTypes[]
-  imgUrl: string
-  location: string
-  name: string
-  openChatUrl: string
+  careerStartDate: string | null
+  description: string | null
+  genres: GenreTypes[] | null
+  imgUrl: string | null
+  location: string | null
+  name: string | null
+  openChatUrl: string | null
   portfolioUrl: {
-    instagram: string
-    tiktok: string
-    youtube: string
+    instagram: string | null
+    tiktok: string | null
+    youtube: string | null
   }
   type: string
 }

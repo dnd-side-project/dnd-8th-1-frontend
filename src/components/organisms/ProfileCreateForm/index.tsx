@@ -29,17 +29,19 @@ const ProfileCreateForm = ({
     useForm<ProfileEditRequest>({
       mode: 'onSubmit',
       defaultValues: {
-        careerStartDate: previousValue ? previousValue.careerStartDate : '',
-        description: previousValue ? previousValue.description : '',
+        careerStartDate: previousValue ? previousValue.careerStartDate : null,
+        description: previousValue ? previousValue.description : null,
         genres: previousValue ? previousValue.genres : [],
-        imgUrl: previousValue ? previousValue.imgUrl : '',
-        location: previousValue ? previousValue.location : '',
-        name: previousValue ? previousValue.name : '',
-        openChatUrl: previousValue ? previousValue.openChatUrl : '',
+        imgUrl: previousValue ? previousValue.imgUrl : null,
+        location: previousValue ? previousValue.location : null,
+        name: previousValue ? previousValue.name : null,
+        openChatUrl: previousValue ? previousValue.openChatUrl : null,
         portfolioUrl: {
-          instagram: previousValue ? previousValue.portfolioUrl.instagram : '',
-          tiktok: previousValue ? previousValue.portfolioUrl.tiktok : '',
-          youtube: previousValue ? previousValue.portfolioUrl.youtube : '',
+          instagram: previousValue
+            ? previousValue.portfolioUrl.instagram
+            : null,
+          tiktok: previousValue ? previousValue.portfolioUrl.tiktok : null,
+          youtube: previousValue ? previousValue.portfolioUrl.youtube : null,
         },
         type: previousValue ? previousValue.type : '댄서',
       },
@@ -78,12 +80,12 @@ const ProfileCreateForm = ({
   const router = useRouter()
 
   const isEmptyPortfolio =
-    fieldValues?.portfolioUrl?.instagram?.length !== 0 ||
-    fieldValues?.portfolioUrl?.youtube?.length !== 0 ||
-    fieldValues?.portfolioUrl?.tiktok?.length !== 0
+    fieldValues?.portfolioUrl?.instagram ||
+    fieldValues?.portfolioUrl?.youtube ||
+    fieldValues?.portfolioUrl?.tiktok
 
-  const isEmptyUrl = (link: string) => {
-    return link.length === 0
+  const isEmptyUrl = (link: string | null) => {
+    return link
   }
   return (
     <>
@@ -118,7 +120,7 @@ const ProfileCreateForm = ({
                 <span className={essentialStyle}>필수</span>
               </div>
               <ProfileImgUpload
-                initialImage={previousValue?.imgUrl}
+                initialImage={previousValue?.imgUrl as string}
                 handleSetImage={(image) => {
                   setImage(image)
                   const formData = new FormData()
@@ -155,7 +157,7 @@ const ProfileCreateForm = ({
                     ? previousValue?.genres
                     : fieldValues
                     ? fieldValues.genres
-                    : []
+                    : null
                 }
               />
             </div>
@@ -164,7 +166,7 @@ const ProfileCreateForm = ({
             <div className={formSectionStyle}>
               <label className={labelStyle}>지역</label>
               <RegionSelect
-                selectedRegion={previousValue?.location}
+                selectedRegion={previousValue?.location as string}
                 handleRegionSelect={(location) => {
                   setValue('location', location)
                 }}
@@ -220,12 +222,12 @@ const ProfileCreateForm = ({
                     <span className={essentialStyle}>필수</span>
                   </div>
                   <p className="mt-[5px] text-body2 text-gray-500">
-                    {isEmptyUrl(fieldValues.openChatUrl as string)
+                    {!isEmptyUrl(fieldValues.openChatUrl as string)
                       ? '미등록'
                       : '등록'}
                   </p>
                 </div>
-                {!isEmptyUrl(fieldValues.openChatUrl as string) ? (
+                {isEmptyUrl(fieldValues.openChatUrl as string) ? (
                   <button
                     onClick={handleToggleOpenChat}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light text-body2 font-bold text-green-light"
@@ -253,15 +255,19 @@ const ProfileCreateForm = ({
                       미등록
                     </span>
                   )}
-                  {!isEmptyUrl(fieldValues.portfolioUrl?.youtube as string) && (
+                  {isEmptyUrl(
+                    fieldValues.portfolioUrl?.youtube as string | null,
+                  ) && (
                     <p className="mt-[5px] text-body2 text-gray-500">유튜브</p>
                   )}
-                  {!isEmptyUrl(
-                    fieldValues.portfolioUrl?.instagram as string,
+                  {isEmptyUrl(
+                    fieldValues.portfolioUrl?.instagram as string | null,
                   ) && (
                     <p className="mt-[5px] text-body2 text-gray-500">인스타</p>
                   )}
-                  {!isEmptyUrl(fieldValues.portfolioUrl?.tiktok as string) && (
+                  {isEmptyUrl(
+                    fieldValues.portfolioUrl?.tiktok as string | null,
+                  ) && (
                     <p className="mt-[5px] text-body2 text-gray-500">틱톡</p>
                   )}
                 </div>
@@ -317,7 +323,7 @@ const ProfileCreateForm = ({
           previousData={
             previousValue?.openChatUrl
               ? (previousValue?.openChatUrl as string)
-              : fieldValues.openChatUrl
+              : (fieldValues?.openChatUrl as string | null)
           }
         />
       )}

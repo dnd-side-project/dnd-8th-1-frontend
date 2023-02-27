@@ -9,7 +9,7 @@ import { GenreTypes } from '@types'
  *TODO: 전체적으로 string[]에 대한 리팩토링 필요 + selected도 지네릭 적용 필요
  */
 interface RegionSelectProps {
-  selectedGenres?: GenreTypes[]
+  selectedGenres?: GenreTypes[] | null
   handleGenreSelect: (genres: GenreTypes[]) => void
 }
 const GenreSelect = ({
