@@ -48,3 +48,19 @@ export interface CommentResponse extends BaseResponse {
 export interface SearchResultResponse extends BaseResponse {
   data?: PerformanceSearchResult
 }
+
+export interface ProfileEditRequest {
+  careerStartDate: string
+  description: string
+  genres: GenreTypes[]
+  imgUrl: string
+  location: string
+  name: string
+  openChatUrl: string
+  portfolioUrl: {
+    instagram: string
+    tiktok: string
+    youtube: string
+  }
+  type: string
+}
