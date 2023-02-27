@@ -19,7 +19,7 @@ const AdditionalInfoPopup = ({
   setPopupOpen,
 }: AdditionalInfoPopupProps) => {
   return (
-    <section className="fixed top-0 z-[9999] h-screen w-[375px]">
+    <section className="fixed top-0 z-[9999] h-screen w-[375px] bg-gray-900">
       <FormTitleHeader setShowPopup={setPopupOpen} title={headerTitle} />
       <Spacer size={38} />
       <div className="px-[16px]">
