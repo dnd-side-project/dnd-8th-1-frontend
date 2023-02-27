@@ -12,6 +12,9 @@ const ProfileImgUpload = ({
   handleSetImage,
   initialImage,
 }: ImageUploadProps) => {
+  /**
+   *TODO: selectedImage 다시 생각해보기
+   */
   const [selectedImage, setSelectedImage] = useState(null)
   const [selectedImageURL, setSelectedImageURL] = useState(
     initialImage ? initialImage : '',
@@ -26,7 +29,7 @@ const ProfileImgUpload = ({
             alt="선택된 이미지"
             width={'100%'}
             src={selectedImageURL}
-            className="h-full w-full rounded-full"
+            className="h-full w-full rounded-full object-cover"
           />
         )}
         <label
