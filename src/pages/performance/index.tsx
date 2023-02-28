@@ -17,7 +17,7 @@ import {
   useImminentPerformance,
   usePerformance,
 } from '@queries'
-import { useQueryClient } from '@tanstack/react-query'
+import { dehydrate, QueryClient, useQueryClient } from '@tanstack/react-query'
 import {
   GenreTypes,
   Performance,
@@ -31,12 +31,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 
-interface PerformanceProps {
-  allData: PerformanceResponse
-  imminentPerformanceData: PerformanceImminentResponse
-}
-
-const PerformancePage = ({ imminentPerformanceData }: PerformanceProps) => {
+const PerformancePage = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isTotal, setIsTotal] = useState(true)
   const {
@@ -91,8 +86,10 @@ const PerformancePage = ({ imminentPerformanceData }: PerformanceProps) => {
     })
   }, [payloadMonth, year, day])
   const imminentFallback = {} as PerformanceImminentResponse
-  const { data: imminentPerformances = imminentFallback } =
-    useImminentPerformance(imminentPerformanceData)
+  const { data: imminentPerformancesData = imminentFallback } =
+    useImminentPerformance()
+
+  const imminentPerformances = imminentPerformancesData.data
 
   const queryClient = useQueryClient()
   useEffect(() => {
@@ -186,9 +183,6 @@ const PerformancePage = ({ imminentPerformanceData }: PerformanceProps) => {
   )
 }
 
-/**
- *TODO: 추후 initialData로 가져오는 로직이 아닌 dehydrated로 가져오는 로직으로 변경
- */
 export const getServerSideProps: GetServerSideProps = async () => {
   const performancePayload: PerformancePayload = {
     year: CURRENT_YEAR,
@@ -199,16 +193,20 @@ export const getServerSideProps: GetServerSideProps = async () => {
     pageNumber: 0,
     pageSize: 15,
   }
-  const allData = await getAllPerformance(performancePayload)
-  const { data: imminentPerformanceData } = await getImminentPerformances()
-  // const queryClient = new QueryClient()
-  // await Promise.all([
-  //   queryClient.prefetchQuery(performanceKeys.all, () => getAllPerformance(performancePayload))
-  // ])
+  const queryClient = new QueryClient()
+  await Promise.all([
+    queryClient.prefetchQuery(
+      [...performanceKeys.all, CURRENT_YEAR, CURRENT_MONTH, '', '', '', 0, 15],
+      () => getAllPerformance(performancePayload),
+    ),
+    queryClient.prefetchQuery(
+      performanceKeys.imminentPerformance,
+      getImminentPerformances,
+    ),
+  ])
   return {
     props: {
-      allData,
-      imminentPerformanceData,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }

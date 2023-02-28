@@ -10,16 +10,8 @@ export const getImminentPerformances = async () => {
   return data
 }
 
-const useImminentPerformance = (
-  imminentPerformanceData: PerformanceImminentResponse,
-) => {
-  return useQuery(
-    performanceKeys.imminentPerformance,
-    getImminentPerformances,
-    {
-      initialData: imminentPerformanceData,
-    },
-  )
+const useImminentPerformance = () => {
+  return useQuery(performanceKeys.imminentPerformance, getImminentPerformances)
 }
 
 export default useImminentPerformance
