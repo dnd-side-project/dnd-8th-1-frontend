@@ -14,13 +14,10 @@ const MeetBanner = () => {
       />
 
       <div className="absolute top-[153px] left-[16px]">
-        <h2 className="h-[55px] text-title2 font-bold text-gray-100">
-          다같이 창작하고,
-          <br />
-          다같이 공유해요!
+        <h2 className="mb-[14px] text-title2 font-bold text-gray-100">
+          함께 창작하고,공유해요!
         </h2>
-
-        <p className="mt-[22px] text-body2 text-gray-300">
+        <p className="text-body2 text-gray-300">
           <span className="text-body2 font-bold text-green-light">콜라보</span>{' '}
           에서 다양한 댄서와 함께 창작하고, <br />
           <span className="text-body2 font-bold text-green-light">
