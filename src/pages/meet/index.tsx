@@ -58,7 +58,7 @@ const MeetPage = ({ meetAllData }: MeetPageProps) => {
 
       <MeetBanner />
       <main>
-        <div className="mt-[43px] flex items-center justify-between px-[16px]">
+        <div className="flex items-center justify-between px-[16px]">
           <div className="flex gap-[8px]">
             <FilterButton
               type="region"
