@@ -11,13 +11,9 @@ export const getMeetDetail = async (eventId: number) => {
   return data
 }
 
-const useMeetDetail = (
-  eventId: number,
-  meetDetailData?: MeetDetailResponse,
-) => {
+const useMeetDetail = (eventId: number) => {
   return useQuery(meetKeys.detail(eventId), () => getMeetDetail(eventId), {
     enabled: !!eventId,
-    initialData: meetDetailData,
   })
 }
 
