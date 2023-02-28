@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RegisterList } from '@components'
 import { useDisclosure } from '@hooks'
 import dynamic from 'next/dynamic'
