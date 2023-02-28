@@ -18,7 +18,7 @@ import {
   MY_APPLIED_DUMMY,
   MY_PERFORMANCE_DUMMY,
   MY_REVIEW_DUMMY,
-} from '../../../../dummy'
+} from 'dummy'
 
 const ProfileHistoryPage = () => {
   const router = useRouter()
