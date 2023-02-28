@@ -3,16 +3,11 @@ import { MeetBanner, FilterButton, Pagination, CollaboList } from '@components'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Center } from '@chakra-ui/react'
-import { getMeet, useMeet } from '@queries'
+import { getMeet, meetKeys, useMeet } from '@queries'
 import { MeetResponse } from '@types'
-import { useQueryClient } from '@tanstack/react-query'
-import { QUERY_KEY } from '@constants'
+import { dehydrate, QueryClient, useQueryClient } from '@tanstack/react-query'
 
-interface MeetPageProps {
-  meetAllData: MeetResponse
-}
-
-const MeetPage = ({ meetAllData }: MeetPageProps) => {
+const MeetPage = () => {
   const fallback = {} as MeetResponse
   const [currentQueryString, setCurrentQueryString] = useState({
     page: 0,
@@ -21,10 +16,7 @@ const MeetPage = ({ meetAllData }: MeetPageProps) => {
     type: '',
   })
   const currentPage = currentQueryString.page + 1
-  const { data = fallback, isLoading } = useMeet(
-    currentQueryString,
-    meetAllData,
-  )
+  const { data = fallback, isLoading } = useMeet(currentQueryString)
   const { data: meetData } = data
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -32,7 +24,7 @@ const MeetPage = ({ meetAllData }: MeetPageProps) => {
   useEffect(() => {
     if (currentQueryString.page < data?.data?.totalPages) {
       queryClient.prefetchQuery(
-        [QUERY_KEY.MEET, page + 1, size, location, type],
+        [...meetKeys.all, page + 1, size, location, type],
         () => getMeet(currentQueryString),
       )
     }
@@ -91,15 +83,18 @@ const MeetPage = ({ meetAllData }: MeetPageProps) => {
 }
 
 export const getServerSideProps = async () => {
-  const meetAllData = await getMeet({
-    page: 0,
-    size: 15,
-    location: '',
-    type: '',
-  })
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery([...meetKeys.all, 0, 15, '', ''], () =>
+    getMeet({
+      page: -1,
+      size: 15,
+      location: '',
+      type: '',
+    }),
+  )
   return {
     props: {
-      meetAllData,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }

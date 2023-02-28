@@ -36,18 +36,15 @@ export const getAllPerformance = async ({
   return data
 }
 
-const usePerformance = (
-  {
-    year,
-    month,
-    day,
-    location,
-    genre,
-    pageNumber,
-    pageSize,
-  }: PerformancePayload,
-  allData?: PerformanceResponse,
-) => {
+const usePerformance = ({
+  year,
+  month,
+  day,
+  location,
+  genre,
+  pageNumber,
+  pageSize,
+}: PerformancePayload) => {
   return useQuery(
     [
       QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE,
@@ -71,7 +68,6 @@ const usePerformance = (
       }),
     {
       keepPreviousData: true,
-      initialData: allData && allData,
     },
   )
 }
