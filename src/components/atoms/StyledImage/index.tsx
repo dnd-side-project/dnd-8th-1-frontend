@@ -22,7 +22,7 @@ const StyledImage = ({
 }: StyledImageProps) => {
   return (
     <div
-      className={`${styleClass} relative overflow-hidden`}
+      className={`${styleClass} overflow-hidden`}
       style={{ ...style, width, height }}
     >
       <Image

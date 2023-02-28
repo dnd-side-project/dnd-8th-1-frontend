@@ -45,13 +45,11 @@ const Modal = ({
     <>
       {showModal && (
         <div
-          className={`absolute top-0 z-[999] flex h-[100vh] w-[100%] items-center
-          justify-items-center overflow-hidden  bg-[#000]
-          bg-opacity-60
+          className={`absolute top-0 z-[999] flex h-[100%] w-[100%] items-center justify-center  overflow-hidden  bg-[#000] bg-opacity-60
           `}
         >
           <div
-            className={`fixed top-[250px] left-0 right-0 z-[999] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}
+            className={`z-[1000] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}
             ref={ModalRef}
           >
             {hasCloseButton && (
@@ -61,7 +59,7 @@ const Modal = ({
               >
                 <IconButton
                   icon="x-active"
-                  color={theme.colors.gray[400]}
+                  color={theme.colors.gray[300]}
                   size={24}
                   areaLabel="모달 닫기 버튼"
                 />
