@@ -19,12 +19,7 @@ const GoogleLoginButton = ({
         <Image src={GoogleIcon} alt="구글 아이콘" width={18} />
       </div>
 
-      <p
-        className="text-[14px] font-bold"
-        style={{
-          fontFamily: 'Roboto !important',
-        }}
-      >
+      <p className="font-[roboto] text-[14px] font-bold">
         Google 계정으로 로그인
       </p>
     </button>
