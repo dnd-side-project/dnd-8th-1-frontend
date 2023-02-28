@@ -18,10 +18,12 @@ const SideBarMenu = () => {
       !triggerWrapper.contains(e.target) &&
       setShowSidebar(false)
   })
-
   return (
     <>
-      <div ref={iconButtonRef} className="absolute right-[18.68px] z-[999]">
+      <div
+        ref={iconButtonRef}
+        className="absolute right-[18.68px] z-[999] flex items-center"
+      >
         <IconButton
           icon={'line-three'}
           areaLabel={'사이드바 메뉴 버튼'}

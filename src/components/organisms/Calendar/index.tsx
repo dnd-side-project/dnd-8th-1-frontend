@@ -1,11 +1,9 @@
 import { PerformancePayload } from '@queries'
-import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
 import CalandarSlider from './CalendarSlider'
 import CalandarSwiper from './CalendarSwiper'
 
 interface CalendarProps {
-  setIsSearchOpen: Dispatch<SetStateAction<boolean>>
   isTotal: boolean
   setIsTotal: Dispatch<SetStateAction<boolean>>
   handleSetMonth: (monthIncrement: number) => void
@@ -26,13 +24,11 @@ const Calendar = ({
   getDay,
   calandar,
   handleSetMonth,
-  setIsSearchOpen,
   isTotal,
   setIsTotal,
   setPerformancePayload,
   performancePayload,
 }: CalendarProps) => {
-  const router = useRouter()
   return (
     <div className="relative flex flex-col bg-gray-900">
       <div className="flex w-full justify-between pt-[50px] pb-[20px]">
@@ -43,20 +39,6 @@ const Calendar = ({
           setCurrentDay={setCurrentDay}
           currentDay={currentDay}
         />
-        <div className="flex">
-          <button
-            onClick={() => router.push('/performance/edit')}
-            className="text-body1 text-gray-300"
-          >
-            등록
-          </button>
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="mr-[16px] pl-[14px] text-body1 text-gray-300"
-          >
-            공연 검색
-          </button>
-        </div>
       </div>
       <CalandarSwiper
         isTotal={isTotal}
