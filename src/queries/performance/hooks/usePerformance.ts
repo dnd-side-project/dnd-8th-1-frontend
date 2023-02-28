@@ -36,7 +36,7 @@ export const getAllPerformance = async ({
   return data
 }
 
-const usePerformance = ({
+export const usePerformance = ({
   year,
   month,
   day,
@@ -71,5 +71,3 @@ const usePerformance = ({
     },
   )
 }
-
-export default usePerformance
