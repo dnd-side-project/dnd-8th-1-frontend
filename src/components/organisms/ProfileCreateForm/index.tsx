@@ -250,25 +250,14 @@ const ProfileCreateForm = ({
                   <div>
                     <label className={labelStyle}>작업물</label>
                   </div>
-                  {!isEmptyPortfolio && (
+                  {!isEmptyPortfolio ? (
                     <span className="mt-[5px] text-body2 text-gray-500">
                       미등록
                     </span>
-                  )}
-                  {isEmptyUrl(
-                    fieldValues.portfolioUrl?.youtube as string | null,
-                  ) && (
-                    <p className="mt-[5px] text-body2 text-gray-500">유튜브</p>
-                  )}
-                  {isEmptyUrl(
-                    fieldValues.portfolioUrl?.instagram as string | null,
-                  ) && (
-                    <p className="mt-[5px] text-body2 text-gray-500">인스타</p>
-                  )}
-                  {isEmptyUrl(
-                    fieldValues.portfolioUrl?.tiktok as string | null,
-                  ) && (
-                    <p className="mt-[5px] text-body2 text-gray-500">틱톡</p>
+                  ) : (
+                    <span className="mt-[5px] text-body2 text-gray-500">
+                      등록
+                    </span>
                   )}
                 </div>
                 {isEmptyPortfolio ? (
