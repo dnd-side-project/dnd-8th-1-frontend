@@ -27,8 +27,9 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
       setIsTrigger(false)
     }
   }, [isSelected])
+
   return !isSelected ? (
-    <Popover>
+    <Popover onClose={() => setIsTrigger(false)}>
       <div
         className={`${buttonDefaultStyle} ${
           isTrigger ? 'border-green-light' : 'border-gray-700'
