@@ -10,16 +10,9 @@ export const getSearchResult = async (teamName: string) => {
   return data
 }
 
-const useSearchResult = (
-  teamName: string,
-  searchResultData: SearchResultResponse,
-) => {
-  return useQuery(
-    [...performanceKeys.search, teamName],
-    () => getSearchResult(teamName),
-    {
-      initialData: searchResultData,
-    },
+const useSearchResult = (teamName: string) => {
+  return useQuery([...performanceKeys.search, teamName], () =>
+    getSearchResult(teamName),
   )
 }
 
