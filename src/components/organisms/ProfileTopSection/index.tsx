@@ -8,7 +8,7 @@ interface ProfileTopSectionProps {
   name: string
   genres: GenreTypes[]
   location: RegionTypes
-  startDate: string
+  startDate?: string
 }
 
 const ProfileTopSection = ({
@@ -21,7 +21,7 @@ const ProfileTopSection = ({
   startDate,
 }: ProfileTopSectionProps) => {
   return (
-    <section className="relative h-[350.5px] w-[375px] ">
+    <section className=" relative w-[375px]">
       <ProfileBackgroundSection type={type} id={id} />
       <div className="translate-y-[-63px]">
         <ProfileInfo

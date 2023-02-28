@@ -14,7 +14,7 @@ const ProfileButtonGroup = ({
     Object.values(portfolio).filter((link) => link && link !== '').length !== 0
 
   return (
-    <div className="flex w-[343px] items-center justify-center gap-[11px] px-[16px]">
+    <div className="flex w-[343px] flex-grow items-center justify-center gap-[11px] px-[16px]">
       <OpenChatButton openChatUrl={openChatUrl} />
       {hasPortfolio && <PortfolioButton portfolio={portfolio} />}
     </div>
