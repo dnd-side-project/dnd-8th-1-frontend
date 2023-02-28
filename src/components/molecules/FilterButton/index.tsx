@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/react'
 
 import {
   GenrePopupContent,
+  Icon,
   IconButton,
   MeetPopupContent,
   RegionPopupContent,
@@ -18,21 +19,44 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
   const isSelected = selectedFilter !== ''
 
   const buttonDefaultStyle =
-    'h-[28px] bg-gray-700 py-[3px] px-[22px] text-green-light rounded-[37px] text-body2'
+    'h-[34px] flex border items-center w-[81px] bg-gray-700 py-[3px] px-[16px] text-gray-300 rounded-[37px] text-body2'
 
+  const [isTrigger, setIsTrigger] = useState(false)
+  useEffect(() => {
+    if (isSelected) {
+      setIsTrigger(false)
+    }
+  }, [isSelected])
   return !isSelected ? (
     <Popover>
-      <PopoverTrigger>
+      <div
+        className={`${buttonDefaultStyle} ${
+          isTrigger ? 'border-green-light' : 'border-gray-700'
+        }`}
+      >
         {type === 'region' ? (
-          <button className={buttonDefaultStyle}>지역</button>
+          <span>지역</span>
         ) : type === 'meet' ? (
-          <button className={buttonDefaultStyle}>유형</button>
+          <span>유형</span>
         ) : (
-          <button className={buttonDefaultStyle}>장르</button>
+          <span>장르</span>
         )}
-      </PopoverTrigger>
+        <PopoverTrigger>
+          <button
+            onClick={() => setIsTrigger(!isTrigger)}
+            className="ml-[10px]"
+          >
+            {isTrigger ? (
+              <Icon icon="arrow-increase-shallow" size={8} />
+            ) : (
+              <Icon icon="arrow-decrease-shallow" size={8} />
+            )}
+          </button>
+        </PopoverTrigger>
+      </div>
 
       <PopoverContent
+        marginTop="10px"
         border="none"
         width="fit-content"
         overflow="hidden"
@@ -67,7 +91,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
       </PopoverContent>
     </Popover>
   ) : (
-    <div className="flex h-[28px] w-fit items-center justify-center gap-[10.95px] rounded-[37px] border-[1px] border-solid border-green-light bg-gray-700 py-[3px] px-[12px] text-body2 text-green-light">
+    <div className="flex h-[34px] w-[81px] items-center justify-center gap-[10.95px] rounded-[37px] border-[1px] border-solid border-green-light bg-gray-700 py-[3px] px-[12px] text-body2 text-green-light">
       <span>{selectedFilter}</span>
       <IconButton
         icon="x-active"
