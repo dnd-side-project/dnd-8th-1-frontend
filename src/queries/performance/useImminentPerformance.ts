@@ -1,8 +1,8 @@
 import { performanceAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useQuery } from '@tanstack/react-query'
 import { PerformanceImminentResponse } from '@types'
 import { AxiosResponse } from 'axios'
+import { performanceKeys } from '@queries'
 
 export const getImminentPerformances = async () => {
   const { data }: AxiosResponse<PerformanceImminentResponse> =
@@ -13,9 +13,13 @@ export const getImminentPerformances = async () => {
 const useImminentPerformance = (
   imminentPerformanceData: PerformanceImminentResponse,
 ) => {
-  return useQuery([QUERY_KEY.PERFORMANCE.IMMINENT], getImminentPerformances, {
-    initialData: imminentPerformanceData,
-  })
+  return useQuery(
+    performanceKeys.imminentPerformance,
+    getImminentPerformances,
+    {
+      initialData: imminentPerformanceData,
+    },
+  )
 }
 
 export default useImminentPerformance

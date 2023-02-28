@@ -2,7 +2,7 @@ import { performanceAPI } from '@apis'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CommentCreate } from '@types'
 import { AxiosResponse } from 'axios'
-import { performanceKeys } from '../performanceKeys'
+import { performanceKeys } from '@queries'
 
 const postReviewCreate = async (
   performanceId: number,

@@ -1,8 +1,8 @@
 import { performanceAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useQuery } from '@tanstack/react-query'
 import { SearchResultResponse } from '@types'
 import { AxiosResponse } from 'axios'
+import { performanceKeys } from '@queries'
 
 export const getSearchResult = async (teamName: string) => {
   const { data }: AxiosResponse<SearchResultResponse> =
@@ -15,7 +15,7 @@ const useSearchResult = (
   searchResultData: SearchResultResponse,
 ) => {
   return useQuery(
-    [QUERY_KEY.PERFORMANCE_SEARCH, teamName],
+    [...performanceKeys.search, teamName],
     () => getSearchResult(teamName),
     {
       initialData: searchResultData,

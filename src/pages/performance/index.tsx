@@ -7,11 +7,12 @@ import {
   PerformanceList,
   SearchHeader,
 } from '@components'
-import { CURRENT_MONTH, CURRENT_YEAR, QUERY_KEY } from '@constants'
+import { CURRENT_MONTH, CURRENT_YEAR } from '@constants'
 import { useCalendar } from '@hooks'
 import {
   getAllPerformance,
   getImminentPerformances,
+  performanceKeys,
   PerformancePayload,
   useImminentPerformance,
   usePerformance,
@@ -35,10 +36,7 @@ interface PerformanceProps {
   imminentPerformanceData: PerformanceImminentResponse
 }
 
-const PerformancePage = ({
-  allData,
-  imminentPerformanceData,
-}: PerformanceProps) => {
+const PerformancePage = ({ imminentPerformanceData }: PerformanceProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isTotal, setIsTotal] = useState(true)
   const {
@@ -71,7 +69,7 @@ const PerformancePage = ({
     pageSize,
   } = performancePayload
   const fallback = {} as PerformanceResponse
-  const { data = fallback } = usePerformance(performancePayload, allData)
+  const { data = fallback } = usePerformance(performancePayload)
   const { data: performanceData } = data
   const calandarProps = {
     month,
@@ -103,7 +101,7 @@ const PerformancePage = ({
     } else {
       queryClient.prefetchQuery(
         [
-          QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE,
+          ...performanceKeys.all,
           year,
           payloadMonth,
           day && day + 1,
@@ -192,7 +190,7 @@ const PerformancePage = ({
  *TODO: 추후 initialData로 가져오는 로직이 아닌 dehydrated로 가져오는 로직으로 변경
  */
 export const getServerSideProps: GetServerSideProps = async () => {
-  const allData = await getAllPerformance({
+  const performancePayload: PerformancePayload = {
     year: CURRENT_YEAR,
     month: CURRENT_MONTH,
     day: '',
@@ -200,8 +198,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
     genre: '',
     pageNumber: 0,
     pageSize: 15,
-  })
+  }
+  const allData = await getAllPerformance(performancePayload)
   const { data: imminentPerformanceData } = await getImminentPerformances()
+  // const queryClient = new QueryClient()
+  // await Promise.all([
+  //   queryClient.prefetchQuery(performanceKeys.all, () => getAllPerformance(performancePayload))
+  // ])
   return {
     props: {
       allData,
