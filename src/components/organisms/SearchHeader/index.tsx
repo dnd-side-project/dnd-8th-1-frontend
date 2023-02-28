@@ -1,4 +1,4 @@
-import { Dimmed, Icon, Input } from '@components'
+import { Icon, Input } from '@components'
 import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -46,7 +46,7 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
           </div>
           <Input
             placeholder="댄서/팀 이름으로 공연 검색"
-            styleClass="ml-[6px] w-[322px] h-[41px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none bg-white text-body1 placeholder:text-gray-500 text-gray-100"
+            styleClass="ml-[6px] w-[322px] h-[39px] rounded-[26px] h-10 px-3 border border-gray-700 focus:outline-none bg-gray-700 text-body1 placeholder:text-gray-500 text-gray-100"
             {...register('search')}
           />
           <div
@@ -67,11 +67,11 @@ const SearchHeader = ({ open, setOpen }: SearchHeaderProps) => {
         )}
       </header>
       {open && (
-        <Dimmed
-          handleOnClick={() => {
+        <div
+          onClick={() => {
             setOpen(!open)
           }}
-          styleClass="h-screen bg-[#000000] opacity-70"
+          className={`fixed z-[998] mx-[auto] h-screen w-[375px] bg-[#131313]`}
         />
       )}
     </>
