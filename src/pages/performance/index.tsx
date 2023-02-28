@@ -2,10 +2,11 @@ import { Center } from '@chakra-ui/react'
 import {
   Calandar,
   FilterButton,
+  FloatingButton,
   Pagination,
   PerformanceBanner,
   PerformanceList,
-  SearchHeader,
+  Spacer,
 } from '@components'
 import { CURRENT_MONTH, CURRENT_YEAR, QUERY_KEY } from '@constants'
 import { useCalendar } from '@hooks'
@@ -28,6 +29,7 @@ import {
 import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 interface PerformanceProps {
@@ -39,7 +41,6 @@ const PerformancePage = ({
   allData,
   imminentPerformanceData,
 }: PerformanceProps) => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isTotal, setIsTotal] = useState(true)
   const {
     monthYear,
@@ -73,6 +74,7 @@ const PerformancePage = ({
   const fallback = {} as PerformanceResponse
   const { data = fallback } = usePerformance(performancePayload, allData)
   const { data: performanceData } = data
+  performanceData?.content
   const calandarProps = {
     month,
     handleSetMonth,
@@ -116,15 +118,14 @@ const PerformancePage = ({
       )
     }
   }, [day])
+
+  const router = useRouter()
   return (
     <>
       <Head>
         <title>공연 정보 - Danverse</title>
       </Head>
-      {isSearchOpen && (
-        <SearchHeader open={isSearchOpen} setOpen={setIsSearchOpen} />
-      )}
-      <section className="mt-[52px]">
+      <section className="mt-[-2px]">
         <PerformanceBanner
           imminentPerformances={imminentPerformances as PerformanceImminent[]}
         />
@@ -132,7 +133,6 @@ const PerformancePage = ({
           {...calandarProps}
           isTotal={isTotal}
           setIsTotal={setIsTotal}
-          setIsSearchOpen={setIsSearchOpen}
         />
         <div className="flex w-full px-[16px] py-[22px]">
           <FilterButton
@@ -170,18 +170,27 @@ const PerformancePage = ({
               />
             </div>
           )}
-          <Center className={isTotal ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
-            <Pagination
-              currentPage={currentPage as number}
-              totalPages={performanceData?.totalPages as number}
-              handleChangePage={(page) => {
-                setPerformancePayload({
-                  ...performancePayload,
-                  pageNumber: page - 1,
-                })
-              }}
+          <div className="ml-[310px]">
+            <FloatingButton
+              handleOnClick={() => router.push('/performance/edit')}
             />
-          </Center>
+          </div>
+          {performanceData?.content.length !== 0 ? (
+            <Center className={isTotal ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
+              <Pagination
+                currentPage={currentPage as number}
+                totalPages={performanceData?.totalPages as number}
+                handleChangePage={(page) => {
+                  setPerformancePayload({
+                    ...performancePayload,
+                    pageNumber: page - 1,
+                  })
+                }}
+              />
+            </Center>
+          ) : (
+            <Spacer size={60} />
+          )}
         </>
       </section>
     </>
