@@ -89,6 +89,7 @@ const ProfileCreateForm = ({
   }
   return (
     <>
+      {/** 소개 텍스트 */}
       {(!isOpenChatOpen || !isPortfolioOpen) && (
         <div className="mt-[31px] px-[16px]">
           <h1 className="text-title1 font-bold text-gray-100">
@@ -218,7 +219,9 @@ const ProfileCreateForm = ({
                 />
                 <div className="absolute bottom-[6px] left-[12px] text-[12px] font-[400] leading-[24px]">
                   <span className="text-gray-400">
-                    {fieldValues?.description?.length}
+                    {fieldValues?.description === null
+                      ? 0
+                      : fieldValues?.description?.length}
                   </span>{' '}
                   <span className="text-[#515151]">/ 300</span>
                 </div>
