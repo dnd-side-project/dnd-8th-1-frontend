@@ -25,7 +25,7 @@ const MyAppliedEventItem = ({
               src={imgUrl}
               width={80}
               height={90}
-              styleClass="rounded-[6px] border-[0.5px] border-gray-700"
+              styleClass="rounded-[6px] border-[0.5px] border-gray-700 relative"
               alt="활동 내역 이미지"
               placeholder="blur"
             />
