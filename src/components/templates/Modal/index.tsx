@@ -45,10 +45,7 @@ const Modal = ({
     <>
       {showModal && (
         <div
-          className={`absolute top-0 z-[999] flex h-[100%] w-[100%] items-center items-center justify-center
-          justify-items-center overflow-hidden  bg-[#000]
-          bg-opacity-60
-          `}
+          className={`absolute top-0 z-[999] flex h-[100%] w-[100%] items-center justify-center overflow-hidden bg-[#000] bg-opacity-60`}
         >
           <div
             className={`z-[1000] ml-auto mr-auto w-fit overflow-hidden rounded-[12px] bg-gray-700`}

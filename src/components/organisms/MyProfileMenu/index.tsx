@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import MyProfileMenuItem from './MyProfileMenuItem'
+import dynamic from 'next/dynamic'
+import { useDisclosure } from '@hooks'
+import { SetStateAction } from 'react'
+
+const CheckboxModal = dynamic(() => import('../../templates/CheckboxModal'), {
+  ssr: false,
+})
 
 const MyProfileMenu = () => {
   const dividerStyle = 'width-[100%] h-[0.7px] bg-gray-600'
+  const [showModal, setShowModal, toggle] = useDisclosure()
 
   return (
     <div className="relative">
@@ -16,8 +24,7 @@ const MyProfileMenu = () => {
         />
         {/* </Link> */}
         <div className={dividerStyle} />
-        {/* TODO: 탈퇴 모달 머지되면 탈퇴 모달 띄우기  */}
-        <MyProfileMenuItem content="탈퇴" />
+        <MyProfileMenuItem content="탈퇴" handleOnClick={toggle} />
       </ul>
       <button
         className="absolute top-[176px] right-[17px] w-fit text-body1 text-gray-400"
@@ -28,6 +35,19 @@ const MyProfileMenu = () => {
       >
         <span className="underline">로그아웃</span>
       </button>
+
+      <CheckboxModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleOnSubmit={() => {
+          // TODO: 탈퇴 API 호출
+          console.log('탈퇴')
+          setShowModal(false)
+        }}
+        modalContent="정말 탈퇴하시나요?"
+        submitMessage="탈퇴하기"
+        checkBoxDescription="계정 삭제에 동의합니다."
+      />
     </div>
   )
 }
