@@ -1,8 +1,8 @@
 import { eventAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { MeetEditRequest } from '@types'
 import { useRouter } from 'next/router'
+import { meetKeys } from '@queries'
 
 const patchMeet = async (payload: MeetEditRequest) => {
   const { data } = await eventAPI.update(payload)
@@ -14,11 +14,7 @@ const useModifyMeet = (eventId: number) => {
   const router = useRouter()
   return useMutation((payload: MeetEditRequest) => patchMeet(payload), {
     onSuccess: () => {
-      queryClient.invalidateQueries([
-        QUERY_KEY.MEET,
-        QUERY_KEY.MEET.DETAIL,
-        eventId,
-      ])
+      queryClient.invalidateQueries(meetKeys.detail(eventId))
       router.push('/meet')
     },
   })

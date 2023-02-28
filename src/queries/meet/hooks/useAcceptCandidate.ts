@@ -1,7 +1,7 @@
 import { eventAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { MeetAcceptRequest } from '@types'
+import { meetKeys } from '@queries'
 
 const patchAcceptCandidate = async (
   eventId: number,
@@ -18,7 +18,7 @@ const useAcceptCandidate = () => {
       patchAcceptCandidate(payload.eventId, payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.MEET.CANDIDATE])
+        queryClient.invalidateQueries(meetKeys.candidate)
       },
     },
   )

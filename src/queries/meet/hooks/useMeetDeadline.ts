@@ -1,8 +1,8 @@
 import { eventAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { MeetCloseRequest } from '@types'
 import { useRouter } from 'next/router'
+import { meetKeys } from '@queries'
 
 const patchEarlyDeadline = async (payload: MeetCloseRequest) => {
   const { data } = await eventAPI.close(payload)
@@ -16,7 +16,7 @@ const useMeetDeadline = (meetId: number) => {
     (payload: MeetCloseRequest) => patchEarlyDeadline(payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.MEET.DETAIL, meetId])
+        queryClient.invalidateQueries(meetKeys.detail(meetId))
         router.push(`/meet/${meetId}`)
       },
     },

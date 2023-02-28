@@ -1,8 +1,8 @@
 import { eventAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { MeetApplyRequest } from '@types'
 import { Dispatch, SetStateAction } from 'react'
+import { meetKeys } from '@queries'
 
 const postRequestCandidate = async (payload: MeetApplyRequest) => {
   const { data } = await eventAPI.apply(payload)
@@ -19,7 +19,7 @@ const useRequestCandidate = (
     (payload: MeetApplyRequest) => postRequestCandidate(payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.MEET.CANDIDATE, eventId])
+        queryClient.invalidateQueries(meetKeys.candidate)
         setIsCompleted(true)
         setIsCandidate(true)
       },
