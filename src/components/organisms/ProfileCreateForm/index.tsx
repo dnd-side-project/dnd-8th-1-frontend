@@ -90,8 +90,24 @@ const ProfileCreateForm = ({
   return (
     <>
       {(!isOpenChatOpen || !isPortfolioOpen) && (
+        <div className="mt-[31px] px-[16px]">
+          <h1 className="text-title1 font-bold text-gray-100">
+            프로필{' '}
+            {previousValue ? <span>수정하기</span> : <span>등록하기</span>}
+          </h1>
+          <h3 className="mt-[14px] text-body1 text-gray-400">
+            댄서 또는 댄스팀에 대한 정보를{' '}
+            {previousValue ? (
+              <span>수정합니다.</span>
+            ) : (
+              <span>등록합니다.</span>
+            )}{' '}
+          </h3>
+        </div>
+      )}
+      {(!isOpenChatOpen || !isPortfolioOpen) && (
         <form
-          className="mt-[40px] flex flex-col gap-[34px]"
+          className="flex flex-col gap-[34px]"
           onSubmit={handleSubmit((formValues) => {
             handleOnSubmit({
               ...formValues,
@@ -291,11 +307,11 @@ const ProfileCreateForm = ({
                   disabled
                   className="ml-[12px] flex h-[50px] w-[234px] items-center justify-center rounded-[10px] disabled:bg-gray-600 disabled:text-subtitle disabled:font-bold disabled:text-gray-400"
                 >
-                  완료
+                  저장하기
                 </button>
               ) : (
                 <button className="ml-[12px] flex h-[50px] w-[234px] items-center justify-center rounded-[10px] bg-green-light text-subtitle font-bold text-gray-900">
-                  완료
+                  저장하기
                 </button>
               )}
             </div>
