@@ -1,5 +1,12 @@
 import Head from 'next/head'
-import { MeetBanner, FilterButton, Pagination, CollaboList } from '@components'
+import {
+  MeetBanner,
+  FilterButton,
+  Pagination,
+  CollaboList,
+  FloatingButton,
+  Spacer,
+} from '@components'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Center } from '@chakra-ui/react'
@@ -69,22 +76,32 @@ const MeetPage = ({ meetAllData }: MeetPageProps) => {
               }
             />
           </div>
-          <button onClick={() => router.push('meet/edit')}>작성하기</button>
+          <div className="mr-[50px]">
+            <FloatingButton
+              handleOnClick={() => {
+                router.push('/meet/edit')
+              }}
+            />
+          </div>
         </div>
 
         <section>
           <CollaboList collaboItems={meetData?.content} />
         </section>
 
-        <Center className="mb-[30px]">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={meetData?.totalPages}
-            handleChangePage={(page) => {
-              setCurrentQueryString({ ...currentQueryString, page: page - 1 })
-            }}
-          />
-        </Center>
+        {meetData.content.length !== 0 ? (
+          <Center className="mb-[30px]">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={meetData?.totalPages}
+              handleChangePage={(page) => {
+                setCurrentQueryString({ ...currentQueryString, page: page - 1 })
+              }}
+            />
+          </Center>
+        ) : (
+          <Spacer size={30} />
+        )}
       </main>
     </>
   )
