@@ -42,7 +42,7 @@ const GenreSelect = ({
     return tagIndex === 2
   }
   return (
-    <div className={`relative  w-[343px] ${isPopupOpen ? 'z-[997]' : 'z-[1]'}`}>
+    <div className={`relative  w-[343px] ${isPopupOpen ? 'z-[97]' : 'z-[1]'}`}>
       <div
         ref={regionInputRef}
         className={`flex w-[100%] items-center border
