@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRecoilValue } from 'recoil'
 import { userAtom } from 'states'
+import { ALIGN_CENTER } from '@constants'
 
 const Header = () => {
   const pathname = usePathname()
@@ -56,8 +57,10 @@ const Header = () => {
 
           {!id && (
             <Link href={'/signin'}>
-              <button className="rounded-[10px] bg-green-light px-[10px] py-[5px] font-bold text-gray-900">
-                로그인
+              <button
+                className={`text-gray-10 h-[23px] rounded-[20px] border-[1px] border-gray-100 px-[13px] py-[8px] text-caption ${ALIGN_CENTER}`}
+              >
+                <span>로그인</span>
               </button>
             </Link>
           )}
