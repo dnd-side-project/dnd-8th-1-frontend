@@ -1,25 +1,13 @@
-import { GenreTypes, MeetTypes, RegionTypes } from '@types'
+import { GenreTypes, MeetTypes, RegionTypes, RecruitmentType } from '@types'
 
 export interface User {
-  memberId?: string
-  memberName?: string
-  memberEmail?: string
-  isSignUp?: string
-  role?: string
-  profileId?: string
-  profileType?: string
-  profileName?: string
-  profileImg?: string
-  profileGenre?: string
-  location?: string
-  careerStartDay?: string
-  description?: string
-  openChatUrl?: string
-  portfolioUrl?: {
-    youtubeUrl?: string
-    instagramUrl?: string
-    twitterUrl?: string
-  }
+  id: string // 멤버고유ID
+  name: string // 멤버이름(구글이름)
+  email: string // 멤버이메일
+  imgUrl: string // 구글 기본 프로필 사진
+  role: string // 권한
+  profile: Profile | null // 프로필 등록하지 않았다면 null
+  signUp: boolean //회원가입했다면true(신규회원), 그렇지 않다면 false (기존회원)
 }
 
 export interface Portfolio {
@@ -34,11 +22,11 @@ export interface Profile {
   name: string // 프로필 댄스팀 이름
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
-  location: RegionTypes
+  location: RegionTypes | null
   genre: GenreTypes[]
   startDate: string
   portfolio: Portfolio
-  type: string // 계정 유형, 댄서 or 댄스팀
+  type: RecruitmentType // 계정 유형, 댄서 or 댄스팀
 }
 
 export interface Meet {
