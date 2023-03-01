@@ -1,25 +1,19 @@
 import { AxiosInstance } from 'axios'
+import { ACCESS_TOKEN_KEY } from '@constants'
+import { setToken, getAccessToken, removeAccessToken } from '@utils'
+import { userAPI } from '@apis'
 
-const dummyToken = process.env.NEXT_PUBLIC_DUMMY_ACCESS_TOKEN
-
-export const interceptors = (instance: AxiosInstance) => {
+export const authInterceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
     (config) => {
-      // TODO: 로컬 스토리지에서 토큰 불러오는 로직
-
-      //   config.headers = {
-      //     authorization: token ? `Bearer ${token}` : '',
-      //   }
-
       config.headers = {
-        authorization: `Bearer ${dummyToken}`,
+        authorization: `Bearer ${getAccessToken()}`,
       }
-
       return config
     },
     (error) => Promise.reject(error.response),
   )
-  // TODO: 인증 에러 핸들링 로직
+
   instance.interceptors.response.use(
     (response) => {
       return response
@@ -29,19 +23,39 @@ export const interceptors = (instance: AxiosInstance) => {
 
       if (error.response.status === 401 || error.response.status === 403) {
         originalRequest._retry = true
-
-        // TODO: 토큰 새로 발급받는 로직
-        //  쿠키에 있는 리프레시 토큰을 서버에 post 하여 엑세스 토큰 받아오고
-        // 그 엑세스 토큰을 오리지날 리퀘스트에 넣어준다.
-
-        // 우선 임시 토큰 사용하기
-
-        // originalRequest.headers.Authorization = `Bearer ${token}`
+        try {
+          const res = await userAPI.reissue()
+          const newAccessToken = res.headers.authorization?.replace(
+            'Bearer ',
+            '',
+          )
+          setToken(ACCESS_TOKEN_KEY, newAccessToken as string)
+          originalRequest.headers.authorization = `Bearer ${newAccessToken}`
+        } catch (e) {
+          console.error(e)
+          removeAccessToken()
+        }
         return instance(originalRequest)
       }
       return Promise.reject(error)
     },
   )
+  return instance
+}
+
+export const loginInterceptors = (instance: AxiosInstance) => {
+  instance.interceptors.request.use(
+    (config) => {
+      return config
+    },
+    (error) => Promise.reject(error.response),
+  )
+  // TODO: 인증 에러 핸들링 로직
+  instance.interceptors.response.use((response) => {
+    const accessToken = response.headers.authorization?.replace('Bearer ', '')
+    setToken(ACCESS_TOKEN_KEY, accessToken as string)
+    return response
+  })
 
   return instance
 }
