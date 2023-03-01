@@ -1,5 +1,3 @@
-import { PerformanceEditRequest } from '@types'
-import { authInstance, unAuthInstance } from 'apis/utils'
 import { authInstance, unAuthInstance } from '@apis'
 import { CommentCreate, PerformanceEditRequest } from '@types'
 

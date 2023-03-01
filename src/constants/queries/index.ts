@@ -11,7 +11,4 @@ export const QUERY_KEY = {
     IMMINENT: 'performance-imminent',
   },
   PERFORMANCE_SEARCH: 'performanceSearch',
-  PERFORMANCE: {
-    TOTAL_PERFORMANCE: 'totalPerformance',
-  },
 }
