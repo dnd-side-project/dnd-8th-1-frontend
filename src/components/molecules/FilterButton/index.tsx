@@ -64,7 +64,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
         backgroundColor="transparent"
       >
         {type === 'region' ? (
-          <div className=" ml-[19px] mb-[19px] w-[336px] rounded-[8px] border-[1px] border-gray-600 bg-gray-700 px-[10px] py-[15px]">
+          <div className="ml-[16px] mt-[10px] w-[336px] rounded-[8px] border-[1px] border-gray-600 bg-gray-700 px-[10px] py-[15px]">
             <RegionPopupContent
               handleOnClick={(region) => {
                 setSelectedFilter(region)
@@ -73,14 +73,16 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
             />
           </div>
         ) : type === 'meet' ? (
-          <MeetPopupContent
-            handleOnClick={(meet) => {
-              setSelectedFilter(meet)
-              handleSelected(meet)
-            }}
-          />
+          <div className="mr-[22px] mt-[10px]">
+            <MeetPopupContent
+              handleOnClick={(meet) => {
+                setSelectedFilter(meet)
+                handleSelected(meet)
+              }}
+            />
+          </div>
         ) : (
-          <div className="ml-[20px] mt-[6px] flex h-[208px] w-[336px] items-center justify-center rounded-[8px] border border-gray-600 bg-gray-700 px-[10px]">
+          <div className="ml-[16px] mt-[10px] flex h-[208px] w-[336px] items-center justify-center rounded-[8px] border border-gray-600 bg-gray-700 px-[10px]">
             <GenrePopupContent
               handleOnClick={(genre) => {
                 setSelectedFilter(genre)

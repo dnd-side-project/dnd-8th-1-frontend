@@ -22,7 +22,7 @@ const ImageWithDeadLine = ({
       className={`relative h-[110px] w-[96px] overflow-hidden rounded-[6px] ${styleClass}`}
     >
       {isDead && (
-        <Center className="absolute z-[1] h-[100%] w-[100%] bg-[#000000] bg-opacity-80">
+        <Center className="absolute z-[1] h-[100%] w-[100%] bg-[#000000] bg-opacity-70">
           <Text className="z-[2] text-caption font-bold text-gray-100">
             마감
           </Text>

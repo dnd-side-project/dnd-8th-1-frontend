@@ -170,7 +170,7 @@ const PerformancePage = ({
               />
             </div>
           )}
-          <div className="ml-[310px]">
+          <div className="ml-[304px]">
             <FloatingButton
               handleOnClick={() => router.push('/performance/edit')}
             />

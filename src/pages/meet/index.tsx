@@ -76,7 +76,7 @@ const MeetPage = ({ meetAllData }: MeetPageProps) => {
               }
             />
           </div>
-          <div className="mr-[50px]">
+          <div className="mr-[56px]">
             <FloatingButton
               handleOnClick={() => {
                 router.push('/meet/edit')
