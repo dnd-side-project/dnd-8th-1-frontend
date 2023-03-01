@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { RecruitmentType } from '@types'
+import { RECRUITMENT_TYPE } from '@constants'
 
 interface ProfileSubCategoryTabProps {
   handleOnChange: (category: RecruitmentType) => void
   defaultType: RecruitmentType
 }
-
-const GENRE_CATEGORIES = ['댄서', '댄스팀']
 
 const ProfileCategorySelect = ({
   handleOnChange,
@@ -21,7 +20,7 @@ const ProfileCategorySelect = ({
 
   return (
     <div className="flex h-[30px] w-[120px] items-center justify-center rounded-[4px] border border-green-light">
-      {GENRE_CATEGORIES.map((category) => (
+      {(RECRUITMENT_TYPE as RecruitmentType[]).map((category) => (
         <button
           className={`${
             selected === category
@@ -31,8 +30,8 @@ const ProfileCategorySelect = ({
           key={category}
           onClick={(e) => {
             e.preventDefault()
-            setSelected(category as '댄서' | '댄스팀')
-            handleOnChange(category as '댄서' | '댄스팀')
+            setSelected(category)
+            handleOnChange(category)
           }}
         >
           {category}
