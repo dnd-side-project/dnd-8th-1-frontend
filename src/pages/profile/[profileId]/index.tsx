@@ -7,64 +7,50 @@ import {
   ProfileButtonGroup,
   MyProfileMenu,
 } from '@components'
-import { GenreTypes, RecruitmentType, RegionTypes } from '@types'
+import {
+  GenreTypes,
+  ProfileResponse,
+  RecruitmentType,
+  RegionTypes,
+} from '@types'
 import { Center } from '@chakra-ui/react'
 import { isEmptyFiled } from '@utils'
-import { Profile } from '@types'
-// TODO: 장르랑 지역, 경력, 소개는 필수가 아님
-
-const descriptionLong =
-  '로렘 입숨은 출판이나 그래픽 디자인 \n\n분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나시각적 연출을 보여줄 때 사용하는 표준 채우기텍스트로, 최종 결과를 더.로렘 입숨은 출판이나 그래픽 디자인 \n\n분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나시각적 연출을 보여줄 때 사용하는 표준 채우기텍스트로, 최종 결과를 더'
-
-const PROFILE_DUMMY = {
-  id: 11,
-  name: '아이키',
-  imgUrl: 'https://picsum.photos/500',
-  location: '부산' as RegionTypes,
-  genre: ['커버댄스', '스트릿댄스'] as GenreTypes[],
-  startDate: '2011-01-05',
-  description: descriptionLong,
-  openChatUrl: 'https://www.allsilver.dev/',
-  portfolio: {
-    youtubeUrl: 'https://www.allsilver.dev/',
-    instagramUrl: 'https://www.allsilver.dev/',
-    tiktokUrl: 'https://www.allsilver.dev/',
-  },
-  type: '댄스팀' as RecruitmentType,
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { useGetProfile } from 'queries/profile/hooks'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
+interface ProfileProps {
+  memberId: number
 }
 
-// TODO: 백엔드와 협의 안됨
-const MEMBER_DUMMY = {
-  id: 1,
-  name: '아이키',
-  imgUrl: 'https://picsum.photos/500',
-  email: '123@naver.com',
-  isSignUp: true,
-  role: '권한',
-  profile: PROFILE_DUMMY,
-  // 프로필 없는 경우
-  // profile: null as unknown as Profile,
-}
-
-const ProfilePage = () => {
-  const { profile, imgUrl, name, id } = MEMBER_DUMMY
-
+const ProfilePage = ({ memberId }: ProfileProps) => {
+  const fallback = {} as ProfileResponse
+  const { data = fallback, isLoading } = useGetProfile(memberId)
+  const { id: userId } = useRecoilValue(userAtom)
+  const profileData = data?.data?.profile
+  const profile = profileData
+  const notProfileData = data?.data
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <>
       <Head>
         <title>프로필 - Danverse</title>
       </Head>
       <main>
+        {/** 일반 적인 경우 */}
         {profile && (
           <>
             <ProfileTopSection
-              id={profile.id}
+              userId={userId as number}
+              id={profile.id as number}
               type={profile.type as RecruitmentType}
               imgUrl={profile.imgUrl}
               name={profile.name}
-              genres={profile.genre}
-              location={profile.location}
-              startDate={profile.startDate}
+              genres={profile.genres as GenreTypes[]}
+              location={profile.location as RegionTypes}
+              startDate={profile.careerStartDate}
             />
 
             <Center flexDirection="column" className="mt-[-63px]">
@@ -82,20 +68,37 @@ const ProfilePage = () => {
             </Center>
           </>
         )}
-        {!profile && (
-          <ProfileDisabled profileImage={imgUrl} name={name} id={id} />
+
+        {/** 프로필 등록을 하지 않았을 경우(프로필 필드는 null이지만 그 이외의 필드는 null이 아닌 경우로 분기 처리) */}
+        {!profile && notProfileData && (
+          <ProfileDisabled
+            userId={userId as number}
+            profileImage={notProfileData.imgUrl}
+            name={notProfileData.name}
+            id={memberId}
+          />
         )}
+
         {/* 자기 자신의 프로필일 경우 */}
-        {/* TODO: 전역 상태를 통하여 자기 아이디인지 판단한 후 렌더링 */}
-        {
+        {userId && userId === memberId && (
           <>
             <Spacer size={24} />
             <MyProfileMenu />
           </>
-        }
+        )}
       </main>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  return {
+    props: {
+      memberId: parseInt(ctx?.params?.profileId as string),
+    },
+  }
 }
 
 export default ProfilePage
