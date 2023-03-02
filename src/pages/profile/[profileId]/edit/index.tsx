@@ -1,5 +1,6 @@
 import { ProfileCreateForm } from '@components'
-import { useCreateProfile } from '@queries'
+import { useCreateProfile, useGetProfile, useModifyProfile } from '@queries'
+import { GenreTypes, ProfileResponse } from '@types'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 interface ProfileEditPageProps {
@@ -8,10 +9,44 @@ interface ProfileEditPageProps {
 
 const ProfileEditPage = ({ memberId }: ProfileEditPageProps) => {
   const { mutate: requestCreateProfile } = useCreateProfile(memberId)
+  const fallback = {} as ProfileResponse
+  const { data = fallback, isLoading } = useGetProfile(memberId)
+  const { mutate: requestModifyProfile } = useModifyProfile(memberId)
+  const profileDetailData = data?.data
+  console.log(profileDetailData?.profile)
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <ProfileCreateForm
+      previousValue={{
+        careerStartDate:
+          (profileDetailData?.profile?.careerStartDate as string) || null,
+        description:
+          (profileDetailData?.profile?.description as string) || null,
+        genres: (profileDetailData?.profile?.genres as GenreTypes[]) || null,
+        imgUrl: (profileDetailData?.profile?.imgUrl as string) || null,
+        location: (profileDetailData?.profile?.location as string) || null,
+        name: (profileDetailData?.profile?.name as string) || null,
+        openChatUrl:
+          (profileDetailData?.profile?.openChatUrl as string) || null,
+        portfolio: {
+          instagram:
+            (profileDetailData?.profile?.portfolio?.instagram as string) ||
+            null,
+          tiktok:
+            (profileDetailData?.profile?.portfolio?.tiktok as string) || null,
+          youtube:
+            (profileDetailData?.profile?.portfolio?.youtube as string) || null,
+        },
+        type: (profileDetailData?.profile?.type as string) || null,
+      }}
       handleOnSubmit={(formValues) => {
-        requestCreateProfile(formValues)
+        if (profileDetailData.profile === null) {
+          requestCreateProfile(formValues)
+        } else {
+          requestModifyProfile(formValues)
+        }
       }}
     />
   )
