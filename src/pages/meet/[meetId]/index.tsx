@@ -68,11 +68,12 @@ const ConfirmModal = dynamic(
 
 interface MeetDetailPageProps {
   meetId: number
+  token: string
 }
 
-const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
+const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
   const fallback = {} as MeetDetailResponse
-  const { data = fallback, isLoading } = useMeetDetail(meetId)
+  const { data = fallback, isLoading } = useMeetDetail(meetId, token)
   const detailData = data?.data
   const router = useRouter()
   const [isStatusBarOpen, setIsStatusBarOpen] = useState(false)
@@ -94,16 +95,9 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
     useDisclosure()
 
   const [showprofileModal, setShowProfileModal] = useDisclosure()
-
   const [showLoginModal, setShowLoginModal] = useDisclosure()
-
   const { id, hasProfile } = useRecoilValue(userAtom)
-
-  let isUser = false
-
-  useEffect(() => {
-    isUser = id === detailData?.profile.id
-  }, [id])
+  const isMyPost = id === detailData?.profile.id
 
   /**
    *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함
@@ -198,7 +192,7 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
           {/**
            * TODO: 유저 데이터 받을 경우 새로운 분기 처리 필요
            */}
-          {isUser && (
+          {isMyPost && (
             <IconButton
               handleOnClick={() => {
                 setIsStatusBarOpen(!isStatusBarOpen)
@@ -256,7 +250,7 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
           >
             마감되었어요!
           </button>
-        ) : isUser ? (
+        ) : isMyPost ? (
           // TODO: 코드리뷰 시 분기처리 확인 부탁합니다.
           <button
             onClick={() => router.push(`/meet/${detailData?.id}/candidate`)}
@@ -322,15 +316,17 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }: GetServerSidePropsContext) => {
+  // TODO: 새로고침 시 에러 생김
   const accessToken = req.cookies[ACCESS_TOKEN_KEY]
+    ? req.cookies[ACCESS_TOKEN_KEY]
+    : ''
 
   const queryClient = new QueryClient()
   const meetId = parseInt(params?.meetId as string)
 
   try {
-    await queryClient.prefetchQuery(
-      meetKeys.detail(meetId, accessToken ? accessToken : ''),
-      () => getMeetDetail(meetId, accessToken),
+    await queryClient.prefetchQuery(meetKeys.detail(meetId, accessToken), () =>
+      getMeetDetail(meetId, accessToken),
     )
   } catch (e) {
     res.setHeader('Set-Cookie', [`ACCESS_TOKEN=deleted; Max-Age=0`])
@@ -340,6 +336,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       meetId,
       dehydratedState: dehydrate(queryClient),
+      token: accessToken,
     },
   }
 }
