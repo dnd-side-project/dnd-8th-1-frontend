@@ -23,6 +23,8 @@ import {
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { performanceKeys } from 'queries/performance/performanceKeys'
 import { useRouter } from 'next/router'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 
 const CancelSubmitModal = dynamic(
   () => import('../../../components/templates/CancelSubmitModal'),
@@ -70,6 +72,7 @@ const PerformanceDetailPage = () => {
   const [showDeleteModal, setShowDeleteModal, handleDeleteModalToggle] =
     useDisclosure()
 
+  const { id: userId } = useRecoilValue(userAtom)
   // TODO: 로딩 중 처리
   if (
     isPerformanceLoading ||
@@ -95,12 +98,12 @@ const PerformanceDetailPage = () => {
     address,
     description,
   } = performanceData
+  console.log(userId === profile.id)
 
   // TODO: API 이슈 있음
   // const { mutate: requestModifyReview } = useCreateReview(id)
   // const { mutate: requestDeletePerformance } = useDeletePerformance(id)
   // const { mutate: requestCreateReview } = useCreateReview(id)
-
   return (
     <>
       <Head>
@@ -113,7 +116,7 @@ const PerformanceDetailPage = () => {
             title={title}
             startDate={startDate}
             imgUrl={imgUrl}
-            publisherId={profile.id}
+            isPublisher={userId === profile.id}
             performanceId={id}
             handleOnDelete={handleDeleteModalToggle}
           />
