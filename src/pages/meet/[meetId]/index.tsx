@@ -8,7 +8,7 @@ import {
   Tags,
 } from '@components'
 import { useDisclosure } from '@hooks'
-import { useCancelCandidate, useRequestCandidate } from '@queries'
+import { meetKeys, useCancelCandidate, useRequestCandidate } from '@queries'
 import {
   GenreTypes,
   MeetDetailResponse,
@@ -21,7 +21,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useMeetDetail, getMeetDetail } from '@queries'
 import { useState } from 'react'
-import { ParsedUrlQuery } from 'querystring'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 const MeetDeleteModal = dynamic(
   () => import('../../../components/organisms/MeetDeleteModal'),
   {
@@ -48,16 +48,12 @@ const CandidateModal = dynamic(
 )
 
 interface MeetDetailPageProps {
-  params: ParsedUrlQuery
-  meetDetailData: MeetDetailResponse
+  meetId: number
 }
 
-const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
+const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
   const fallback = {} as MeetDetailResponse
-  const { data = fallback, isLoading } = useMeetDetail(
-    parseInt(params?.meetId as string),
-    meetDetailData,
-  )
+  const { data = fallback, isLoading } = useMeetDetail(meetId)
   const detailData = data?.data
   const router = useRouter()
   const [isStatusBarOpen, setIsStatusBarOpen] = useState(false)
@@ -88,12 +84,12 @@ const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
   const [isCompleted, setIsCompleted] = useState(false)
 
   const { mutate: requestMeetCandidate } = useRequestCandidate(
-    parseInt(params?.meetId as string),
+    meetId,
     setIsCompleted,
     setIsCandidate,
   )
   const { mutate: requestCancelCandidate } = useCancelCandidate(
-    parseInt(params?.meetId as string),
+    meetId,
     setIsCompleted,
   )
   if (isLoading) {
@@ -104,7 +100,7 @@ const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
       {showDeleteModal && (
         <>
           <MeetDeleteModal
-            id={parseInt(params?.meetId as string)}
+            id={meetId}
             showModal={showDeleteModal}
             setShowModal={setDeleteShowModal}
           />
@@ -144,7 +140,7 @@ const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
       <CandidateBottomSheet
         handleOnClickSubmit={() => {
           handleCandidateModalToggle()
-          requestMeetCandidate({ eventId: parseInt(params?.meetId as string) })
+          requestMeetCandidate({ eventId: meetId })
         }}
         showBottomSheet={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
@@ -256,7 +252,7 @@ const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
             onClick={(e) => {
               e.stopPropagation()
               handleCancelModalToggle()
-              requestCancelCandidate(parseInt(params?.meetId as string))
+              requestCancelCandidate(meetId)
             }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
@@ -271,11 +267,15 @@ const MeetDetailPage = ({ params, meetDetailData }: MeetDetailPageProps) => {
 export const getServerSideProps: GetServerSideProps = async ({
   params,
 }: GetServerSidePropsContext) => {
-  const meetDetailData = await getMeetDetail(parseInt(params?.meetId as string))
+  const queryClient = new QueryClient()
+  const meetId = parseInt(params?.meetId as string)
+  await queryClient.prefetchQuery(meetKeys.detail(meetId), () =>
+    getMeetDetail(meetId),
+  )
   return {
     props: {
-      params,
-      meetDetailData,
+      meetId,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }
