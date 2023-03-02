@@ -20,7 +20,7 @@ const RedirectPage = () => {
         data: { data },
       } = await userAPI.login(accessToken)
 
-      const { id, imgUrl, name, profile } = data
+      const { id, imgUrl, name, profile, signUp } = data
 
       setUser({
         id,
@@ -28,9 +28,9 @@ const RedirectPage = () => {
         name,
         profile,
         hasProfile: !!profile,
+        signUp,
       })
     }
-
     loginSocial()
     router.push('/')
   }, [])

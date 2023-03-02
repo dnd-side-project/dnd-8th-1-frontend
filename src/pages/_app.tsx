@@ -39,8 +39,8 @@ function DanverseApp({ Component, pageProps, signinData }: DanverseAppProps) {
   const initialState = useMemo(
     () =>
       ({ set }: MutableSnapshot) => {
-        const { id, name, imgUrl, profile, hasProfile } = signinData
-        set(userAtom, { id, name, imgUrl, profile, hasProfile })
+        const { id, name, imgUrl, profile, hasProfile, signUp } = signinData
+        set(userAtom, { id, name, imgUrl, profile, hasProfile, signUp })
       },
     [signinData],
   )
@@ -86,7 +86,7 @@ DanverseApp.getInitialProps = async (context: AppContext) => {
           },
         },
       )
-      const { id, imgUrl, name, profile } = data
+      const { id, imgUrl, name, profile, signUp } = data
 
       signinData = {
         id,
@@ -94,6 +94,7 @@ DanverseApp.getInitialProps = async (context: AppContext) => {
         name,
         profile,
         hasProfile: !!profile,
+        signUp,
       }
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
