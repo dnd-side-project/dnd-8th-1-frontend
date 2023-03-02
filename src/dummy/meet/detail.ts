@@ -24,4 +24,5 @@ export const MEET_DETAIL: MeetDetail = {
     imgUrl: 'https://picsum.photos/400/500?random=1',
     name: '댄스팀',
   },
+  applied: false,
 }
