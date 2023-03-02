@@ -4,7 +4,9 @@ import {
   MainPerformanceSection,
   MainProfileSection,
   Spacer,
+  WelcomeModalContent,
 } from '@components'
+import { useDisclosure } from '@hooks'
 import {
   getAllPerformance,
   getLatestReviews,
@@ -28,7 +30,19 @@ import {
   Profile,
 } from '@types'
 import { GetServerSideProps } from 'next'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
+const ModalWithSingleButton = dynamic(
+  () => import('../components/templates/ModalWithSingleButton'),
+  {
+    ssr: false,
+  },
+)
 
 const performanceParams: PerformancePayload = {
   year: '',
@@ -57,6 +71,17 @@ export default function Home() {
   const performanceData = allPerformanceData?.data?.content.slice(0, 6)
   const commentData = allCommentData?.data
   const profileData = allProfileData?.data
+
+  const { id, signUp } = useRecoilValue(userAtom)
+  const router = useRouter()
+
+  const [showDisclosure, setShowDisclosure] = useDisclosure()
+
+  useEffect(() => {
+    const showWelcomeModal = !!id && signUp
+    setShowDisclosure(showWelcomeModal)
+  }, [id, signUp])
+
   return (
     <>
       <Head>
@@ -79,6 +104,18 @@ export default function Home() {
           }
         />
         <div className="mb-[38px] mt-[38px] h-[10px] w-full bg-[#161616]" />
+
+        <ModalWithSingleButton
+          showModal={showDisclosure}
+          setShowModal={setShowDisclosure}
+          handleOnClick={() => {
+            router.push(`/profile/${id}/edit`)
+          }}
+          submitMessage="프로필 등록하기"
+          hasCloseButton={true}
+        >
+          <WelcomeModalContent />
+        </ModalWithSingleButton>
       </main>
     </>
   )
