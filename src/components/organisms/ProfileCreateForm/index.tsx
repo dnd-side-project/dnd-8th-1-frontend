@@ -43,24 +43,24 @@ const ProfileCreateForm = ({
           tiktok: previousValue ? previousValue.portfolio.tiktok : null,
           youtube: previousValue ? previousValue.portfolio.youtube : null,
         },
-        type: previousValue ? previousValue.type : '댄서',
+        type:
+          (previousValue as ProfileEditRequest).type === null
+            ? '댄서'
+            : previousValue?.type,
       },
       shouldUnregister: false,
     })
-
   const { mutate: requestUploadImage } = useUploadImage(setValue)
   const fieldValues = useWatch<ProfileEditRequest>({ control })
-
   const isComplete = (fieldValues: ProfileEditRequest) => {
     const { imgUrl, name, openChatUrl, type } = fieldValues
     return (
       type !== null &&
       (image || previousValue?.imgUrl || imgUrl !== null) &&
-      name !== null &&
+      name !== '' &&
       openChatUrl !== null
     )
   }
-
   const essentialStyle = 'ml-[5px] text-body2 text-green-light'
   const labelStyle = 'text-subtitle font-bold text-gray-100'
   const formSectionStyle = 'flex flex-col gap-[6px]'
@@ -95,11 +95,15 @@ const ProfileCreateForm = ({
         <div className="mt-[31px] px-[16px]">
           <h1 className="text-title1 font-bold text-gray-100">
             프로필{' '}
-            {previousValue ? <span>수정하기</span> : <span>등록하기</span>}
+            {previousValue?.type !== null ? (
+              <span>수정하기</span>
+            ) : (
+              <span>등록하기</span>
+            )}
           </h1>
           <h3 className="mt-[14px] text-body1 text-gray-400">
             댄서 또는 댄스팀에 대한 정보를{' '}
-            {previousValue ? (
+            {previousValue?.type !== null ? (
               <span>수정합니다.</span>
             ) : (
               <span>등록합니다.</span>
@@ -124,7 +128,11 @@ const ProfileCreateForm = ({
                 <span className={essentialStyle}>필수</span>
               </div>
               <ProfileCategorySelect
-                defaultType={fieldValues?.type as RecruitmentType}
+                defaultType={
+                  fieldValues?.type === null
+                    ? '댄서'
+                    : (fieldValues?.type as RecruitmentType)
+                }
                 handleOnChange={(category) => {
                   setValue('type', category)
                 }}
