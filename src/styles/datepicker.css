@@ -9,11 +9,17 @@
   font-size: 14px !important;
   border-radius: 8px !important;
   background-color: var(--gray-700) !important;
+  width: 343px !important;
+  display: flex !important;
+  /* 시간 인풋을 위한 속성 */
+  flex-direction: column;
+  overflow: hidden !important;
 }
 
+/* 월 영역 */
 .react-datepicker__month-container {
   color: var(--gray-100) !important;
-  width: 343px !important;
+  flex-grow: 1;
   border-radius: 8px !important;
 }
 
@@ -21,6 +27,11 @@
   position: relative !important;
   border: none !important;
   border-radius: 8px !important;
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* height: 68px; */
 }
 
@@ -56,23 +67,27 @@
 }
 
 /* 다음 달 가는 화살 표 위치 */
-.react-datepicker__navigation {
+/* .react-datepicker__navigation {
   top: 32px !important;
 }
 
 .react-datepicker__navigation--next {
-  right: 98px !important;
-}
+  position: absolute !important;
+  right: 90px !important;
+} */
 
 .react-datepicker__current-month {
   font-size: 18px !important;
   font-weight: bold !important;
   color: var(--gray-100) !important;
   top: 28px !important;
+  position: absolute !important;
+  left: 40% !important;
 }
-.react-datepicker__navigation--previous {
+
+/* .react-datepicker__navigation--previous {
   left: 98px !important;
-}
+} */
 
 .react-datepicker__header__dropdown
   .react-datepicker__header__dropdown--scroll {
@@ -82,7 +97,8 @@
 /* 일 월 화 수 목 금 토 영역 */
 .react-datepicker__day-names {
   position: absolute !important;
-  width: 343px !important;
+  width: 100% !important;
+  flex-grow: 1;
   left: 0 !important;
   top: 69px !important;
   display: flex !important;
@@ -103,6 +119,7 @@
 
 .react-datepicker__header {
   background: var(--gray-700) !important;
+
   padding: 28px 98px;
 }
 
@@ -111,6 +128,12 @@
   margin-bottom: 20.78px;
   position: absolute;
   left: 135px;
+}
+
+/* 달 이동 화살표 버튼 */
+.react-datepicker__navigation {
+  padding: 0px 25% !important;
+  top: 30px !important;
 }
 
 .react-datepicker__month {
@@ -126,8 +149,9 @@
 
 .react-datepicker__week {
   display: flex !important;
+  flex-grow: 1;
   justify-content: space-around !important;
-  padding: 0px 20px !important;
+  padding: 0px 15px !important;
 }
 
 /* 선택된 날짜 스타일 */
@@ -256,4 +280,82 @@
   background-color: var(--gray-500) !important;
   color: var(--gray-100) !important;
   font-weight: 700 !important;
+}
+
+/* 시간 인풋 wraooer  (라벨 + 인풋) */
+.react-datepicker__input-time-container {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding-left: 34px;
+  padding-right: 34px;
+  padding-bottom: 31px;
+}
+
+/* 시간 선택 라벨 */
+.react-datepicker-time__caption {
+  color: var(--gray-100);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* 시간 인풋 컨테이너 (시간이 표시되는 부분) */
+.react-datepicker-time__input-container {
+  background-color: var(--gray-600);
+  box-sizing: border-box;
+  padding: 8px 24px;
+  border-radius: 8px;
+  width: 145px;
+  text-align: center;
+}
+
+/* 시간 인풋 */
+.react-datepicker-time__input {
+  background-color: var(--gray-600);
+  color: var(--gray-100);
+  font-size: 14px;
+  margin-left: 0 !important;
+}
+
+/* 시간 인풋 포커스 효과 방지  */
+.react-datepicker-time__input:focus {
+  outline: none !important; /* for non-webkit browsers */
+  outline: none -webkit-focus-ring-color !important;
+}
+
+/* 인풋 아이콘 (이거 눌러야 드롭다운이 펼쳐짐)  */
+input[type='time']::-webkit-calendar-picker-indicator {
+  /* 시간 아이콘은 숨기고, 전체 영역 클릭하면 드롭 다운이 펼쳐지도록 한다. */
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  cursor: pointer;
+}
+
+input[value='']::-webkit-datetime-edit {
+  color: var(--gray-100);
+}
+
+input[type='date'] {
+  -moz-appearance: textfield;
+}
+
+.react-datepicker__day.react-datepicker__day--disabled.react-datepicker__day--selected.react-datepicker__day--today {
+  color: var(--gray-500) !important;
+  background-color: var(--gray-700) !important;
+}
+
+.react-datepicker__day.react-datepicker__day--disabled.react-datepicker__day--selected.react-datepicker__day--today:hover {
+  color: var(--gray-500) !important;
+  background-color: var(--gray-700) !important;
+  font-weight: 400 !important;
+}
+
+.react-datepicker-time__header {
+  color: var(--gray-100) !important;
+}
+
+/* 시간의 경우, 달 이동 다음 화살표 클래스가 달라짐 */
+.react-datepicker__navigation.react-datepicker__navigation--next.react-datepicker__navigation--next--with-time {
+  right: 60px !important;
 }
