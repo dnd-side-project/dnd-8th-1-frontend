@@ -1,3 +1,4 @@
+import { getAccessToken } from '@utils'
 import { authInstance, unAuthInstance } from '@apis'
 
 import {
@@ -15,8 +16,11 @@ export const eventAPI = {
     )
   },
   //이벤트 글 상세 조회
-  getDetail: (eventId: number) => {
-    return unAuthInstance.get(`api/v1/events/${eventId}`)
+  getDetail: (eventId: number, token?: string) => {
+    const accessToken = getAccessToken()
+    return accessToken
+      ? authInstance.get(`api/v1/events/${eventId}`)
+      : unAuthInstance.get(`api/v1/events/${eventId}`)
   },
   // 이벤트 글 등록
   create: (payload: MeetEditRequest) => {
