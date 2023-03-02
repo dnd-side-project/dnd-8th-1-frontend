@@ -1,4 +1,6 @@
 import { useRouter, usePathname } from 'next/navigation'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 import SidebarContentItem from './SidebarContentItem'
 
 interface SidebarContentProps {
@@ -24,7 +26,8 @@ const SidebarContent = ({ handleOnClick }: SidebarContentProps) => {
   const router = useRouter()
   const pathName = usePathname() as string
 
-  // TODO: 전역 로그인 상태 로직
+  const userState = useRecoilValue(userAtom)
+  const { id } = userState
 
   return (
     <ul className="py-[16px] px-[20px]">
@@ -45,14 +48,16 @@ const SidebarContent = ({ handleOnClick }: SidebarContentProps) => {
         )
       })}
 
-      {/* TODO: 로그인 시 프로필 버튼 미 로그인시 로그인 버튼 */}
-      {/* TODO: 전역 로그인 상태를 이용한 분기처리 필요 */}
-
-      {/* <SidebarContentItem
-        handleOnClick={() => router.push('/myprofile')}
-        content="내 프로필"
-        isCurrentPath={pathName.includes('/myprofile')}
-      /> */}
+      {!!id && (
+        <SidebarContentItem
+          handleOnClick={() => {
+            router.push(`/profile/${id}`)
+            handleOnClick()
+          }}
+          content="내 프로필"
+          isCurrentPath={pathName.includes(`/profile/${id}`)}
+        />
+      )}
     </ul>
   )
 }

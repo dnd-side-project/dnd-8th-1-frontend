@@ -1,17 +1,17 @@
 import { AdditionalInfoPopup, IconButton, Input } from '@components'
 import { VALIDATION_OPEN_CHAT } from '@constants'
 import Link from 'next/link'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 interface OpenchatPopupProps {
-  previousData?: string
+  previousData?: string | null
   setIsOpenChatOpen: Dispatch<SetStateAction<boolean>>
-  handleOnSubmit: (data: string) => void
+  handleOnSubmit: (data: string | null) => void
 }
 
 interface OpenChatForm {
-  openChatLink: string
+  openChatLink: string | null
 }
 
 const OpenchatPopup = ({
@@ -19,26 +19,17 @@ const OpenchatPopup = ({
   setIsOpenChatOpen,
   handleOnSubmit,
 }: OpenchatPopupProps) => {
-  const [isValid, setIsValid] = useState(true)
   const { register, handleSubmit, reset, control } = useForm<OpenChatForm>({
     defaultValues: {
       openChatLink: previousData ? previousData : '',
     },
   })
-
   const { openChatLink } = useWatch({ control })
-  const isEmpty = openChatLink?.length === 0
 
-  useEffect(() => {
-    if (
-      openChatLink?.match(VALIDATION_OPEN_CHAT) &&
-      openChatLink?.length === 33
-    ) {
-      setIsValid(true)
-    } else {
-      setIsValid(false)
-    }
-  }, [openChatLink])
+  const isValid =
+    openChatLink?.match(VALIDATION_OPEN_CHAT) && openChatLink?.length === 33
+
+  const isEmpty = openChatLink?.length === 0
 
   return (
     <>
@@ -52,7 +43,7 @@ const OpenchatPopup = ({
         <form
           onSubmit={handleSubmit((data: OpenChatForm) => {
             setIsOpenChatOpen(false)
-            handleOnSubmit(data?.openChatLink)
+            handleOnSubmit(data?.openChatLink as string | null)
           })}
           className="mt-[41px] flex flex-col"
         >

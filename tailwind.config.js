@@ -16,6 +16,10 @@ module.exports = {
       blue: {
         light: '#55ADFF',
         DEFAULT: '#1890FF',
+        google: {
+          DEFAULT: '#4285f4',
+          active: '#1669F2',
+        },
       },
       violet: {
         light: '#9577FF',
@@ -30,6 +34,7 @@ module.exports = {
         300: '#C9C9C9',
         100: '#FEFEFE',
       },
+      white: '#fff',
     },
     backgroundImage: {
       green_gradient: 'linear-gradient(64.24deg, #18FF74 12.45%, #18ACFF 100%)',
@@ -43,6 +48,7 @@ module.exports = {
     boxShadow: {
       shadow: 'inset 0px 1px 0px rgba(255, 255, 255, 0.1)',
       blur: '0px 0px 20px rgba(164, 170, 172, 0.25)',
+      google: '0 3px 4px 0 rgba(0,0,0,.25)',
     },
     screens: {
       mobile: '375px',

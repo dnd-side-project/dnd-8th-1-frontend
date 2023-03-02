@@ -51,4 +51,8 @@ export const performanceAPI = {
   search: (teamName: string) => {
     return unAuthInstance.get(`/api/v1/performances/team?name=${teamName}`)
   },
+  // 공연 등록
+  create: (payload: PerformanceEditRequest) => {
+    return authInstance.post('/api/v1/performances', payload)
+  },
 }

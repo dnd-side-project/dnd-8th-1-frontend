@@ -58,7 +58,12 @@ export const ALIGN_CENTER = 'flex justify-center items-center'
 export const TEXT_OVERFLOW_STYLE =
   'overflow-hidden text-ellipsis whitespace-nowrap'
 
-// TODO: 작은 모달 버튼
+export const MODAL_BUTTON_ACTIVE_LG =
+  'h-[50px]  bg-green-light text-body1 font-bold text-gray-900'
+
 export const MODAL_BUTTON_STYLE_SM = 'h-[50px] w-[145px] text-body1 font-bold'
 export const MODAL_BUTTON_ACTIVE_SM = `${MODAL_BUTTON_STYLE_SM} text-gray-900 bg-green-light`
 export const MODAL_BUTTON_DISABLED_SM = `${MODAL_BUTTON_STYLE_SM} text-gray-900 bg-gray-400`
+
+export const ProfileButtonStyle =
+  'flex h-[50px] items-center justify-center gap-[9.25px] rounded-[8px] bg-gray-100 px-[25px] py-[15px] text-body1 font-bold text-gray-900 flex-grow min-w-[165px]'

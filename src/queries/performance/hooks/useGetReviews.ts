@@ -2,7 +2,7 @@ import { CommentResponse } from '@types'
 import { performanceAPI } from '@apis'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { performanceKeys } from '../performanceKeys'
+import { performanceKeys } from '@queries'
 
 export const fetchReviews = async (performanceId: number) => {
   const { data }: AxiosResponse<CommentResponse> =

@@ -1,6 +1,4 @@
-import { Tabs, TabList, Tab } from '@chakra-ui/react'
-import { theme } from '@constants'
-import { SetStateAction, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HISTORY_MAIN_CATEGORIES } from '@types'
 
 interface ProfileHistoryTabProps {
@@ -14,50 +12,48 @@ const ProfileHistoryTab = ({
   handleOnChange,
   defaultValue,
 }: ProfileHistoryTabProps) => {
-  const categories = ['만나기', '공연']
+  const categories: HISTORY_MAIN_CATEGORIES[] = ['만나기', '공연']
 
-  const { colors, fontSize } = theme
-  const [selected, setSelected] = useState<'만나기' | '공연'>(
+  const [selected, setSelected] = useState(
     defaultValue ? defaultValue : '만나기',
   )
 
+  useEffect(() => {
+    if (defaultValue) {
+      setSelected(defaultValue)
+    }
+  }, [defaultValue])
+
   return (
-    <Tabs
-      variant="unstyled"
-      onChange={(index) => {
-        setSelected(categories[index] as SetStateAction<'만나기' | '공연'>)
-        handleOnChange(categories[index] as HISTORY_MAIN_CATEGORIES)
-      }}
-      defaultIndex={defaultValue && categories.indexOf(defaultValue)}
-    >
-      <TabList
-        style={{
-          color: colors.gray[500],
-          fontSize: fontSize.subtitle[0],
-          borderBottom: `0.75px solid ${colors.gray[600]}`,
-        }}
-      >
+    <div className="mb-[1px]">
+      <div className="ml-[16px] flex gap-[26px]">
         {categories.map((category) => (
-          <Tab
-            key={category}
-            style={{
-              fontSize: fontSize.subtitle[0],
-            }}
-            _selected={{
-              color: colors.gray[100],
-              fontSize: fontSize.subtitle[0],
-              fontWeight: 700,
-            }}
-            position="relative"
-          >
-            {category}
-            {category === selected && (
-              <div className="absolute bottom-0 h-[2px] w-[47px] bg-gray-100" />
-            )}
-          </Tab>
+          <div key={category}>
+            <button
+              className={`${
+                category === selected
+                  ? 'font-bold text-gray-100'
+                  : 'text-gray-500'
+              }  relative text-subtitle leading-none`}
+              onClick={() => {
+                setSelected(category)
+                handleOnChange(category)
+              }}
+            >
+              {category}
+              {category === selected && (
+                <div
+                  className={`absolute bottom-[-13px] h-[2px] ${
+                    category === '만나기' ? 'w-[47px]' : 'w-[32px]'
+                  } bg-gray-100`}
+                />
+              )}
+            </button>
+          </div>
         ))}
-      </TabList>
-    </Tabs>
+      </div>
+      <div className="mt-[9px] h-[0.7px] w-[375px] bg-gray-600"></div>
+    </div>
   )
 }
 
