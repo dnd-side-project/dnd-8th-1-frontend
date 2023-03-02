@@ -51,4 +51,8 @@ export const performanceAPI = {
   search: (teamName: string) => {
     return unAuthInstance.get(`/api/v1/performances/team?name=${teamName}`)
   },
+  // 리뷰 삭제
+  deleteReview: (reviewId: number) => {
+    return authInstance.delete(`/api/v1/performances/reviews/${reviewId}`)
+  },
 }
