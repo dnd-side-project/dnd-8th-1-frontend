@@ -1,19 +1,19 @@
 import { GenreTypes, MeetTypes, RegionTypes, RecruitmentType } from '@types'
 
 export interface User {
-  id: string // 멤버고유ID
-  name: string // 멤버이름(구글이름)
-  email: string // 멤버이메일
-  imgUrl: string // 구글 기본 프로필 사진
+  id: string // 멤버고유ID v
+  name: string // 멤버이름(구글이름) v
+  email: string // 멤버이메일 v
+  imgUrl: string // 구글 기본 프로필 사진 v
   role: string // 권한
-  profile: Profile | null // 프로필 등록하지 않았다면 null
+  profile: Profile | null // 프로필 등록하지 않았다면 null v
   signUp: boolean //회원가입했다면true(신규회원), 그렇지 않다면 false (기존회원)
 }
 
 export interface Portfolio {
-  youtubeUrl?: string | null
-  instagramUrl?: string | null
-  tiktokUrl?: string | null
+  youtube?: string | null
+  instagram?: string | null
+  tiktok?: string | null
 }
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
@@ -23,8 +23,8 @@ export interface Profile {
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
   location: RegionTypes | null
-  genre: GenreTypes[]
-  startDate: string
+  genres: GenreTypes[]
+  careerStartDate: string
   portfolio: Portfolio
   type: RecruitmentType // 계정 유형, 댄서 or 댄스팀
 }
