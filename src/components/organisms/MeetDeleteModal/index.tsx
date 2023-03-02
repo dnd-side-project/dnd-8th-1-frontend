@@ -14,7 +14,7 @@ const MeetDeleteModal = ({
   showModal,
   setShowModal,
 }: MeetDeleteModalProps) => {
-  const { mutate: requestDeleteMeet } = useDeleteMeet()
+  const { mutate: requestDeleteMeet } = useDeleteMeet(id)
   return (
     <Modal
       hasCloseButton={false}

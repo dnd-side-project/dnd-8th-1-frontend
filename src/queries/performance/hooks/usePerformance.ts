@@ -1,8 +1,8 @@
 import { performanceAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useQuery } from '@tanstack/react-query'
 import { GenreTypes, PerformanceResponse, RegionTypes } from '@types'
 import { AxiosResponse } from 'axios'
+import { performanceKeys } from '@queries'
 
 export interface PerformancePayload {
   year?: number | ''
@@ -36,21 +36,18 @@ export const getAllPerformance = async ({
   return data
 }
 
-const usePerformance = (
-  {
-    year,
-    month,
-    day,
-    location,
-    genre,
-    pageNumber,
-    pageSize,
-  }: PerformancePayload,
-  allData?: PerformanceResponse,
-) => {
+export const usePerformance = ({
+  year,
+  month,
+  day,
+  location,
+  genre,
+  pageNumber,
+  pageSize,
+}: PerformancePayload) => {
   return useQuery(
     [
-      QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE,
+      ...performanceKeys.all,
       year,
       month,
       day,
@@ -71,9 +68,6 @@ const usePerformance = (
       }),
     {
       keepPreviousData: true,
-      initialData: allData && allData,
     },
   )
 }
-
-export default usePerformance

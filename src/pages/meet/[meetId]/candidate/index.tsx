@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RegisterList } from '@components'
 import { useDisclosure } from '@hooks'
 import dynamic from 'next/dynamic'
 import { MeetApplicant, MeetApplicantsResponse } from '@types'
 import { useAcceptCandidate, useCandidate, useMeetDeadline } from '@queries'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 const Modal = dynamic(
   () => import('../../../../components/templates/CancelSubmitModal'),
@@ -13,20 +12,17 @@ const Modal = dynamic(
   },
 )
 
-/**
- *TODO: params 타입 추론 필요
- */
-const MeetCandidatePage = ({ params }: any) => {
+interface MeetCandidatePageProps {
+  eventId: number
+}
+
+const MeetCandidatePage = ({ eventId }: MeetCandidatePageProps) => {
   const [showModal, setShowModal, toggle] = useDisclosure()
   const fallback = {} as MeetApplicantsResponse
-  const { data = fallback, isLoading } = useCandidate(
-    parseInt(params?.meetId as string),
-  )
+  const { data = fallback, isLoading } = useCandidate(eventId)
   const candidateData = data?.data as MeetApplicant[]
   const { mutate: requestAcceptCandidate } = useAcceptCandidate()
-  const { mutate: requestEarlyDeadline } = useMeetDeadline(
-    params?.meetId as number,
-  )
+  const { mutate: requestEarlyDeadline } = useMeetDeadline(eventId)
   if (isLoading) {
     return <div></div>
   }
@@ -55,7 +51,7 @@ const MeetCandidatePage = ({ params }: any) => {
             setShowModal={setShowModal}
             handleOnSubmit={() => {
               requestEarlyDeadline({
-                eventId: parseInt(params?.meetId as string),
+                eventId,
               })
             }}
             modalContent="모집을 마감하시겠어요?"
@@ -68,7 +64,7 @@ const MeetCandidatePage = ({ params }: any) => {
         registerItems={candidateData}
         handleOnClick={(id) => {
           requestAcceptCandidate({
-            eventId: parseInt(params?.meetId as string),
+            eventId,
             profileId: id,
           })
         }}
@@ -77,15 +73,12 @@ const MeetCandidatePage = ({ params }: any) => {
   )
 }
 
-/**
- *TODO: 추후 리팩토링 필요한 로직
- */
 export const getServerSideProps: GetServerSideProps = async ({
   params,
-}: any) => {
+}: GetServerSidePropsContext) => {
   return {
     props: {
-      params,
+      eventId: parseInt(params?.meetId as string),
     },
   }
 }

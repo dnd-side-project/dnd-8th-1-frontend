@@ -5,13 +5,15 @@ import {
   MainProfileSection,
   Spacer,
 } from '@components'
-import { QUERY_KEY } from '@constants'
 import {
   getAllPerformance,
   getLatestReviews,
   getMeet,
   getProfile,
   mainKeys,
+  meetKeys,
+  performanceKeys,
+  PerformancePayload,
   useLatestReviews,
   useMeet,
   usePerformance,
@@ -28,7 +30,12 @@ import {
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-const performanceParams = {
+const performanceParams: PerformancePayload = {
+  year: '',
+  month: '',
+  day: '',
+  location: '',
+  genre: '',
   pageNumber: 0,
   pageSize: 6,
 }
@@ -80,13 +87,15 @@ export default function Home() {
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient()
   await Promise.all([
-    queryClient.prefetchQuery([QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE], () =>
-      getAllPerformance({
-        pageNumber: 0,
-        pageSize: 6,
-      }),
+    queryClient.prefetchQuery(
+      [...performanceKeys.all, '', '', '', '', '', 0, 6],
+      () =>
+        getAllPerformance({
+          pageNumber: 0,
+          pageSize: 6,
+        }),
     ),
-    queryClient.prefetchQuery([QUERY_KEY.MEET.TOTAL_MEET], () =>
+    queryClient.prefetchQuery([...meetKeys.all, 0, 6, '', ''], () =>
       getMeet({
         location: '',
         type: '',

@@ -1,7 +1,7 @@
 import { eventAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Dispatch, SetStateAction } from 'react'
+import { meetKeys } from '@queries'
 
 const deleteCandidate = async (eventId: number) => {
   const { data } = await eventAPI.cancel(eventId)
@@ -15,7 +15,7 @@ const useCancelCandidate = (
   const queryClient = useQueryClient()
   return useMutation((eventId: number) => deleteCandidate(eventId), {
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.MEET.CANDIDATE, eventId])
+      queryClient.invalidateQueries([meetKeys.candidate])
       setIsCompleted(false)
     },
   })
