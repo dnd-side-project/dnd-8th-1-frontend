@@ -51,6 +51,7 @@ export interface MeetDetail {
   description: string
   recruitCount: number
   deadline: string
+  applied: boolean
 }
 
 export interface MeetApplicant {
