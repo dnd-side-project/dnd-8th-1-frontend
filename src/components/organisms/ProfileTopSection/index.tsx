@@ -9,9 +9,11 @@ interface ProfileTopSectionProps {
   genres: GenreTypes[]
   location: RegionTypes
   startDate?: string
+  userId: number | null
 }
 
 const ProfileTopSection = ({
+  userId,
   id,
   type,
   imgUrl,
@@ -22,7 +24,7 @@ const ProfileTopSection = ({
 }: ProfileTopSectionProps) => {
   return (
     <section className=" relative w-[375px]">
-      <ProfileBackgroundSection type={type} id={id} />
+      <ProfileBackgroundSection userId={userId} type={type} id={id} />
       <div className="translate-y-[-63px]">
         <ProfileInfo
           imgUrl={imgUrl}

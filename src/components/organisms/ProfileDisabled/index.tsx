@@ -8,9 +8,15 @@ interface ProfileDisabledProps {
   name: string
   // TODO: 해당 프로필의 아이디와 자신의 아이디를 비교해서 자신의 아이디면 프로필 등록하기 버튼 렌더링
   id: number
+  userId: number
 }
 
-const ProfileDisabled = ({ profileImage, name, id }: ProfileDisabledProps) => {
+const ProfileDisabled = ({
+  userId,
+  profileImage,
+  name,
+  id,
+}: ProfileDisabledProps) => {
   const router = useRouter()
 
   return (
@@ -23,12 +29,14 @@ const ProfileDisabled = ({ profileImage, name, id }: ProfileDisabledProps) => {
           <span className="text-title2 font-bold text-gray-100">{name}</span>
           {/* // TODO: 해당 프로필의 아이디와 자신의 아이디를 비교해서 자신의 아이디면 프로필 등록하기 버튼 렌더링 */}
           <Spacer size={26.5} />
-          <button
-            className="h-[50px] w-[343px] rounded-[10px] bg-green-light px-[16px] text-body1 font-bold text-gray-900"
-            onClick={() => router.push(`/profile/${id}/edit`)}
-          >
-            프로필 등록하기
-          </button>
+          {userId === id && (
+            <button
+              className="h-[50px] w-[343px] rounded-[10px] bg-green-light px-[16px] text-body1 font-bold text-gray-900"
+              onClick={() => router.push(`/profile/${id}/edit`)}
+            >
+              프로필 등록하기
+            </button>
+          )}
         </Center>
       </div>
     </div>
