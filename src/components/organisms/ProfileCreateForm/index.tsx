@@ -14,6 +14,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { useRef, useState } from 'react'
 import { useClickAway, useDisclosure } from '@hooks'
 import { useRouter } from 'next/router'
+import { useUploadImage } from '@queries'
 
 interface ProfileCreateFormProps {
   previousValue?: ProfileEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -48,6 +49,7 @@ const ProfileCreateForm = ({
       shouldUnregister: false,
     })
 
+  const { mutate: requestUploadImage } = useUploadImage(setValue)
   const fieldValues = useWatch<ProfileEditRequest>({ control })
 
   const isComplete = (fieldValues: ProfileEditRequest) => {
@@ -143,8 +145,9 @@ const ProfileCreateForm = ({
                   const formData = new FormData()
                   formData.append('img', image)
                   /**
-                   *TODO: formData 처리에 대한 추가적인 로직 필요
+                   *TODO: 추후 업로드 로직 변경 필요
                    */
+                  requestUploadImage(formData)
                 }}
               />
             </div>

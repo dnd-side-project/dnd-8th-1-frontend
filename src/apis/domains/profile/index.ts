@@ -1,8 +1,16 @@
-import { unAuthInstance } from 'apis/utils'
+import { authInstance, unAuthInstance } from 'apis/utils'
 
 export const profileAPI = {
   // 프로필 전체 조회
   getAllProfile: (memberId: number) => {
     return unAuthInstance.get(`/api/v1/profiles/${memberId}`)
+  },
+  // 프로필 이미지 등록
+  uploadImage: (payload: FormData) => {
+    return authInstance.post(`/api/v1/profiles/image`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
   },
 }
