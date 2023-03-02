@@ -1,5 +1,7 @@
 import { ProfileBackgroundSection, ProfileInfo } from '@components'
 import { GenreTypes, RecruitmentType, RegionTypes } from '@types'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 
 interface ProfileTopSectionProps {
   id: number
@@ -9,11 +11,9 @@ interface ProfileTopSectionProps {
   genres: GenreTypes[]
   location: RegionTypes
   startDate?: string
-  userId: number | null
 }
 
 const ProfileTopSection = ({
-  userId,
   id,
   type,
   imgUrl,
@@ -22,6 +22,7 @@ const ProfileTopSection = ({
   location,
   startDate,
 }: ProfileTopSectionProps) => {
+  const { id: userId } = useRecoilValue(userAtom)
   return (
     <section className=" relative w-[375px]">
       <ProfileBackgroundSection userId={userId} type={type} id={id} />

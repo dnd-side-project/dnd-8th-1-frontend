@@ -1,12 +1,12 @@
 import { GenreTypes, MeetTypes, RegionTypes, RecruitmentType } from '@types'
 
 export interface User {
-  id: string // 멤버고유ID v
-  name: string // 멤버이름(구글이름) v
-  email: string // 멤버이메일 v
-  imgUrl: string // 구글 기본 프로필 사진 v
+  id: string // 멤버고유ID
+  name: string // 멤버이름(구글이름)
+  email: string // 멤버이메일
+  imgUrl: string // 구글 기본 프로필 사진
   role: string // 권한
-  profile: Profile | null // 프로필 등록하지 않았다면 null v
+  profile: Profile | null // 프로필 등록하지 않았다면 null
   signUp: boolean //회원가입했다면true(신규회원), 그렇지 않다면 false (기존회원)
 }
 

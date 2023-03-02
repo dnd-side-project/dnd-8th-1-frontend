@@ -29,7 +29,7 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
   const { id: userId } = useRecoilValue(userAtom)
   const profileData = data?.data?.profile
   const profile = profileData
-  const notProfileData = data?.data
+  const userDefaultData = data?.data
   if (isLoading) {
     return <div></div>
   }
@@ -43,7 +43,6 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
         {profile && (
           <>
             <ProfileTopSection
-              userId={userId as number}
               id={profile.id as number}
               type={profile.type as RecruitmentType}
               imgUrl={profile.imgUrl}
@@ -70,11 +69,11 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
         )}
 
         {/** 프로필 등록을 하지 않았을 경우(프로필 필드는 null이지만 그 이외의 필드는 null이 아닌 경우로 분기 처리) */}
-        {!profile && notProfileData && (
+        {!profile && userDefaultData && (
           <ProfileDisabled
             userId={userId as number}
-            profileImage={notProfileData.imgUrl}
-            name={notProfileData.name}
+            profileImage={userDefaultData.imgUrl}
+            name={userDefaultData.name}
             id={memberId}
           />
         )}
