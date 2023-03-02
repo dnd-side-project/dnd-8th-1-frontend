@@ -75,8 +75,10 @@ const PerformanceDetailPage = () => {
   const { id: userId } = useRecoilValue(userAtom)
 
   // TODO: API 이슈 있음
-  // const { mutate: requestModifyReview } = useCreateReview(id)
-  // const { mutate: requestCreateReview } = useCreateReview(id)
+  // const { mutate: requestModifyReview } = useModifyReview(id)
+  const { mutate: requestCreateReview } = useCreateReview(
+    performance?.data?.id as number,
+  )
   const { mutate: requestDeletePerformance } = useDeletePerformance()
 
   // TODO: 로딩 중 처리
@@ -176,9 +178,7 @@ const PerformanceDetailPage = () => {
             console.log(reviewId, '삭제!')
           }}
           handleOnSubmit={(reviewContent: string) => {
-            // TODO: API 구현 안된 부분
-            // requestCreateReview({ review: reviewContent })
-            // console.log(reviewContent)
+            requestCreateReview({ review: reviewContent })
           }}
         />
       </main>
