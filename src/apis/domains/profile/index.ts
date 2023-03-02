@@ -1,3 +1,4 @@
+import { ProfileEditRequest } from '@types'
 import { authInstance, unAuthInstance } from 'apis/utils'
 
 export const profileAPI = {
@@ -12,5 +13,9 @@ export const profileAPI = {
         'Content-Type': 'multipart/form-data',
       },
     })
+  },
+  // 프로필 등록
+  createProfile: (payload: ProfileEditRequest) => {
+    return authInstance.post(`/api/v1/profiles`, payload)
   },
 }
