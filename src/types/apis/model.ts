@@ -1,31 +1,19 @@
-import { GenreTypes, MeetTypes, RegionTypes } from '@types'
+import { GenreTypes, MeetTypes, RegionTypes, RecruitmentType } from '@types'
 
 export interface User {
-  memberId?: string
-  memberName?: string
-  memberEmail?: string
-  isSignUp?: string
-  role?: string
-  profileId?: string
-  profileType?: string
-  profileName?: string
-  profileImg?: string
-  profileGenre?: string
-  location?: string
-  careerStartDay?: string
-  description?: string
-  openChatUrl?: string
-  portfolioUrl?: {
-    youtubeUrl?: string
-    instagramUrl?: string
-    twitterUrl?: string
-  }
+  id: string // 멤버고유ID
+  name: string // 멤버이름(구글이름)
+  email: string // 멤버이메일
+  imgUrl: string // 구글 기본 프로필 사진
+  role: string // 권한
+  profile: Profile | null // 프로필 등록하지 않았다면 null
+  signUp: boolean //회원가입했다면true(신규회원), 그렇지 않다면 false (기존회원)
 }
 
 export interface Portfolio {
-  youtubeUrl: string
-  instagramUrl: string
-  twitterUrl: string
+  youtubeUrl?: string | null
+  instagramUrl?: string | null
+  tiktokUrl?: string | null
 }
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
@@ -34,11 +22,11 @@ export interface Profile {
   name: string // 프로필 댄스팀 이름
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
-  location: RegionTypes
+  location: RegionTypes | null
   genre: GenreTypes[]
   startDate: string
   portfolio: Portfolio
-  type: string // 계정 유형, 댄서 or 댄스팀
+  type: RecruitmentType // 계정 유형, 댄서 or 댄스팀
 }
 
 export interface Meet {
@@ -83,18 +71,18 @@ export interface PerformanceImminent {
   imgUrl: string
 }
 
+// TODO: 이거 통합해서 써도 될것 같습니다..
 export interface Performance {
-  id: string
+  id: number
   title: string
   imgUrl: string
   startDate: string
   location: RegionTypes
   genres: GenreTypes[]
-  profile: {
-    id: string
-    imgUrl: string
-    name: string
-  }
+  profile: Pick<Profile, 'id' | 'name' | 'imgUrl'>
+  startTime: string
+  description: string
+  address: string
 }
 
 export interface PerformanceDetail {
@@ -146,6 +134,7 @@ export interface MyEvent {
   isMatched: boolean // 이벤트 매칭 여부, 지원자 한명이라도 매칭되면 true
   type: MeetTypes // 콜라보 or 쉐어
 }
+
 export type ProfileMain = Pick<Profile, 'id' | 'imgUrl' | 'name' | 'type'>
 
 export interface MainComment {
@@ -162,4 +151,30 @@ export interface MainComment {
     id: number
     name: string
   }
+}
+
+// 내가 지원한 이벤트
+export interface AppliedEvent {
+  id: number // 이벤트 고유 ID,
+  appliedAt: string // 내가 이벤트에 지원한 시간 ex) 2022-12-31T23:59:59,
+  imgUrl: string //  이벤트 이미지,
+  title: string // 이벤트 제목,
+  profile: Pick<Profile, 'name'>
+  isMatched: boolean //나의 지원이 매칭된 여부 true, false,
+  type: MeetTypes // 콜라보 or 쉐어
+}
+
+export interface MyPerformance {
+  id: number // 공연 고유 ID
+  createdAt: string // 2022-12-31T23:59:59,
+  imgUrl: string // 공연 이미지
+  title: string // 공연 제목
+  profile: Pick<Profile, 'name'>
+}
+
+export interface MyReview {
+  id: number // 후기 고유 ID
+  createdAt: string // 2022-12-31T23:59:59
+  review: string // 후기 내용
+  performance: Pick<Performance, 'id' | 'title'>
 }

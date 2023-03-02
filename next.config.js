@@ -28,6 +28,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'aws-image-upload-s3-bucket.s3.ap-northeast-2.amazonaws.com',
       },
+      // 구글 기본 프로필
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
 }

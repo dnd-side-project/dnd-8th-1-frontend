@@ -1,3 +1,4 @@
+export { loginInstance } from './loginInstance'
 export { authInstance } from './authInstance'
-export { interceptors } from './interceptors'
+export * from './interceptors'
 export { unAuthInstance } from './unAuthInstance'

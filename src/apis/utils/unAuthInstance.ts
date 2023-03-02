@@ -9,6 +9,7 @@ const createUnAuthInstance = (url: string, options: object): AxiosInstance => {
       'Content-Type': 'application/json',
     },
     ...options,
+    withCredentials: true,
   })
 
   return instance

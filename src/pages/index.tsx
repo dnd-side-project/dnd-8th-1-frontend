@@ -5,13 +5,15 @@ import {
   MainProfileSection,
   Spacer,
 } from '@components'
-import { QUERY_KEY } from '@constants'
 import {
   getAllPerformance,
   getLatestReviews,
   getMeet,
   getProfile,
   mainKeys,
+  meetKeys,
+  performanceKeys,
+  PerformancePayload,
   useLatestReviews,
   useMeet,
   usePerformance,
@@ -28,7 +30,12 @@ import {
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-const performanceParams = {
+const performanceParams: PerformancePayload = {
+  year: '',
+  month: '',
+  day: '',
+  location: '',
+  genre: '',
   pageNumber: 0,
   pageSize: 6,
 }
@@ -55,22 +62,24 @@ export default function Home() {
       <Head>
         <title>Home - Danverse</title>
       </Head>
-      <Spacer size={34} />
-      <MainBanner />
-      <Spacer size={60} />
-      <MainMeetSection meetLists={meetData as Meet[]} />
-      <div className="mb-[38px] mt-[10px] h-[10px] w-full bg-[#161616]" />
-      <MainPerformanceSection
-        performanceList={performanceData as Performance[]}
-        commentList={commentData as MainComment[]}
-      />
-      <div className="mb-[38px] mt-[10px] h-[10px] w-full bg-[#161616]" />
-      <MainProfileSection
-        profileItems={
-          profileData as Pick<Profile, 'id' | 'imgUrl' | 'type' | 'name'>[]
-        }
-      />
-      <div className="mb-[38px] mt-[38px] h-[10px] w-full bg-[#161616]" />
+      <main>
+        <Spacer size={34} />
+        <MainBanner />
+        <Spacer size={60} />
+        <MainMeetSection meetLists={meetData as Meet[]} />
+        <div className="mb-[38px] mt-[10px] h-[10px] w-full bg-[#161616]" />
+        <MainPerformanceSection
+          performanceList={performanceData as Performance[]}
+          commentList={commentData as MainComment[]}
+        />
+        <div className="mb-[38px] mt-[10px] h-[10px] w-full bg-[#161616]" />
+        <MainProfileSection
+          profileItems={
+            profileData as Pick<Profile, 'id' | 'imgUrl' | 'type' | 'name'>[]
+          }
+        />
+        <div className="mb-[38px] mt-[38px] h-[10px] w-full bg-[#161616]" />
+      </main>
     </>
   )
 }
@@ -78,13 +87,15 @@ export default function Home() {
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient()
   await Promise.all([
-    queryClient.prefetchQuery([QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE], () =>
-      getAllPerformance({
-        pageNumber: 0,
-        pageSize: 6,
-      }),
+    queryClient.prefetchQuery(
+      [...performanceKeys.all, '', '', '', '', '', 0, 6],
+      () =>
+        getAllPerformance({
+          pageNumber: 0,
+          pageSize: 6,
+        }),
     ),
-    queryClient.prefetchQuery([QUERY_KEY.MEET.TOTAL_MEET], () =>
+    queryClient.prefetchQuery([...meetKeys.all, 0, 6, '', ''], () =>
       getMeet({
         location: '',
         type: '',

@@ -2,7 +2,7 @@ import { performanceAPI } from '@apis'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PerformanceEditRequest } from '@types'
 import { useRouter } from 'next/router'
-import { performanceKeys } from '../performanceKeys'
+import { performanceKeys } from '@queries'
 
 export const patchPerformance = async (
   payload: PerformanceEditRequest & { id: number },

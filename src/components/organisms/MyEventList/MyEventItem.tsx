@@ -24,7 +24,8 @@ const MyEventItem = ({ myEvent }: MyEventItemProps) => {
               src={imgUrl}
               width={80}
               height={90}
-              styleClass="rounded-[6px] border-[0.5px] border-gray-700"
+              placeholder="blur"
+              styleClass="rounded-[6px] border-[0.5px] border-gray-700 relative"
               alt="활동 내역 이미지"
             />
             <div className={`w-[235px] `}>

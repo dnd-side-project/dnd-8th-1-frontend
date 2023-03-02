@@ -18,7 +18,7 @@ const PerformanceEntireList = ({
   }
 
   const entireDate = Array.from(
-    new Set(performances.map((item) => item.startDate)),
+    new Set(performances?.map((item) => item.startDate)),
   )
     .sort((a, b) => {
       return dayjs(b).valueOf() - dayjs(a).valueOf()

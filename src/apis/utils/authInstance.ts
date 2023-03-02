@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 
-import { interceptors } from './interceptors'
+import { authInterceptors } from './interceptors'
 
 const API_END_POINT = `${process.env.NEXT_PUBLIC_API_END_POINT}`
 
@@ -10,10 +10,11 @@ const createAuthInstance = (url: string, options: object): AxiosInstance => {
     headers: {
       'Content-Type': 'application/json',
     },
+    withCredentials: true,
     timeout: 5000,
     ...options,
   })
-  interceptors(instance)
+  authInterceptors(instance)
   return instance
 }
 

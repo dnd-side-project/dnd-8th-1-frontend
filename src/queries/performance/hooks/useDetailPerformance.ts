@@ -1,7 +1,7 @@
 import { PerformanceDetailResponse } from '@types'
 import { performanceAPI } from '@apis'
 import { useQuery } from '@tanstack/react-query'
-import { performanceKeys } from '../performanceKeys'
+import { performanceKeys } from '@queries'
 import { AxiosResponse } from 'axios'
 
 export const fetchPerformanceDetail = async (performanceId: number) => {
