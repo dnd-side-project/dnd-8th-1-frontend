@@ -18,6 +18,7 @@ import {
   fetchPerformanceDetail,
   useGetReviews,
   fetchReviews,
+  useDeleteReview,
 } from '@queries'
 
 import { dehydrate, QueryClient } from '@tanstack/react-query'
@@ -74,8 +75,9 @@ const PerformanceDetailPage = () => {
 
   const { id: userId } = useRecoilValue(userAtom)
 
-  // TODO: API 이슈 있음
-  // const { mutate: requestModifyReview } = useModifyReview(id)
+  const { mutate: requestDeleteReview } = useDeleteReview(
+    performance?.data?.id as number,
+  )
   const { mutate: requestCreateReview } = useCreateReview(
     performance?.data?.id as number,
   )
@@ -131,8 +133,6 @@ const PerformanceDetailPage = () => {
               modalDescription="삭제한 공연은 되돌릴 수 없어요."
               submitMessage="네, 삭제할게요"
               handleOnSubmit={() => {
-                // TODO: 삭제 api 호출 - API 구현 안됨
-                console.log('게시글 삭제')
                 setShowDeleteModal(false)
                 requestDeletePerformance(id)
               }}
@@ -174,8 +174,7 @@ const PerformanceDetailPage = () => {
           startDate={startDate}
           reviews={reviewData.data}
           handleOnDelete={(reviewId) => {
-            // 공연 리뷰 삭제 (TODO: api 미구현, 명세에 없음)
-            console.log(reviewId, '삭제!')
+            requestDeleteReview(reviewId)
           }}
           handleOnSubmit={(reviewContent: string) => {
             requestCreateReview({ review: reviewContent })
