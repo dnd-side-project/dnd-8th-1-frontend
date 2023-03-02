@@ -62,5 +62,5 @@ export interface ProfileEditRequest {
     tiktok: string | null
     youtube: string | null
   }
-  type: string
+  type: string | null
 }

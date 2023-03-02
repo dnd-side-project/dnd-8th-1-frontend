@@ -18,4 +18,8 @@ export const profileAPI = {
   createProfile: (payload: ProfileEditRequest) => {
     return authInstance.post(`/api/v1/profiles`, payload)
   },
+  // 프로필 수정
+  modifyProfile: (payload: ProfileEditRequest) => {
+    return authInstance.patch(`/api/v1/profiles`, payload)
+  },
 }
