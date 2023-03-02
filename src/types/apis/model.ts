@@ -105,7 +105,7 @@ export interface CommentCreate {
 export interface Comment {
   content: string
   reviewId: number
-  profile: Pick<Profile, 'id' | 'name'>
+  writer: Pick<Profile, 'id' | 'name'>
   createdDate: string
 }
 
