@@ -15,6 +15,7 @@ import { useRef, useState } from 'react'
 import { useClickAway, useDisclosure } from '@hooks'
 import { useRouter } from 'next/router'
 import { useUploadImage } from '@queries'
+import dayjs from 'dayjs'
 
 interface ProfileCreateFormProps {
   previousValue?: ProfileEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -37,12 +38,10 @@ const ProfileCreateForm = ({
         location: previousValue ? previousValue.location : null,
         name: previousValue ? previousValue.name : null,
         openChatUrl: previousValue ? previousValue.openChatUrl : null,
-        portfolioUrl: {
-          instagram: previousValue
-            ? previousValue.portfolioUrl.instagram
-            : null,
-          tiktok: previousValue ? previousValue.portfolioUrl.tiktok : null,
-          youtube: previousValue ? previousValue.portfolioUrl.youtube : null,
+        portfolio: {
+          instagram: previousValue ? previousValue.portfolio.instagram : null,
+          tiktok: previousValue ? previousValue.portfolio.tiktok : null,
+          youtube: previousValue ? previousValue.portfolio.youtube : null,
         },
         type: previousValue ? previousValue.type : '댄서',
       },
@@ -55,10 +54,10 @@ const ProfileCreateForm = ({
   const isComplete = (fieldValues: ProfileEditRequest) => {
     const { imgUrl, name, openChatUrl, type } = fieldValues
     return (
-      type !== '' &&
-      (image || previousValue?.imgUrl || imgUrl !== '') &&
-      name !== '' &&
-      openChatUrl !== ''
+      type !== null &&
+      (image || previousValue?.imgUrl || imgUrl !== null) &&
+      name !== null &&
+      openChatUrl !== null
     )
   }
 
@@ -82,9 +81,9 @@ const ProfileCreateForm = ({
   const router = useRouter()
 
   const isEmptyPortfolio =
-    fieldValues?.portfolioUrl?.instagram ||
-    fieldValues?.portfolioUrl?.youtube ||
-    fieldValues?.portfolioUrl?.tiktok
+    fieldValues?.portfolio?.instagram ||
+    fieldValues?.portfolio?.youtube ||
+    fieldValues?.portfolio?.tiktok
 
   const isEmptyUrl = (link: string | null) => {
     return link
@@ -199,7 +198,7 @@ const ProfileCreateForm = ({
               <ProfileDatePicker
                 initialStartDate={fieldValues.careerStartDate as string}
                 handleStartDate={(date) => {
-                  setValue('careerStartDate', date as unknown as string)
+                  setValue('careerStartDate', dayjs(date).format('YYYY-MM-DD'))
                 }}
               />
             </div>
@@ -251,14 +250,22 @@ const ProfileCreateForm = ({
                 </div>
                 {isEmptyUrl(fieldValues.openChatUrl as string) ? (
                   <button
-                    onClick={handleToggleOpenChat}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleToggleOpenChat()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light text-body2 font-bold text-green-light"
                   >
                     변경
                   </button>
                 ) : (
                   <button
-                    onClick={handleToggleOpenChat}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleToggleOpenChat()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light bg-green-light text-body2 font-bold text-gray-900"
                   >
                     등록
@@ -284,14 +291,22 @@ const ProfileCreateForm = ({
                 </div>
                 {isEmptyPortfolio ? (
                   <button
-                    onClick={handleTogglePortfolio}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleTogglePortfolio()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light text-body2 font-bold text-green-light"
                   >
                     변경
                   </button>
                 ) : (
                   <button
-                    onClick={handleTogglePortfolio}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleTogglePortfolio()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light bg-green-light text-body2 font-bold text-gray-900"
                   >
                     등록
@@ -342,15 +357,15 @@ const ProfileCreateForm = ({
       {isPortfolioOpen && (
         <PortfolioPopup
           handleOnSubmit={(portfolioLink) => {
-            setValue('portfolioUrl.instagram', portfolioLink?.instaLink)
-            setValue('portfolioUrl.youtube', portfolioLink?.youtubeLink)
-            setValue('portfolioUrl.tiktok', portfolioLink?.tiktokLink)
+            setValue('portfolio.instagram', portfolioLink?.instaLink)
+            setValue('portfolio.youtube', portfolioLink?.youtubeLink)
+            setValue('portfolio.tiktok', portfolioLink?.tiktokLink)
           }}
           setIsPortfolioOpen={setIsPortfolioOpen}
           previousData={{
-            youtubeLink: fieldValues?.portfolioUrl?.youtube as string,
-            instaLink: fieldValues?.portfolioUrl?.instagram as string,
-            tiktokLink: fieldValues?.portfolioUrl?.tiktok as string,
+            youtubeLink: fieldValues?.portfolio?.youtube as string,
+            instaLink: fieldValues?.portfolio?.instagram as string,
+            tiktokLink: fieldValues?.portfolio?.tiktok as string,
           }}
         />
       )}
