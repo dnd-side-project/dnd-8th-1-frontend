@@ -31,6 +31,7 @@ const Template: ComponentStory<typeof ProfileTopSection> = (args) => {
   const { imgUrl, name, genres, location, startDate, id, type } = DUMMY_PROFILE
   return (
     <ProfileTopSection
+      userId={1}
       imgUrl={imgUrl}
       name={name}
       genres={genres}
