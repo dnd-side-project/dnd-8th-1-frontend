@@ -39,9 +39,9 @@ export const performanceAPI = {
       payload,
     )
   },
-  // 공연 정보글 삭제 (TODO: 미구현)
+  // 공연 정보글 삭제
   delete: (performanceId: number) => {
-    return authInstance.delete(`api/v1/performances/${performanceId}`)
+    return authInstance.delete(`/api/v1/performances/${performanceId}`)
   },
   // 공연 정보 수정
   edit: (payload: PerformanceEditRequest & { id: number }) => {

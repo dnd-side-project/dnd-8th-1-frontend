@@ -73,6 +73,12 @@ const PerformanceDetailPage = () => {
     useDisclosure()
 
   const { id: userId } = useRecoilValue(userAtom)
+
+  // TODO: API 이슈 있음
+  // const { mutate: requestModifyReview } = useCreateReview(id)
+  // const { mutate: requestCreateReview } = useCreateReview(id)
+  const { mutate: requestDeletePerformance } = useDeletePerformance()
+
   // TODO: 로딩 중 처리
   if (
     isPerformanceLoading ||
@@ -82,7 +88,6 @@ const PerformanceDetailPage = () => {
   ) {
     return <div>상세 조회 로딩중...</div>
   }
-
   const performanceData = performance.data
   const reviewData = review.data
 
@@ -98,12 +103,7 @@ const PerformanceDetailPage = () => {
     address,
     description,
   } = performanceData
-  console.log(userId === profile.id)
 
-  // TODO: API 이슈 있음
-  // const { mutate: requestModifyReview } = useCreateReview(id)
-  // const { mutate: requestDeletePerformance } = useDeletePerformance(id)
-  // const { mutate: requestCreateReview } = useCreateReview(id)
   return (
     <>
       <Head>
@@ -130,9 +130,9 @@ const PerformanceDetailPage = () => {
               submitMessage="네, 삭제할게요"
               handleOnSubmit={() => {
                 // TODO: 삭제 api 호출 - API 구현 안됨
-                console.log('개시글 삭제')
+                console.log('게시글 삭제')
                 setShowDeleteModal(false)
-                // requestDeletePerformance(id)
+                requestDeletePerformance(id)
               }}
             />
           )}

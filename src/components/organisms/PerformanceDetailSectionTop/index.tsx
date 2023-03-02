@@ -10,7 +10,7 @@ interface PerformanceDetailSectionTopProps {
   startDate: string
   imgUrl: string
   performanceId: number
-  isPublisher: boolean // 게시글 작성자 아이디
+  isPublisher: boolean // 작성자의 게시물인지의 유무 확인
   handleOnDelete: () => void
 }
 
