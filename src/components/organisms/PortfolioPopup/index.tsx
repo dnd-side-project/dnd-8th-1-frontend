@@ -4,7 +4,7 @@ import { useForm, useWatch } from 'react-hook-form'
 
 interface PortfolioPopupProps {
   previousData?: PortfolioForm
-  setIsOpenChatOpen: Dispatch<SetStateAction<boolean>>
+  setIsPortfolioOpen: Dispatch<SetStateAction<boolean>>
   handleOnSubmit: (data: PortfolioForm) => void
 }
 
@@ -16,7 +16,7 @@ interface PortfolioForm {
 
 const PortfolioPopup = ({
   previousData,
-  setIsOpenChatOpen,
+  setIsPortfolioOpen,
   handleOnSubmit,
 }: PortfolioPopupProps) => {
   const { register, handleSubmit, reset, control } = useForm<PortfolioForm>({
@@ -36,14 +36,14 @@ const PortfolioPopup = ({
   return (
     <>
       <AdditionalInfoPopup
-        setPopupOpen={setIsOpenChatOpen}
+        setPopupOpen={setIsPortfolioOpen}
         headerTitle="작업물"
         title="댄스 작업물 소개하기"
         subTitle="멋진 춤을 사람들에게 소개해 주세요. 유튜브, 인스타, 틱톡을 연결할 수 있어요."
       >
         <form
           onSubmit={handleSubmit((data: PortfolioForm) => {
-            setIsOpenChatOpen(false)
+            setIsPortfolioOpen(false)
             handleOnSubmit(data)
           })}
           className="mt-[41px] flex flex-col"
