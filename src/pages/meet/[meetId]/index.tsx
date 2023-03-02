@@ -6,6 +6,7 @@ import {
   MeetDetailImage,
   StatusPopupContent,
   Tags,
+  ProfileRegisterContent,
 } from '@components'
 import { useDisclosure } from '@hooks'
 import { meetKeys, useCancelCandidate, useRequestCandidate } from '@queries'
@@ -20,8 +21,12 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useMeetDetail, getMeetDetail } from '@queries'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { ACCESS_TOKEN_KEY } from '@constants'
+import { userAtom } from 'states'
+import { useRecoilValue } from 'recoil'
+
 const MeetDeleteModal = dynamic(
   () => import('../../../components/organisms/MeetDeleteModal'),
   {
@@ -42,6 +47,20 @@ const CandidateCancelModal = dynamic(
 )
 const CandidateModal = dynamic(
   () => import('../../../components/organisms/CandidateModal'),
+  {
+    ssr: false,
+  },
+)
+
+const ModalWithSingleButton = dynamic(
+  () => import('../../../components/templates/ModalWithSingleButton'),
+  {
+    ssr: false,
+  },
+)
+
+const ConfirmModal = dynamic(
+  () => import('../../../components/templates/ConfirmModal'),
   {
     ssr: false,
   },
@@ -73,11 +92,19 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
     useDisclosure()
   const [showCancelModal, setShowCancelModal, handleCancelModalToggle] =
     useDisclosure()
-  /**
-   *TODO: 임시 유저 데이터
-   */
-  const DUMMY_USER_ID = 1
-  const isUser = DUMMY_USER_ID === detailData?.profile.id
+
+  const [showprofileModal, setShowProfileModal] = useDisclosure()
+
+  const [showLoginModal, setShowLoginModal] = useDisclosure()
+
+  const { id, hasProfile } = useRecoilValue(userAtom)
+
+  let isUser = false
+
+  useEffect(() => {
+    isUser = id === detailData?.profile.id
+  }, [id])
+
   /**
    *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함
    */
@@ -230,19 +257,28 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
             마감되었어요!
           </button>
         ) : isUser ? (
-          /**
-           * TODO: 유저 데이터 받을 경우 새롭게 분기 처리 필요
-           */
-
+          // TODO: 코드리뷰 시 분기처리 확인 부탁합니다.
           <button
             onClick={() => router.push(`/meet/${detailData?.id}/candidate`)}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
             신청자 확인하기
           </button>
-        ) : !isCompleted ? (
+        ) : !isCompleted && !detailData?.applied ? (
           <button
-            onClick={handleBottomToggle}
+            onClick={() => {
+              if (id === null) {
+                setShowLoginModal(true)
+                return
+              }
+
+              if (!hasProfile) {
+                setShowProfileModal(true)
+                return
+              }
+
+              handleBottomToggle()
+            }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
             신청하기
@@ -260,18 +296,46 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
           </button>
         )}
       </div>
+      <ModalWithSingleButton
+        showModal={showprofileModal}
+        setShowModal={setShowProfileModal}
+        handleOnClick={() => router.push(`/profile/${id}/edit`)}
+        submitMessage={'프로필 등록하기'}
+        hasCloseButton={true}
+      >
+        <ProfileRegisterContent />
+      </ModalWithSingleButton>
+
+      <ConfirmModal
+        showModal={showLoginModal}
+        setShowModal={setShowLoginModal}
+        handleOnSubmit={() => router.push('/signin')}
+        modalContent={'로그인 후 이용이 가능합니다.'}
+        submitMessage={'로그인 하기'}
+      />
     </>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
+  req,
+  res,
 }: GetServerSidePropsContext) => {
+  const accessToken = req.cookies[ACCESS_TOKEN_KEY]
+
   const queryClient = new QueryClient()
   const meetId = parseInt(params?.meetId as string)
-  await queryClient.prefetchQuery(meetKeys.detail(meetId), () =>
-    getMeetDetail(meetId),
-  )
+
+  try {
+    await queryClient.prefetchQuery(
+      meetKeys.detail(meetId, accessToken ? accessToken : ''),
+      () => getMeetDetail(meetId, accessToken),
+    )
+  } catch (e) {
+    res.setHeader('Set-Cookie', [`ACCESS_TOKEN=deleted; Max-Age=0`])
+  }
+
   return {
     props: {
       meetId,
