@@ -21,11 +21,12 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useMeetDetail, getMeetDetail } from '@queries'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { ACCESS_TOKEN_KEY } from '@constants'
 import { userAtom } from 'states'
 import { useRecoilValue } from 'recoil'
+import Head from 'next/head'
 
 const MeetDeleteModal = dynamic(
   () => import('../../../components/organisms/MeetDeleteModal'),
@@ -118,6 +119,9 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
   }
   return (
     <>
+      <Head>
+        <title>만나기 상세 - Danverse</title>
+      </Head>
       {showDeleteModal && (
         <>
           <MeetDeleteModal
