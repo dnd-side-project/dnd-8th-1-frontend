@@ -12,7 +12,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { AppContext, AppProps } from 'next/app'
 import { ChakraBaseProvider } from '@chakra-ui/react'
 import { theme } from '@styles'
-import { Layout } from '@components'
+import { Layout, PageLoading } from '@components'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
 import { userStateType } from '@types'
 import { SIGNOUT_USER_STATE } from '@constants'
@@ -52,7 +52,10 @@ function DanverseApp({ Component, pageProps, signinData }: DanverseAppProps) {
           <ReactQueryDevtools />
           <Hydrate state={pageProps.dehydratedState}>
             <Layout>
-              <Component {...pageProps} />
+              <>
+                <PageLoading />
+                <Component {...pageProps} />
+              </>
             </Layout>
           </Hydrate>
         </QueryClientProvider>
