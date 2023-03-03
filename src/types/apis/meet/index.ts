@@ -3,7 +3,6 @@ import {
   Meet,
   MeetAccept,
   MeetApplicant,
-  // TODO: MeetDetail 수정 후 주석 해제
   MeetDetail,
   PaginationResponse,
 } from '@types'
@@ -13,7 +12,6 @@ export interface MeetResponse extends BaseResponse {
   data: PaginationResponse<Meet>
 }
 
-// TODO: MeetDetail 수정 후 주석 해제
 // 만나기 상세 조회 응답
 export interface MeetDetailResponse extends BaseResponse {
   data?: MeetDetail
