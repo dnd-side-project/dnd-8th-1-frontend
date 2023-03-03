@@ -4,6 +4,7 @@ import {
   IconButton,
   MeetDetailCard,
   MeetDetailImage,
+  ProfileRegisterContent,
   StatusPopupContent,
   Tags,
 } from '@components'
@@ -50,6 +51,13 @@ const CandidateModal = dynamic(
   },
 )
 
+const ModalWithSingleButton = dynamic(
+  () => import('../../../components/templates/ModalWithSingleButton'),
+  {
+    ssr: false,
+  },
+)
+
 interface MeetDetailPageProps {
   meetId: number
 }
@@ -76,14 +84,17 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
     useDisclosure()
   const [showCancelModal, setShowCancelModal, handleCancelModalToggle] =
     useDisclosure()
+  const [showprofileModal, setShowProfileModal] = useDisclosure()
+  const [showErrorTypeModal, setshowErrorTypeModal] = useDisclosure()
 
-  const { id } = useRecoilValue(userAtom)
+  const { id, hasProfile, profile } = useRecoilValue(userAtom)
   const isMyPost = id === detailData?.profile.id
 
   /**
    *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함
    */
   const [isCompleted, setIsCompleted] = useState(false)
+  const isDifferentRecuritmentType = detailData?.recruitType === profile?.type
 
   const { mutate: requestMeetCandidate } = useRequestCandidate(
     meetId,
@@ -245,10 +256,28 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
           </button>
         ) : !isCompleted ? (
           <button
-            onClick={handleBottomToggle}
-            className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
+            onClick={() => {
+              if (hasProfile && detailData?.recruitType === profile?.type) {
+                handleBottomToggle()
+                return
+              }
+
+              if (!hasProfile) {
+                setShowProfileModal(true)
+                return
+              }
+            }}
+            className={`fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px]
+              text-subtitle font-bold  ${
+                detailData?.recruitType !== profile?.type
+                  ? 'bg-gray-600 text-gray-100'
+                  : 'bg-green-light text-gray-900'
+              }`}
+            disabled={hasProfile && detailData?.recruitType !== profile?.type}
           >
-            신청하기
+            {hasProfile && detailData?.recruitType !== profile?.type
+              ? `${detailData?.recruitType}만 지원 가능해요`
+              : '신청하기'}
           </button>
         ) : (
           <button
@@ -262,6 +291,15 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
             신청 취소하기
           </button>
         )}
+        <ModalWithSingleButton
+          showModal={showprofileModal}
+          setShowModal={setShowProfileModal}
+          handleOnClick={() => router.push(`/profile/${id}/edit`)}
+          submitMessage={'프로필 등록하기'}
+          hasCloseButton={true}
+        >
+          <ProfileRegisterContent />
+        </ModalWithSingleButton>
       </div>
     </>
   )
