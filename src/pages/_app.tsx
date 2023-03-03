@@ -19,12 +19,17 @@ import { SIGNOUT_USER_STATE } from '@constants'
 import { userAtom } from 'states'
 import axios from 'axios'
 import { useMemo } from 'react'
-
 interface DanverseAppProps extends AppProps {
   signinData: userStateType
 }
 
 function DanverseApp({ Component, pageProps, signinData }: DanverseAppProps) {
+  console.log(
+    '%c 댄버스 💫 ',
+    'font-size:2rem; color:white; background: linear-gradient(61.53deg, #2400A2 -5.41%, #374BFF 35.21%, #18FF74 100%); font-weight: bold;',
+    '\n\n🪩춤으로 연결되는 댄스 유니버스💫',
+  )
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
