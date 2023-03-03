@@ -7,9 +7,10 @@ interface MyReviewList {
 }
 
 const MyReviewList = ({ myReviews }: MyReviewList) => {
+  const isDataEmpty = myReviews && myReviews.length === 0
   return (
     <ul>
-      {myReviews.length === 0 && <ActivityEmptyHelper />}
+      {(myReviews || isDataEmpty) && <ActivityEmptyHelper />}
       {myReviews.length !== 0 &&
         myReviews.map((myReview) => (
           <MyReviewItem key={myReview.id} myReview={myReview} />
