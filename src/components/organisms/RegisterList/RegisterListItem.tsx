@@ -1,6 +1,7 @@
 import { MeetApplicant } from '@types'
 import { Avatar, Icon } from '@components'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 interface RegisterListItemProps {
   registerItem: MeetApplicant
@@ -13,11 +14,20 @@ const RegisterListItem = ({
   const { profile, matched } = registerItem
   const { id, imgUrl, name, description, openChatUrl, location } = profile
 
+  const router = useRouter()
   return (
     <li className="mb-[16px] h-[166px] w-[343px] rounded-[12px] border-[1px] border-gray-700 bg-[#121212] p-[16px]">
       <div className="flex gap-[16px]">
-        <Avatar profileImage={imgUrl} size={70} />
-
+        <div
+          className="cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            router.push(`/profile/${id}`)
+          }}
+        >
+          <Avatar profileImage={imgUrl} size={70} />
+        </div>
         <div className="mb-[16px] flex w-[225px] flex-col justify-center gap-[8px]">
           <span className="block text-[12px] leading-none text-green-light">
             {location}
