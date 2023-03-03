@@ -19,7 +19,15 @@ const CollaboListItem = ({ collaboListItem }: { collaboListItem: Meet }) => {
           <Flex direction="column">
             <div className="mb-[12px] ml-[7px] flex h-[24px] w-[100%] gap-[8px]">
               <Tag type="region" content={location} />
-              <Tag type="meet" content={type} width={55} py={6} />
+              <Tag
+                type="meet"
+                content={type}
+                width={55}
+                wrapperStyle={{
+                  paddingLeft: '12px',
+                  paddingRight: '12px',
+                }}
+              />
             </div>
             <Box className="ml-[12px]">
               <h3 className="mb-[12px] h-[20px] w-[235px] overflow-hidden text-ellipsis whitespace-nowrap text-subtitle  font-bold leading-none text-gray-100">

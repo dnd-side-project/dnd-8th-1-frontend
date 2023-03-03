@@ -19,20 +19,19 @@ const PerformanceReviewItem = ({
   reviewItem,
   handleOnDelete,
 }: PerformanceReviewItemProp) => {
-  const { content, reviewId, createdDate, profile } = reviewItem
+  const { content, reviewId, createdDate, writer } = reviewItem
   const [
     showReviewDeleteModal,
     setShowReviewDeleteModal,
     handleReviewDeleteModalToggle,
   ] = useDisclosure()
-
   return (
     <>
       <li>
         <div className="mb-[42px] px-[16px]">
           <div className="relative mb-[9px] flex gap-[8px]">
             <span className="text-body2 font-bold text-gray-300">
-              {profile?.name}
+              {writer?.name}
             </span>
             <span className="text-body2 text-gray-500 ">
               {dayjs(createdDate).format('· M월 D일')}

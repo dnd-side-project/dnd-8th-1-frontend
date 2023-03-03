@@ -3,7 +3,6 @@ import ReactDatePicker from 'react-datepicker'
 import { FORM_INPUT_STYLE } from '@constants'
 import 'react-datepicker/dist/react-datepicker.css'
 import dayjs from 'dayjs'
-import { Icon } from '@components'
 import { isPossibleDay } from '@utils'
 import { ko } from 'date-fns/locale'
 
@@ -54,22 +53,24 @@ const DatePickerWithTime = ({
   CustomInput.displayName = 'customInput'
 
   return (
-    <ReactDatePicker
-      selected={startDate ? new Date(startDate) : null}
-      onChange={(date) => {
-        setStartDate(date)
-        handleStartDate(date)
-      }}
-      customInput={<CustomInput inputref={inputRef} />}
-      filterDate={isPossibleDay}
-      locale={ko}
-      onCalendarOpen={() => setIsOpen(true)}
-      onCalendarClose={() => setIsOpen(false)}
-      showTimeInput
-      timeInputLabel="시작 시간"
-      // showTimeSelect
-      timeFormat="aa h:mm"
-    />
+    <div className="z-[999]">
+      <ReactDatePicker
+        selected={startDate ? new Date(startDate) : null}
+        onChange={(date) => {
+          setStartDate(date)
+          handleStartDate(date)
+        }}
+        customInput={<CustomInput inputref={inputRef} />}
+        filterDate={isPossibleDay}
+        locale={ko}
+        onCalendarOpen={() => setIsOpen(true)}
+        onCalendarClose={() => setIsOpen(false)}
+        showTimeInput
+        timeInputLabel="시작 시간"
+        // showTimeSelect
+        timeFormat="aa h:mm"
+      />
+    </div>
   )
 }
 

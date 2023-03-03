@@ -1,6 +1,7 @@
 import { Center, Text } from '@chakra-ui/react'
 import { Icon } from '@components'
 import { theme } from '@constants'
+import { CSSProperties } from 'react'
 
 type tagType = 'region' | 'meet' | 'genre'
 
@@ -14,11 +15,13 @@ interface TagInterface {
   height?: number
   px?: number
   py?: number
+  wrapperStyle?: CSSProperties
 }
 
 const { colors } = theme
 
 const Tag = ({
+  wrapperStyle,
   type,
   content,
   isHighlighted,
@@ -31,10 +34,11 @@ const Tag = ({
   const isRegion = type === 'region'
   return (
     <Center
+      style={wrapperStyle}
       className={`${width && `w-[${width}]`} 
       inline-block h-[24px] rounded-[4px] bg-gray-700 
       ${px ? `px-[${px}px]` : `px-[12px]`} 
-      ${py ? `px-[${py}px]` : `py-[4px]`} 
+      ${py ? `px-[${py}px]` : `py-[6px]`} 
       text-center text-caption ${
         isHighlighted ? 'text-green-light' : 'text-gray-300'
       }  ${styleClass}`}

@@ -8,16 +8,19 @@ const deletePerformance = async (performanceId: number) => {
   return data
 }
 
-const useDeletePerformance = (performanceId: number) => {
+const useDeletePerformance = () => {
   const queryClient = useQueryClient()
   const router = useRouter()
 
-  return useMutation(() => deletePerformance(performanceId), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(performanceKeys.all)
-      router.push('/performance')
+  return useMutation(
+    (performanceId: number) => deletePerformance(performanceId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(performanceKeys.all)
+        router.push('/performance')
+      },
     },
-  })
+  )
 }
 
 export default useDeletePerformance

@@ -15,7 +15,7 @@ const PerformanceListItem = ({
     startDate,
     location,
     genres,
-    profile: { name },
+    profile: { name, imgUrl: profileImgUrl },
   },
 }: PerformanceListItemProps) => {
   const date = `${startDate?.slice(0, 4)}.${startDate?.slice(
@@ -43,7 +43,7 @@ const PerformanceListItem = ({
           <Avatar
             style={{ border: `1px solid ${theme.colors.gray[600]}` }}
             size={24}
-            profileImage={imgUrl}
+            profileImage={profileImgUrl}
           />
           <span className="ml-2 w-[220px] overflow-hidden text-ellipsis whitespace-nowrap text-body2 text-gray-400">
             {name}
