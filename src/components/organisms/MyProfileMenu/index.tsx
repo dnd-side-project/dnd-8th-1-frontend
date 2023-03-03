@@ -2,7 +2,12 @@ import Link from 'next/link'
 import MyProfileMenuItem from './MyProfileMenuItem'
 import dynamic from 'next/dynamic'
 import { useDisclosure } from '@hooks'
-import { SetStateAction } from 'react'
+import { userAPI } from '@apis'
+import { useRouter } from 'next/router'
+import { useSetRecoilState } from 'recoil'
+import { userAtom } from 'states'
+import { SIGNOUT_USER_STATE } from '@constants'
+import { removeAccessToken } from '@utils'
 
 const CheckboxModal = dynamic(() => import('../../templates/CheckboxModal'), {
   ssr: false,
@@ -11,6 +16,8 @@ const CheckboxModal = dynamic(() => import('../../templates/CheckboxModal'), {
 const MyProfileMenu = ({ id }: { id: number }) => {
   const dividerStyle = 'width-[100%] h-[0.7px] bg-gray-600'
   const [showModal, setShowModal, toggle] = useDisclosure()
+  const router = useRouter()
+  const setUser = useSetRecoilState(userAtom)
 
   return (
     <div className="relative bg-gray-900">
@@ -28,9 +35,12 @@ const MyProfileMenu = ({ id }: { id: number }) => {
       </ul>
       <button
         className="absolute top-[176px] right-[17px] w-fit text-body1 text-gray-400"
-        onClick={() => {
-          // TODO: 로그아웃 API 호출하기
-          console.log('로그아웃')
+        onClick={async () => {
+          // TODO: 함수로 분리하기
+          await userAPI.logout()
+          setUser(SIGNOUT_USER_STATE)
+          removeAccessToken()
+          router.push('/')
         }}
       >
         <span className="underline">로그아웃</span>

@@ -16,4 +16,7 @@ export const userAPI = {
   getMyInfo: () => {
     return authInstance.get(`/api/v1/member/info`)
   },
+  logout: () => {
+    return authInstance.get(`/api/v1/member/logout`)
+  },
 }
