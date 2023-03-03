@@ -80,7 +80,7 @@ export default function Home() {
   useEffect(() => {
     const showWelcomeModal = !!id && signUp
     setShowDisclosure(showWelcomeModal)
-  }, [id, signUp])
+  }, [])
 
   return (
     <>
