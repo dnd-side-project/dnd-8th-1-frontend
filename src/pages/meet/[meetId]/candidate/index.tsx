@@ -65,7 +65,7 @@ const MeetCandidatePage = ({ eventId }: MeetCandidatePageProps) => {
         handleOnClick={(id) => {
           requestAcceptCandidate({
             eventId,
-            profileId: id,
+            memberId: id,
           })
         }}
       />

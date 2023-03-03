@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { eventAPI } from '@apis'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { MeetEditRequest } from '@types'
@@ -16,9 +17,9 @@ const useCreateMeet = () => {
   const queryClient = useQueryClient()
   const router = useRouter()
   return useMutation((payload: MeetEditRequest) => postMeetCreate(payload), {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries(meetKeys.candidate)
-      router.push('/meet')
+      router.push(`/meet/${(data as any).data.id}`)
     },
   })
 }

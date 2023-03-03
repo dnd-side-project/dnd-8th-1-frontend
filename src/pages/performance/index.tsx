@@ -120,7 +120,7 @@ const PerformancePage = () => {
       <Head>
         <title>공연 정보 - Danverse</title>
       </Head>
-      <section className="mt-[52px]">
+      <section>
         <PerformanceBanner
           imminentPerformances={imminentPerformances as PerformanceImminent[]}
         />

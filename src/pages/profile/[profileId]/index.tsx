@@ -38,7 +38,7 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
       <Head>
         <title>프로필 - Danverse</title>
       </Head>
-      <main>
+      <main className={`${userId !== profileData?.id && 'mb-[130px]'}`}>
         {/** 일반 적인 경우 */}
         {profile && (
           <>
@@ -81,7 +81,7 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
         {/* 자기 자신의 프로필일 경우 */}
         {userId && userId === memberId && (
           <>
-            <Spacer size={24} />
+            <Spacer size={36} />
             <MyProfileMenu id={memberId} />
           </>
         )}

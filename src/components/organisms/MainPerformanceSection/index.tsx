@@ -5,15 +5,15 @@ import Link from 'next/link'
 import MainPerformanceCommentList from './MainPerformanceCommentList'
 import MainPerformanceList from './MainPerformanceList'
 
-interface MainMeetSectionProps {
+interface MainPerformanceSectionProps {
   performanceList: Omit<Performance, 'performStartDate'>[]
   commentList: MainComment[]
 }
 
-const MainMeetSection = ({
+const MainPerformanceSection = ({
   performanceList,
   commentList,
-}: MainMeetSectionProps) => {
+}: MainPerformanceSectionProps) => {
   return (
     <section className="px-[16px]">
       {/** 공연 정보 제목 */}
@@ -23,7 +23,7 @@ const MainMeetSection = ({
         >
           공연
         </h2>
-        <Link href="/meet">
+        <Link href="/performance">
           <Icon icon="arrow-right" size={20} color={theme.colors.gray[600]} />
         </Link>
       </div>
@@ -77,4 +77,4 @@ const MainMeetSection = ({
   )
 }
 
-export default MainMeetSection
+export default MainPerformanceSection

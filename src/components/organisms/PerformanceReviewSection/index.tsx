@@ -18,12 +18,12 @@ const PerformanceReviewSection = ({
   handleOnSubmit,
 }: PerformanceReviewSectionProps) => {
   return (
-    <section>
+    <section className="mb-[60px] h-full w-full">
       <h3 className="ml-[16px] text-headline font-bold text-green-light">
         후기
       </h3>
       {!isDeadLine(startDate) ? (
-        <Center className=" mt-[8px] flex-col gap-[20.78px]">
+        <Center className=" mt-[54px] mb-[108px] flex-col gap-[20.78px]">
           <Image src={Graphic} alt={'후기 작성 불가 알림'} width={75.19} />
           <p className=" text-center text-body1 text-gray-400">
             후기는 공연 종료 후에 <br /> 작성할 수 있어요!

@@ -31,7 +31,7 @@ const Calendar = ({
 }: CalendarProps) => {
   return (
     <div className="relative flex flex-col bg-gray-900">
-      <div className="flex w-full justify-between pt-[50px] pb-[20px]">
+      <div className="flex w-full justify-between pt-[30px] pb-[6px]">
         <CalandarSlider
           performancePayload={performancePayload}
           setPerformancePayload={setPerformancePayload}

@@ -94,7 +94,7 @@ const FilterButton = ({ type, handleSelected }: FilterButtonProps) => {
       </PopoverContent>
     </Popover>
   ) : (
-    <div className="flex h-[34px] w-[81px] items-center justify-center gap-[10.95px] rounded-[37px] border-[1px] border-solid border-green-light bg-gray-700 py-[3px] px-[12px] text-body2 text-green-light">
+    <div className="flex h-[34px] w-[fit] items-center justify-center gap-[10.95px] rounded-[37px] border-[1px] border-solid border-green-light bg-gray-700 py-[3px] px-[12px] text-body2 text-green-light">
       <span>{selectedFilter}</span>
       <IconButton
         icon="x-active"
