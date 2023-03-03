@@ -1,7 +1,7 @@
 import { GenreTypes, Meet, RegionTypes } from '@types'
 import { Avatar, Tags } from '@components'
 import Link from 'next/link'
-
+import { TEXT_OVERFLOW_STYLE } from '@constants'
 interface MainMeetListItemProps {
   meetItem: Omit<Meet, 'deadline'>
 }
@@ -31,13 +31,16 @@ const MainMeetListItem = ({
       <span className="mb-[8px] block w-full overflow-hidden text-ellipsis whitespace-nowrap text-body1 font-bold">
         {title}
       </span>
-      <div className="flex items-center">
+
+      <div className={`flex items-center gap-[8px]`}>
         <Avatar
           profileImage={profileImgUrl}
           size={24}
           styleClass="border-solid border-[0.5px] border-gray-700"
         />
-        <span className="ml-[8px] overflow-hidden text-ellipsis whitespace-nowrap text-body2 text-gray-100">
+        <span
+          className={`ml-[8px]text-body2 text-gray-100 ${TEXT_OVERFLOW_STYLE} w-[98px]`}
+        >
           {name}
         </span>
       </div>

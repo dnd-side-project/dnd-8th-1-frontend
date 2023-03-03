@@ -1,6 +1,7 @@
 import { MainComment } from '@types'
 import { StyledImage } from '@components'
 import Link from 'next/link'
+import { TEXT_OVERFLOW_STYLE } from '@constants'
 
 interface MainPerformanceCommentListItemProps {
   commentItem: MainComment
@@ -27,16 +28,18 @@ export const MainPerformanceCommentListItem = ({
         placeholder="blur"
       />
       <div className="ml-[126px] w-[194px]">
-        <div className="mb-[6px] w-full border-b border-gray-600 pb-[6px]">
-          <span className="text-body1 font-bold text-gray-100">{title}</span>
+        <div className="mb-[6px] w-full border-b border-gray-600 pb-[6px] ">
+          <div
+            className={`text-body1 font-bold text-gray-100 ${TEXT_OVERFLOW_STYLE} `}
+          >
+            <span>{title}</span>
+          </div>
         </div>
         <div>
           <span className="mb-[8px] block text-caption font-bold text-gray-300">
             {name}
           </span>
-          <p className="overflow-hidden text-ellipsis whitespace-nowrap text-body2 text-gray-400">
-            {content.slice(0, 20)} <br /> {content.slice(20)}
-          </p>
+          <p className="text-body2 text-gray-400 line-clamp-2">{content}</p>
         </div>
       </div>
     </Link>

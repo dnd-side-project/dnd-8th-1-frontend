@@ -16,6 +16,7 @@ const useDeletePerformance = () => {
     (performanceId: number) => deletePerformance(performanceId),
     {
       onSuccess: () => {
+        // TODO: 404 뜸
         queryClient.invalidateQueries(performanceKeys.all)
         router.push('/performance')
       },

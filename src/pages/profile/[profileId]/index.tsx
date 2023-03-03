@@ -81,7 +81,7 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
         {/* 자기 자신의 프로필일 경우 */}
         {userId && userId === memberId && (
           <>
-            {userId !== memberId && <Spacer size={24} />}
+            <Spacer size={36} />
             <MyProfileMenu id={memberId} />
           </>
         )}

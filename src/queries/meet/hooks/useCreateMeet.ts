@@ -19,8 +19,7 @@ const useCreateMeet = () => {
   return useMutation((payload: MeetEditRequest) => postMeetCreate(payload), {
     onSuccess: (data) => {
       queryClient.invalidateQueries(meetKeys.candidate)
-      console.log((data as any).data.id)
-      router.push(`/meet/${data.id}`)
+      router.push(`/meet/${(data as any).data.id}`)
     },
   })
 }

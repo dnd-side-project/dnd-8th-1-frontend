@@ -20,7 +20,7 @@ const useModifyMeet = (eventId: number) => {
       queryClient.invalidateQueries(
         meetKeys.detail(eventId, accessToken ? accessToken : ''),
       )
-      router.push('/meet')
+      router.push(`/meet/${eventId}`)
     },
   })
 }

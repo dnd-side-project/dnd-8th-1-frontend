@@ -15,9 +15,9 @@ export const useCreatePerformance = () => {
   return useMutation(
     (payload: PerformanceEditRequest) => createPerformance(payload),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
         queryClient.invalidateQueries(performanceKeys.all)
-        router.push('/performance')
+        router.push(`/performance/${data.data.id}`)
       },
     },
   )
