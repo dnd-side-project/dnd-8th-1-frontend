@@ -11,7 +11,7 @@ export const getCandidate = async (eventId: number) => {
 }
 
 export const useCandidate = (eventId: number) => {
-  return useQuery([meetKeys.candidate], () => getCandidate(eventId), {
+  return useQuery([...meetKeys.candidate], () => getCandidate(eventId), {
     enabled: !!eventId,
   })
 }

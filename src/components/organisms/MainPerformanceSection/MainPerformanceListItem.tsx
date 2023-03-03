@@ -1,5 +1,5 @@
 import { GenreTypes, Performance, RegionTypes } from '@types'
-import { Avatar, Tags } from '@components'
+import { Avatar, StyledImage, Tags } from '@components'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PLACEHOLDER_IMG } from '@constants'
@@ -24,17 +24,14 @@ const MainPerformanceListItem = ({
       key={id}
       href={`/performance/${id}`}
     >
-      <div className="rounded-[8px] border border-gray-700">
-        <Image
-          alt="공연 이미지"
-          width={239}
-          src={imgUrl}
-          height={130}
-          placeholder="blur"
-          blurDataURL={PLACEHOLDER_IMG}
-          style={{ objectFit: 'cover' }}
-        />
-      </div>
+      <StyledImage
+        src={imgUrl}
+        alt="공연 이미지"
+        width={239}
+        height={130}
+        styleClass="relative overflow-hidden rounded-[8px] border border-gray-700"
+      />
+
       <Tags
         containerStyle="mt-[12px] mb-[8px]"
         textStyle="text-caption text-gray-400"

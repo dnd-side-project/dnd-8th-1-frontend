@@ -311,11 +311,11 @@ const ProfileCreateForm = ({
                     <label className={labelStyle}>작업물</label>
                   </div>
                   {!isEmptyPortfolio ? (
-                    <span className="mt-[5px] text-body2 text-gray-500">
+                    <span className="mt-[6px] block text-body2 text-gray-500">
                       미등록
                     </span>
                   ) : (
-                    <span className="mt-[5px] text-body2 text-gray-500">
+                    <span className="mt-[6px] block text-body2 text-gray-500">
                       등록
                     </span>
                   )}

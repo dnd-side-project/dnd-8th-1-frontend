@@ -14,7 +14,7 @@ const ProfileDescription = ({ description }: { description: string }) => {
       >
         <p
           className={`text-justify ${
-            !showMore && 'line-clamp-5 h-[105px] overflow-hidden'
+            !showMore && 'h-[105px] overflow-hidden line-clamp-5'
           }`}
         >
           {description}
