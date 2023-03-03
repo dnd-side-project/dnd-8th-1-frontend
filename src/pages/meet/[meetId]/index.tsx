@@ -16,7 +16,7 @@ import {
   RecruitmentType,
   RegionTypes,
 } from '@types'
-import { isDeadLine } from '@utils'
+import { getAccessToken, isDeadLine } from '@utils'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -109,7 +109,6 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
    *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함
    */
   const [isCompleted, setIsCompleted] = useState(false)
-  const isDifferentRecuritmentType = detailData?.recruitType === profile?.type
 
   const { mutate: requestMeetCandidate } = useRequestCandidate(
     meetId,
@@ -303,7 +302,7 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
             onClick={(e) => {
               e.stopPropagation()
               handleCancelModalToggle()
-              requestCancelCandidate(meetId)
+              requestCancelCandidate(meetId, getAccessToken())
             }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
@@ -346,7 +345,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }: GetServerSidePropsContext) => {
-  // TODO: 새로고침 시 에러 생김
   const accessToken = req.cookies[ACCESS_TOKEN_KEY]
     ? req.cookies[ACCESS_TOKEN_KEY]
     : ''
