@@ -30,15 +30,11 @@ const RegisterList = ({ registerItems, handleOnClick }: RegisterListProps) => {
     <div className="w-[100%] bg-gray-900 px-[16px] pt-[16px] text-body1">
       {registerItems.map((registerItem) => {
         return (
-          <Link
+          <RegisterListItem
             key={registerItem?.profile?.id}
-            href={`/profile/${registerItem?.profile?.id}`}
-          >
-            <RegisterListItem
-              registerItem={registerItem}
-              handleOnClick={handleOnClick}
-            />
-          </Link>
+            registerItem={registerItem}
+            handleOnClick={handleOnClick}
+          />
         )
       })}
     </div>
