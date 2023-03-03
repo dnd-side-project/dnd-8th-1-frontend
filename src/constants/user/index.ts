@@ -7,4 +7,5 @@ export const SIGNOUT_USER_STATE: userStateType = {
   name: null,
   profile: null,
   hasProfile: false,
+  signUp: false,
 }

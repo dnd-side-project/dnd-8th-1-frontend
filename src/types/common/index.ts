@@ -8,4 +8,5 @@ export interface userStateType {
   name: string | null // 기본 구글 이름
   profile: Profile | null // 프로필
   hasProfile: boolean // 프로필 보유 여부
+  signUp: boolean // 첫 회원가입 여부
 }
