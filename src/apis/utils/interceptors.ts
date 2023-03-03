@@ -3,11 +3,11 @@ import { ACCESS_TOKEN_KEY } from '@constants'
 import { setToken, getAccessToken, removeAccessToken } from '@utils'
 import { userAPI } from '@apis'
 
-export const authInterceptors = (instance: AxiosInstance) => {
+export const authInterceptors = (instance: AxiosInstance, token?: string) => {
   instance.interceptors.request.use(
     (config) => {
       config.headers = {
-        authorization: `Bearer ${getAccessToken()}`,
+        authorization: `Bearer ${token ? token : getAccessToken()}`,
       }
       return config
     },
