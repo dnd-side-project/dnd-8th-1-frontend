@@ -74,7 +74,7 @@ export const MY_APPLIED_DUMMY_SINGLE: AppliedEvent = {
   imgUrl: 'https://picsum.photos/500',
   profile: { name: '이벤트 주최자 이름' },
   isMatched: true,
-  type: '콜라보',
+  //  type: '콜라보',
 }
 
 export const MY_APPLIED_DUMMY: AppliedEvent[] = Array.from(

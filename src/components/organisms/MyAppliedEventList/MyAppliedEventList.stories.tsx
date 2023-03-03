@@ -27,7 +27,6 @@ const MEET_ITEM_DUMMY: AppliedEvent = {
   imgUrl: 'https://picsum.photos/500',
   profile: { name: '이벤트 주최자 이름' },
   isMatched: true,
-  type: '콜라보',
 }
 
 const MEET_ITEMS_DUMMY: AppliedEvent[] = Array.from({ length: 15 }, (_, i) => {

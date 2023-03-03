@@ -7,13 +7,17 @@ interface MyAppliedEventListProps {
 }
 
 const MyAppliedEventList = ({ myAppliedEvents }: MyAppliedEventListProps) => {
+  const isDataEmpty = myAppliedEvents && myAppliedEvents.length === 0
+
   return (
     <ul>
-      {myAppliedEvents.length === 0 && <ActivityEmptyHelper />}
-      {myAppliedEvents.length !== 0 &&
+      {!myAppliedEvents || isDataEmpty ? (
+        <ActivityEmptyHelper />
+      ) : (
         myAppliedEvents.map((appliedEvent) => (
           <AppliedEventItem key={appliedEvent.id} appliedEvent={appliedEvent} />
-        ))}
+        ))
+      )}
     </ul>
   )
 }
