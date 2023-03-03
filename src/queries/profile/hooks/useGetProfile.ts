@@ -4,12 +4,12 @@ import { ProfileResponse } from '@types'
 import { AxiosResponse } from 'axios'
 import { profileKeys } from '@queries'
 
-export const getProfile = async (memberId: number) => {
+export const getAllProfile = async (memberId: number) => {
   const { data }: AxiosResponse<ProfileResponse> =
     await profileAPI.getAllProfile(memberId)
   return data
 }
 
 export const useGetProfile = (memberId: number) => {
-  return useQuery([...profileKeys.all, memberId], () => getProfile(memberId))
+  return useQuery([...profileKeys.all, memberId], () => getAllProfile(memberId))
 }
