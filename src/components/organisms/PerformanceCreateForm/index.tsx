@@ -12,11 +12,9 @@ import {
 } from '@components'
 import { useForm, useWatch } from 'react-hook-form'
 import { useRef, useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import { uploadImageUrl } from '@queries'
 import dayjs from 'dayjs'
 import { useClickAway } from '@hooks'
-
+import { performanceAPI } from '@apis'
 interface PerformanceCreateFormProps {
   previousValue?: PerformanceEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
   handleOnSubmit: (formValues: PerformanceEditRequest) => void
@@ -42,18 +40,7 @@ const PerformanceCreateForm = ({
       },
       shouldUnregister: false,
     })
-  const { mutate: requestImgUrl } = useMutation(
-    (payload: FormData) => uploadImageUrl(payload),
-    {
-      // TODO: useUploadImageUrl과 함께보기
-      /**
-       *TODO: 시간 날 때 data 타입 형식 정하기 (autocomplete 를 위함)
-       */
-      onSuccess: ({ data: { imgUrl } }) => {
-        setValue('imgUrl', imgUrl)
-      },
-    },
-  )
+
   const fieldValues = useWatch<PerformanceEditRequest>({ control })
 
   const isAllFull = (fieldValues: PerformanceEditRequest) => {
@@ -68,10 +55,13 @@ const PerformanceCreateForm = ({
       address,
     } = fieldValues
 
+    const isSetPreviousImage = previousValue?.imgUrl && imgUrl !== ''
+    const isSetNewPostImage = !previousValue?.imgUrl && !!image
+
     return (
       title !== '' &&
       location !== '' &&
-      (image || previousValue?.imgUrl || imgUrl !== '') &&
+      (isSetPreviousImage || isSetNewPostImage) &&
       description !== '' &&
       startTime !== '' &&
       startDate !== '' &&
@@ -98,9 +88,17 @@ const PerformanceCreateForm = ({
 
       <form
         className="mt-[40px] flex flex-col gap-[34px] p-[16px]"
-        onSubmit={handleSubmit((formValues) => {
+        onSubmit={handleSubmit(async (formValues) => {
+          const formData = new FormData()
+          formData.append('img', image as File)
+
+          const {
+            data: { data },
+          } = await performanceAPI.uploadImage(formData)
+
           handleOnSubmit({
             ...formValues,
+            imgUrl: data.imgUrl,
           })
         })}
       >
@@ -139,9 +137,7 @@ const PerformanceCreateForm = ({
         </div>
 
         {/* 시간 */}
-        {/**
-         *TODO: 다은님이 컴포넌트 만들어주시는 대로 교체 될 예정
-         */}
+
         <div className={formSectionStyle}>
           <label className={labelStyle}>시간</label>
           <p className="text-body2 text-gray-400">
@@ -189,9 +185,6 @@ const PerformanceCreateForm = ({
             initialImage={previousValue?.imgUrl}
             handleSetImage={(image) => {
               setImage(image)
-              const formData = new FormData()
-              formData.append('img', image)
-              requestImgUrl(formData as FormData)
             }}
           />
         </div>

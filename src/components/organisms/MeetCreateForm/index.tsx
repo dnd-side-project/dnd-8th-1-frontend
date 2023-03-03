@@ -16,9 +16,8 @@ import {
   FORM_INPUT_STYLE,
 } from '@constants'
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import { uploadImageUrl } from '@queries'
 import dayjs from 'dayjs'
+import { performanceAPI } from '@apis'
 
 interface MeetCreateFormProps {
   previousValue?: MeetEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -46,28 +45,19 @@ const MeetCreateForm = ({
       },
       shouldUnregister: false,
     })
-  const { mutate: requestImgUrl } = useMutation(
-    (payload: FormData) => uploadImageUrl(payload),
-    {
-      // TODO: useUploadImageUrl과 함께보기
-      /**
-       *TODO: 시간 날 때 data 타입 형식 정하기 (autocomplete 를 위함)
-       */
-      onSuccess: ({ data: { imgUrl } }) => {
-        setValue('imgUrl', imgUrl)
-      },
-    },
-  )
 
   const fieldValues = useWatch<MeetEditRequest>({ control })
 
   const isAllFull = (fieldValues: MeetEditRequest) => {
     const { title, location, description, deadline, imgUrl } = fieldValues
 
+    const isSetPreviousImage = previousValue?.imgUrl && imgUrl !== ''
+    const isSetNewPostImage = !previousValue?.imgUrl && !!image
+
     return (
       title !== '' &&
       location !== '' &&
-      (image || previousValue?.imgUrl || imgUrl !== '') &&
+      (isSetPreviousImage || isSetNewPostImage) &&
       description !== '' &&
       deadline !== ''
     )
@@ -95,14 +85,23 @@ const MeetCreateForm = ({
 
       <form
         className="mt-[40px] flex flex-col gap-[34px] p-[16px]"
-        onSubmit={handleSubmit((formValues) => {
+        onSubmit={handleSubmit(async (formValues) => {
           const day = dayjs(formValues.deadline).day()
           const deadline = dayjs(formValues.deadline)
             .set('day', day + 1)
             .toISOString()
+
+          const formData = new FormData()
+          formData.append('img', image as File)
+
+          const {
+            data: { data },
+          } = await performanceAPI.uploadImage(formData)
+
           handleOnSubmit({
             ...formValues,
             deadline,
+            imgUrl: data.imgUrl,
           })
         })}
       >
@@ -197,9 +196,6 @@ const MeetCreateForm = ({
             initialImage={previousValue?.imgUrl}
             handleSetImage={(image) => {
               setImage(image)
-              const formData = new FormData()
-              formData.append('img', image)
-              requestImgUrl(formData)
             }}
           />
         </div>
