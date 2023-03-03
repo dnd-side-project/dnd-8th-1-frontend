@@ -7,6 +7,8 @@ import {
   MeetApplyRequest,
   MeetCloseRequest,
 } from '@types'
+import axios from 'axios'
+const API_END_POINT = `${process.env.NEXT_PUBLIC_API_END_POINT}`
 
 export const eventAPI = {
   // 이벤트 전체 조회
@@ -18,6 +20,16 @@ export const eventAPI = {
   //이벤트 글 상세 조회
   getDetail: (eventId: number, token?: string) => {
     const accessToken = getAccessToken()
+
+    // TODO: 서버사이드 임시 로직
+    if (token) {
+      return axios.get(`${API_END_POINT}api/v1/events/${eventId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+    }
+
     return accessToken
       ? authInstance.get(`api/v1/events/${eventId}`)
       : unAuthInstance.get(`api/v1/events/${eventId}`)

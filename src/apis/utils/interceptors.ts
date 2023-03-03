@@ -34,6 +34,7 @@ export const authInterceptors = (instance: AxiosInstance, token?: string) => {
         } catch (e) {
           console.error(e)
           removeAccessToken()
+          return Promise.reject(error)
         }
         return instance(originalRequest)
       }

@@ -14,10 +14,10 @@ import { useForm, useWatch } from 'react-hook-form'
 import { useRef, useState } from 'react'
 import { useClickAway, useDisclosure } from '@hooks'
 import { useRouter } from 'next/router'
-import { useUploadImage } from '@queries'
 import dayjs from 'dayjs'
 import { useRecoilValue } from 'recoil'
 import { userAtom } from 'states'
+import { profileAPI } from '@apis'
 
 interface ProfileCreateFormProps {
   previousValue?: ProfileEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -72,13 +72,18 @@ const ProfileCreateForm = ({
       },
       shouldUnregister: false,
     })
-  const { mutate: requestUploadImage } = useUploadImage(setValue)
+
   const fieldValues = useWatch<ProfileEditRequest>({ control })
+
   const isComplete = (fieldValues: ProfileEditRequest) => {
     const { imgUrl, name, openChatUrl, type } = fieldValues
+
+    const isSetPreviousImage = previousValue?.imgUrl && imgUrl !== ''
+    const isSetNewPostImage = !previousValue?.imgUrl && !!image
+
     return (
       type !== null &&
-      (image || previousValue?.imgUrl || imgUrl !== null) &&
+      (isSetPreviousImage || isSetNewPostImage) &&
       name !== '' &&
       openChatUrl !== null
     )
@@ -137,9 +142,23 @@ const ProfileCreateForm = ({
       {(!isOpenChatOpen || !isPortfolioOpen) && (
         <form
           className="flex flex-col gap-[34px]"
-          onSubmit={handleSubmit((formValues) => {
+          onSubmit={handleSubmit(async (formValues) => {
+            let newImage
+
+            if (image) {
+              const formData = new FormData()
+              formData.append('img', image as File)
+              const {
+                data: { data },
+              } = await profileAPI.uploadImage(formData)
+              newImage = data.imgUrl
+            } else {
+              newImage = previousValue?.imgUrl
+            }
+
             handleOnSubmit({
               ...formValues,
+              imgUrl: newImage,
             })
           })}
         >
@@ -172,12 +191,6 @@ const ProfileCreateForm = ({
                 initialImage={fieldValues.imgUrl as string}
                 handleSetImage={(image) => {
                   setImage(image)
-                  const formData = new FormData()
-                  formData.append('img', image)
-                  /**
-                   *TODO: 추후 업로드 로직 변경 필요
-                   */
-                  requestUploadImage(formData)
                 }}
               />
             </div>

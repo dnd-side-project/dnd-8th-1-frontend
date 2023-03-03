@@ -4,9 +4,9 @@ import {
   IconButton,
   MeetDetailCard,
   MeetDetailImage,
+  ProfileRegisterContent,
   StatusPopupContent,
   Tags,
-  ProfileRegisterContent,
 } from '@components'
 import { useDisclosure } from '@hooks'
 import { meetKeys, useCancelCandidate, useRequestCandidate } from '@queries'
@@ -16,14 +16,16 @@ import {
   RecruitmentType,
   RegionTypes,
 } from '@types'
-import { isDeadLine } from '@utils'
+import { getAccessToken, isDeadLine } from '@utils'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useMeetDetail, getMeetDetail } from '@queries'
 import { useState } from 'react'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
+
 import { ACCESS_TOKEN_KEY } from '@constants'
+
 import { userAtom } from 'states'
 import { useRecoilValue } from 'recoil'
 import Head from 'next/head'
@@ -96,8 +98,12 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
     useDisclosure()
 
   const [showprofileModal, setShowProfileModal] = useDisclosure()
+  const [showErrorTypeModal, setshowErrorTypeModal] = useDisclosure()
+
+  const { id, hasProfile, profile } = useRecoilValue(userAtom)
+
   const [showLoginModal, setShowLoginModal] = useDisclosure()
-  const { id, hasProfile } = useRecoilValue(userAtom)
+
   const isMyPost = id === detailData?.profile.id
 
   /**
@@ -174,6 +180,7 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
          */
         openchatUrl="https://open.kakao.com/o/g2g5b5b9"
       />
+
       <header className="w-full">
         <MeetDetailImage
           imgUrl={detailData?.imgUrl as string}
@@ -255,7 +262,10 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
             마감되었어요!
           </button>
         ) : isMyPost ? (
-          // TODO: 코드리뷰 시 분기처리 확인 부탁합니다.
+          /**
+           * TODO: 유저 데이터 받을 경우 새롭게 분기 처리 필요
+           */
+
           <button
             onClick={() => router.push(`/meet/${detailData?.id}/candidate`)}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
@@ -265,34 +275,53 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
         ) : !isCompleted && !detailData?.applied ? (
           <button
             onClick={() => {
-              if (id === null) {
-                setShowLoginModal(true)
-                return
-              }
+              if (hasProfile && detailData?.recruitType === profile?.type) {
+                handleBottomToggle()
 
-              if (!hasProfile) {
-                setShowProfileModal(true)
-                return
-              }
+                if (id === null) {
+                  setShowLoginModal(true)
+                  return
+                }
 
-              handleBottomToggle()
+                if (!hasProfile) {
+                  setShowProfileModal(true)
+                  return
+                }
+              }
             }}
-            className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
+            className={`fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px]
+              text-subtitle font-bold  ${
+                detailData?.recruitType !== profile?.type
+                  ? 'bg-gray-600 text-gray-100'
+                  : 'bg-green-light text-gray-900'
+              }`}
+            disabled={hasProfile && detailData?.recruitType !== profile?.type}
           >
-            신청하기
+            {hasProfile && detailData?.recruitType !== profile?.type
+              ? `${detailData?.recruitType}만 지원 가능해요`
+              : '신청하기'}
           </button>
         ) : (
           <button
             onClick={(e) => {
               e.stopPropagation()
               handleCancelModalToggle()
-              requestCancelCandidate(meetId)
+              requestCancelCandidate(meetId, getAccessToken())
             }}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"
           >
             신청 취소하기
           </button>
         )}
+        <ModalWithSingleButton
+          showModal={showprofileModal}
+          setShowModal={setShowProfileModal}
+          handleOnClick={() => router.push(`/profile/${id}/edit`)}
+          submitMessage={'프로필 등록하기'}
+          hasCloseButton={true}
+        >
+          <ProfileRegisterContent />
+        </ModalWithSingleButton>
       </div>
       <ModalWithSingleButton
         showModal={showprofileModal}
@@ -320,7 +349,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }: GetServerSidePropsContext) => {
-  // TODO: 새로고침 시 에러 생김
   const accessToken = req.cookies[ACCESS_TOKEN_KEY]
     ? req.cookies[ACCESS_TOKEN_KEY]
     : ''

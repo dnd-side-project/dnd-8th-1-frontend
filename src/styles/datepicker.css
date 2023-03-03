@@ -255,6 +255,13 @@
   font-weight: 400 !important;
 }
 
+/* 현재 선택 값이 다른 달에 스타일 유지되는 상태 변경 */
+.react-datepicker__month-text.react-datepicker__month-text--keyboard-selected {
+  background-color: var(--gray-700);
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
 /* 현재 값 스타일 해제 */
 .react-datepicker__month-text--today {
   font-weight: 400 !important;

@@ -12,8 +12,6 @@ const cookieEffect =
     onSet(async () => {
       const accessToken = getAccessToken()
 
-      console.log('onSet', 'access', getAccessToken())
-
       if (!accessToken) {
         return SIGNOUT_USER_STATE
       }

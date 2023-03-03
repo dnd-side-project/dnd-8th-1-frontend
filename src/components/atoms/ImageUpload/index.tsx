@@ -64,7 +64,7 @@ const ImageUpload = ({
           id="input-file"
           name="myImage"
           className="hidden"
-          accept="image/*"
+          accept="image/gif, image/jpeg, image/png"
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(event: any) => {
             const current = event.target.files[0]

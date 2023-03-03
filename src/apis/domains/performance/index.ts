@@ -59,4 +59,12 @@ export const performanceAPI = {
   create: (payload: PerformanceEditRequest) => {
     return authInstance.post('/api/v1/performances', payload)
   },
+  //공연 이미지 업로드
+  uploadImage: (payload: FormData) => {
+    return authInstance.post(`api/v1/performances/image`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
 }

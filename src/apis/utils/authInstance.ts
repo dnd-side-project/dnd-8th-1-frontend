@@ -4,7 +4,11 @@ import { authInterceptors } from './interceptors'
 
 const API_END_POINT = `${process.env.NEXT_PUBLIC_API_END_POINT}`
 
-const createAuthInstance = (url: string, options: object): AxiosInstance => {
+const createAuthInstance = (
+  url: string,
+  options: object,
+  token?: string,
+): AxiosInstance => {
   const instance = axios.create({
     baseURL: API_END_POINT,
     headers: {
@@ -14,7 +18,7 @@ const createAuthInstance = (url: string, options: object): AxiosInstance => {
     timeout: 5000,
     ...options,
   })
-  authInterceptors(instance)
+  authInterceptors(instance, token)
   return instance
 }
 

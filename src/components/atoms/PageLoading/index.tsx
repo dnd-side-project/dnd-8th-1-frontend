@@ -26,7 +26,7 @@ const PageLoading = () => {
   })
 
   return loading ? (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-[999] flex h-[100%] w-[100%] items-center justify-center bg-[#000] opacity-[60%]">
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-[999] mx-auto flex h-[100%] min-h-[100vh] w-[375px] items-center justify-center bg-[#000] opacity-[60%]">
       <Lottie animationData={pageLoadingAnimation} loop={true} />
     </div>
   ) : (
