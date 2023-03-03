@@ -14,7 +14,7 @@ const MyPerformanceItem = ({ myPerformance }: MyPerformanceItemProps) => {
 
   return (
     <li>
-      <Link href={`performance/${id}`}>
+      <Link href={`/performance/${id}`}>
         <div className="px-[16px]">
           <div className="mt-[15px] mb-[9px] text-body2 text-gray-400">
             {date.format('YYYY.MM.DD 등록')}

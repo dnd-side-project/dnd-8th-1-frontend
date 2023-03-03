@@ -15,7 +15,7 @@ const MyAppliedEventItem = ({
 
   return (
     <li>
-      <Link href={`meet/${id}`}>
+      <Link href={`/meet/${id}`}>
         <div className="px-[16px]">
           <div className="mt-[15px] mb-[9px] text-body2 text-gray-400">
             {date.format('YYYY.MM.DD 지원')}
