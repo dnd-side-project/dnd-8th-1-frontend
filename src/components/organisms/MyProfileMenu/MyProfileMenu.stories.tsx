@@ -17,7 +17,9 @@ export default {
   ],
 } as ComponentMeta<typeof MyProfileMenu>
 
-const Template: ComponentStory<typeof MyProfileMenu> = () => <MyProfileMenu />
+const Template: ComponentStory<typeof MyProfileMenu> = () => (
+  <MyProfileMenu id={1} />
+)
 
 export const Default = Template.bind({})
 
