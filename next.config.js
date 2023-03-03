@@ -33,6 +33,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
+      // cdn.leadmom.com
+      {
+        protocol: 'https',
+        hostname: 'cdn.leadmom.com',
+      },
     ],
   },
 }
