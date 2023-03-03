@@ -25,15 +25,15 @@ const Template: ComponentStory<typeof ProfileButtonGroup> = (args) => (
 )
 
 const portfolio: Portfolio = {
-  youtubeUrl: 'https://www.allsilver.dev/',
-  instagramUrl: 'https://www.allsilver.dev/',
-  tiktokUrl: 'https://www.allsilver.dev/',
+  youtube: 'https://www.allsilver.dev/',
+  instagram: 'https://www.allsilver.dev/',
+  tiktok: 'https://www.allsilver.dev/',
 }
 
 const nullPortfolio: Portfolio = {
-  youtubeUrl: '',
-  instagramUrl: null,
-  tiktokUrl: '',
+  youtube: '',
+  instagram: null,
+  tiktok: '',
 }
 
 const OpenChatButtonTemplate: ComponentStory<

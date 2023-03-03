@@ -57,18 +57,20 @@ const FormDatePicker = ({
   CustomInput.displayName = 'customInput'
 
   return (
-    <ReactDatePicker
-      selected={startDate ? new Date(startDate) : null}
-      onChange={(date) => {
-        setStartDate(date)
-        handleStartDate(date)
-      }}
-      customInput={<CustomInput inputref={inputRef} />}
-      filterDate={isPossibleDay}
-      locale={ko}
-      onCalendarOpen={() => setIsOpen(true)}
-      onCalendarClose={() => setIsOpen(false)}
-    />
+    <div className="z-[999]">
+      <ReactDatePicker
+        selected={startDate ? new Date(startDate) : null}
+        onChange={(date) => {
+          setStartDate(date)
+          handleStartDate(date)
+        }}
+        customInput={<CustomInput inputref={inputRef} />}
+        filterDate={isPossibleDay}
+        locale={ko}
+        onCalendarOpen={() => setIsOpen(true)}
+        onCalendarClose={() => setIsOpen(false)}
+      />
+    </div>
   )
 }
 

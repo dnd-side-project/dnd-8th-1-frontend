@@ -10,7 +10,7 @@ interface PerformanceDetailSectionTopProps {
   startDate: string
   imgUrl: string
   performanceId: number
-  publisherId: number // 게시글 작성자 아이디
+  isPublisher: boolean // 작성자의 게시물인지의 유무 확인
   handleOnDelete: () => void
 }
 
@@ -18,7 +18,7 @@ const PerformanceDetailSectionTop = ({
   title,
   imgUrl,
   performanceId,
-  publisherId,
+  isPublisher,
   handleOnDelete,
 }: PerformanceDetailSectionTopProps) => {
   const router = useRouter()
@@ -55,17 +55,18 @@ const PerformanceDetailSectionTop = ({
         styleClass="rounded-[5px] absolute top-[45px] z-[2] mx-[110px]"
         placeholder="blur"
       />
-      {/* TODO: 전역 로그인 정보 필요 */}
       {/* 현재 게시글이 본인의 게시글일 때만 렌더링 한다. */}
-      <div ref={iconButtonRef}>
-        <IconButton
-          areaLabel={'공연정보 수정/삭제'}
-          icon={'dots'}
-          size={24}
-          styleClass="absolute top-[7px] right-[16px] z-[3]"
-          handleOnClick={() => setShowStatusPopup(!showStatusPopup)}
-        />
-      </div>
+      {isPublisher && (
+        <div ref={iconButtonRef}>
+          <IconButton
+            areaLabel={'공연정보 수정/삭제'}
+            icon={'dots'}
+            size={24}
+            styleClass="absolute top-[7px] right-[16px] z-[3]"
+            handleOnClick={() => setShowStatusPopup(!showStatusPopup)}
+          />
+        </div>
+      )}
 
       {showStatusPopup && (
         <div

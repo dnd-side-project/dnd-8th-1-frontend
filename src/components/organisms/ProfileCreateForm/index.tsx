@@ -14,6 +14,10 @@ import { useForm, useWatch } from 'react-hook-form'
 import { useRef, useState } from 'react'
 import { useClickAway, useDisclosure } from '@hooks'
 import { useRouter } from 'next/router'
+import { useUploadImage } from '@queries'
+import dayjs from 'dayjs'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 
 interface ProfileCreateFormProps {
   previousValue?: ProfileEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -25,41 +29,60 @@ const ProfileCreateForm = ({
   handleOnSubmit,
 }: ProfileCreateFormProps) => {
   const [image, setImage] = useState<File>()
+  const { imgUrl, name } = useRecoilValue(userAtom)
   const { register, control, handleSubmit, setValue } =
     useForm<ProfileEditRequest>({
       mode: 'onSubmit',
       defaultValues: {
-        careerStartDate: previousValue ? previousValue.careerStartDate : null,
-        description: previousValue ? previousValue.description : null,
-        genres: previousValue ? previousValue.genres : [],
-        imgUrl: previousValue ? previousValue.imgUrl : null,
-        location: previousValue ? previousValue.location : null,
-        name: previousValue ? previousValue.name : null,
-        openChatUrl: previousValue ? previousValue.openChatUrl : null,
-        portfolioUrl: {
-          instagram: previousValue
-            ? previousValue.portfolioUrl.instagram
+        careerStartDate:
+          previousValue?.careerStartDate !== null
+            ? previousValue?.careerStartDate
             : null,
-          tiktok: previousValue ? previousValue.portfolioUrl.tiktok : null,
-          youtube: previousValue ? previousValue.portfolioUrl.youtube : null,
+        description:
+          previousValue?.description !== null
+            ? previousValue?.description
+            : null,
+        genres: previousValue?.genres !== null ? previousValue?.genres : null,
+        imgUrl: previousValue?.imgUrl !== null ? previousValue?.imgUrl : imgUrl,
+        location:
+          previousValue?.location !== null ? previousValue?.location : null,
+        name: previousValue?.name !== null ? previousValue?.name : name,
+        openChatUrl:
+          previousValue?.openChatUrl !== null
+            ? previousValue?.openChatUrl
+            : null,
+        portfolio: {
+          instagram:
+            previousValue?.portfolio.instagram !== null
+              ? previousValue?.portfolio?.instagram
+              : null,
+          tiktok:
+            previousValue?.portfolio.tiktok !== null
+              ? previousValue?.portfolio?.tiktok
+              : null,
+          youtube:
+            previousValue?.portfolio.youtube !== null
+              ? previousValue?.portfolio?.youtube
+              : null,
         },
-        type: previousValue ? previousValue.type : '댄서',
+        type:
+          (previousValue as ProfileEditRequest).type === null
+            ? '댄서'
+            : previousValue?.type,
       },
       shouldUnregister: false,
     })
-
+  const { mutate: requestUploadImage } = useUploadImage(setValue)
   const fieldValues = useWatch<ProfileEditRequest>({ control })
-
   const isComplete = (fieldValues: ProfileEditRequest) => {
     const { imgUrl, name, openChatUrl, type } = fieldValues
     return (
-      type !== '' &&
-      (image || previousValue?.imgUrl || imgUrl !== '') &&
+      type !== null &&
+      (image || previousValue?.imgUrl || imgUrl !== null) &&
       name !== '' &&
-      openChatUrl !== ''
+      openChatUrl !== null
     )
   }
-
   const essentialStyle = 'ml-[5px] text-body2 text-green-light'
   const labelStyle = 'text-subtitle font-bold text-gray-100'
   const formSectionStyle = 'flex flex-col gap-[6px]'
@@ -80,13 +103,14 @@ const ProfileCreateForm = ({
   const router = useRouter()
 
   const isEmptyPortfolio =
-    fieldValues?.portfolioUrl?.instagram ||
-    fieldValues?.portfolioUrl?.youtube ||
-    fieldValues?.portfolioUrl?.tiktok
+    fieldValues?.portfolio?.instagram ||
+    fieldValues?.portfolio?.youtube ||
+    fieldValues?.portfolio?.tiktok
 
   const isEmptyUrl = (link: string | null) => {
     return link
   }
+
   return (
     <>
       {/** 소개 텍스트 */}
@@ -94,11 +118,15 @@ const ProfileCreateForm = ({
         <div className="mt-[31px] px-[16px]">
           <h1 className="text-title1 font-bold text-gray-100">
             프로필{' '}
-            {previousValue ? <span>수정하기</span> : <span>등록하기</span>}
+            {previousValue?.type !== null ? (
+              <span>수정하기</span>
+            ) : (
+              <span>등록하기</span>
+            )}
           </h1>
           <h3 className="mt-[14px] text-body1 text-gray-400">
             댄서 또는 댄스팀에 대한 정보를{' '}
-            {previousValue ? (
+            {previousValue?.type !== null ? (
               <span>수정합니다.</span>
             ) : (
               <span>등록합니다.</span>
@@ -123,7 +151,11 @@ const ProfileCreateForm = ({
                 <span className={essentialStyle}>필수</span>
               </div>
               <ProfileCategorySelect
-                defaultType={fieldValues?.type as RecruitmentType}
+                defaultType={
+                  fieldValues?.type === null
+                    ? '댄서'
+                    : (fieldValues?.type as RecruitmentType)
+                }
                 handleOnChange={(category) => {
                   setValue('type', category)
                 }}
@@ -137,14 +169,15 @@ const ProfileCreateForm = ({
                 <span className={essentialStyle}>필수</span>
               </div>
               <ProfileImgUpload
-                initialImage={previousValue?.imgUrl as string}
+                initialImage={fieldValues.imgUrl as string}
                 handleSetImage={(image) => {
                   setImage(image)
                   const formData = new FormData()
                   formData.append('img', image)
                   /**
-                   *TODO: formData 처리에 대한 추가적인 로직 필요
+                   *TODO: 추후 업로드 로직 변경 필요
                    */
+                  requestUploadImage(formData)
                 }}
               />
             </div>
@@ -196,7 +229,7 @@ const ProfileCreateForm = ({
               <ProfileDatePicker
                 initialStartDate={fieldValues.careerStartDate as string}
                 handleStartDate={(date) => {
-                  setValue('careerStartDate', date as unknown as string)
+                  setValue('careerStartDate', dayjs(date).format('YYYY-MM-DD'))
                 }}
               />
             </div>
@@ -248,14 +281,22 @@ const ProfileCreateForm = ({
                 </div>
                 {isEmptyUrl(fieldValues.openChatUrl as string) ? (
                   <button
-                    onClick={handleToggleOpenChat}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleToggleOpenChat()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light text-body2 font-bold text-green-light"
                   >
                     변경
                   </button>
                 ) : (
                   <button
-                    onClick={handleToggleOpenChat}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleToggleOpenChat()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light bg-green-light text-body2 font-bold text-gray-900"
                   >
                     등록
@@ -281,14 +322,22 @@ const ProfileCreateForm = ({
                 </div>
                 {isEmptyPortfolio ? (
                   <button
-                    onClick={handleTogglePortfolio}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleTogglePortfolio()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light text-body2 font-bold text-green-light"
                   >
                     변경
                   </button>
                 ) : (
                   <button
-                    onClick={handleTogglePortfolio}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleTogglePortfolio()
+                    }}
                     className="h-[30px] w-[56px] rounded-[4px] border-[0.5px] border-green-light bg-green-light text-body2 font-bold text-gray-900"
                   >
                     등록
@@ -339,15 +388,15 @@ const ProfileCreateForm = ({
       {isPortfolioOpen && (
         <PortfolioPopup
           handleOnSubmit={(portfolioLink) => {
-            setValue('portfolioUrl.instagram', portfolioLink?.instaLink)
-            setValue('portfolioUrl.youtube', portfolioLink?.youtubeLink)
-            setValue('portfolioUrl.tiktok', portfolioLink?.tiktokLink)
+            setValue('portfolio.instagram', portfolioLink?.instaLink)
+            setValue('portfolio.youtube', portfolioLink?.youtubeLink)
+            setValue('portfolio.tiktok', portfolioLink?.tiktokLink)
           }}
           setIsPortfolioOpen={setIsPortfolioOpen}
           previousData={{
-            youtubeLink: fieldValues?.portfolioUrl?.youtube as string,
-            instaLink: fieldValues?.portfolioUrl?.instagram as string,
-            tiktokLink: fieldValues?.portfolioUrl?.tiktok as string,
+            youtubeLink: fieldValues?.portfolio?.youtube as string,
+            instaLink: fieldValues?.portfolio?.instagram as string,
+            tiktokLink: fieldValues?.portfolio?.tiktok as string,
           }}
         />
       )}

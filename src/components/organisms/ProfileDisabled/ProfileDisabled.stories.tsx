@@ -19,6 +19,7 @@ export default {
 
 const Template: ComponentStory<typeof ProfileDisabled> = () => (
   <ProfileDisabled
+    userId={1}
     profileImage="https://picsum.photos/500/500"
     name="구글 계정 이름"
     id={1}

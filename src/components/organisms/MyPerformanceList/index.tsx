@@ -7,16 +7,21 @@ interface MyPerformanceList {
 }
 
 const MyPerformanceList = ({ myPerformances }: MyPerformanceList) => {
+  const isDataEmpty = myPerformances && myPerformances.length === 0
+
   return (
     <ul>
-      {myPerformances.length === 0 && <ActivityEmptyHelper />}
-      {myPerformances.length !== 0 &&
+      {!myPerformances || isDataEmpty ? (
+        <ActivityEmptyHelper />
+      ) : (
+        myPerformances.length !== 0 &&
         myPerformances.map((myPerformance) => (
           <MyPerformanceItem
             key={myPerformance.id}
             myPerformance={myPerformance}
           />
-        ))}
+        ))
+      )}
     </ul>
   )
 }

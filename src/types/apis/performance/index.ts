@@ -57,10 +57,10 @@ export interface ProfileEditRequest {
   location: string | null
   name: string | null
   openChatUrl: string | null
-  portfolioUrl: {
+  portfolio: {
     instagram: string | null
     tiktok: string | null
     youtube: string | null
   }
-  type: string
+  type: string | null
 }

@@ -11,9 +11,9 @@ export interface User {
 }
 
 export interface Portfolio {
-  youtubeUrl?: string | null
-  instagramUrl?: string | null
-  tiktokUrl?: string | null
+  youtube?: string | null
+  instagram?: string | null
+  tiktok?: string | null
 }
 // TODO: User와 일부 통합될 여지가 있음
 export interface Profile {
@@ -23,8 +23,8 @@ export interface Profile {
   description: string // 프로필 상세 설명
   openChatUrl: string // 카카오 오픈 채팅 주소
   location: RegionTypes | null
-  genre: GenreTypes[]
-  startDate: string
+  genres: GenreTypes[]
+  careerStartDate: string
   portfolio: Portfolio
   type: RecruitmentType // 계정 유형, 댄서 or 댄스팀
 }
@@ -106,7 +106,7 @@ export interface CommentCreate {
 export interface Comment {
   content: string
   reviewId: number
-  profile: Pick<Profile, 'id' | 'name'>
+  writer: Pick<Profile, 'id' | 'name'>
   createdDate: string
 }
 
@@ -162,7 +162,6 @@ export interface AppliedEvent {
   title: string // 이벤트 제목,
   profile: Pick<Profile, 'name'>
   isMatched: boolean //나의 지원이 매칭된 여부 true, false,
-  type: MeetTypes // 콜라보 or 쉐어
 }
 
 export interface MyPerformance {
