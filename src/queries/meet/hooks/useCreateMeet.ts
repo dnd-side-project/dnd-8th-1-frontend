@@ -1,9 +1,9 @@
 import { eventAPI } from '@apis'
-import { QUERY_KEY } from '@constants'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { MeetEditRequest } from '@types'
 import { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
+import { meetKeys } from '@queries'
 
 const postMeetCreate = async (payload: MeetEditRequest) => {
   const { data }: AxiosResponse<MeetEditRequest> = await eventAPI.create(
@@ -17,7 +17,7 @@ const useCreateMeet = () => {
   const router = useRouter()
   return useMutation((payload: MeetEditRequest) => postMeetCreate(payload), {
     onSuccess: () => {
-      queryClient.invalidateQueries([QUERY_KEY.MEET.TOTAL_MEET])
+      queryClient.invalidateQueries(meetKeys.candidate)
       router.push('/meet')
     },
   })

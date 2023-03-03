@@ -1,12 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MeetCreateForm } from '@components'
 import { MeetDetail, MeetDetailResponse } from '@types'
 import { useMeetDetail, useModifyMeet } from '@queries'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
-const MeetCreatePage = ({ params }: any) => {
+interface MeetCreatePageProps {
+  eventId: number
+}
+
+const MeetCreatePage = ({ eventId }: MeetCreatePageProps) => {
   const fallback = {} as MeetDetailResponse
-  const { data = fallback, isLoading } = useMeetDetail(params?.meetId)
+  const { data = fallback, isLoading } = useMeetDetail(eventId)
   const detailData = data?.data as MeetDetail
   const { mutate: requestModifyMeet } = useModifyMeet(detailData?.id)
 
@@ -39,10 +42,10 @@ const MeetCreatePage = ({ params }: any) => {
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
-}: any) => {
+}: GetServerSidePropsContext) => {
   return {
     props: {
-      params,
+      eventId: params?.meetId as string,
     },
   }
 }

@@ -3,7 +3,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Logo from '/public/assets/logo/logo_big.png'
 import { Spacer, GoogleLoginButton } from '@components'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { getGoogleUrl } from '@utils'
+
 const SignInPage = () => {
+  const router = useRouter()
+
   return (
     <>
       <Head>
@@ -21,12 +27,15 @@ const SignInPage = () => {
           <h2 className="text-body2">춤으로 연결되는 댄스 유니버스</h2>
           <Spacer size={103} />
 
-          <GoogleLoginButton
-            handleOnClick={() => {
-              // TODO: 로그인 로직 연동
-              console.log('로그인!')
-            }}
-          />
+          <Link href={getGoogleUrl()}>
+            <GoogleLoginButton
+              handleOnClick={() => {
+                router.push(getGoogleUrl())
+                // TODO: 전역 모달 구현하기
+              }}
+            />
+          </Link>
+
           <Spacer size={55} />
           <span className="text-body2 leading-none text-[#7A7A7A]">
             혹시 댄버스가 처음이신가요?
@@ -35,8 +44,8 @@ const SignInPage = () => {
           <button
             className="text-body2 text-[#FFF]"
             onClick={() => {
-              // TODO: 회원가입 로직 이후 가입 축하 모달 띄우기
-              console.log('회원가입')
+              router.push(getGoogleUrl())
+              // TODO: 전역 모달 구현하기
             }}
           >
             구글로 회원가입하기

@@ -2,7 +2,7 @@ import { eventAPI } from '@apis'
 import { useQuery } from '@tanstack/react-query'
 import { MeetResponse } from '@types'
 import { AxiosResponse } from 'axios'
-import { QUERY_KEY } from '@constants'
+import { meetKeys } from '@queries'
 
 interface MeetPayload {
   page: number
@@ -21,14 +21,13 @@ export const getMeet = async ({ page, size, location, type }: MeetPayload) => {
   return data
 }
 
-const useMeet = (payload: MeetPayload, meetAllData?: MeetResponse) => {
+const useMeet = (payload: MeetPayload) => {
   const { page, size, location, type } = payload
   return useQuery(
-    [QUERY_KEY.MEET.TOTAL_MEET, page, size, location, type],
+    [...meetKeys.all, page, size, location, type],
     () => getMeet(payload),
     {
       keepPreviousData: true,
-      initialData: meetAllData && meetAllData,
     },
   )
 }

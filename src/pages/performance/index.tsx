@@ -2,22 +2,22 @@ import { Center } from '@chakra-ui/react'
 import {
   Calandar,
   FilterButton,
-  FloatingButton,
   Pagination,
   PerformanceBanner,
   PerformanceList,
-  Spacer,
+  SearchHeader,
 } from '@components'
-import { CURRENT_MONTH, CURRENT_YEAR, QUERY_KEY } from '@constants'
+import { CURRENT_MONTH, CURRENT_YEAR } from '@constants'
 import { useCalendar } from '@hooks'
 import {
   getAllPerformance,
   getImminentPerformances,
+  performanceKeys,
   PerformancePayload,
   useImminentPerformance,
   usePerformance,
 } from '@queries'
-import { useQueryClient } from '@tanstack/react-query'
+import { dehydrate, QueryClient, useQueryClient } from '@tanstack/react-query'
 import {
   GenreTypes,
   Performance,
@@ -29,18 +29,10 @@ import {
 import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-interface PerformanceProps {
-  allData: PerformanceResponse
-  imminentPerformanceData: PerformanceImminentResponse
-}
-
-const PerformancePage = ({
-  allData,
-  imminentPerformanceData,
-}: PerformanceProps) => {
+const PerformancePage = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isTotal, setIsTotal] = useState(true)
   const {
     monthYear,
@@ -72,9 +64,8 @@ const PerformancePage = ({
     pageSize,
   } = performancePayload
   const fallback = {} as PerformanceResponse
-  const { data = fallback } = usePerformance(performancePayload, allData)
+  const { data = fallback } = usePerformance(performancePayload)
   const { data: performanceData } = data
-  performanceData?.content
   const calandarProps = {
     month,
     handleSetMonth,
@@ -95,8 +86,10 @@ const PerformancePage = ({
     })
   }, [payloadMonth, year, day])
   const imminentFallback = {} as PerformanceImminentResponse
-  const { data: imminentPerformances = imminentFallback } =
-    useImminentPerformance(imminentPerformanceData)
+  const { data: imminentPerformancesData = imminentFallback } =
+    useImminentPerformance()
+
+  const imminentPerformances = imminentPerformancesData.data
 
   const queryClient = useQueryClient()
   useEffect(() => {
@@ -105,7 +98,7 @@ const PerformancePage = ({
     } else {
       queryClient.prefetchQuery(
         [
-          QUERY_KEY.PERFORMANCE.TOTAL_PERFORMANCE,
+          ...performanceKeys.all,
           year,
           payloadMonth,
           day && day + 1,
@@ -118,14 +111,15 @@ const PerformancePage = ({
       )
     }
   }, [day])
-
-  const router = useRouter()
   return (
     <>
       <Head>
         <title>공연 정보 - Danverse</title>
       </Head>
-      <section className="mt-[-2px]">
+      {isSearchOpen && (
+        <SearchHeader open={isSearchOpen} setOpen={setIsSearchOpen} />
+      )}
+      <section className="mt-[52px]">
         <PerformanceBanner
           imminentPerformances={imminentPerformances as PerformanceImminent[]}
         />
@@ -133,6 +127,7 @@ const PerformancePage = ({
           {...calandarProps}
           isTotal={isTotal}
           setIsTotal={setIsTotal}
+          setIsSearchOpen={setIsSearchOpen}
         />
         <div className="flex w-full px-[16px] py-[22px]">
           <FilterButton
@@ -170,38 +165,26 @@ const PerformancePage = ({
               />
             </div>
           )}
-          <div className="ml-[304px]">
-            <FloatingButton
-              handleOnClick={() => router.push('/performance/edit')}
+          <Center className={isTotal ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
+            <Pagination
+              currentPage={currentPage as number}
+              totalPages={performanceData?.totalPages as number}
+              handleChangePage={(page) => {
+                setPerformancePayload({
+                  ...performancePayload,
+                  pageNumber: page - 1,
+                })
+              }}
             />
-          </div>
-          {performanceData?.content.length !== 0 ? (
-            <Center className={isTotal ? 'mt-[15px] mb-[30px]' : 'my-[30px]'}>
-              <Pagination
-                currentPage={currentPage as number}
-                totalPages={performanceData?.totalPages as number}
-                handleChangePage={(page) => {
-                  setPerformancePayload({
-                    ...performancePayload,
-                    pageNumber: page - 1,
-                  })
-                }}
-              />
-            </Center>
-          ) : (
-            <Spacer size={60} />
-          )}
+          </Center>
         </>
       </section>
     </>
   )
 }
 
-/**
- *TODO: 추후 initialData로 가져오는 로직이 아닌 dehydrated로 가져오는 로직으로 변경
- */
 export const getServerSideProps: GetServerSideProps = async () => {
-  const allData = await getAllPerformance({
+  const performancePayload: PerformancePayload = {
     year: CURRENT_YEAR,
     month: CURRENT_MONTH,
     day: '',
@@ -209,12 +192,21 @@ export const getServerSideProps: GetServerSideProps = async () => {
     genre: '',
     pageNumber: 0,
     pageSize: 15,
-  })
-  const { data: imminentPerformanceData } = await getImminentPerformances()
+  }
+  const queryClient = new QueryClient()
+  await Promise.all([
+    queryClient.prefetchQuery(
+      [...performanceKeys.all, CURRENT_YEAR, CURRENT_MONTH, '', '', '', 0, 15],
+      () => getAllPerformance(performancePayload),
+    ),
+    queryClient.prefetchQuery(
+      performanceKeys.imminentPerformance,
+      getImminentPerformances,
+    ),
+  ])
   return {
     props: {
-      allData,
-      imminentPerformanceData,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }

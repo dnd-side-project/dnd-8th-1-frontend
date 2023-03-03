@@ -3,25 +3,20 @@ import {
   SearchResultList,
   SearchResultTab,
 } from '@components'
-import { getSearchResult, useSearchResult } from '@queries'
+import { getSearchResult, performanceKeys, useSearchResult } from '@queries'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { SearchResult, SearchResultResponse } from '@types'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
-import { ParsedUrlQuery } from 'querystring'
 import { useState } from 'react'
 
 interface PerformanceSearchPageProps {
-  query: ParsedUrlQuery
-  searchResultData: SearchResultResponse
+  teamName: string
 }
 
-const PerformanceSearchPage = ({
-  query,
-  searchResultData,
-}: PerformanceSearchPageProps) => {
-  const teamName = query?.team as string
+const PerformanceSearchPage = ({ teamName }: PerformanceSearchPageProps) => {
   const fallback = {} as SearchResultResponse
-  const { data = fallback } = useSearchResult(teamName, searchResultData)
+  const { data = fallback } = useSearchResult(teamName)
   const searchData = data?.data
   const comming = searchData?.comming
   const ended = searchData?.ended
@@ -64,11 +59,15 @@ const PerformanceSearchPage = ({
 export const getServerSideProps: GetServerSideProps = async ({
   query,
 }: GetServerSidePropsContext) => {
-  const searchResultData = await getSearchResult(query?.team as string)
+  const queryClient = new QueryClient()
+  const teamName = query?.team as string
+  await queryClient.prefetchQuery([...performanceKeys.search, teamName], () =>
+    getSearchResult(query?.team as string),
+  )
   return {
     props: {
-      query,
-      searchResultData,
+      teamName,
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }
