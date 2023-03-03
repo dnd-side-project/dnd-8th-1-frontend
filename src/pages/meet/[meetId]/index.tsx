@@ -28,6 +28,7 @@ import { ACCESS_TOKEN_KEY } from '@constants'
 
 import { userAtom } from 'states'
 import { useRecoilValue } from 'recoil'
+import Head from 'next/head'
 
 const MeetDeleteModal = dynamic(
   () => import('../../../components/organisms/MeetDeleteModal'),
@@ -124,6 +125,9 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
   }
   return (
     <>
+      <Head>
+        <title>만나기 상세 - Danverse</title>
+      </Head>
       {showDeleteModal && (
         <>
           <MeetDeleteModal

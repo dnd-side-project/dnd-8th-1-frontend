@@ -30,7 +30,7 @@ export interface MeetEditRequest {
 
 // 이벤트 지원자 요청 수락
 export interface MeetAcceptRequest {
-  profileId: number
+  memberId: number
 }
 
 // 이벤트 지원자 요청 신청

@@ -13,7 +13,7 @@ const MyProfileMenu = ({ id }: { id: number }) => {
   const [showModal, setShowModal, toggle] = useDisclosure()
 
   return (
-    <div className="relative">
+    <div className="relative bg-gray-900">
       <ul>
         <div className={dividerStyle} />
         <Link href={`/profile/${id}/history`}>

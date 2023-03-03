@@ -20,7 +20,7 @@ const useCreateReview = (performanceId: number) => {
     (payload: CommentCreate) => postReviewCreate(performanceId, payload),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(performanceKeys.detail(performanceId))
+        queryClient.invalidateQueries(performanceKeys.reviews(performanceId))
       },
     },
   )

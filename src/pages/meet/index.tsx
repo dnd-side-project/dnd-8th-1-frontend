@@ -103,7 +103,7 @@ export const getServerSideProps = async () => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery([...meetKeys.all, 0, 15, '', ''], () =>
     getMeet({
-      page: -1,
+      page: 0,
       size: 15,
       location: '',
       type: '',

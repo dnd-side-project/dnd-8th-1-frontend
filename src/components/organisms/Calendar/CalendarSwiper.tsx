@@ -24,7 +24,7 @@ const CalendarSwiper = ({
   setPerformancePayload,
 }: CalendarSwiperProps) => {
   return (
-    <div className="no-scrollbar flex w-[100%] resize-none overflow-x-scroll pl-[58px]">
+    <div className="no-scrollbar flex h-[57px] w-[100%] resize-none overflow-x-scroll pl-[58px]">
       <div>
         <button
           onClick={() => {
@@ -36,7 +36,7 @@ const CalendarSwiper = ({
           }}
           className={`b-0 absolute left-0 h-[57px] bg-gray-900 px-[16px] text-[16px] font-bold  ${
             isTotal
-              ? 'border-b-[3px] border-b-green-light text-green-light'
+              ? 'h-[57px] border-b-[3px] border-b-green-light pt-[1px] text-green-light'
               : 'border-b-[2px] border-b-gray-700 text-gray-400'
           }`}
         >

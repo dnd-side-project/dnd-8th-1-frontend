@@ -168,7 +168,7 @@ const PerformanceDetailPage = () => {
           />
         </div>
 
-        <Spacer size={60} />
+        <div className="mt-[29px] mb-[21px] h-[10px] w-full bg-[#161616]" />
 
         <PerformanceReviewSection
           startDate={startDate}

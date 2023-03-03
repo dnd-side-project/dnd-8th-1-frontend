@@ -20,7 +20,7 @@ const ProfileDisabled = ({
   const router = useRouter()
 
   return (
-    <div className="relative bg-[#1A1A1A]">
+    <div className={`relative text-gray-900 ${userId === id && 'h-[390px]'}`}>
       <Image src={Background_black} alt="프로필 미등록자" />
       <div className="translate-y-[-63px]">
         <Center className="flex-col">
