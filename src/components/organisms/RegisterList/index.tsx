@@ -2,6 +2,7 @@ import { MeetApplicant } from '@types'
 import RegisterListItem from './RegisterListItem'
 import noneItemLogo from '/public/assets/images/graphic_2.png'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface RegisterListProps {
   registerItems: MeetApplicant[]
@@ -29,11 +30,15 @@ const RegisterList = ({ registerItems, handleOnClick }: RegisterListProps) => {
     <div className="w-[100%] bg-gray-900 px-[16px] pt-[16px] text-body1">
       {registerItems.map((registerItem) => {
         return (
-          <RegisterListItem
-            key={registerItem.profile.id}
-            registerItem={registerItem}
-            handleOnClick={handleOnClick}
-          />
+          <Link
+            key={registerItem?.profile?.id}
+            href={`/profile/${registerItem?.profile?.id}`}
+          >
+            <RegisterListItem
+              registerItem={registerItem}
+              handleOnClick={handleOnClick}
+            />
+          </Link>
         )
       })}
     </div>
