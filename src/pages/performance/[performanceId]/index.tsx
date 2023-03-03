@@ -18,11 +18,14 @@ import {
   fetchPerformanceDetail,
   useGetReviews,
   fetchReviews,
+  useDeleteReview,
 } from '@queries'
 
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { performanceKeys } from 'queries/performance/performanceKeys'
 import { useRouter } from 'next/router'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 
 const CancelSubmitModal = dynamic(
   () => import('../../../components/templates/CancelSubmitModal'),
@@ -70,6 +73,16 @@ const PerformanceDetailPage = () => {
   const [showDeleteModal, setShowDeleteModal, handleDeleteModalToggle] =
     useDisclosure()
 
+  const { id: userId } = useRecoilValue(userAtom)
+
+  const { mutate: requestDeleteReview } = useDeleteReview(
+    performance?.data?.id as number,
+  )
+  const { mutate: requestCreateReview } = useCreateReview(
+    performance?.data?.id as number,
+  )
+  const { mutate: requestDeletePerformance } = useDeletePerformance()
+
   // TODO: 로딩 중 처리
   if (
     isPerformanceLoading ||
@@ -79,7 +92,6 @@ const PerformanceDetailPage = () => {
   ) {
     return <div>상세 조회 로딩중...</div>
   }
-
   const performanceData = performance.data
   const reviewData = review.data
 
@@ -96,11 +108,6 @@ const PerformanceDetailPage = () => {
     description,
   } = performanceData
 
-  // TODO: API 이슈 있음
-  // const { mutate: requestModifyReview } = useCreateReview(id)
-  // const { mutate: requestDeletePerformance } = useDeletePerformance(id)
-  // const { mutate: requestCreateReview } = useCreateReview(id)
-
   return (
     <>
       <Head>
@@ -113,7 +120,7 @@ const PerformanceDetailPage = () => {
             title={title}
             startDate={startDate}
             imgUrl={imgUrl}
-            publisherId={profile.id}
+            isPublisher={userId === profile.id}
             performanceId={id}
             handleOnDelete={handleDeleteModalToggle}
           />
@@ -126,10 +133,8 @@ const PerformanceDetailPage = () => {
               modalDescription="삭제한 공연은 되돌릴 수 없어요."
               submitMessage="네, 삭제할게요"
               handleOnSubmit={() => {
-                // TODO: 삭제 api 호출 - API 구현 안됨
-                console.log('개시글 삭제')
                 setShowDeleteModal(false)
-                // requestDeletePerformance(id)
+                requestDeletePerformance(id)
               }}
             />
           )}
@@ -169,13 +174,10 @@ const PerformanceDetailPage = () => {
           startDate={startDate}
           reviews={reviewData.data}
           handleOnDelete={(reviewId) => {
-            // 공연 리뷰 삭제 (TODO: api 미구현, 명세에 없음)
-            console.log(reviewId, '삭제!')
+            requestDeleteReview(reviewId)
           }}
           handleOnSubmit={(reviewContent: string) => {
-            // TODO: API 구현 안된 부분
-            // requestCreateReview({ review: reviewContent })
-            // console.log(reviewContent)
+            requestCreateReview({ review: reviewContent })
           }}
         />
       </main>
