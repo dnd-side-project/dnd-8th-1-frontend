@@ -22,6 +22,9 @@ import { useRouter } from 'next/router'
 import { useMeetDetail, getMeetDetail } from '@queries'
 import { useState } from 'react'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { userAtom } from 'states'
+import { useRecoilValue } from 'recoil'
+
 const MeetDeleteModal = dynamic(
   () => import('../../../components/organisms/MeetDeleteModal'),
   {
@@ -73,11 +76,10 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
     useDisclosure()
   const [showCancelModal, setShowCancelModal, handleCancelModalToggle] =
     useDisclosure()
-  /**
-   *TODO: 임시 유저 데이터
-   */
-  const DUMMY_USER_ID = 302
-  const isUser = DUMMY_USER_ID === detailData?.profile.id
+
+  const { id } = useRecoilValue(userAtom)
+  const isMyPost = id === detailData?.profile.id
+
   /**
    *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함
    */
@@ -149,6 +151,7 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
          */
         openchatUrl="https://open.kakao.com/o/g2g5b5b9"
       />
+
       <header className="w-full">
         <MeetDetailImage
           imgUrl={detailData?.imgUrl as string}
@@ -171,7 +174,7 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
           {/**
            * TODO: 유저 데이터 받을 경우 새로운 분기 처리 필요
            */}
-          {isUser && (
+          {isMyPost && (
             <IconButton
               handleOnClick={() => {
                 setIsStatusBarOpen(!isStatusBarOpen)
@@ -229,7 +232,7 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
           >
             마감되었어요!
           </button>
-        ) : isUser ? (
+        ) : isMyPost ? (
           /**
            * TODO: 유저 데이터 받을 경우 새롭게 분기 처리 필요
            */
