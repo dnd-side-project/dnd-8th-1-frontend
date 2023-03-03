@@ -16,6 +16,8 @@ import { useClickAway, useDisclosure } from '@hooks'
 import { useRouter } from 'next/router'
 import { useUploadImage } from '@queries'
 import dayjs from 'dayjs'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 
 interface ProfileCreateFormProps {
   previousValue?: ProfileEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -27,21 +29,41 @@ const ProfileCreateForm = ({
   handleOnSubmit,
 }: ProfileCreateFormProps) => {
   const [image, setImage] = useState<File>()
+  const { imgUrl, name } = useRecoilValue(userAtom)
   const { register, control, handleSubmit, setValue } =
     useForm<ProfileEditRequest>({
       mode: 'onSubmit',
       defaultValues: {
-        careerStartDate: previousValue ? previousValue.careerStartDate : null,
-        description: previousValue ? previousValue.description : null,
-        genres: previousValue ? previousValue.genres : [],
-        imgUrl: previousValue ? previousValue.imgUrl : null,
-        location: previousValue ? previousValue.location : null,
-        name: previousValue ? previousValue.name : null,
-        openChatUrl: previousValue ? previousValue.openChatUrl : null,
+        careerStartDate:
+          previousValue?.careerStartDate !== null
+            ? previousValue?.careerStartDate
+            : null,
+        description:
+          previousValue?.description !== null
+            ? previousValue?.description
+            : null,
+        genres: previousValue?.genres !== null ? previousValue?.genres : null,
+        imgUrl: previousValue?.imgUrl !== null ? previousValue?.imgUrl : imgUrl,
+        location:
+          previousValue?.location !== null ? previousValue?.location : null,
+        name: previousValue?.name !== null ? previousValue?.name : name,
+        openChatUrl:
+          previousValue?.openChatUrl !== null
+            ? previousValue?.openChatUrl
+            : null,
         portfolio: {
-          instagram: previousValue ? previousValue.portfolio.instagram : null,
-          tiktok: previousValue ? previousValue.portfolio.tiktok : null,
-          youtube: previousValue ? previousValue.portfolio.youtube : null,
+          instagram:
+            previousValue?.portfolio.instagram !== null
+              ? previousValue?.portfolio?.instagram
+              : null,
+          tiktok:
+            previousValue?.portfolio.tiktok !== null
+              ? previousValue?.portfolio?.tiktok
+              : null,
+          youtube:
+            previousValue?.portfolio.youtube !== null
+              ? previousValue?.portfolio?.youtube
+              : null,
         },
         type:
           (previousValue as ProfileEditRequest).type === null
@@ -88,6 +110,7 @@ const ProfileCreateForm = ({
   const isEmptyUrl = (link: string | null) => {
     return link
   }
+
   return (
     <>
       {/** 소개 텍스트 */}
@@ -146,7 +169,7 @@ const ProfileCreateForm = ({
                 <span className={essentialStyle}>필수</span>
               </div>
               <ProfileImgUpload
-                initialImage={previousValue?.imgUrl as string}
+                initialImage={fieldValues.imgUrl as string}
                 handleSetImage={(image) => {
                   setImage(image)
                   const formData = new FormData()
