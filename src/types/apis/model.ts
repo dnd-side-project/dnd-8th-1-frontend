@@ -161,7 +161,6 @@ export interface AppliedEvent {
   title: string // 이벤트 제목,
   profile: Pick<Profile, 'name'>
   isMatched: boolean //나의 지원이 매칭된 여부 true, false,
-  type: MeetTypes // 콜라보 or 쉐어
 }
 
 export interface MyPerformance {
