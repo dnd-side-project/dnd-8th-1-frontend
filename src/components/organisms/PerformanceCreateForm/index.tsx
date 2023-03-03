@@ -89,16 +89,23 @@ const PerformanceCreateForm = ({
       <form
         className="mt-[40px] flex flex-col gap-[34px] p-[16px]"
         onSubmit={handleSubmit(async (formValues) => {
-          const formData = new FormData()
-          formData.append('img', image as File)
+          let newImage
 
-          const {
-            data: { data },
-          } = await performanceAPI.uploadImage(formData)
+          if (image) {
+            const formData = new FormData()
+            formData.append('img', image as File)
+
+            const {
+              data: { data },
+            } = await performanceAPI.uploadImage(formData)
+            newImage = data.imgUrl
+          } else {
+            newImage = previousValue?.imgUrl
+          }
 
           handleOnSubmit({
             ...formValues,
-            imgUrl: data.imgUrl,
+            imgUrl: newImage,
           })
         })}
       >

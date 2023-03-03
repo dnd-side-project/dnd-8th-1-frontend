@@ -17,7 +17,7 @@ import {
 } from '@constants'
 import { useState } from 'react'
 import dayjs from 'dayjs'
-import { performanceAPI } from '@apis'
+import { eventAPI } from '@apis'
 
 interface MeetCreateFormProps {
   previousValue?: MeetEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -91,17 +91,24 @@ const MeetCreateForm = ({
             .set('day', day + 1)
             .toISOString()
 
-          const formData = new FormData()
-          formData.append('img', image as File)
+          let newImage
 
-          const {
-            data: { data },
-          } = await performanceAPI.uploadImage(formData)
+          if (image) {
+            const formData = new FormData()
+            formData.append('img', image as File)
+
+            const {
+              data: { data },
+            } = await eventAPI.uploadImage(formData)
+            newImage = data.imgUrl
+          } else {
+            newImage = previousValue?.imgUrl
+          }
 
           handleOnSubmit({
             ...formValues,
             deadline,
-            imgUrl: data.imgUrl,
+            imgUrl: newImage,
           })
         })}
       >

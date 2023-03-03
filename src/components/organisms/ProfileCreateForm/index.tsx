@@ -73,14 +73,17 @@ const ProfileCreateForm = ({
       shouldUnregister: false,
     })
 
-  // const { mutate: requestUploadImage } = useUploadImage(setValue)
-
   const fieldValues = useWatch<ProfileEditRequest>({ control })
+
   const isComplete = (fieldValues: ProfileEditRequest) => {
     const { imgUrl, name, openChatUrl, type } = fieldValues
+
+    const isSetPreviousImage = previousValue?.imgUrl && imgUrl !== ''
+    const isSetNewPostImage = !previousValue?.imgUrl && !!image
+
     return (
       type !== null &&
-      (image || previousValue?.imgUrl || imgUrl !== null) &&
+      (isSetPreviousImage || isSetNewPostImage) &&
       name !== '' &&
       openChatUrl !== null
     )
@@ -140,16 +143,22 @@ const ProfileCreateForm = ({
         <form
           className="flex flex-col gap-[34px]"
           onSubmit={handleSubmit(async (formValues) => {
-            const formData = new FormData()
-            formData.append('img', image as File)
+            let newImage
 
-            const {
-              data: { data },
-            } = await profileAPI.uploadImage(formData)
+            if (image) {
+              const formData = new FormData()
+              formData.append('img', image as File)
+              const {
+                data: { data },
+              } = await profileAPI.uploadImage(formData)
+              newImage = data.imgUrl
+            } else {
+              newImage = previousValue?.imgUrl
+            }
 
             handleOnSubmit({
               ...formValues,
-              imgUrl: data.imgUrl,
+              imgUrl: newImage,
             })
           })}
         >
