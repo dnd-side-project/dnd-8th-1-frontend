@@ -50,8 +50,10 @@ const MyProfileMenu = ({ id }: { id: number }) => {
         showModal={showModal}
         setShowModal={setShowModal}
         handleOnSubmit={() => {
-          // TODO: 탈퇴 API 호출
-          console.log('탈퇴')
+          userAPI.deleteAccount()
+          setUser(SIGNOUT_USER_STATE)
+          removeAccessToken()
+          router.push('/')
           setShowModal(false)
         }}
         modalContent="정말 탈퇴하시나요?"

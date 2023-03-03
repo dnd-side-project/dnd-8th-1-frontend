@@ -19,4 +19,7 @@ export const userAPI = {
   logout: () => {
     return authInstance.get(`/api/v1/member/logout`)
   },
+  deleteAccount: () => {
+    return authInstance.delete(`/api/v1/member`)
+  },
 }
