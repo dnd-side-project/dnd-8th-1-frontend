@@ -127,7 +127,6 @@ const PerformancePage = () => {
           {...calandarProps}
           isTotal={isTotal}
           setIsTotal={setIsTotal}
-          setIsSearchOpen={setIsSearchOpen}
         />
         <div className="flex w-full px-[16px] py-[22px]">
           <FilterButton

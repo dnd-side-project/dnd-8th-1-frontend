@@ -24,6 +24,10 @@ export type iconName =
   | 'x-inactive'
   | 'image'
   | 'user-square-mono'
+  | 'plus'
+  | 'search'
+  | 'arrow-decrease-shallow'
+  | 'arrow-increase-shallow'
 
 export type icon = {
   path: string
