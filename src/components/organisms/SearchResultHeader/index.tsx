@@ -36,7 +36,7 @@ const SearchResultHeader = () => {
 
         <Input
           placeholder="댄서/팀 이름으로 공연 검색"
-          styleClass="ml-[6px] w-[322px] h-[41px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none bg-white text-body1 placeholder:text-gray-500 text-gray-100"
+          styleClass="ml-[6px] w-[322px] h-[39px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none text-body1 placeholder:text-gray-500 text-gray-100"
           {...register('searchResult')}
         />
         <IconButton

@@ -10,7 +10,6 @@ import {
   GenreSelect,
 } from '@components'
 import { useForm, useWatch } from 'react-hook-form'
-import { theme } from '@constants'
 import { useRef, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { uploadImageUrl } from '@queries'
@@ -28,8 +27,7 @@ const PerformanceCreateForm = ({
   handleOnSubmit,
 }: PerformanceCreateFormProps) => {
   const [image, setImage] = useState<File>()
-
-  const { register, control, handleSubmit, setValue, watch } =
+  const { register, control, handleSubmit, setValue } =
     useForm<PerformanceEditRequest>({
       mode: 'onSubmit',
       defaultValues: {
@@ -193,7 +191,7 @@ const PerformanceCreateForm = ({
               setImage(image)
               const formData = new FormData()
               formData.append('img', image)
-              requestImgUrl(formData)
+              requestImgUrl(formData as FormData)
             }}
           />
         </div>

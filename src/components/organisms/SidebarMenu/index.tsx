@@ -25,7 +25,7 @@ const SideBarMenu = () => {
         <IconButton
           icon={'line-three'}
           areaLabel={'사이드바 메뉴 버튼'}
-          size={24}
+          size={18}
           handleOnClick={() => setShowSidebar(!showSidebar)}
         />
       </div>

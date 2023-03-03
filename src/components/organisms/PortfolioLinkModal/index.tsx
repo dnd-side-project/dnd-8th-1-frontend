@@ -31,20 +31,20 @@ const PortfolioLinkModal = ({
           </div>
 
           <div className="flex flex-col gap-[17px]">
-            {portfolio.instagramUrl && portfolio.instagramUrl !== '' && (
-              <Link href={portfolio.instagramUrl} target="_blank">
+            {portfolio?.instagram && portfolio?.instagram !== '' && (
+              <Link href={portfolio?.instagram} target="_blank">
                 <button className={likeButtonStyle}>인스타그램</button>
               </Link>
             )}
 
-            {portfolio.youtubeUrl && portfolio.youtubeUrl !== '' && (
-              <Link href={portfolio.youtubeUrl} target="_blank">
+            {portfolio?.youtube && portfolio?.youtube !== '' && (
+              <Link href={portfolio?.youtube} target="_blank">
                 <button className={likeButtonStyle}>유튜브</button>
               </Link>
             )}
 
-            {portfolio.tiktokUrl && portfolio.tiktokUrl !== '' && (
-              <Link href={portfolio.tiktokUrl} target="_blank">
+            {portfolio?.tiktok && portfolio?.tiktok !== '' && (
+              <Link href={portfolio?.tiktok} target="_blank">
                 <button className={likeButtonStyle}>틱톡</button>
               </Link>
             )}

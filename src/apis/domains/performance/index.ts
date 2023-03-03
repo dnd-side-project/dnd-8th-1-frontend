@@ -55,4 +55,8 @@ export const performanceAPI = {
   deleteReview: (reviewId: number) => {
     return authInstance.delete(`/api/v1/performances/reviews/${reviewId}`)
   },
+  // 공연 등록
+  create: (payload: PerformanceEditRequest) => {
+    return authInstance.post('/api/v1/performances', payload)
+  },
 }
