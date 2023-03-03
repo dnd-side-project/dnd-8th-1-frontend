@@ -18,6 +18,7 @@ const MeetDetailImage = ({ imgUrl, deadline }: MeetDetailImageProps) => {
             fill
             placeholder="blur"
             blurDataURL={PLACEHOLDER_IMG}
+            style={{ objectFit: 'cover' }}
           />
           <div className="absolute top-[16px] left-[16px] flex h-[28px] w-[55px] items-center justify-center rounded-[14px] bg-gray-700 text-body2 text-gray-300">
             마감
@@ -31,6 +32,7 @@ const MeetDetailImage = ({ imgUrl, deadline }: MeetDetailImageProps) => {
             fill
             placeholder="blur"
             blurDataURL={PLACEHOLDER_IMG}
+            style={{ objectFit: 'cover' }}
           />
         </div>
       )}
