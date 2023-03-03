@@ -76,7 +76,7 @@ const MeetDetailPage = ({ meetId }: MeetDetailPageProps) => {
   /**
    *TODO: 임시 유저 데이터
    */
-  const DUMMY_USER_ID = 1
+  const DUMMY_USER_ID = 302
   const isUser = DUMMY_USER_ID === detailData?.profile.id
   /**
    *TODO: 백엔드로 부터 데이터 받아오는 로직으로 변경되어야 함

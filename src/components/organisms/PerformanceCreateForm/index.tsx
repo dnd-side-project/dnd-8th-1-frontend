@@ -8,6 +8,7 @@ import {
   RegionSelect,
   ImageUpload,
   GenreSelect,
+  DatePickerWithTime,
 } from '@components'
 import { useForm, useWatch } from 'react-hook-form'
 import { useRef, useState } from 'react'
@@ -15,7 +16,6 @@ import { useMutation } from '@tanstack/react-query'
 import { uploadImageUrl } from '@queries'
 import dayjs from 'dayjs'
 import { useClickAway } from '@hooks'
-import FormDateTimePicker from '../../molecules/FormDatePicker/FormDateTimePicker'
 
 interface PerformanceCreateFormProps {
   previousValue?: PerformanceEditRequest // 값이 이미 존재하는 경우 (게시글 수정의 경우)
@@ -93,7 +93,7 @@ const PerformanceCreateForm = ({
   return (
     <>
       <h1 className="mt-[10px] ml-[16px] text-title2 font-bold leading-none text-gray-100">
-        공연 등록
+        공연 {previousValue ? <span>수정</span> : <span>등록</span>}
       </h1>
 
       <form
@@ -147,7 +147,7 @@ const PerformanceCreateForm = ({
           <p className="text-body2 text-gray-400">
             공연이 시작되는 시간을 알려주세요.
           </p>
-          <FormDateTimePicker
+          <DatePickerWithTime
             initialStartDate={previousValue?.startTime}
             handleStartDate={(date) => {
               setValue(
