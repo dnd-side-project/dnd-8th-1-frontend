@@ -8,7 +8,7 @@ const CheckboxModal = dynamic(() => import('../../templates/CheckboxModal'), {
   ssr: false,
 })
 
-const MyProfileMenu = () => {
+const MyProfileMenu = ({ id }: { id: number }) => {
   const dividerStyle = 'width-[100%] h-[0.7px] bg-gray-600'
   const [showModal, setShowModal, toggle] = useDisclosure()
 
@@ -16,13 +16,13 @@ const MyProfileMenu = () => {
     <div className="relative">
       <ul>
         <div className={dividerStyle} />
-        {/* TODO: 전역 로그인 상태 이용 */}
-        {/* <Link href={`/profile/${id}/history`}> */}
-        <MyProfileMenuItem
-          content="활동 내역"
-          description="만나기, 공연, 후기 "
-        />
-        {/* </Link> */}
+        <Link href={`/profile/${id}/history`}>
+          <MyProfileMenuItem
+            content="활동 내역"
+            description="만나기, 공연, 후기 "
+          />
+        </Link>
+
         <div className={dividerStyle} />
         <MyProfileMenuItem content="탈퇴" handleOnClick={toggle} />
       </ul>

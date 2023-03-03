@@ -9,20 +9,35 @@ import {
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { HISTORY_MAIN_CATEGORIES, HISTORY_SUB_CATEGORIES } from '@types'
+import {
+  AppliedEvent,
+  HISTORY_MAIN_CATEGORIES,
+  HISTORY_SUB_CATEGORIES,
+  MyEvent,
+  MyPerformance,
+  MyReview,
+} from '@types'
 import { MY_MAIN_CATEGORIES } from '@constants'
 
-// TODO: API 통신 구현 후 더미데이터 삭제
 import {
-  MY_EVENT_DUMMY,
-  MY_APPLIED_DUMMY,
-  MY_PERFORMANCE_DUMMY,
-  MY_REVIEW_DUMMY,
-} from 'dummy'
+  useMyAppliedEvent,
+  useMyEvents,
+  useMyPerformance,
+  useMyReviews,
+} from '@queries'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { useCheckAuth } from '@hooks'
 
-const ProfileHistoryPage = () => {
+const ProfileHistoryPage = ({ memberId }: { memberId: number }) => {
   const router = useRouter()
   const { profileId, type } = router.query
+
+  const [isChecking] = useCheckAuth()
+
+  const { data: appliedEventsData } = useMyAppliedEvent(memberId)
+  const { data: eventsData } = useMyEvents(memberId)
+  const { data: performancesData } = useMyPerformance(memberId)
+  const { data: reviewData } = useMyReviews(memberId)
 
   const currentProfileId = parseInt(profileId as string)
 
@@ -47,37 +62,59 @@ const ProfileHistoryPage = () => {
       <Head>
         <title>활동내역 - Danverse</title>
       </Head>
-      <main>
-        <Spacer size={31} />
-        <h1 className="ml-[12px] text-title1 font-bold text-gray-100">
-          활동 내역
-        </h1>
-        <Spacer size={24} />
-        <ActivityCategorySelector
-          handleOnChangeMainCategory={(category: HISTORY_MAIN_CATEGORIES) => {
-            setCategory(category)
-            router.push(`/profile/${currentProfileId}/history?type=${category}`)
-          }}
-          handleOnChangeSubCategory={(category) => setSubCategory(category)}
-          initialMainCategory={category}
-        />
 
-        {category === '만나기' && subCategory === '등록' && (
-          <MyEventList myEvents={MY_EVENT_DUMMY} />
-        )}
+      {isChecking ? (
+        <></>
+      ) : (
+        <main>
+          <Spacer size={31} />
+          <h1 className="ml-[12px] text-title1 font-bold text-gray-100">
+            활동 내역
+          </h1>
+          <Spacer size={24} />
+          <ActivityCategorySelector
+            handleOnChangeMainCategory={(category: HISTORY_MAIN_CATEGORIES) => {
+              setCategory(category)
+              router.push(
+                `/profile/${currentProfileId}/history?type=${category}`,
+              )
+            }}
+            handleOnChangeSubCategory={(category) => setSubCategory(category)}
+            initialMainCategory={category}
+          />
 
-        {category === '만나기' && subCategory === '신청' && (
-          <MyAppliedEventList myAppliedEvents={MY_APPLIED_DUMMY} />
-        )}
-        {category === '공연' && subCategory === '등록한 공연' && (
-          <MyPerformanceList myPerformances={MY_PERFORMANCE_DUMMY} />
-        )}
-        {category === '공연' && subCategory === '후기' && (
-          <MyReviewList myReviews={MY_REVIEW_DUMMY} />
-        )}
-      </main>
+          {category === '만나기' && subCategory === '등록' && (
+            <MyEventList myEvents={eventsData?.data as MyEvent[]} />
+          )}
+
+          {category === '만나기' && subCategory === '신청' && (
+            <MyAppliedEventList
+              myAppliedEvents={appliedEventsData?.data as AppliedEvent[]}
+            />
+          )}
+
+          {category === '공연' && subCategory === '등록한 공연' && (
+            <MyPerformanceList
+              myPerformances={performancesData?.data as MyPerformance[]}
+            />
+          )}
+          {category === '공연' && subCategory === '후기' && (
+            <MyReviewList myReviews={reviewData?.data as MyReview[]} />
+          )}
+        </main>
+      )}
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  return {
+    props: {
+      memberId: parseInt(ctx?.params?.profileId as string),
+    },
+  }
 }
 
 export default ProfileHistoryPage

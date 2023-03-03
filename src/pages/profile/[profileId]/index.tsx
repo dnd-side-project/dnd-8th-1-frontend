@@ -82,7 +82,7 @@ const ProfilePage = ({ memberId }: ProfileProps) => {
         {userId && userId === memberId && (
           <>
             <Spacer size={24} />
-            <MyProfileMenu />
+            <MyProfileMenu id={memberId} />
           </>
         )}
       </main>
