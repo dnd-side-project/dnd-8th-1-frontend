@@ -8892,7 +8892,6 @@ __metadata:
     framer-motion: ^9.0.1
     husky: ^8.0.3
     lint-staged: ^13.1.0
-    lottie-react: ^2.4.0
     lottie-web: ^5.10.2
     msw: ^0.49.2
     next: 13.1.2
@@ -12991,18 +12990,6 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 6517e24e0cad87ec9888f500c5b5947032cdfe6ef65e1c1936a0c48a524b81e65542c9c3edc91c97d5bddc806ee2a985dbc79be89215d613b1de5db6d1cfe6f4
-  languageName: node
-  linkType: hard
-
-"lottie-react@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "lottie-react@npm:2.4.0"
-  dependencies:
-    lottie-web: ^5.10.2
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: e9ea4a89be90a29bde4a83956f76a80d1f8031882f18ea38ef5271d2aafd8e68348ae6297f185ed85b149ca4896fe33aee7faf9780b88a1b289b8e146f477448
   languageName: node
   linkType: hard
 
