@@ -23,12 +23,8 @@ const PerformanceReviewItem = ({
 }: PerformanceReviewItemProp) => {
   const { content, reviewId, createdDate, writer } = reviewItem
   const { id } = useRecoilValue(userAtom)
-  console.log(writer.id, id)
-  const [
-    showReviewDeleteModal,
-    setShowReviewDeleteModal,
-    handleReviewDeleteModalToggle,
-  ] = useDisclosure()
+
+  const [showReviewDeleteModal, setShowReviewDeleteModal] = useDisclosure()
   return (
     <>
       <li className="flex justify-center">

@@ -68,10 +68,7 @@ const ImageUpload = ({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(event: any) => {
             const current = event.target.files[0]
-
             if (current) {
-              console.log(current.size, current.size > 2 * MB)
-              console.log(2 * MB)
               if (current.size > 2 * MB) {
                 setShowModal(true)
               } else {
