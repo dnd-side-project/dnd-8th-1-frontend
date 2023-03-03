@@ -45,7 +45,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-[14px]">
-          {!!id && (
+          {!!id && pathname !== '/performance' && (
             <Link href={`/profile/${id}`}>
               <Avatar
                 profileImage={
