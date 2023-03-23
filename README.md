@@ -42,7 +42,7 @@ yarn set version berry
 5. yarn berry unplug file 설치
 
 ```
-yarn unplug
+yarn unplug
 ```
 
 <br/>
