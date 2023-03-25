@@ -43,7 +43,7 @@ const CandidateBottomSheet = dynamic(
   },
 )
 const CandidateCancelModal = dynamic(
-  () => import('../../../components/organisms/CandidateCancelModal'),
+  () => import('../../../components/domain/meet/detail/CandidateCancelModal'),
   {
     ssr: false,
   },

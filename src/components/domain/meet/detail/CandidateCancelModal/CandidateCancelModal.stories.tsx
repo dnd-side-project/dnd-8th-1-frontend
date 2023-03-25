@@ -5,7 +5,7 @@ import { Layout } from '@components'
 
 export default {
   component: CandidateCancelModal,
-  title: 'Organisms/CandidateCancelModal',
+  title: 'domain/meet/detail/CandidateCancelModal',
   parameters: {
     componentSubtitle: '신청 완료 시 등장하는 모달 컴포넌트',
   },
