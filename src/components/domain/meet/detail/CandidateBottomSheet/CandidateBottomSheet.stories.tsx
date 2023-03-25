@@ -4,7 +4,7 @@ import { useDisclosure } from '@hooks'
 import { Layout } from '@components'
 export default {
   component: CandidateBottomSheet,
-  title: 'Organisms/CandidateBottomSheet',
+  title: 'domain/meet/detail/CandidateBottomSheet',
   parameters: {
     componentSubtitle: '만나기 신청을 위한 바텀 시트 컴포넌트',
   },

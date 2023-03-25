@@ -37,7 +37,7 @@ const MeetDeleteModal = dynamic(
   },
 )
 const CandidateBottomSheet = dynamic(
-  () => import('../../../components/organisms/CandidateBottomSheet'),
+  () => import('../../../components/domain/meet/detail/CandidateBottomSheet'),
   {
     ssr: false,
   },
