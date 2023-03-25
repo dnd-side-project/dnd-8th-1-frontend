@@ -1,5 +1,5 @@
 import { ProfileEditRequest } from '@types'
-import { authInstance, unAuthInstance } from 'apis/utils'
+import { authInstance, unAuthInstance } from '@apis'
 
 export const profileAPI = {
   // 프로필 전체 조회

@@ -47,6 +47,7 @@ module.exports = {
       '@assets': path.resolve(__dirname, '../public/assets'),
       '@images': path.resolve(__dirname, '../public/assets/images'),
       public: path.resolve(__dirname, '../public'),
+      states: path.resolve(__dirname, '../src/states'),
     }
 
     return config
