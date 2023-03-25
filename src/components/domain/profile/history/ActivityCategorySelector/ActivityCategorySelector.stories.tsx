@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default {
   component: ActivityCategorySelector,
-  title: 'Organisms/ActivityCategorySelector',
+  title: 'domain/profile/history/ActivityCategorySelector',
   parameters: {
     componentSubtitle: '활동 내역에 사용되는 서브 카테고리 컴포넌트',
   },
