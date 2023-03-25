@@ -5,7 +5,7 @@ import { Meet } from '@types'
 
 export default {
   component: CollaboList,
-  title: 'Organisms/CollaboList',
+  title: 'domain/meet/main/CollaboList',
   parameters: {
     componentSubtitle: '만나기 페이지에서 사용될 콜라보 리스트',
   },
