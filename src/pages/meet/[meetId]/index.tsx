@@ -49,7 +49,7 @@ const CandidateCancelModal = dynamic(
   },
 )
 const CandidateModal = dynamic(
-  () => import('../../../components/organisms/CandidateModal'),
+  () => import('../../../components/domain/meet/detail/CandidateModal'),
   {
     ssr: false,
   },
