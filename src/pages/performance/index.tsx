@@ -6,7 +6,6 @@ import {
   Pagination,
   PerformanceBanner,
   PerformanceList,
-  SearchHeader,
   Spacer,
 } from '@components'
 import { CURRENT_MONTH, CURRENT_YEAR } from '@constants'
