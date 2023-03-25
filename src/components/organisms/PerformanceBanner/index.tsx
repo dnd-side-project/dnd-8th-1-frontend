@@ -27,6 +27,8 @@ const PerformanceBanner = ({
                   height: '100%',
                   width: '100%',
                   background: `linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, #080808 89.06%), url(${imminentPerformance.imgUrl})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: '100% 100%',
                 }}
               >
                 <div className="absolute left-[16px] bottom-[40px]">
