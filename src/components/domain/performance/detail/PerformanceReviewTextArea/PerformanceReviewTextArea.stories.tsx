@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 export default {
   component: PerformanceReviewTextArea,
-  title: 'Organisms/PerformanceReviewTextArea',
+  title: 'domain/performance/detail/PerformanceReviewTextArea',
   parameters: {
     componentSubtitle: '공연 상세 페이지의 리뷰 쓰기에 사용되는 컴포넌트',
   },
