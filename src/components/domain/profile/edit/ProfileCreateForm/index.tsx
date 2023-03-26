@@ -28,6 +28,7 @@ const ProfileCreateForm = ({
   previousValue,
   handleOnSubmit,
 }: ProfileCreateFormProps) => {
+  console.log(previousValue)
   const [image, setImage] = useState<File>()
   const { imgUrl, name } = useRecoilValue(userAtom)
   const { register, control, handleSubmit, setValue } =
