@@ -4,17 +4,17 @@ import PerformanceBanner from '.'
 
 export default {
   component: PerformanceBanner,
-  title: 'Organisms/PerformanceBanner',
+  title: 'domain/performance/main/PerformanceBanner',
   parameters: {
     componentSubtitle: 'PerformanceBanner 컴포넌트',
   },
   argTypes: {
     imminentPerformances: {
       defaultValue: [
-        { title: '1월 공연', image: 'https://picsum.photos/375/275' },
-        { title: '2월 공연', image: 'https://picsum.photos/375/275' },
-        { title: '3월 공연', image: 'https://picsum.photos/375/275' },
-        { title: '4월 공연', image: 'https://picsum.photos/375/275' },
+        { title: '1월 공연', imgUrl: 'https://picsum.photos/375/275' },
+        { title: '2월 공연', imgUrl: 'https://picsum.photos/375/275' },
+        { title: '3월 공연', imgUrl: 'https://picsum.photos/375/275' },
+        { title: '4월 공연', imgUrl: 'https://picsum.photos/375/275' },
       ],
     },
   },

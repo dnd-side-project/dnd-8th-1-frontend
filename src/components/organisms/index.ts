@@ -1,5 +1,4 @@
 export { default as Organism } from './Organism'
-export { default as PerformanceBanner } from './PerformanceBanner'
 export { default as SidebarMenu } from './SidebarMenu'
 export { default as PerformanceList } from './PerformanceList'
 export { default as SearchHeader } from './SearchHeader'
