@@ -4,7 +4,7 @@ import { Layout } from '@components'
 
 export default {
   component: ProfileDisabled,
-  title: 'Organisms/ProfileDisabled',
+  title: 'domain/profile/main/ProfileDisabled',
   parameters: {
     componentSubtitle: '프로필 미등록시 보이는 컴포넌트',
   },
