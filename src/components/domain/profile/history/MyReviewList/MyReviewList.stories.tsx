@@ -5,7 +5,7 @@ import { MyReview } from '@types'
 
 export default {
   component: MyReviewList,
-  title: 'Organisms/MyReviewList',
+  title: 'domain/profile/history/MyReviewList',
   parameters: {
     componentSubtitle: '활동 내역의 내가 작성한 리뷰 리스트',
   },
