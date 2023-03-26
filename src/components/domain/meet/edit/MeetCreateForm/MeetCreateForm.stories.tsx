@@ -4,7 +4,7 @@ import { Layout } from '@components'
 
 export default {
   component: MeetCreateForm,
-  title: 'Organisms/MeetCreateForm',
+  title: 'domain/meet/edit/MeetCreateForm',
   parameters: {
     componentSubtitle: '만나기 페이지에서 만나기를 등록하는 폼 컴포넌트',
   },
