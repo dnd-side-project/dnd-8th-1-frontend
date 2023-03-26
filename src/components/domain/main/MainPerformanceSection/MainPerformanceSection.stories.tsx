@@ -4,7 +4,7 @@ import { Layout } from '@components'
 
 export default {
   component: MainPerformanceSection,
-  title: 'Organisms/MainPerformanceSection',
+  title: 'domain/main/MainPerformanceSection',
   parameters: {
     componentSubtitle: '메인 페이지에서 사용되는 공연 정보 관련 컴포넌트',
   },
