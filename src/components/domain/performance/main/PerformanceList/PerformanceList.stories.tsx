@@ -4,7 +4,7 @@ import { GenreTypes, RegionTypes } from '@types'
 
 export default {
   component: PerformanceList,
-  title: 'Organisms/PerformanceList',
+  title: 'domain/performance/main/PerformanceList',
   parameters: {
     componentSubtitle: '공연 정보 리스트 컴포넌트',
   },
@@ -21,11 +21,11 @@ export default {
 
 const Template: ComponentStory<typeof PerformanceList> = (args) => {
   const DUMMY = {
-    performTitle: '1월 부산에서 공연할 예정인 혁오 밴드 입니다!!',
-    performImg: 'https://picsum.photos/96/110',
-    performStartDate: '2021.01.01',
-    performLocation: '부산' as RegionTypes,
-    performGenres: ['힙합'] as GenreTypes[],
+    title: '1월 부산에서 공연할 예정인 혁오 밴드 입니다!!',
+    imgUrl: 'https://picsum.photos/96/110',
+    startDate: '2021.01.01',
+    location: '부산' as RegionTypes,
+    genres: ['힙합'] as GenreTypes[],
     profile: {
       id: '1',
       imgUrl: 'https://picsum.photos/96/110',

@@ -2,7 +2,7 @@ import { PLACEHOLDER_IMG } from '@constants'
 import { Performance } from '@types'
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import PerformanceListItem from '../../../../organisms/PerformanceList/PerformanceListItem'
+import PerformanceListItem from '../PerformanceList/PerformanceListItem'
 import emptyImage from '/public/assets/images/graphic_1.png'
 
 interface PerformanceEntireListProps {
