@@ -5,7 +5,7 @@ import { MyPerformance } from '@types'
 
 export default {
   component: MyPerformanceList,
-  title: 'Organisms/MyPerformanceList',
+  title: 'domain/profile/history/MyPerformanceList',
   parameters: {
     componentSubtitle: '활동 내역 페이지의 내가 작성한 공연 리스트',
   },
