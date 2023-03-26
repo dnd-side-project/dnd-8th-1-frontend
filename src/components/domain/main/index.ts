@@ -5,3 +5,4 @@ export { default as MainPerformanceSection } from '../main/MainPerformanceSectio
 export { default as MainPerformanceCommentList } from '../main/MainPerformanceCommentList'
 export { default as MainPerformanceList } from '../main/MainPerformanceList'
 export { default as MainProfileList } from '../main/MainProfileList'
+export { default as MainProfileSection } from '../main/MainProfileSection'

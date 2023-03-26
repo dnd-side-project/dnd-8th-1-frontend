@@ -4,7 +4,7 @@ import { ProfileMain } from '@types'
 
 export default {
   component: MainProfileSection,
-  title: 'Organisms/MainProfileSection',
+  title: 'domain/main/MainProfileSection',
   parameters: {
     componentSubtitle: '메인 페이지의 프로필 섹션',
   },
