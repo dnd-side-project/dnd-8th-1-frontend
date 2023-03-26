@@ -7,6 +7,7 @@ import {
   PerformanceBanner,
   PerformanceList,
   Spacer,
+  PerformanceEntireList,
 } from '@components'
 import { CURRENT_MONTH, CURRENT_YEAR } from '@constants'
 import { useCalendar } from '@hooks'
@@ -27,14 +28,12 @@ import {
   PerformanceResponse,
   RegionTypes,
 } from '@types'
-import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const PerformancePage = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isTotal, setIsTotal] = useState(true)
   const {
     monthYear,
