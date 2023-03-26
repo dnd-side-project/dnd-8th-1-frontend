@@ -6,7 +6,7 @@ import { ProfileMain } from '@types'
 
 export default {
   component: MainProfileList,
-  title: 'Organisms/MainProfileList',
+  title: 'domain/main/MainProfileList',
   parameters: {
     componentSubtitle: '메인에서 사용되는 프로필 리스트',
   },
