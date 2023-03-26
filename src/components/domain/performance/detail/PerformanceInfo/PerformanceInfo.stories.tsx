@@ -4,7 +4,7 @@ import { Center } from '@chakra-ui/react'
 
 export default {
   component: PerformanceInfo,
-  title: 'Organisms/PerformanceInfo',
+  title: 'domain/performance/detail/PerformanceInfo',
   parameters: {
     componentSubtitle:
       '공연 상세 페이지에서 공연 시간과 장소를 알려주는 컴포넌트',
