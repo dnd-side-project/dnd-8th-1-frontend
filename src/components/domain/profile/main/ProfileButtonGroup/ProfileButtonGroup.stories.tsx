@@ -6,7 +6,7 @@ import { Portfolio } from '@types'
 
 export default {
   component: ProfileButtonGroup,
-  title: 'Organisms/ProfileButtonGroup',
+  title: 'domain/profile/main/ProfileButtonGroup',
   parameters: {
     componentSubtitle: '프로필 버튼',
   },
