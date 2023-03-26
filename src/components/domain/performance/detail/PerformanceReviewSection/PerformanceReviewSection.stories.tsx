@@ -3,14 +3,14 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Comment } from '@types'
 export default {
   component: PerformanceReviewSection,
-  title: 'Organisms/PerformanceReviewSection',
+  title: 'domain/performance/detail/PerformanceReviewSection',
   parameters: {
     componentSubtitle: '공통 컴포넌트로 사용되는 컴포넌트',
   },
 
   decorators: [
     (Story) => (
-      <div className="w-[375px]">
+      <div className="w-[375px] bg-gray-900">
         <Story />
       </div>
     ),
@@ -42,7 +42,7 @@ const PERFORMANCE_REVIEW_DUMMY: Comment[] = [
 
 const Template: ComponentStory<typeof PerformanceReviewSection> = () => (
   <PerformanceReviewSection
-    startDate={''}
+    startDate={'2023-03-24T12:00:00'}
     reviews={PERFORMANCE_REVIEW_DUMMY}
     handleOnDelete={(reviewId) => alert(`${reviewId}번 리뷰를 삭제??`)}
     handleOnSubmit={(review) => console.log(review)}
@@ -51,3 +51,29 @@ const Template: ComponentStory<typeof PerformanceReviewSection> = () => (
 
 export const Default = Template.bind({})
 Default.args = {}
+
+const EmptyTemplate: ComponentStory<typeof PerformanceReviewSection> = () => (
+  <PerformanceReviewSection
+    startDate={'2023-03-24T12:00:00'}
+    reviews={[]}
+    handleOnDelete={(reviewId) => alert(`${reviewId}번 리뷰를 삭제??`)}
+    handleOnSubmit={(review) => console.log(review)}
+  />
+)
+
+export const Empty = EmptyTemplate.bind({})
+Empty.args = {}
+
+const IntentedTemplate: ComponentStory<
+  typeof PerformanceReviewSection
+> = () => (
+  <PerformanceReviewSection
+    startDate={'2099-03-24T12:00:00'}
+    reviews={PERFORMANCE_REVIEW_DUMMY}
+    handleOnDelete={(reviewId) => alert(`${reviewId}번 리뷰를 삭제??`)}
+    handleOnSubmit={(review) => console.log(review)}
+  />
+)
+
+export const IntentedPerformance = IntentedTemplate.bind({})
+IntentedPerformance.args = {}

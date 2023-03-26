@@ -11,6 +11,7 @@ const PerformanceReviewList = ({
   reviews,
   handleOnDelete,
 }: PerformanceReviewListProps) => {
+  console.log(reviews)
   return (
     <ul>
       {reviews.length ? (
