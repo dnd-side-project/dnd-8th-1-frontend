@@ -175,6 +175,6 @@ export interface MyPerformance {
 export interface MyReview {
   id: number // 후기 고유 ID
   createdAt: string // 2022-12-31T23:59:59
-  review: string // 후기 내용
+  content: string // 후기 내용
   performance: Pick<Performance, 'id' | 'title'>
 }
