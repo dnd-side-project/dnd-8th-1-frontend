@@ -114,7 +114,7 @@ export const MY_PERFORMANCE_DUMMY: MyPerformance[] = Array.from(
 export const MY_REVIEW_DUMMY_SINGLE: MyReview = {
   id: 1,
   createdAt: '2022-12-31T23:59:59',
-  review:
+  content:
     '로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트이다로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트이다로렘 입숨은 출판이나 그래픽 디자인 분야에서 폰트, 타이포래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트이다',
   performance: {
     id: 1,
