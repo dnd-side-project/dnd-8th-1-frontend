@@ -5,7 +5,7 @@ import { MyEvent } from '@types'
 
 export default {
   component: MyEventList,
-  title: 'Organisms/MyEventList',
+  title: 'domain/profile/history/MyEventList',
   parameters: {
     componentSubtitle: '활동 내역 페이지의 작성한 만나기 내역 리스트 ',
   },
