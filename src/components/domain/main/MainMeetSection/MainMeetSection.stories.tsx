@@ -4,7 +4,7 @@ import { Layout } from '@components'
 
 export default {
   component: MainMeetSection,
-  title: 'Organisms/MainMeetSection',
+  title: 'domain/main/MainMeetSection',
   parameters: {
     componentSubtitle: '메인 페이지에서 사용되는 만나기 관련 컴포넌트',
   },
