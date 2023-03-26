@@ -1,8 +1,7 @@
-import { Icon } from '@components'
+import { Icon, MainMeetList } from '@components'
 import { theme } from '@constants'
 import { Meet } from '@types'
 import Link from 'next/link'
-import MainMeetList from './MainMeetList'
 
 interface MainMeetSectionProps {
   meetLists: Omit<Meet, 'deadline'>[]
