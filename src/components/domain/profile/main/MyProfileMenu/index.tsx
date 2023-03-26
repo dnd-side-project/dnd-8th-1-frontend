@@ -9,9 +9,12 @@ import { userAtom } from 'states'
 import { SIGNOUT_USER_STATE } from '@constants'
 import { removeAccessToken } from '@utils'
 
-const CheckboxModal = dynamic(() => import('../../templates/CheckboxModal'), {
-  ssr: false,
-})
+const CheckboxModal = dynamic(
+  () => import('../../../../templates/CheckboxModal'),
+  {
+    ssr: false,
+  },
+)
 
 const MyProfileMenu = ({ id }: { id: number }) => {
   const dividerStyle = 'width-[100%] h-[0.7px] bg-gray-600'

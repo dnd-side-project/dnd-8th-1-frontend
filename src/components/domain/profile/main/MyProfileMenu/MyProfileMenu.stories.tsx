@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 export default {
   component: MyProfileMenu,
-  title: 'Organisms/MyProfileMenu',
+  title: 'domain/profile/main/MyProfileMenu',
   parameters: {
     componentSubtitle: '자신의 프로필일 경우, 보이는 메뉴 컴포넌트',
   },
