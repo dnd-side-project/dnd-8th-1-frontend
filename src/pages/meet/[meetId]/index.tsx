@@ -31,7 +31,7 @@ import { useRecoilValue } from 'recoil'
 import Head from 'next/head'
 
 const MeetDeleteModal = dynamic(
-  () => import('../../../components/organisms/MeetDeleteModal'),
+  () => import('../../../components/domain/meet/detail/MeetDeleteModal'),
   {
     ssr: false,
   },
