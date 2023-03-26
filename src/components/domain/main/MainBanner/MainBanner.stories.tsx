@@ -4,7 +4,7 @@ import MainBanner from '.'
 
 export default {
   component: MainBanner,
-  title: 'Organisms/MainBanner',
+  title: 'domain/main/MainBanner',
   parameters: {
     componentSubtitle: '홈 화면의 배너 컴포넌트',
   },
