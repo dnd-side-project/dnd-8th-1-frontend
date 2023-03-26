@@ -4,7 +4,7 @@ import { Comment } from '@types'
 
 export default {
   component: PerformanceReviewList,
-  title: 'Organisms/PerformanceReviewList',
+  title: 'domain/performance/detail/PerformanceReviewList',
   parameters: {
     componentSubtitle:
       '공연 정보 상세에서 사용되는 공연 정보 후기 리스트 컴포넌트',
