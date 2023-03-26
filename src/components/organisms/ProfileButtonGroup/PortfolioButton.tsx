@@ -5,9 +5,12 @@ import { Portfolio } from '@types'
 
 import dynamic from 'next/dynamic'
 
-const PortfolioLinkModal = dynamic(() => import('../PortfolioLinkModal'), {
-  ssr: false,
-})
+const PortfolioLinkModal = dynamic(
+  () => import('../../domain/profile/main/PortfolioLinkModal'),
+  {
+    ssr: false,
+  },
+)
 
 const PortfolioButton = ({ portfolio }: { portfolio: Portfolio }) => {
   const [showModal, setShowModal, handleToggle] = useDisclosure()
