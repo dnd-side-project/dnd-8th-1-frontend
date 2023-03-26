@@ -5,7 +5,7 @@ import { AppliedEvent } from '@types'
 
 export default {
   component: MyAppliedEventList,
-  title: 'Organisms/MyAppliedEventList',
+  title: 'domain/profile/history/MyAppliedEventList',
   parameters: {
     componentSubtitle: '활동내역 페이지에서 사용되는 신청한 이벤트 리스트',
   },
