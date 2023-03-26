@@ -1,8 +1,7 @@
-import { Icon } from '@components'
+import { Icon, MainPerformanceCommentList } from '@components'
 import { theme } from '@constants'
 import { MainComment, Performance } from '@types'
 import Link from 'next/link'
-import MainPerformanceCommentList from './MainPerformanceCommentList'
 import MainPerformanceList from './MainPerformanceList'
 
 interface MainPerformanceSectionProps {
