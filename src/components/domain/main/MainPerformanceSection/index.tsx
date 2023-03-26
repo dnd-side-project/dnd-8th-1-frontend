@@ -1,8 +1,11 @@
-import { Icon, MainPerformanceCommentList } from '@components'
+import {
+  Icon,
+  MainPerformanceCommentList,
+  MainPerformanceList,
+} from '@components'
 import { theme } from '@constants'
 import { MainComment, Performance } from '@types'
 import Link from 'next/link'
-import MainPerformanceList from './MainPerformanceList'
 
 interface MainPerformanceSectionProps {
   performanceList: Omit<Performance, 'performStartDate'>[]

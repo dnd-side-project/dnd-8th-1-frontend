@@ -1,8 +1,6 @@
 import { GenreTypes, Performance, RegionTypes } from '@types'
 import { Avatar, StyledImage, Tags } from '@components'
 import Link from 'next/link'
-import Image from 'next/image'
-import { PLACEHOLDER_IMG } from '@constants'
 
 interface MainMeetListItemProps {
   performanceItem: Omit<Performance, 'startDate'>
