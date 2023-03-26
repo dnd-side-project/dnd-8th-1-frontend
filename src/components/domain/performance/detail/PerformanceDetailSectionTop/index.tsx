@@ -77,7 +77,6 @@ const PerformanceDetailSectionTop = ({
             handleOnModify={() =>
               router.push(`/performance/edit/${performanceId}`)
             }
-            // TODO: 삭제 API 호출
             handleOnDelete={() => {
               handleOnDelete && handleOnDelete()
             }}
