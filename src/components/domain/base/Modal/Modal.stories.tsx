@@ -5,7 +5,7 @@ import { useDisclosure } from '@hooks'
 
 export default {
   component: Modal,
-  title: 'Templates/Modal',
+  title: 'domain/base/Modal',
   parameters: {
     componentSubtitle: '공통 컴포넌트로 사용되는 모달 컴포넌트',
   },
