@@ -4,7 +4,7 @@ import SearchResultList from '.'
 
 export default {
   component: SearchResultList,
-  title: 'Organisms/SearchResultList',
+  title: 'domain/performance/search/SearchResultList',
   parameters: {
     componentSubtitle: '검색 결과 리스트 컴포넌트',
   },
