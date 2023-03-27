@@ -5,7 +5,7 @@ import { Layout } from '@components'
 
 export default {
   component: ConfirmModal,
-  title: 'Templates/ConfirmModal',
+  title: 'domain/base/ConfirmModal',
   parameters: {
     componentSubtitle: '확인 용도로 사용되는 모달 컴포넌트',
   },

@@ -63,7 +63,7 @@ const ModalWithSingleButton = dynamic(
 )
 
 const ConfirmModal = dynamic(
-  () => import('../../../components/templates/ConfirmModal'),
+  () => import('../../../components/domain/base/ConfirmModal'),
   {
     ssr: false,
   },

@@ -1,5 +1,4 @@
-import { IconButton, Modal } from '@components'
-import { theme } from '@constants'
+import { Modal } from '@components'
 import { Dispatch, SetStateAction } from 'react'
 
 interface ConfirmModalProps {
