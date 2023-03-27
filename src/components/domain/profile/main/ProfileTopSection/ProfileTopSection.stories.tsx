@@ -4,9 +4,9 @@ import { GenreTypes, RecruitmentType, RegionTypes } from '@types'
 
 export default {
   component: ProfileTopSection,
-  title: 'Organisms/ProfileTopSection',
+  title: 'domain/profile/main/ProfileTopSection',
   parameters: {
-    componentSubtitle: '프로필 페이지에 상단 섹션',
+    componentSubtitle: '프로필 페이지에 상단 섹션을 담당하는 컴포넌트',
   },
   decorators: [
     (Story) => (
