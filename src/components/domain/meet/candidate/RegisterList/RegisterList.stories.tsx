@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { MeetApplicant } from '@types'
 export default {
   component: RegisterList,
-  title: 'Organisms/RegisterList',
+  title: 'domain/meet/candidate/RegisterList',
   decorators: [
     (Story) => (
       <div className="w-[375px]">
