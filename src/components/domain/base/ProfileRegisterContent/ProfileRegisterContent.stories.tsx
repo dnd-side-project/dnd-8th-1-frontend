@@ -3,9 +3,9 @@ import ProfileRegisterContent from '.'
 
 export default {
   component: ProfileRegisterContent,
-  title: 'Organisms/ProfileRegisterContent',
+  title: 'domain/base/ProfileRegisterContent',
   parameters: {
-    componentSubtitle: '프로필 등록 팝업',
+    componentSubtitle: '프로필 등록 팝업에 포함되는 content 컴포넌트',
   },
 
   decorators: [
