@@ -5,7 +5,7 @@ import { Layout, WelcomeModalContent } from '@components'
 
 export default {
   component: ModalWithSingleButton,
-  title: 'Templates/ModalWithSingleButton',
+  title: 'domain/base/ModalWithSingleButton',
   parameters: {
     componentSubtitle: '버튼 하나있는 모달',
   },

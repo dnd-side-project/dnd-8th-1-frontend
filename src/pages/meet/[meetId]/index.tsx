@@ -56,7 +56,7 @@ const CandidateModal = dynamic(
 )
 
 const ModalWithSingleButton = dynamic(
-  () => import('../../../components/templates/ModalWithSingleButton'),
+  () => import('../../../components/domain/base/ModalWithSingleButton'),
   {
     ssr: false,
   },
