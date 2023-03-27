@@ -6,3 +6,4 @@ export { default as MainPerformanceCommentList } from '../main/MainPerformanceCo
 export { default as MainPerformanceList } from '../main/MainPerformanceList'
 export { default as MainProfileList } from '../main/MainProfileList'
 export { default as MainProfileSection } from '../main/MainProfileSection'
+export { default as WelcomeModalContent } from './WelcomeModalContent'

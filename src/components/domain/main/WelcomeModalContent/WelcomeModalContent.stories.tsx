@@ -3,7 +3,7 @@ import WelcomeModalContent from '.'
 
 export default {
   component: WelcomeModalContent,
-  title: 'Organisms/WelcomeModalContent',
+  title: 'domain/main/WelcomeModalContent',
   parameters: {
     componentSubtitle: '가입 시 뜨는 모달 안의 콘텐츠',
   },
