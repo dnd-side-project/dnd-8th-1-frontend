@@ -5,7 +5,7 @@ import { Layout } from '@components'
 
 export default {
   component: CancelSubmitModal,
-  title: 'Templates/CancelSubmitModal',
+  title: 'domain/base/CancelSubmitModal',
   parameters: {
     componentSubtitle: '제출과 취소가 있는 모달',
   },
