@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 export default {
   component: SearchResultHeader,
-  title: 'Organisms/SearchResultHeader',
+  title: 'domain/performance/search/SearchResultHeader',
   parameters: {
     componentSubtitle: '공연 정보 검색 결과 페이지 내 header 컴포넌트',
   },
