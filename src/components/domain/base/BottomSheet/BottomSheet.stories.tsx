@@ -5,7 +5,7 @@ import { useDisclosure } from '@hooks'
 
 export default {
   component: BottomSheet,
-  title: 'Templates/BottomSheet',
+  title: 'domain/base/BottomSheet',
   parameters: {
     componentSubtitle: '공통 컴포넌트로 사용되는 바텀 시트 컴포넌트',
   },
