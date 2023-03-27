@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default {
   component: SearchHeader,
-  title: 'Organisms/SearchHeader',
+  title: 'domain/performance/main/SearchHeader',
   parameters: {
     componentSubtitle: '공연 정보 검색을 위한 컴포넌트',
   },
