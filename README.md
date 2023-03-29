@@ -48,10 +48,10 @@ yarn set version berry
 
 <img width="460" alt="image" src="https://user-images.githubusercontent.com/87177577/224735266-6ebae878-2d3b-4a6c-b3b7-f035093966a2.png"/>
 <br/>
-<br/>
 
 6. vs code allow 설정
-   <img width="460" alt="image" src="https://user-images.githubusercontent.com/87177577/224741823-ec3ca481-8e2a-46f2-8756-a61057c21d4e.png">
+
+<img width="460" alt="image" src="https://user-images.githubusercontent.com/87177577/224741823-ec3ca481-8e2a-46f2-8756-a61057c21d4e.png">
 
 - 다음과 같은 박스가 로드 된다면 allow 클릭
 
