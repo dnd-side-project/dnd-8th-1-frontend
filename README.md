@@ -80,7 +80,7 @@
 
 <br/>
 
-1. 레포지토리 클론
+<h4> 1. 레포지토리 클론 </h4>
 
 ```bash
 git clone https://github.com/dnd-side-project/dnd-8th-1-frontend.git
@@ -88,7 +88,7 @@ git clone https://github.com/dnd-side-project/dnd-8th-1-frontend.git
 
 <br/>
 
-2. localhost.pem, localhost-key.pem Download (mac 유저만 해당되며, window 유저일 경우 wiki 내 [localhost.pem, localhost-key.pem Download](https://github.com/dnd-side-project/dnd-8th-1-frontend/wiki/Getting-Started) 섹션 참고 하세요!)
+<h4> 2. <code>localhost.pem</code>, <code>localhost-key.pem</code> Download (mac 유저만 해당되며, window 유저일 경우 wiki 내 <a href="https://github.com/dnd-side-project/dnd-8th-1-frontend/wiki/Getting-Started">localhost.pem, localhost-key.pem Download 섹션</a> 참고해 주세요 :) </h4>
 
 ```bash
 yarn init-https
@@ -96,7 +96,7 @@ yarn init-https
 
 <br/>
 
-3. 환경 변수 파일 추가(.env.development)
+<h4> 3. 환경 변수 파일 추가<code>(.env.development)</code> </h4>
 
 ```bash
 NEXT_PUBLIC_API_END_POINT=https://danverse.o-r.kr/
@@ -107,7 +107,7 @@ NEXT_PUBLIC_GOOGLE_CLIENT_SECREET=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
 
 <br/>
 
-4. yarn 버전 확인 후 yarn `1.x` 버전일 경우 적용
+<h4> 4. yarn 버전 확인 후 <code>yarn 1.x</code> 버전일 경우 적용 </h4>
 
 ```bash
 yarn set version berry
@@ -115,12 +115,12 @@ yarn set version berry
 
 <br/>
 
-5. vs code extension ZipFS 설치
+<h4> 5. vs code extension <code>ZipFS</code> 설치 </h4>
 
 <img width="460" alt="image" src="https://user-images.githubusercontent.com/87177577/224735266-6ebae878-2d3b-4a6c-b3b7-f035093966a2.png"/>
 <br/>
 
-6. vs code allow 설정
+<h4> 6. vs code allow 설정 </h4>
 
 <img width="460" alt="image" src="https://user-images.githubusercontent.com/87177577/224741823-ec3ca481-8e2a-46f2-8756-a61057c21d4e.png">
 
@@ -128,7 +128,7 @@ yarn set version berry
 
 <br/>
 
-7. yarn berry unplug file 설치
+<h4> 7. yarn berry <code>unplug file</code> 설치 </h4>
 
 ```bash
 yarn unplug
@@ -136,7 +136,7 @@ yarn unplug
 
 <br/>
 
-8. local 실행
+<h4> 8. local 실행 </h4>
 
 ```bash
 yarn dev
@@ -144,7 +144,7 @@ yarn dev
 
 <br/>
 
-9. storybook 실행
+<h4> 9. storybook 실행 </h4>
 
 ```bash
 yarn storybook
