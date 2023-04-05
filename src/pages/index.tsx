@@ -38,7 +38,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 const ModalWithSingleButton = dynamic(
-  () => import('../components/domain/base/ModalWithSingleButton'),
+  () => import('../components/common/ModalWithSingleButton'),
   {
     ssr: false,
   },

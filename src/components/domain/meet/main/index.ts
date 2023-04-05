@@ -1,1 +1,2 @@
-export { default as CollaboList } from '../main/CollaboList'
+export { default as CollaboList } from './CollaboList'
+export { default as MeetBanner } from './MeetBanner'
