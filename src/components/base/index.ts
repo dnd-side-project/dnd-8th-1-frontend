@@ -2,7 +2,7 @@
 export { default as Atom } from './Atom'
 export { default as Avatar } from './Avatar'
 export { default as BottomSheet } from './BottomSheet'
-export { default as Checkbox } from './BottomSheet'
+export { default as Checkbox } from './Checkbox'
 export { default as Dimmed } from './Dimmed'
 export { default as Icon } from './Icon'
 export { default as IconButton } from './IconButton'
