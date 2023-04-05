@@ -6,7 +6,7 @@ import { useAcceptCandidate, useCandidate, useMeetDeadline } from '@queries'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 const Modal = dynamic(
-  () => import('../../../../components/templates/CancelSubmitModal'),
+  () => import('../../../../components/domain/base/CancelSubmitModal'),
   {
     ssr: false,
   },
