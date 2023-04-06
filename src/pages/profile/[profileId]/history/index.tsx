@@ -1,10 +1,10 @@
 import {
   Spacer,
-  ActivityCategorySelector,
   MyEventList,
   MyAppliedEventList,
   MyPerformanceList,
   MyReviewList,
+  ActivityCategorySelector,
 } from '@components'
 import Head from 'next/head'
 import { useRouter } from 'next/router'

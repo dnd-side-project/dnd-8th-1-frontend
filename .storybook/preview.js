@@ -3,6 +3,7 @@ import '../src/styles/variable.css'
 import * as nextImage from 'next/image'
 import { theme } from '../src/styles/theme/chakraTheme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { RecoilRoot } from 'recoil'
 
 export const parameters = {
   chakra: {
@@ -21,9 +22,11 @@ const queryClient = new QueryClient()
 
 export const decorators = [
   (Story) => (
-    <QueryClientProvider client={queryClient}>
-      <Story />
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    </RecoilRoot>
   ),
 ]
 

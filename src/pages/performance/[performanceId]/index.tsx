@@ -28,7 +28,7 @@ import { useRecoilValue } from 'recoil'
 import { userAtom } from 'states'
 
 const CancelSubmitModal = dynamic(
-  () => import('../../../components/templates/CancelSubmitModal'),
+  () => import('../../../components/domain/base/CancelSubmitModal'),
   {
     ssr: false,
   },

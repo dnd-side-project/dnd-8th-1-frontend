@@ -6,6 +6,8 @@ import {
   CollaboList,
   FloatingButton,
   Spacer,
+  ProfileRegisterContent,
+  ModalWithSingleButton,
 } from '@components'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -13,6 +15,9 @@ import { Center } from '@chakra-ui/react'
 import { getMeet, meetKeys, useMeet } from '@queries'
 import { MeetResponse } from '@types'
 import { dehydrate, QueryClient, useQueryClient } from '@tanstack/react-query'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
+import { useDisclosure } from '@hooks'
 
 const MeetPage = () => {
   const fallback = {} as MeetResponse
@@ -36,6 +41,10 @@ const MeetPage = () => {
       )
     }
   }, [currentQueryString.page])
+
+  const { hasProfile, id } = useRecoilValue(userAtom)
+  const [showProfileRegisterModal, setShowProfileRegisterModal] =
+    useDisclosure()
   /**
    *TODO: 임시 loading 로직
    */
@@ -71,7 +80,11 @@ const MeetPage = () => {
           <div className="mr-[56px]">
             <FloatingButton
               handleOnClick={() => {
-                router.push('/meet/edit')
+                if (!hasProfile) {
+                  setShowProfileRegisterModal(true)
+                } else {
+                  router.push('/meet/edit')
+                }
               }}
             />
           </div>
@@ -93,6 +106,19 @@ const MeetPage = () => {
           </Center>
         ) : (
           <Spacer size={30} />
+        )}
+
+        {/** 프로필 등록 모달 */}
+        {showProfileRegisterModal && (
+          <ModalWithSingleButton
+            handleOnClick={() => router.push(`/profile/${id}/edit`)}
+            submitMessage="프로필 등록하기"
+            showModal={showProfileRegisterModal}
+            setShowModal={setShowProfileRegisterModal}
+            hasCloseButton={true}
+          >
+            <ProfileRegisterContent />
+          </ModalWithSingleButton>
         )}
       </main>
     </>
