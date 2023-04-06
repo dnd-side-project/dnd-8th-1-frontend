@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default {
   component: FilterButton,
-  title: 'Molecules/FilterButton',
+  title: 'domain/main/FilterButton',
   argTypes: {
     type: {
       defaultValue: 'region',
