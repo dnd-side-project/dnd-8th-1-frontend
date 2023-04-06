@@ -7,9 +7,8 @@ interface MyReviewItemProps {
 }
 
 const MyReviewItem = ({ myReview }: MyReviewItemProps) => {
-  const { createdAt, review, performance } = myReview
+  const { createdAt, content, performance } = myReview
   const date = dayjs(createdAt)
-
   return (
     <li>
       <Link href={`/performance/${performance.id}`}>
@@ -22,7 +21,7 @@ const MyReviewItem = ({ myReview }: MyReviewItemProps) => {
               {date.format('M월 D일')}
             </div>
           </div>
-          <p className="text-body2  text-gray-100 line-clamp-3">{review}</p>
+          <p className="text-body2 text-gray-100 line-clamp-3">{content}</p>
         </div>
       </Link>
       <div className="h-[1px] w-[375px] bg-gray-700" />
