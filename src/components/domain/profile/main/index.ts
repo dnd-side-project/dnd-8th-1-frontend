@@ -1,5 +1,8 @@
 export { default as MyProfileMenu } from './MyProfileMenu'
 export { default as PortfolioLinkModal } from './PortfolioLinkModal'
+export { default as ProfileBackgroundSection } from './ProfileBackgroundSection'
 export { default as ProfileButtonGroup } from './ProfileButtonGroup'
+export { default as ProfileDescription } from './ProfileDescription'
 export { default as ProfileDisabled } from './ProfileDisabled'
+export { default as ProfileInfo } from './ProfileInfo'
 export { default as ProfileTopSection } from './ProfileTopSection'
