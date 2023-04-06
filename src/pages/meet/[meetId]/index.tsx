@@ -31,39 +31,39 @@ import { useRecoilValue } from 'recoil'
 import Head from 'next/head'
 
 const MeetDeleteModal = dynamic(
-  () => import('../../../components/organisms/MeetDeleteModal'),
+  () => import('../../../components/domain/meet/detail/MeetDeleteModal'),
   {
     ssr: false,
   },
 )
 const CandidateBottomSheet = dynamic(
-  () => import('../../../components/organisms/CandidateBottomSheet'),
+  () => import('../../../components/domain/meet/detail/CandidateBottomSheet'),
   {
     ssr: false,
   },
 )
 const CandidateCancelModal = dynamic(
-  () => import('../../../components/organisms/CandidateCancelModal'),
+  () => import('../../../components/domain/meet/detail/CandidateCancelModal'),
   {
     ssr: false,
   },
 )
 const CandidateModal = dynamic(
-  () => import('../../../components/organisms/CandidateModal'),
+  () => import('../../../components/domain/meet/detail/CandidateModal'),
   {
     ssr: false,
   },
 )
 
 const ModalWithSingleButton = dynamic(
-  () => import('../../../components/templates/ModalWithSingleButton'),
+  () => import('../../../components/domain/base/ModalWithSingleButton'),
   {
     ssr: false,
   },
 )
 
 const ConfirmModal = dynamic(
-  () => import('../../../components/templates/ConfirmModal'),
+  () => import('../../../components/domain/base/ConfirmModal'),
   {
     ssr: false,
   },

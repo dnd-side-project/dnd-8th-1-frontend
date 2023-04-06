@@ -3,14 +3,16 @@ import {
   Calandar,
   FilterButton,
   FloatingButton,
+  ModalWithSingleButton,
   Pagination,
   PerformanceBanner,
   PerformanceList,
-  SearchHeader,
+  ProfileRegisterContent,
   Spacer,
+  PerformanceEntireList,
 } from '@components'
 import { CURRENT_MONTH, CURRENT_YEAR } from '@constants'
-import { useCalendar } from '@hooks'
+import { useCalendar, useDisclosure } from '@hooks'
 import {
   getAllPerformance,
   getImminentPerformances,
@@ -28,14 +30,14 @@ import {
   PerformanceResponse,
   RegionTypes,
 } from '@types'
-import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { userAtom } from 'states'
 
 const PerformancePage = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isTotal, setIsTotal] = useState(true)
   const {
     monthYear,
@@ -115,6 +117,10 @@ const PerformancePage = () => {
       )
     }
   }, [day])
+
+  const { hasProfile, id } = useRecoilValue(userAtom)
+  const [showProfileRegisterModal, setShowProfileRegisterModal] =
+    useDisclosure()
   return (
     <>
       <Head>
@@ -184,11 +190,27 @@ const PerformancePage = () => {
           <div className="ml-[304px]">
             <FloatingButton
               handleOnClick={() => {
-                router.push('/performance/edit')
+                if (!hasProfile) {
+                  setShowProfileRegisterModal(true)
+                } else {
+                  router.push('/performance/edit')
+                }
               }}
             />
           </div>
         </>
+        {/** 프로필 등록 모달 */}
+        {showProfileRegisterModal && (
+          <ModalWithSingleButton
+            handleOnClick={() => router.push(`/profile/${id}/edit`)}
+            submitMessage="프로필 등록하기"
+            showModal={showProfileRegisterModal}
+            setShowModal={setShowProfileRegisterModal}
+            hasCloseButton={true}
+          >
+            <ProfileRegisterContent />
+          </ModalWithSingleButton>
+        )}
       </section>
     </>
   )
