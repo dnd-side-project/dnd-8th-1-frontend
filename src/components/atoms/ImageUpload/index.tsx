@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 import { useDisclosure } from '@hooks'
 
-const ConfirmModal = dynamic(() => import('../../templates/ConfirmModal'), {
+const ConfirmModal = dynamic(() => import('../../domain/base/ConfirmModal'), {
   ssr: false,
 })
 

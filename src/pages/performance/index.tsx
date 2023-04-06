@@ -9,6 +9,7 @@ import {
   PerformanceList,
   ProfileRegisterContent,
   Spacer,
+  PerformanceEntireList,
 } from '@components'
 import { CURRENT_MONTH, CURRENT_YEAR } from '@constants'
 import { useCalendar, useDisclosure } from '@hooks'
@@ -29,7 +30,6 @@ import {
   PerformanceResponse,
   RegionTypes,
 } from '@types'
-import PerformanceEntireList from 'components/organisms/PerformanceEntireList'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
