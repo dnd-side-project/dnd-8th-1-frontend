@@ -27,11 +27,13 @@ const PerformanceBanner = ({
                   height: '100%',
                   width: '100%',
                   background: `linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, #080808 89.06%), url(${imminentPerformance.imgUrl})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: '100% 100%',
                 }}
               >
                 <div className="absolute left-[16px] bottom-[40px]">
                   <span
-                    className={`block bg-green_gradient bg-clip-text text-subtitle font-bold text-[transparent]`}
+                    className={`block w-fit bg-green_gradient bg-clip-text text-subtitle font-bold text-[transparent]`}
                   >
                     NEW!
                   </span>
