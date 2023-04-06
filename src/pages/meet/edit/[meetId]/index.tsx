@@ -2,12 +2,13 @@ import { MeetCreateForm } from '@components'
 import { MeetDetail, MeetDetailResponse } from '@types'
 import { useMeetDetail, useModifyMeet } from '@queries'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-
+import { useCheckAuth } from '@hooks'
 interface MeetCreatePageProps {
   eventId: number
 }
 
 const MeetCreatePage = ({ eventId }: MeetCreatePageProps) => {
+  useCheckAuth()
   const fallback = {} as MeetDetailResponse
   const { data = fallback, isLoading } = useMeetDetail(eventId)
   const detailData = data?.data as MeetDetail
