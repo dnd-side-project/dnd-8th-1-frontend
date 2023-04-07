@@ -38,7 +38,6 @@ import { useRecoilValue } from 'recoil'
 import { userAtom } from 'states'
 
 const PerformancePage = () => {
-  const [isTotal, setIsTotal] = useState(true)
   const {
     monthYear,
     month,
@@ -48,6 +47,8 @@ const PerformancePage = () => {
     currentDay,
     getDay,
     calandar,
+    isTotal,
+    setIsTotal,
   } = useCalendar()
   const router = useRouter()
   const [performancePayload, setPerformancePayload] =

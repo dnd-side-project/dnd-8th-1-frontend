@@ -68,6 +68,7 @@ const useCalendar = () => {
   const getDay = (day: number) => {
     return day + 1
   }
+  const [isTotal, setIsTotal] = useState(true)
 
   return {
     monthYear,
@@ -78,6 +79,8 @@ const useCalendar = () => {
     getDay,
     month,
     calandar,
+    isTotal,
+    setIsTotal,
   }
 }
 
