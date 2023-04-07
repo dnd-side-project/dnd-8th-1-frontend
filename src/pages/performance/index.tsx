@@ -17,7 +17,7 @@ import {
   getAllPerformance,
   getImminentPerformances,
   performanceKeys,
-  PerformancePayload,
+  PerformanceParams,
   useImminentPerformance,
   usePerformance,
 } from '@queries'
@@ -45,14 +45,13 @@ const PerformancePage = () => {
     handleIsSunday,
     setCurrentDay,
     currentDay,
-    handleGetDay,
     calandar,
     isTotal,
     setIsTotal,
   } = useCalendar()
   const router = useRouter()
-  const [performancePayload, setPerformancePayload] =
-    useState<PerformancePayload>({
+  const [performanceParams, setPerformanceParams] = useState<PerformanceParams>(
+    {
       year: CURRENT_YEAR,
       month: CURRENT_MONTH,
       day: '',
@@ -60,18 +59,19 @@ const PerformancePage = () => {
       genre: '',
       pageNumber: 0,
       pageSize: 15,
-    })
+    },
+  )
   const {
-    month: payloadMonth,
+    month: ParamsMonth,
     year,
     day,
     location,
     genre,
     pageNumber,
     pageSize,
-  } = performancePayload
+  } = performanceParams
   const fallback = {} as PerformanceResponse
-  const { data = fallback } = usePerformance(performancePayload)
+  const { data = fallback } = usePerformance(performanceParams)
   const { data: performanceData } = data
   const calandarProps = {
     month,
@@ -79,19 +79,18 @@ const PerformancePage = () => {
     handleIsSunday,
     setCurrentDay,
     currentDay,
-    handleGetDay,
     calandar,
-    setPerformancePayload,
-    performancePayload,
+    setPerformanceParams,
+    performanceParams,
   }
-  const currentPage = performancePayload.pageNumber + 1
+  const currentPage = performanceParams.pageNumber + 1
 
   useEffect(() => {
-    setPerformancePayload({
-      ...performancePayload,
+    setPerformanceParams({
+      ...performanceParams,
       pageNumber: 0,
     })
-  }, [payloadMonth, year, day])
+  }, [ParamsMonth, year, day])
   const imminentFallback = {} as PerformanceImminentResponse
   const { data: imminentPerformancesData = imminentFallback } =
     useImminentPerformance()
@@ -107,14 +106,14 @@ const PerformancePage = () => {
         [
           ...performanceKeys.all,
           year,
-          payloadMonth,
+          ParamsMonth,
           day && day + 1,
           location,
           genre,
           pageNumber,
           pageSize,
         ],
-        () => getAllPerformance(performancePayload),
+        () => getAllPerformance(performanceParams),
       )
     }
   }, [day])
@@ -139,8 +138,8 @@ const PerformancePage = () => {
         <div className="flex w-full px-[16px] py-[22px]">
           <FilterButton
             handleSelected={(region) =>
-              setPerformancePayload({
-                ...performancePayload,
+              setPerformanceParams({
+                ...performanceParams,
                 location: region as RegionTypes,
               })
             }
@@ -149,8 +148,8 @@ const PerformancePage = () => {
           <div className="ml-[8px]">
             <FilterButton
               handleSelected={(genre) =>
-                setPerformancePayload({
-                  ...performancePayload,
+                setPerformanceParams({
+                  ...performanceParams,
                   genre: genre as GenreTypes,
                 })
               }
@@ -178,8 +177,8 @@ const PerformancePage = () => {
                 currentPage={currentPage as number}
                 totalPages={performanceData?.totalPages as number}
                 handleChangePage={(page) => {
-                  setPerformancePayload({
-                    ...performancePayload,
+                  setPerformanceParams({
+                    ...performanceParams,
                     pageNumber: page - 1,
                   })
                 }}
@@ -218,7 +217,7 @@ const PerformancePage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const performancePayload: PerformancePayload = {
+  const performanceParams: PerformanceParams = {
     year: CURRENT_YEAR,
     month: CURRENT_MONTH,
     day: '',
@@ -231,7 +230,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   await Promise.all([
     queryClient.prefetchQuery(
       [...performanceKeys.all, CURRENT_YEAR, CURRENT_MONTH, '', '', '', 0, 15],
-      () => getAllPerformance(performancePayload),
+      () => getAllPerformance(performanceParams),
     ),
     queryClient.prefetchQuery(
       performanceKeys.imminentPerformance,

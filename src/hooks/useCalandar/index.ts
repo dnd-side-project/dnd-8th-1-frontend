@@ -60,14 +60,11 @@ const useCalendar = () => {
 
   // 현재 달에 대한 1일 ~ 달의 마지막 일 까지의 배열을 만드는 변수
   // (swiper 컴포넌트의 캘린더 틀을 만들기 위해 사용)
-  const calandar = Array.from({ length: monthYear.lastDate })
+  const calandar = Array.from({ length: monthYear.lastDate }, () => 0)
 
   // 사용자가 캘린더 클릭 했을 때의 일을 저장하기 위한 변수 (ex) 12일 클릭 -> 11)
   const [currentDay, setCurrentDay] = useState(0)
-  // 현재 일의 - 1한 값이 currentDay이기 때문에 +1을 해주기 위한 함수
-  const handleGetDay = (day: number) => {
-    return day + 1
-  }
+
   // 전체 버튼 클릭 유무 확인하는 변수
   const [isTotal, setIsTotal] = useState(true)
   return {
@@ -76,7 +73,6 @@ const useCalendar = () => {
     handleIsSunday,
     currentDay,
     setCurrentDay,
-    handleGetDay,
     month,
     calandar,
     isTotal,

@@ -3,15 +3,15 @@ import { CalandarCtx, CalendarProps } from '.'
 import DayList from './DayList'
 
 const CalendarSwiper = () => {
-  const { isTotal, setIsTotal, setPerformancePayload } = useContext(
+  const { isTotal, setIsTotal, setPerformanceParams } = useContext(
     CalandarCtx,
-  ) as Pick<CalendarProps, 'isTotal' | 'setIsTotal' | 'setPerformancePayload'>
+  ) as Pick<CalendarProps, 'isTotal' | 'setIsTotal' | 'setPerformanceParams'>
   return (
     <div className="no-scrollbar flex h-[57px] w-[100%] resize-none overflow-x-scroll pl-[58px]">
       <div>
         <button
           onClick={() => {
-            setPerformancePayload((prev) => ({
+            setPerformanceParams((prev) => ({
               ...prev,
               day: '',
             }))

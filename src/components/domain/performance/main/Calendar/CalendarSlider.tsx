@@ -1,22 +1,22 @@
 import { theme } from '@constants'
 import { IconButton } from '@components'
 import { SetStateAction } from 'react'
-import { PerformancePayload } from '@queries'
+import { PerformanceParams } from '@queries'
 
 interface CalendarSliderProps {
   handleSetMonth: (monthIncrement: number) => void
   setCurrentDay: (value: SetStateAction<number>) => void
   currentDay: number
-  setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
-  performancePayload: PerformancePayload
+  setPerformanceParams: (value: SetStateAction<PerformanceParams>) => void
+  performanceParams: PerformanceParams
 }
 
 const CalendarSlider = ({
   handleSetMonth,
   setCurrentDay,
   currentDay,
-  setPerformancePayload,
-  performancePayload: { month },
+  setPerformanceParams,
+  performanceParams: { month },
 }: CalendarSliderProps) => {
   return (
     <div className="flex items-center justify-center pl-[10px]">
@@ -29,7 +29,7 @@ const CalendarSlider = ({
           if (month === 1) {
             handleSetMonth(12)
             setCurrentDay(currentDay)
-            setPerformancePayload((prev) => {
+            setPerformanceParams((prev) => {
               return {
                 ...prev,
                 month: prev.month && 12,
@@ -39,7 +39,7 @@ const CalendarSlider = ({
           } else {
             handleSetMonth(-1)
             setCurrentDay(currentDay)
-            setPerformancePayload((prev) => {
+            setPerformanceParams((prev) => {
               return {
                 ...prev,
                 month: prev.month && prev.month - 1,
@@ -59,7 +59,7 @@ const CalendarSlider = ({
         handleOnClick={() => {
           handleSetMonth(1)
           if (month === 12) {
-            setPerformancePayload((prev) => {
+            setPerformanceParams((prev) => {
               return {
                 ...prev,
                 month: prev.month && 1,
@@ -67,7 +67,7 @@ const CalendarSlider = ({
               }
             })
           } else {
-            setPerformancePayload((prev) => {
+            setPerformanceParams((prev) => {
               return {
                 ...prev,
                 month: prev.month && prev.month + 1,

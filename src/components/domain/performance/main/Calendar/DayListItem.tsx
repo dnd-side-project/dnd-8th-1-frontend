@@ -10,12 +10,11 @@ const DayListItem = ({ day }: DayListItemProps) => {
     currentDay,
     handleIsSunday,
     setCurrentDay,
-    handleGetDay,
     setIsTotal,
-    setPerformancePayload,
+    setPerformanceParams,
   } = useContext(CalandarCtx) as Omit<
     CalendarProps,
-    'performancePayload' | 'handleSetMonth'
+    'performanceParams' | 'handleSetMonth'
   >
   return (
     <span
@@ -30,15 +29,15 @@ const DayListItem = ({ day }: DayListItemProps) => {
       onClick={() => {
         setCurrentDay(day)
         setIsTotal(false)
-        setPerformancePayload((prev) => {
+        setPerformanceParams((prev) => {
           return {
             ...prev,
-            day: handleGetDay(day),
+            day,
           }
         })
       }}
     >
-      {handleGetDay(day)}
+      {day}
     </span>
   )
 }

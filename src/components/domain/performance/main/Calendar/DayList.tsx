@@ -10,7 +10,7 @@ const DayList = () => {
   return (
     <>
       {calandar.map((_, day) => (
-        <DayListItem key={day} day={day} />
+        <DayListItem key={day} day={day + 1} />
       ))}
     </>
   )
