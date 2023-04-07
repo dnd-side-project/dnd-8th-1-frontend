@@ -7,10 +7,10 @@ export interface CalendarProps {
   isTotal: boolean
   setIsTotal: Dispatch<SetStateAction<boolean>>
   handleSetMonth: (monthIncrement: number) => void
-  isSunday: (day: number) => boolean
+  handleIsSunday: (day: number) => boolean
   currentDay: number
   setCurrentDay: Dispatch<SetStateAction<number>>
-  getDay: (day: number) => number
+  handleGetDay: (day: number) => number
   month: string
   calandar: unknown[]
   setPerformancePayload: Dispatch<SetStateAction<PerformancePayload>>
@@ -20,10 +20,10 @@ export interface CalendarProps {
 export const CalandarCtx = createContext({})
 
 const Calendar = ({
-  isSunday,
+  handleIsSunday,
   currentDay,
   setCurrentDay,
-  getDay,
+  handleGetDay,
   calandar,
   handleSetMonth,
   isTotal,
@@ -36,9 +36,9 @@ const Calendar = ({
       value={{
         calandar,
         currentDay,
-        isSunday,
+        handleIsSunday,
         setCurrentDay,
-        getDay,
+        handleGetDay,
         isTotal,
         setIsTotal,
         setPerformancePayload,

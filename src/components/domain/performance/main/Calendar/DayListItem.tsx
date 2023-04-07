@@ -8,9 +8,9 @@ const DayListItem = ({ day }: DayListItemProps) => {
   const {
     isTotal,
     currentDay,
-    isSunday,
+    handleIsSunday,
     setCurrentDay,
-    getDay,
+    handleGetDay,
     setIsTotal,
     setPerformancePayload,
   } = useContext(CalandarCtx) as Omit<
@@ -22,7 +22,7 @@ const DayListItem = ({ day }: DayListItemProps) => {
       className={`cursor-pointer text-subtitle font-bold mobile:p-[14px] ${
         currentDay === day && !isTotal
           ? 'border-b-[3px] border-b-green-light text-green-light'
-          : isSunday(day)
+          : handleIsSunday(day)
           ? 'border-b-[2px] border-b-gray-700 text-[#783232]'
           : 'border-b-[2px] border-b-gray-700 text-gray-400'
       } `}
@@ -33,12 +33,12 @@ const DayListItem = ({ day }: DayListItemProps) => {
         setPerformancePayload((prev) => {
           return {
             ...prev,
-            day: getDay(day),
+            day: handleGetDay(day),
           }
         })
       }}
     >
-      {getDay(day)}
+      {handleGetDay(day)}
     </span>
   )
 }

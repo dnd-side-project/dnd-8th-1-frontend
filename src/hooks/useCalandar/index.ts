@@ -50,7 +50,7 @@ const useCalendar = () => {
     setMonthYear((prev) => getNewMonthYear(prev, monthIncrement))
   }
   // 매개변수 값을 받아 일요일인지 확인하는 함수
-  const isSunday = (day: number) => {
+  const handleIsSunday = (day: number) => {
     const date = dayjs(`${monthYear.year}-${monthYear.month}-${day + 1}`)
     return date.day() === 0
   }
@@ -65,7 +65,7 @@ const useCalendar = () => {
   // 사용자가 캘린더 클릭 했을 때의 일을 저장하기 위한 변수 (ex) 12일 클릭 -> 11)
   const [currentDay, setCurrentDay] = useState(0)
   // 현재 일의 - 1한 값이 currentDay이기 때문에 +1을 해주기 위한 함수
-  const getDay = (day: number) => {
+  const handleGetDay = (day: number) => {
     return day + 1
   }
   const [isTotal, setIsTotal] = useState(true)
@@ -73,10 +73,10 @@ const useCalendar = () => {
   return {
     monthYear,
     handleSetMonth,
-    isSunday,
+    handleIsSunday,
     currentDay,
     setCurrentDay,
-    getDay,
+    handleGetDay,
     month,
     calandar,
     isTotal,
