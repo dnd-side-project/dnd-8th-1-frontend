@@ -1,9 +1,9 @@
 import { PerformancePayload } from '@queries'
-import { Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction } from 'react'
 import CalandarSlider from './CalendarSlider'
 import CalandarSwiper from './CalendarSwiper'
 
-interface CalendarProps {
+export interface CalendarProps {
   isTotal: boolean
   setIsTotal: Dispatch<SetStateAction<boolean>>
   handleSetMonth: (monthIncrement: number) => void
@@ -16,6 +16,8 @@ interface CalendarProps {
   setPerformancePayload: Dispatch<SetStateAction<PerformancePayload>>
   performancePayload: PerformancePayload
 }
+
+export const CalandarCtx = createContext({})
 
 const Calendar = ({
   isSunday,
@@ -30,27 +32,31 @@ const Calendar = ({
   performancePayload,
 }: CalendarProps) => {
   return (
-    <div className="relative flex flex-col bg-gray-900">
-      <div className="flex w-full justify-between pt-[30px] pb-[6px]">
-        <CalandarSlider
-          performancePayload={performancePayload}
-          setPerformancePayload={setPerformancePayload}
-          handleSetMonth={handleSetMonth}
-          setCurrentDay={setCurrentDay}
-          currentDay={currentDay}
-        />
+    <CalandarCtx.Provider
+      value={{
+        calandar,
+        currentDay,
+        isSunday,
+        setCurrentDay,
+        getDay,
+        isTotal,
+        setIsTotal,
+        setPerformancePayload,
+      }}
+    >
+      <div className="relative flex flex-col bg-gray-900">
+        <div className="flex w-full justify-between pt-[30px] pb-[6px]">
+          <CalandarSlider
+            performancePayload={performancePayload}
+            setPerformancePayload={setPerformancePayload}
+            handleSetMonth={handleSetMonth}
+            setCurrentDay={setCurrentDay}
+            currentDay={currentDay}
+          />
+        </div>
+        <CalandarSwiper />
       </div>
-      <CalandarSwiper
-        isTotal={isTotal}
-        setIsTotal={setIsTotal}
-        calandar={calandar}
-        currentDay={currentDay}
-        isSunday={isSunday}
-        setCurrentDay={setCurrentDay}
-        getDay={getDay}
-        setPerformancePayload={setPerformancePayload}
-      />
-    </div>
+    </CalandarCtx.Provider>
   )
 }
 

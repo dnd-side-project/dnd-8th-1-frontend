@@ -1,26 +1,22 @@
-import { PerformancePayload } from '@queries'
-import { SetStateAction } from 'react'
+import { useContext } from 'react'
+import { CalandarCtx, CalendarProps } from '.'
 
 interface DayListItemProps {
-  currentDay: number
-  isSunday: (day: number) => boolean
-  setCurrentDay: (value: SetStateAction<number>) => void
-  getDay: (day: number) => number
   day: number
-  isTotal: boolean
-  setIsTotal: (value: SetStateAction<boolean>) => void
-  setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
-const DayListItem = ({
-  isTotal,
-  currentDay,
-  isSunday,
-  setCurrentDay,
-  getDay,
-  day,
-  setIsTotal,
-  setPerformancePayload,
-}: DayListItemProps) => {
+const DayListItem = ({ day }: DayListItemProps) => {
+  const {
+    isTotal,
+    currentDay,
+    isSunday,
+    setCurrentDay,
+    getDay,
+    setIsTotal,
+    setPerformancePayload,
+  } = useContext(CalandarCtx) as Omit<
+    CalendarProps,
+    'performancePayload' | 'handleSetMonth'
+  >
   return (
     <span
       className={`cursor-pointer text-subtitle font-bold mobile:p-[14px] ${

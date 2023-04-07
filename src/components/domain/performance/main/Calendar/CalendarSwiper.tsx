@@ -1,28 +1,11 @@
-import { PerformancePayload } from '@queries'
-import { SetStateAction } from 'react'
+import { useContext } from 'react'
+import { CalandarCtx, CalendarProps } from '.'
 import DayList from './DayList'
 
-interface CalendarSwiperProps {
-  calandar: unknown[]
-  currentDay: number
-  isSunday: (day: number) => boolean
-  setCurrentDay: (value: SetStateAction<number>) => void
-  getDay: (day: number) => number
-  isTotal: boolean
-  setIsTotal: (value: SetStateAction<boolean>) => void
-  setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
-}
-
-const CalendarSwiper = ({
-  calandar,
-  currentDay,
-  isSunday,
-  setCurrentDay,
-  getDay,
-  isTotal,
-  setIsTotal,
-  setPerformancePayload,
-}: CalendarSwiperProps) => {
+const CalendarSwiper = () => {
+  const { isTotal, setIsTotal, setPerformancePayload } = useContext(
+    CalandarCtx,
+  ) as Pick<CalendarProps, 'isTotal' | 'setIsTotal' | 'setPerformancePayload'>
   return (
     <div className="no-scrollbar flex h-[57px] w-[100%] resize-none overflow-x-scroll pl-[58px]">
       <div>
@@ -43,16 +26,7 @@ const CalendarSwiper = ({
           전체
         </button>
       </div>
-      <DayList
-        isTotal={isTotal}
-        setIsTotal={setIsTotal}
-        calandar={calandar}
-        currentDay={currentDay}
-        isSunday={isSunday}
-        setCurrentDay={setCurrentDay}
-        getDay={getDay}
-        setPerformancePayload={setPerformancePayload}
-      />
+      <DayList />
     </div>
   )
 }
