@@ -68,8 +68,8 @@ const useCalendar = () => {
   const handleGetDay = (day: number) => {
     return day + 1
   }
+  // 전체 버튼 클릭 유무 확인하는 변수
   const [isTotal, setIsTotal] = useState(true)
-
   return {
     monthYear,
     handleSetMonth,
