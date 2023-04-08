@@ -15,7 +15,7 @@ import {
   mainKeys,
   meetKeys,
   performanceKeys,
-  PerformancePayload,
+  PerformanceParams,
   useLatestReviews,
   useMeet,
   usePerformance,
@@ -44,7 +44,7 @@ const ModalWithSingleButton = dynamic(
   },
 )
 
-const performanceParams: PerformancePayload = {
+const performanceParams: PerformanceParams = {
   year: '',
   month: '',
   day: '',
