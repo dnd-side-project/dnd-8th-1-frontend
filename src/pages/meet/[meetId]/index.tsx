@@ -175,10 +175,7 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
         }}
         showBottomSheet={showBottomSheet}
         setShowBottomSheet={setShowBottomSheet}
-        /**
-         *TODO: 변경 되어야 할 부분(유저 데이터로 채워야 함)
-         */
-        openchatUrl="https://open.kakao.com/o/g2g5b5b9"
+        openchatUrl={profile?.openChatUrl || '프로필 등록이 필요해요!'}
       />
 
       <header className="w-full">
@@ -262,10 +259,6 @@ const MeetDetailPage = ({ meetId, token }: MeetDetailPageProps) => {
             마감되었어요!
           </button>
         ) : isMyPost ? (
-          /**
-           * TODO: 유저 데이터 받을 경우 새롭게 분기 처리 필요
-           */
-
           <button
             onClick={() => router.push(`/meet/${detailData?.id}/candidate`)}
             className="fixed bottom-[17px] mx-[auto] ml-[16px] h-[50px] w-[343px] rounded-[8px] bg-green-light text-subtitle font-bold text-gray-900"

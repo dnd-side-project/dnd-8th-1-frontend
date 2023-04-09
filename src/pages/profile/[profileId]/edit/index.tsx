@@ -1,4 +1,5 @@
 import { ProfileCreateForm } from '@components'
+import { useCheckAuth } from '@hooks'
 import { useCreateProfile, useGetProfile, useModifyProfile } from '@queries'
 import { GenreTypes, ProfileResponse } from '@types'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
@@ -9,6 +10,7 @@ interface ProfileEditPageProps {
 }
 
 const ProfileEditPage = ({ memberId }: ProfileEditPageProps) => {
+  useCheckAuth()
   const { mutate: requestCreateProfile } = useCreateProfile(memberId)
   const fallback = {} as ProfileResponse
   const { data = fallback, isLoading } = useGetProfile(memberId)

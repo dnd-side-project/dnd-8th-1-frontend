@@ -1,8 +1,10 @@
 import { MeetCreateForm } from '@components'
 import { useCreateMeet } from '@queries'
+import { useCheckAuth } from '@hooks'
 import Head from 'next/head'
 
 const MeetCreatePage = () => {
+  useCheckAuth()
   const { mutate: requestCreateMeet } = useCreateMeet()
   return (
     <>
