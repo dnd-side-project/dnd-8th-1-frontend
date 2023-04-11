@@ -5,9 +5,6 @@
       "import Atom from '.'",
       "import { ComponentStory, ComponentMeta } from '@storybook/react'",
       "",
-      "/**",
-      " * 스토리북 확인을 위한 샘플 파일입니다.",
-      " */",
       "export default {",
       "  component: Atom,",
       "  title: 'Example/Atom',",
@@ -31,6 +28,7 @@
       "export const Default = Template.bind({})",
       "Default.args = {}",
       ""
-    ]
+    ],
+    "description": "스토리북 파일 생성 스니펫"
   }
 }
