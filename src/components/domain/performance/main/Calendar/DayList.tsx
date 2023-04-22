@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import { CalandarCtx, CalendarProps } from '.'
+import { CalandarContext, CalendarProps } from '.'
 import DayListItem from './DayListItem'
 
 const DayList = () => {
-  const { calandar } = useContext(CalandarCtx) as Pick<
+  const { calandar } = useContext(CalandarContext) as Pick<
     CalendarProps,
     'calandar'
   >

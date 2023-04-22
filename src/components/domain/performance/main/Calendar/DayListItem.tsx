@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CalandarCtx, CalendarProps } from '.'
+import { CalandarContext, CalendarProps } from '.'
 
 interface DayListItemProps {
   day: number
@@ -12,7 +12,7 @@ const DayListItem = ({ day }: DayListItemProps) => {
     setCurrentDay,
     setIsTotal,
     setPerformanceParams,
-  } = useContext(CalandarCtx) as Omit<
+  } = useContext(CalandarContext) as Omit<
     CalendarProps,
     'performanceParams' | 'handleSetMonth'
   >

@@ -15,7 +15,7 @@ export interface CalendarProps {
   setPerformanceParams: Dispatch<SetStateAction<PerformanceParams>> // performanceParams에 대한 setState
 }
 
-export const CalandarCtx = createContext({})
+export const CalandarContext = createContext({})
 
 const Calendar = ({
   handleIsSunday,
@@ -29,7 +29,7 @@ const Calendar = ({
   performanceParams,
 }: CalendarProps) => {
   return (
-    <CalandarCtx.Provider
+    <CalandarContext.Provider
       value={{
         calandar,
         currentDay,
@@ -52,7 +52,7 @@ const Calendar = ({
         </div>
         <CalandarSwiper />
       </div>
-    </CalandarCtx.Provider>
+    </CalandarContext.Provider>
   )
 }
 

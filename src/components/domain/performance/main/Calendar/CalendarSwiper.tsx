@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import { CalandarCtx, CalendarProps } from '.'
+import { CalandarContext, CalendarProps } from '.'
 import DayList from './DayList'
 
 const CalendarSwiper = () => {
   const { isTotal, setIsTotal, setPerformanceParams } = useContext(
-    CalandarCtx,
+    CalandarContext,
   ) as Pick<CalendarProps, 'isTotal' | 'setIsTotal' | 'setPerformanceParams'>
   return (
     <div className="no-scrollbar flex h-[57px] w-[100%] resize-none overflow-x-scroll pl-[58px]">
