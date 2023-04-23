@@ -9,23 +9,20 @@ interface MonthYear {
   year: string // 년도 (ex. 2021)
 }
 
-function getUpdatedMonthYear(
+/**
+ * monthIncrement 만큼 증가된 년-월의 dayjs 객체를 반환하는 함수
+ */
+const getUpdatedMonthYear = (
   monthYear: MonthYear,
   monthIncrement: number,
-): dayjs.Dayjs {
+): dayjs.Dayjs => {
   return monthYear.startDate.clone().add(monthIncrement, 'months')
 }
 
-function getNewMonthYear(
-  prevMonthYear: MonthYear,
-  monthIncrement: number,
-): MonthYear {
-  const newMonthYear = getUpdatedMonthYear(prevMonthYear, monthIncrement)
-
-  return getMonthYearDetails(newMonthYear)
-}
-
-function getMonthYearDetails(initialDate: dayjs.Dayjs): MonthYear {
+/**
+ * 매개변수로 받은 dayjs 객체를 기준으로 MonthYear 객체를 반환하는 함수
+ */
+const getMonthYearDetails = (initialDate: dayjs.Dayjs): MonthYear => {
   const month = initialDate.format('MM')
   const year = initialDate.format('YYYY')
   const startDate = dayjs(`${year}${month}01`)
@@ -34,32 +31,52 @@ function getMonthYearDetails(initialDate: dayjs.Dayjs): MonthYear {
   return { startDate, lastDate, monthName, month, year }
 }
 
+/**
+ * Update된 dayjs 객체를 통해 증가된 년-월의 MonthYear 객체를 반환하는 함수
+ */
+const getNewMonthYear = (
+  prevMonthYear: MonthYear,
+  monthIncrement: number,
+): MonthYear => {
+  const newMonthYear = getUpdatedMonthYear(prevMonthYear, monthIncrement)
+  return getMonthYearDetails(newMonthYear)
+}
+
 const useCalendar = () => {
   const currentMonth = getMonthYearDetails(dayjs())
   const [monthYear, setMonthYear] = useState(currentMonth)
-  const [currentDay, setCurrentDay] = useState(0)
-  const isSunday = (day: number) => {
-    const date = dayjs(`${monthYear.year}-${monthYear.month}-${day + 1}`)
-    return date.day() === 0
-  }
+  // 달을 변경하는 함수
   const handleSetMonth = (monthIncrement: number) => {
     setMonthYear((prev) => getNewMonthYear(prev, monthIncrement))
   }
-  const getDay = (day: number) => {
-    return day + 1
+  // 매개변수 값을 받아 일요일인지 확인하는 함수
+  const handleIsSunday = (day: number) => {
+    const date = dayjs(`${monthYear.year}-${monthYear.month}-${day + 1}`)
+    return date.day() === 0
   }
+  // 달에 대해 1 ~ 9 / 10 ~ 12가 아닌 01 ~ 09 / 10 ~ 12로 표기하기 위한 변수
   const month =
     monthYear.month[0] !== '0' ? monthYear.month : monthYear.month.slice(1)
-  const calandar = Array.from({ length: monthYear.lastDate })
+
+  // 현재 달에 대한 1일 ~ 달의 마지막 일 까지의 배열을 만드는 변수
+  // (swiper 컴포넌트의 캘린더 틀을 만들기 위해 사용)
+  const calandar = Array.from({ length: monthYear.lastDate }, () => 0)
+
+  // 사용자가 캘린더 클릭 했을 때의 일을 저장하기 위한 변수 (ex) 12일 클릭 -> 11)
+  const [currentDay, setCurrentDay] = useState(0)
+
+  // 전체 버튼 클릭 유무 확인하는 변수
+  const [isTotal, setIsTotal] = useState(true)
   return {
     monthYear,
     handleSetMonth,
-    isSunday,
+    handleIsSunday,
     currentDay,
     setCurrentDay,
-    getDay,
     month,
     calandar,
+    isTotal,
+    setIsTotal,
   }
 }
 

@@ -4,7 +4,7 @@ import { GenreTypes, PerformanceResponse, RegionTypes } from '@types'
 import { AxiosResponse } from 'axios'
 import { performanceKeys } from '@queries'
 
-export interface PerformancePayload {
+export interface PerformanceParams {
   year?: number | ''
   month?: number | ''
   day?: number | ''
@@ -22,7 +22,7 @@ export const getAllPerformance = async ({
   genre,
   pageNumber,
   pageSize,
-}: PerformancePayload) => {
+}: PerformanceParams) => {
   const { data }: AxiosResponse<PerformanceResponse> =
     await performanceAPI.getAll(
       year,
@@ -44,7 +44,7 @@ export const usePerformance = ({
   genre,
   pageNumber,
   pageSize,
-}: PerformancePayload) => {
+}: PerformanceParams) => {
   return useQuery(
     [
       ...performanceKeys.all,

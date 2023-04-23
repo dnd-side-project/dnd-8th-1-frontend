@@ -1,32 +1,27 @@
-import { PerformancePayload } from '@queries'
-import { SetStateAction } from 'react'
+import { useContext } from 'react'
+import { CalandarContext, CalendarProps } from '.'
 
 interface DayListItemProps {
-  currentDay: number
-  isSunday: (day: number) => boolean
-  setCurrentDay: (value: SetStateAction<number>) => void
-  getDay: (day: number) => number
   day: number
-  isTotal: boolean
-  setIsTotal: (value: SetStateAction<boolean>) => void
-  setPerformancePayload: (value: SetStateAction<PerformancePayload>) => void
 }
-const DayListItem = ({
-  isTotal,
-  currentDay,
-  isSunday,
-  setCurrentDay,
-  getDay,
-  day,
-  setIsTotal,
-  setPerformancePayload,
-}: DayListItemProps) => {
+const DayListItem = ({ day }: DayListItemProps) => {
+  const {
+    isTotal,
+    currentDay,
+    handleIsSunday,
+    setCurrentDay,
+    setIsTotal,
+    setPerformanceParams,
+  } = useContext(CalandarContext) as Omit<
+    CalendarProps,
+    'performanceParams' | 'handleSetMonth'
+  >
   return (
     <span
       className={`cursor-pointer text-subtitle font-bold mobile:p-[14px] ${
         currentDay === day && !isTotal
           ? 'border-b-[3px] border-b-green-light text-green-light'
-          : isSunday(day)
+          : handleIsSunday(day)
           ? 'border-b-[2px] border-b-gray-700 text-[#783232]'
           : 'border-b-[2px] border-b-gray-700 text-gray-400'
       } `}
@@ -34,15 +29,15 @@ const DayListItem = ({
       onClick={() => {
         setCurrentDay(day)
         setIsTotal(false)
-        setPerformancePayload((prev) => {
+        setPerformanceParams((prev) => {
           return {
             ...prev,
-            day: getDay(day),
+            day,
           }
         })
       }}
     >
-      {getDay(day)}
+      {day}
     </span>
   )
 }
