@@ -33,6 +33,7 @@ const MeetPage = () => {
   const router = useRouter()
   const queryClient = useQueryClient()
   const { page, size, location, type } = currentQueryString
+
   useEffect(() => {
     if (currentQueryString.page < data?.data?.totalPages) {
       queryClient.prefetchQuery(
@@ -66,6 +67,7 @@ const MeetPage = () => {
               handleSelected={(filter) =>
                 setCurrentQueryString({
                   ...currentQueryString,
+                  page: 0,
                   location: filter,
                 })
               }
@@ -73,7 +75,11 @@ const MeetPage = () => {
             <FilterButton
               type="meet"
               handleSelected={(filter) =>
-                setCurrentQueryString({ ...currentQueryString, type: filter })
+                setCurrentQueryString({
+                  ...currentQueryString,
+                  page: 0,
+                  type: filter,
+                })
               }
             />
           </div>

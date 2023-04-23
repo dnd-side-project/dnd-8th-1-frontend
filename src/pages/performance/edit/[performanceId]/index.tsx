@@ -1,4 +1,5 @@
 import { PerformanceCreateForm } from '@components'
+import { useCheckAuth } from '@hooks'
 import { useDetailPerformance, useModifyPerformance } from '@queries'
 import { GenreTypes, PerformanceDetailResponse } from '@types'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
@@ -10,6 +11,7 @@ interface PerformanceModifyPageProps {
 const PerformanceModifyPage = ({
   performanceId,
 }: PerformanceModifyPageProps) => {
+  useCheckAuth()
   const fallback = {} as PerformanceDetailResponse
   const { data = fallback, isLoading } = useDetailPerformance(
     parseInt(performanceId),

@@ -140,6 +140,7 @@ const PerformancePage = () => {
             handleSelected={(region) =>
               setPerformanceParams({
                 ...performanceParams,
+                pageNumber: 0,
                 location: region as RegionTypes,
               })
             }
@@ -150,6 +151,7 @@ const PerformancePage = () => {
               handleSelected={(genre) =>
                 setPerformanceParams({
                   ...performanceParams,
+                  pageNumber: 0,
                   genre: genre as GenreTypes,
                 })
               }
