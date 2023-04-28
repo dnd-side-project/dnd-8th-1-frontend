@@ -18,3 +18,6 @@ export { default as Textarea } from './Textarea'
 export { default as Layout } from './Layout'
 export { default as SidebarMenu } from './SidebarMenu'
 export { default as Spacer } from './Spacer'
+
+// Headless 컴포넌트 관련
+export { default as PerformanceListHeadless } from './PerformancesWithDateHeadless'
