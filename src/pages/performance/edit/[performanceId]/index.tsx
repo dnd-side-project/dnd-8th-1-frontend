@@ -3,6 +3,7 @@ import { useCheckAuth } from '@hooks'
 import { useDetailPerformance, useModifyPerformance } from '@queries'
 import { GenreTypes, PerformanceDetailResponse } from '@types'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import Head from 'next/head'
 
 interface PerformanceModifyPageProps {
   performanceId: string
@@ -28,6 +29,9 @@ const PerformanceModifyPage = ({
   }
   return (
     <>
+      <Head>
+        <title>공연 수정 - Danverse</title>
+      </Head>
       <PerformanceCreateForm
         previousValue={{
           title: detailData?.title,
