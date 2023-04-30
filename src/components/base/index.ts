@@ -21,3 +21,4 @@ export { default as Spacer } from './Spacer'
 
 // Headless 컴포넌트 관련
 export { default as PerformanceListHeadless } from './PerformancesWithDateHeadless'
+export { default as SearchHeaderHeadless } from './SearchHeaderHeadless'
