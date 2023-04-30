@@ -1,7 +1,7 @@
 import { Performance, SearchResult } from '@types'
 import dayjs from 'dayjs'
 
-const useWithDatePerformances = <T extends Performance[] | SearchResult[]>(
+const usePerformancesWithDate = <T extends Performance[] | SearchResult[]>(
   performances: T,
 ) => {
   const makeDate = (date: string) => {
@@ -40,4 +40,4 @@ const useWithDatePerformances = <T extends Performance[] | SearchResult[]>(
   return { filteredPerformanceData, isEmpty }
 }
 
-export default useWithDatePerformances
+export default usePerformancesWithDate
