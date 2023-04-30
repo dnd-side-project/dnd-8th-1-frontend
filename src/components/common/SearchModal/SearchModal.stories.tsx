@@ -5,7 +5,7 @@ import { SearchModal, SearchBanner } from '@components'
 
 export default {
   component: SearchModal,
-  title: 'domain/performance/main/SearchModal',
+  title: 'common/SearchModal',
   parameters: {
     componentSubtitle: '공연 정보 검색을 위한 컴포넌트',
   },
