@@ -26,13 +26,9 @@ const Template: ComponentStory<typeof SearchModal> = () => {
     setIsOpen,
   }
   return (
-    <>
-      {isOpen && (
-        <SearchModal {...props}>
-          <SearchBanner isBanner={isBanner} />
-        </SearchModal>
-      )}
-    </>
+    <SearchModal {...props}>
+      <SearchBanner isBanner={isBanner} />
+    </SearchModal>
   )
 }
 
