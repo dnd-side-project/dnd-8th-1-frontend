@@ -11,10 +11,10 @@ const SearchModal = ({ children, isOpen, setIsOpen }: SearchModalProps) => {
   return (
     <>
       {/** Header */}
-      <SearchModalHeader setIsOpen={setIsOpen} />
+      {isOpen && <SearchModalHeader setIsOpen={setIsOpen} />}
       {children}
       {/** Body */}
-      <SearchModalBody isOpen={isOpen} setIsOpen={setIsOpen} />
+      {isOpen && <SearchModalBody />}
     </>
   )
 }
