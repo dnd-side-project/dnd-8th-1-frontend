@@ -1,4 +1,4 @@
-import { SidebarMenu, Avatar, IconButton, SearchHeader } from '@components'
+import { SidebarMenu, Avatar, IconButton, SearchModal } from '@components'
 import { usePathname } from 'next/navigation'
 import Logo from '/public/assets/logo/logo_small.png'
 import Image from 'next/image'
@@ -7,13 +7,15 @@ import { useRecoilValue } from 'recoil'
 import { userAtom } from 'states'
 import { ALIGN_CENTER } from '@constants'
 import { useState } from 'react'
+import { SearchBanner } from '@components'
+import { useOpenBanner } from '@hooks'
 
 const Header = () => {
   const pathname = usePathname()
   const userState = useRecoilValue(userAtom)
   const { hasProfile, id, imgUrl, profile } = userState
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-
+  const { isBanner } = useOpenBanner()
   return (
     <div
       className={`relative h-[52px] w-[375px] ${
@@ -68,7 +70,9 @@ const Header = () => {
           )}
           {isSearchOpen && (
             <div className="absolute left-0">
-              <SearchHeader open={isSearchOpen} setOpen={setIsSearchOpen} />
+              <SearchModal isOpen={isSearchOpen} setIsOpen={setIsSearchOpen}>
+                <SearchBanner isBanner={isBanner} />
+              </SearchModal>
             </div>
           )}
           {pathname === '/performance' && (

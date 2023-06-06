@@ -11,6 +11,9 @@ export { default as CancelSubmitModal } from './CancelSubmitModal'
 export { default as ConfirmModal } from './ConfirmModal'
 export { default as CheckboxModal } from './CheckboxModal'
 export { default as ModalWithSingleButton } from './ModalWithSingleButton'
+export { default as SearchModal } from './SearchModal'
+export { default as SearchModalHeader } from './SearchModal/SearchModalHeader'
+export { default as SearchModalBody } from './SearchModal/SearchModalBody'
 
 // modal content
 export { default as GenrePopupContent } from './GenrePopupContent'

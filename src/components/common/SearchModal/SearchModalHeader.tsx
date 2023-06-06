@@ -1,19 +1,25 @@
-import { Icon, IconButton, Input, SearchHeaderHeadless } from '@components'
+import { Icon, IconButton, Input } from '@components'
+import { SearchHeaderHeadless } from '@components'
+import React, { Dispatch, SetStateAction } from 'react'
 
-const SearchResultHeader = () => {
+interface SearchHeaderProps {
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const SearchModalHeader = ({ setIsOpen }: SearchHeaderProps) => {
   return (
     <SearchHeaderHeadless
       headerStyle="fixed top-0 z-[9998] mx-[auto] box-border flex w-[375px] justify-between bg-gray-900 px-[16px] py-[14px]"
       formStyle="relative flex w-full items-center"
     >
-      {({ router, register, reset }) => (
+      {({ register, reset }) => (
         <>
           <button
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 return
               } else {
-                router && router.back()
+                setIsOpen(false)
               }
             }}
           >
@@ -22,17 +28,17 @@ const SearchResultHeader = () => {
 
           <Input
             placeholder="댄서/팀 이름으로 공연 검색"
-            styleClass="ml-[6px] w-[322px] h-[39px] rounded-[26px] bg-gray-700 h-10 px-3 border border-gray-700 focus:outline-none text-body1 placeholder:text-gray-500 text-gray-100"
+            styleClass="ml-[6px] w-[322px] h-[39px] rounded-[26px] h-10 px-3 border border-gray-700 focus:outline-none bg-gray-700 text-body1 placeholder:text-gray-500 text-gray-100"
             {...register('search')}
           />
           <IconButton
-            areaLabel="검색어를 지우는 용도의 버튼"
+            size={20}
+            icon="x-circle"
+            areaLabel="입력 리셋 버튼"
+            styleClass="absolute right-[11.83px] cursor-pointer"
             handleOnClick={() => {
               reset()
             }}
-            styleClass="absolute right-[11.83px] cursor-pointer"
-            icon="x-circle"
-            size={20}
           />
         </>
       )}
@@ -40,4 +46,4 @@ const SearchResultHeader = () => {
   )
 }
 
-export default SearchResultHeader
+export default SearchModalHeader
